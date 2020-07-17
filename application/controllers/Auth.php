@@ -39,9 +39,9 @@ class Auth extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$data['title'] = 'E-MEETING | Login';
 
-			$this->load->view('layout/auth_header', $data);
+			$this->load->view('layout/auth/auth_header', $data);
 			$this->load->view('auth/login');
-			$this->load->view('layout/auth_footer');
+			$this->load->view('layout/auth/auth_footer');
 		} else {
 			// Give an underscore to indicate that the method is private
 			$this->_login();
