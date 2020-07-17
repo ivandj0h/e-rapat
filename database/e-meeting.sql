@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2020 at 05:45 PM
+-- Generation Time: Jul 17, 2020 at 11:16 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -45,8 +45,8 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `agenda`, `files_upload`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
-(14, 1, 1, 'meeting pertama', '', '2020-07-15', '2020-07-15', '15:19:00', '16:02:00', 1),
-(15, 1, 2, 'meeting kedua', '', '2020-07-16', '2020-07-15', '19:42:00', '19:46:00', 0);
+(14, 1, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '', '2020-07-17', '2020-07-15', '15:19:00', '16:02:00', 1),
+(15, 1, 2, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '', '2020-07-17', '2020-07-15', '19:42:00', '19:46:00', 2);
 
 -- --------------------------------------------------------
 
@@ -113,8 +113,8 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `uniqueid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `department_id`, `date_created`, `date_updated`) VALUES
-(1, '5f0b44d082841', 'Devianti', 'admin@admin.com', '0.jpeg', '$2y$10$rlSQG0XGwZnCtqv61NLKkONCAL1SUJdVeJ/95FFWOxSEeGJ9rqLwW', 1, 1, 1, 1594594034, 1594574032),
-(8, '5f0b5b181b087', 'kim jong un', 'user@user.com', '3.jpg', '$2y$10$9nqndnLnAUKMf.cU1pIcpe0I7c8x7hN/cFqOOBgNGE/vQWVY0uQE2', 2, 0, 2, 1594597197, 1594881772),
+(1, '5f0b44d082841', 'Administrator', 'admin@admin.com', '0.jpeg', '$2y$10$rlSQG0XGwZnCtqv61NLKkONCAL1SUJdVeJ/95FFWOxSEeGJ9rqLwW', 1, 1, 1, 1594594034, 1594574032),
+(8, '5f0b5b181b087', 'kim jong un', 'user@user.com', '3.jpg', '$2y$10$rlSQG0XGwZnCtqv61NLKkONCAL1SUJdVeJ/95FFWOxSEeGJ9rqLwW', 2, 1, 2, 1594597197, 1594881772),
 (9, '5f0d8274d6ad7', 'ivandi', 'ivandi.gah@gmail.com', '5.jpg', '$2y$10$B8fLk5mavIkICGfeT01FuOERt6pGJdDuHvTByslst6utSL.is1UFO', 2, 1, 3, 1594720884, 1594890351);
 
 -- --------------------------------------------------------
@@ -272,6 +272,17 @@ CREATE TABLE `view_meeting` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_total_request_status`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_total_request_status` (
+`request_status` int(11)
+,`total_meeting` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_user_department`
 -- (See below for the actual view)
 --
@@ -299,6 +310,15 @@ CREATE TABLE `view_user_department` (
 DROP TABLE IF EXISTS `view_meeting`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status` from ((`meeting` join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_total_request_status`
+--
+DROP TABLE IF EXISTS `view_total_request_status`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_total_request_status`  AS  select `meeting`.`request_status` AS `request_status`,count(`meeting`.`id`) AS `total_meeting` from `meeting` group by `meeting`.`request_status` ;
 
 -- --------------------------------------------------------
 
