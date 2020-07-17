@@ -40,23 +40,23 @@
 
            <!-- Bootstrap core JavaScript-->
            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.js"></script>
 
            <!-- Core plugin JavaScript-->
-           <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
            <!-- Custom scripts for all pages-->
-           <script src="<?= base_url('assets/'); ?>js/sb-admin-2.js"></script>
+           <script src="<?= base_url('assets/js/sb-admin-2.js'); ?>"></script>
 
            <!-- Moment -->
            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 
            <!-- Datatables plugins core script-->
-           <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
            <!-- Datatables plugins custom script -->
-           <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
+           <script src="<?= base_url('assets/js/demo/datatables-demo.js'); ?>"></script>
 
 
            <script>

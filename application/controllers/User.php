@@ -19,7 +19,7 @@ class User extends CI_Controller
         $this->load->view('layout/app/app_header', $data);
         $this->load->view('layout/app/app_sidebar', $data);
         $this->load->view('layout/app/app_topbar', $data);
-        $this->load->view('user/index', $data);
+        $this->load->view('modul/user/index', $data);
         $this->load->view('layout/app/app_footer');
     }
 }

@@ -6,7 +6,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
-                <div class="sidebar-brand-text mx-1">E-MEETING <small>Cpanel</small></div>
+                <div class="sidebar-brand-text mx-1">E-RAPAT <small>Cpanel</small></div>
             </a>
 
             <!-- Divider -->
