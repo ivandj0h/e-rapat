@@ -1,0 +1,16 @@
+# Global files
+
+*.zip
+.svn
+.DS_Store
+thumbs.db
+
+# Codeigniter files
+
+*/user_guide
+*/vendor
+*/system/logs/log-*.php
+*/system/cache/*
+*/system/cache/!index.html
+*/wsdls/*
+*mailing/
