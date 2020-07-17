@@ -4,13 +4,38 @@
 .svn
 .DS_Store
 thumbs.db
-
+readme.rst
 # Codeigniter files
-
-*/user_guide
-*/vendor
+composer.json
+user_guide/
+*/vendor/
 */system/logs/log-*.php
 */system/cache/*
 */system/cache/!index.html
 */wsdls/*
 *mailing/
+
+application/logs/*
+!application/logs/index.html
+
+!application/*/.htaccess
+
+composer.lock
+contributing.md
+license.txt
+
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/tests/tests/
+/tests/results/
+
+.vscode/*
