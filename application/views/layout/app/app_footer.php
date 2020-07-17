@@ -66,12 +66,21 @@
                    $(this).next('.custom-file-label').addClass('selected').html(fileName);
                });
 
+               // alert
                $(".alert-success").fadeTo(1000, 500).slideUp(500, function() {
                    $(".alert-success").slideUp(500);
                });
 
                $(".alert-danger").fadeTo(1000, 500).slideUp(500, function() {
                    $(".alert-danger").slideUp(500);
+               });
+
+               // Searching
+               $("#myInput").on("keyup", function() {
+                   var value = $(this).val().toLowerCase();
+                   $("#myTable tr").filter(function() {
+                       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                   });
                });
 
                // change menu access for checkbox

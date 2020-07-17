@@ -39,9 +39,19 @@ function check_access($role_id, $menu_id)
     if ($result->num_rows() > 0) {
         return "checked = 'checked'";
     }
-    // second way to query with where condition
-    // $ci->db->get_where('user_access_menu', [
-    //     'role_id' => $role_id,
-    //     'menu_id' => $menu_id
-    // ]);
+}
+
+function greetings()
+{
+    date_default_timezone_set('Asia/Jakarta');
+
+    $Hour = date('G');
+
+    if ($Hour >= 5 && $Hour <= 11) {
+        echo "Selamat Pagi";
+    } else if ($Hour >= 12 && $Hour <= 18) {
+        echo "Selamat Siang";
+    } else if ($Hour >= 19 || $Hour <= 4) {
+        echo "Selamat Malam";
+    }
 }
