@@ -1,0 +1,104 @@
+.sidebar {
+	position: sticky !important;
+	top: 0 !important;
+	width: 16rem !important;
+	height: 100%;
+	padding-top: 0rem;
+	z-index: 1111;
+	overflow-x: hidden;
+}
+
+.topbar-breadcrumb {
+	width: 0;
+	height: calc(3.375rem - 2rem);
+	margin: auto 1rem;
+	width: 67rem;
+}
+
+#wrapper #content-wrapper {
+	background-color: #ffffff !important;
+	position: relative !important;
+}
+
+.contents {
+	margin-top: 65px;
+	background-color: #ffffff;
+}
+
+.breadcrumb {
+	border-bottom: 1px solid #eeeeee;
+	background-color: #ffffff;
+	margin-top: 85px;
+}
+
+.avatar {
+	vertical-align: middle;
+	width: 20px;
+	border-radius: 50%;
+}
+
+.border-left {
+	border-left: 1px solid #eeeeee;
+	margin-left: -100;
+}
+
+.menu ul {
+	display: flex;
+	align-items: stretch; /* Default */
+	justify-content: space-between;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.menu-sub li {
+	display: block;
+	flex: 0 1 auto; /* Default */
+	list-style-type: none;
+	background: #671f79;
+}
+
+.form-heigt {
+	height: 1500px !important;
+}
+
+.datepicker td,
+.datepicker th {
+	width: 1.5em;
+	height: 1.5em;
+	border: 1px solid #eee;
+}
+
+.border {
+	border: 1px solid #e3e6f0 !important;
+	padding: 6px 12px !important;
+}
+
+.hide {
+	display: none;
+}
+
+.pointer-link {
+	cursor: pointer;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom {
+	top: 26px !important;
+}
+
+#datepicker {
+	width: 180px;
+	margin: 0 20px 20px 13px;
+}
+#datepicker > span:hover {
+	cursor: pointer;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	border-top: 1px solid #eeeeee;
+	height: 60px;
+	line-height: 60px;
+	z-index: 10;
+}
