@@ -20,15 +20,20 @@
 	position: relative !important;
 }
 
-.contents {
-	margin-top: 65px;
-	background-color: #ffffff;
+.dashboard_box {
+	background-color: #ffffff !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .breadcrumb {
 	border-bottom: 1px solid #eeeeee;
 	background-color: #ffffff;
 	margin-top: 85px;
+}
+
+.jumbotron {
+	border: 1px solid #dddddd;
+	background-color: #ffffff;
 }
 
 .avatar {

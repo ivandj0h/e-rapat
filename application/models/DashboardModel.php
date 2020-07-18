@@ -21,4 +21,20 @@ class DashboardModel extends CI_Model
     {
         return $this->db->get('view_total_request_status')->result_array();
     }
+
+    public function get_count_status_by_department()
+    {
+        $sp = "CALL sp_meeting_department()";
+        return $this->db->query($sp)->row_array();
+    }
+
+    public function get_department()
+    {
+        return $this->db->get('meeting_department')->result_array();
+    }
+
+    public function get_meeting_place()
+    {
+        return $this->db->get('meeting_place')->result_array();
+    }
 }

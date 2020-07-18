@@ -18,8 +18,9 @@ class Admin extends CI_Controller
         $data['profiles'] = $this->PUAModel->get_all_data();
         $data['dashboard'] = $this->DashboardModel->get_todays_meeting();
         $data['status'] = $this->DashboardModel->get_count_status();
+        $data['place'] = $this->DashboardModel->get_meeting_place();
 
-        // var_dump($data['status']);
+        // var_dump($data['department']);
         // die;
         $this->load->view('layout/app/app_header', $data);
         $this->load->view('layout/app/app_sidebar', $data);
