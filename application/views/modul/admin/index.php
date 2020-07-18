@@ -27,8 +27,9 @@
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row h-100 justify-content-center align-items-center">
-                                        <form class="form-inline" action="#">
-                                            <input type="date" class="form-control mb-2 mr-sm-2" placeholder="Enter email" id="date_issues">
+                                        <form class="form-inline" action="<?= base_url('admin/search'); ?>" method="POST">
+                                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                                            <input type="date" class="form-control mb-2 mr-sm-2" name="date_issues" id="date_issues">
                                             <select class="form-control mb-2 mr-sm-2" name="place_id" required>
                                                 <option value="">Pilih Lokasi</option>
                                                 <?php foreach ($place as $p) : ?>
@@ -57,6 +58,7 @@
                                     <div class="card shadow">
                                         <div class="card-body" id="heading1">
                                             <div class="d-flex justify-content-between">
+                                                <div class="p-2 bd-highlight"><?= get_date_today(); ?></div>
                                                 <div class="p-2 bd-highlight"><strong>Department Pertama</strong></div>
                                                 <div class="p-2 bd-highlight"><strong>Ruangan Meeting Pertama</strong></div>
                                                 <div class="p-2 bd-highlight"><span class="badge badge-danger">Booked</span></div>
@@ -68,34 +70,39 @@
                                         <hr class="sidebar-divider mb-0">
                                         <div id="collapseOne" class="collapse mt-0 mb-3" aria-labelledby="heading1" data-parent="#accordion1">
                                             <div class="card-body">
-                                                <p>HTML stands for HyperText Markup Language. HTML is the standard markup language for describing the structure of web pages. <a href="https://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="accordion" id="accordion2">
-                                    <div class="card shadow">
-                                        <div class="card-body" id="heading2">
-                                            <div class="d-flex justify-content-between">
-                                                <div class="p-2 bd-highlight"><strong>Department Pertama</strong></div>
-                                                <div class="p-2 bd-highlight"><strong>Ruangan Meeting Pertama</strong></div>
-                                                <div class="p-2 bd-highlight"><span class="badge badge-primary">Requested</span></div>
-                                                <div class="p-2 bd-highlight">
-                                                    <i class="fas fa-angle-double-down pointer-link" data-toggle="collapse" data-target="#collapse2"></i>
+                                                <!-- TimeLine -->
+                                                <div class="container mt-5 mb-5">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h4>Detail Rapat</h4>
+                                                            <ul class="timeline">
+                                                                <li>
+                                                                    <strong>08.10</strong>
+                                                                    <a href="#" class="float-right"><?= get_date_today(); ?></a>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>08.10</strong>
+                                                                    <a href="#" class="float-right"><?= get_date_today(); ?></a>
+                                                                    <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                    <span class="badge badge-danger">Booked</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <hr class="sidebar-divider mb-0">
-                                        <div id="collapse2" class="collapse mt-0 mb-3" aria-labelledby="heading2" data-parent="#accordion2">
-                                            <div class="card-body">
-                                                <p>HTML stands for HyperText Markup Language. HTML is the standard markup language for describing the structure of web pages. <a href="https://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
+                                                <!-- End of TimeLine -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+
 
 
                         </ul>

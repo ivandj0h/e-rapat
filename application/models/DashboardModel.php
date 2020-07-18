@@ -37,4 +37,13 @@ class DashboardModel extends CI_Model
     {
         return $this->db->get('meeting_place')->result_array();
     }
+
+    public function get_meeting_by_date($date_issues, $place_id)
+    {
+        $this->db->select('*');
+        $this->db->from('view_meeting');
+        $this->db->where('date_issues', $date_issues);
+        $this->db->where('place_id', $place_id);
+        return $this->db->get()->result_array();
+    }
 }
