@@ -20,12 +20,22 @@ class Admin extends CI_Controller
         $data['status'] = $this->DashboardModel->get_count_status();
         $data['place'] = $this->DashboardModel->get_meeting_place();
 
-        // var_dump($data['department']);
-        // die;
         $this->load->view('layout/app/app_header', $data);
         $this->load->view('layout/app/app_sidebar', $data);
         $this->load->view('layout/app/app_topbar', $data);
         $this->load->view('modul/admin/index', $data);
         $this->load->view('layout/app/app_footer');
+    }
+
+    function search()
+    {
+
+        $date_issues = $this->input->post('date_issues');
+        $place_id = $this->input->post('place_id');
+
+        $query = $this->DashboardModel->get_meeting_by_date($date_issues, $place_id);
+
+        var_dump($query);
+        die;
     }
 }

@@ -44,7 +44,7 @@
                         <div class="error mx-auto" data-text="403">403</div>
                         <p class="lead text-gray-800 mb-5">Access Forbidden</p>
                         <p class="text-gray-500 mb-0">It looks like you're not have access to see.'</p>
-                        <a href="<?= base_url('user'); ?>">&larr; Back to Dashboard</a>
+                        <a href="<?= base_url('user'); ?>">&larr; Back to Dashboard in <strong id="number"></strong></a>
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; E-MEETING <?= date('Y'); ?></span>
+                        <span>Copyright &copy; E-RAPAT <?= date('Y'); ?></span>
                     </div>
                 </div>
             </footer>
@@ -74,25 +74,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -103,6 +84,35 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/'); ?>js/sb-admin-2.js"></script>
 
+    <script type="text/javascript">
+        //Calls countdown function
+        var count = 3;
+        countdown(count);
+
+        //counts to 3,2, 1 and redirect
+        function countdown(timer) {
+            //Keeps the interval ID for later clear
+            var intervalID;
+            intervalID = setInterval(function() {
+
+                display(timer);
+                timer = timer - 1;
+
+                if (timer < 0) {
+                    //Clears the timeout 
+                    clearTimeout(intervalID);
+                    window.location.assign("http://localhost/rapat/auth");
+                }
+            }, 1000);
+
+
+        }
+
+        //Modifies the countdown display
+        function display(timer) {
+            document.getElementById("number").innerHTML = timer;
+        }
+    </script>
 </body>
 
 </html>
