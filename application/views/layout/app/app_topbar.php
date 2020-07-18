@@ -14,7 +14,7 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-breadcrumb d-none d-sm-block">You're in <strong><?= $title; ?></strong> Page Now</div>
+                        <div class="topbar-breadcrumb d-none d-sm-block">Anda sedang berada di halaman <strong><?= $title; ?></strong>.</div>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -29,7 +29,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
