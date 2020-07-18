@@ -47,6 +47,10 @@
 	margin-left: -100;
 }
 
+.list-group-item {
+	border-width: 0 0 0px !important;
+}
+
 .menu ul {
 	display: flex;
 	align-items: stretch; /* Default */
@@ -71,6 +75,21 @@
 	width: 1.5em;
 	height: 1.5em;
 	border: 1px solid #eee;
+}
+
+btn {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	outline: none !important;
+	border: none;
+}
+.btn:active {
+	border-style: outset !important;
+	border: none !important;
+	outline: none !important;
 }
 
 .border {

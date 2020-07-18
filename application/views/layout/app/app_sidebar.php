@@ -70,7 +70,7 @@
                 <li class="nav-item">
                     <a class="nav-link py-2" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i>
-                        <span>Logout</span></a>
+                        <span>Keluar</span></a>
                 </li>
 
                 <!-- Divider -->
