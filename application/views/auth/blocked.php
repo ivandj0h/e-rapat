@@ -101,7 +101,7 @@
                 if (timer < 0) {
                     //Clears the timeout 
                     clearTimeout(intervalID);
-                    window.location.assign("http://localhost/rapat/auth");
+                    window.location.assign("http://localhost/rapat/user");
                 }
             }, 1000);
 

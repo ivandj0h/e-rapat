@@ -16,11 +16,17 @@ class Auth extends CI_Controller
 			redirect('user');
 		}
 
+		// if ($this->session->userdata('email') AND $this->session->userdata('role_id') == 1) {
+		// 	redirect('admin');
+		// }else{
+		// 	redirect('user');
+		// }
+
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
 
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'E-MEETING | Login';
+			$data['title'] = 'E-RAPAT | Login';
 
 			$this->load->view('layout/auth/auth_header', $data);
 			$this->load->view('auth/login');
