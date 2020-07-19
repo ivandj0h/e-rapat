@@ -14,7 +14,6 @@ class User extends CI_Controller
     {
         $data['title'] = 'Profile';
         $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['edit_acc'] = $this->db->get_where('view_user_department', ['id' => $id])->row_array();
         $data['user'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->view('layout/header', $data);
@@ -68,7 +67,8 @@ class User extends CI_Controller
     {
 
         $data['title'] = 'Edit Profile';
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
 
         // give rules
         $this->form_validation->set_rules('name', 'Full Name', 'required|trim');

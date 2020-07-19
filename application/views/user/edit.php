@@ -18,7 +18,7 @@
                 <?= $this->session->flashdata('messages'); ?>
             </div>
         </div>
-        <div class="row form-heigt">
+        <div class="row">
             <div class="col-lg-8">
                 <?= form_open_multipart('user/edit'); ?>
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">

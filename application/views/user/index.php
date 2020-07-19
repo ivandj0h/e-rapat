@@ -12,12 +12,10 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-
         </div>
-
         <?= $this->session->flashdata('messages'); ?>
 
-        <div class="row form-heigt">
+        <div class="row">
             <div class="col">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="card-header">
@@ -44,7 +42,7 @@
                                     <?php } ?>
                                 </p>
                                 <p class="card-text"><small class="text-muted">Last Updated : <?= date('d F Y', $user['date_updated']); ?></small></p>
-                                <a href="<?= base_url('user/edit'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Edit Profile</a>
+                                <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Edit Profile</a>
                             </div>
                         </div>
                     </div>
