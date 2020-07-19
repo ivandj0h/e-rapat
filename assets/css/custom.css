@@ -26,9 +26,9 @@
 }
 
 .breadcrumb {
-	border-bottom: 1px solid #eeeeee;
-	background-color: #ffffff;
-	margin-top: 85px;
+	/* border-bottom: 1px solid #eeeeee; */
+	/* background-color: #ffffff; */
+	margin-top: 45px;
 }
 
 .jumbotron {
@@ -98,7 +98,7 @@ ul.timeline > li:before {
 }
 
 .form-heigt {
-	height: 1500px !important;
+	height: 10px !important;
 }
 
 .datepicker td,
