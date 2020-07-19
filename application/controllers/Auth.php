@@ -20,7 +20,7 @@ class Auth extends CI_Controller
     $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
     if ($this->form_validation->run() == false) {
-      $data['title'] = 'E-MEETING | Login';
+      $data['title'] = 'E-RAPAT | Login';
 
       $this->load->view('layout/auth_header', $data);
       $this->load->view('auth/login');
@@ -187,7 +187,7 @@ class Auth extends CI_Controller
 
   public function register()
   {
-    $data['title'] = 'E-MEETING | Registration';
+    $data['title'] = 'E-RAPAT | Registration';
 
     $this->load->view('layout/auth_header', $data);
     $this->load->view('auth/register');
@@ -218,7 +218,7 @@ class Auth extends CI_Controller
     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
     if ($this->form_validation->run() == false) {
 
-      $data['title'] = 'E-MEETING | Forgot Password';
+      $data['title'] = 'E-RAPAT | Forgot Password';
       $this->load->view('layout/auth_header', $data);
       $this->load->view('auth/forgot-password');
       $this->load->view('layout/auth_footer');
@@ -261,7 +261,7 @@ class Auth extends CI_Controller
 
     if ($this->form_validation->run() == false) {
 
-      $data['title'] = 'E-MEETING | Change Password';
+      $data['title'] = 'E-RAPAT | Change Password';
       $this->load->view('layout/auth_header', $data);
       $this->load->view('auth/change-password');
       $this->load->view('layout/auth_footer');

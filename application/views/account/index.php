@@ -36,7 +36,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#newModalAccount">
+                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addAccount">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-file"></i>
                                 </span>
@@ -80,13 +80,9 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <a href="<?= base_url('account/edituser/') . $a['id']; ?>">
-                                                    <i class="fas fa-file-alt"></i>
-                                                </a>
-
-                                                <a href="<?= base_url('account/delete/') . $a['id']; ?>" onClick="return confirm('Delete This account?')">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a>
+                                                <span class="badge badge-success" data-toggle="modal" data-target="#resetAccountPass<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Reset Password</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -107,14 +103,12 @@
 <!-- End of Main Content -->
 
 
-<!-- Start Modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="newModalAccount" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="newModalAccount" aria-hidden="true">
+<!-- Start of Modal Add -->
+<div class="modal fade" id="addAccount" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newModalSubMenuLabel">Add New Account</h5>
+                <h5 class="modal-title" id="addAccount">Add New Account</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -156,4 +150,158 @@
         </div>
     </div>
 </div>
-<!-- End of Modal -->
+<!-- End of Modal Add -->
+
+<!-- Start of Modal Edit -->
+<?php
+foreach ($account as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="editAccount<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="editAccount" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAccount">Edit Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('account/updateuser'); ?>" method="POST">
+                    <input type="hidden" name="id" value="<?= $a['id']; ?>">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <img src="<?= base_url('assets/img/profile/') . $a['image']; ?>" class="img-thumbnail">
+
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Email</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" id="email" name="email" value="<?= $a['email']; ?>" readonly>
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Full Name</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" id="email" name="name" value="<?= $a['name']; ?>">
+                                        <?= form_error('name', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Department Name</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select class="custom-select mr-sm-2" select name="department_id" id="department_id">
+                                            <option value="<?= $a['department_id']; ?>">-- <?= $a['department_name']; ?> --</option>
+                                            <option disabled>--</option>
+                                            <?php foreach ($department as $d) : ?>
+                                                <option value="<?= $d['id']; ?>">-- <?= $d['department_name']; ?> --</option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Role Account</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select class="custom-select mr-sm-2" select name="role_id" id="role_id">
+                                            <option value="<?= $a['role_id']; ?>">-- <?= $a['role']; ?> --</option>
+                                            <option disabled>--</option>
+                                            <option value="1">-- Admin --</option>
+                                            <option value="2">-- User --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Status Account</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
+                                            <option value="<?= $a['is_active']; ?>">-- <?= $a['is_active'] ? 'Active' : 'Not Active'; ?> --</option>
+                                            <option disabled>--</option>
+                                            <option value="1">-- Active --</option>
+                                            <option value="0">-- Not Active --</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Edit -->
+
+
+<!-- Start of Modal Delete -->
+<?php
+foreach ($account as $a) :
+    $id = $a['id'];
+    $name = $a['name'];
+?>
+    <div class="modal fade" id="deleteAccount<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?= base_url('account/delete/'); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Are you sure want to delete <b><?= $name; ?> ?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Delete -->
+
+<!-- Start of Modal Reset Account Password -->
+<?php
+foreach ($account as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="resetAccountPass<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?= base_url('account/resetpass/'); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Are you sure want to Reset Password for Account <b><?= $a['name']; ?> ?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Confirm!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Reset Account Password -->

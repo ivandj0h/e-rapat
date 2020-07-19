@@ -99,9 +99,6 @@ class User extends CI_Controller
 
                     $old_images = $data['user']['image'];
 
-                    // var_dump($old_images);
-                    // die;
-
                     if ($old_images != 'default-avatar.jpg') {
                         unlink(FCPATH . 'assets/img/profile/' . $old_images);
                     }

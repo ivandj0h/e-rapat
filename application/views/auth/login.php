@@ -12,7 +12,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h3 text-primary-900 mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> E-MEETING</h1>
+                                    <h1 class="h3 text-primary-900 mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> E-RAPAT</h1>
                                     <h1 class="h4 text-gray-500 mb-4">Account Login</h1>
                                     <?= $this->session->flashdata('messages'); ?>
                                 </div>
@@ -33,7 +33,7 @@
                                 <hr class="sidebar-divider">
                                 <div class="copyright text-center text-secondary my-auto">
                                     <!-- <a class="small" href="<?= base_url('auth/forgotpassword') ?>">Forgot Password?</a> -->
-                                    <span>Copyright &copy; e-meeting <?= date('Y'); ?></span>
+                                    <span>Copyright &copy; e-rapat <?= date('Y'); ?></span>
                                 </div>
                             </div>
                         </div>
