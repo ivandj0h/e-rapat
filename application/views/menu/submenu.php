@@ -36,7 +36,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#newModalSubMenu">
+                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addSubMenu">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-file"></i>
                                 </span>
@@ -45,9 +45,9 @@
                             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Parent Menu ID</th>
+                                        <th class="text-center w-20">No</th>
                                         <th class="text-center w-20">Parent Menu Name</th>
-                                        <th class="text-center w-20">SubMenu Name</th>
+                                        <th class="text-center w-20">Sub Menu Name</th>
                                         <th class="text-center w-20">Url Name</th>
                                         <th class="text-center w-20">Icon Name</th>
                                         <th class="text-center w-20">Active</th>
@@ -55,9 +55,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 1; ?>
                                     <?php foreach ($subMenu as $sm) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $sm['menu_id']; ?></td>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td><?= $sm['menu']; ?></td>
                                             <td><?= $sm['title']; ?></td>
                                             <td><small>e-meeting</small>/<strong><?= $sm['url']; ?></strong></td>
@@ -71,8 +72,8 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <a href=""><span class="badge badge-primary"><i class="fas fa-pen-square"></i> edit</span></a>
-                                                <a href=""><span class="badge badge-danger"><i class="fas fa-trash-alt"></i> delete</span></a>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -94,14 +95,12 @@
 </div>
 <!-- End of Main Content -->
 
-<!-- =============================================================================================== -->
-
 <!-- Start of Modal Add -->
-<div class="modal fade" id="newModalSubMenu" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="newModalSubMenuLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="addSubMenu" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addSubMenu" aria-hidden="true">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newModalSubMenuLabel">Add New SubMenu</h5>
+                <h5 class="modal-title" id="addSubMenu">Add New SubMenu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,7 +115,7 @@
                         <select name="menu_id" id="menu_id" class="form-control">
                             <option value="">-- Select Menu --</option>
                             <?php foreach ($menu as $m) : ?>
-                                <option value="<?= $m['id']; ?>">-- <?= $m['menu']; ?> --</option>
+                                <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -145,3 +144,86 @@
     </div>
 </div>
 <!-- End of Modal Add -->
+
+<!-- Start of Modal Edit -->
+<?php
+foreach ($subMenu as $s) :
+    $id = $s['id'];
+?>
+    <div class="modal fade" id="editSubMenu<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="editSubMenu" aria-hidden="true">
+
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSubMenu">Edit SubMenu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('menu/updatesubmenu'); ?>" method="POST">
+                    <input type="hidden" name="id" value="<?= $s['id']; ?>">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="title" name="title" value="<?= $s['title']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select mr-sm-2" select name="menu_id" id="menu_id">
+                                <option value="<?= $s['menu_id']; ?>"><?= $s['menu']; ?></option>
+                                <option disabled>--</option>
+                                <?php foreach ($menu as $d) : ?>
+                                    <option value="<?= $d['id']; ?>"><?= $d['menu']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="url" name="url" value="<?= $s['url']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="icon" name="icon" value="<?= $s['icon']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
+                                <option value="<?= $s['is_active']; ?>"><?= $s['is_active'] ? 'Active' : 'Not Active'; ?></option>
+                                <option disabled>--</option>
+                                <option value="1">Active</option>
+                                <option value="0">Not Active</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Edit -->
+
+
+<!-- Start of Modal Delete -->
+<?php
+foreach ($subMenu as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="deleteSubMenu<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?= base_url('menu/deletesubmenu/' . $id); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Apakah anda yakin ingin menghapus Sub Menu <b><?= $a['title']; ?> ?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Delete -->

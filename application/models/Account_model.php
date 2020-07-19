@@ -29,9 +29,7 @@ class Account_model extends CI_Model
 
         $this->db->set('menu', $data);
         $this->db->where('id', $id);
-        $query = $this->db->update('meeting_users');
-
-        return $query;
+        return $this->db->update($this->table);
     }
 
     public function reset_password($id, $data)

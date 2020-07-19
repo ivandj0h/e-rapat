@@ -101,7 +101,6 @@
 </div>
 <!-- End of Main Content -->
 
-
 <!-- Start of Modal Add -->
 <div class="modal fade" id="addAccount" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addAccount" aria-hidden="true">
     <div class="modal-dialog">
@@ -158,7 +157,7 @@ foreach ($account as $a) :
 ?>
     <div class="modal fade" id="editAccount<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="editAccount" aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addAccount">Edit Account</h5>
@@ -230,10 +229,10 @@ foreach ($account as $a) :
                                     </div>
                                     <div class="col-sm-7">
                                         <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
-                                            <option value="<?= $a['is_active']; ?>">-- <?= $a['is_active'] ? 'Active' : 'Not Active'; ?> --</option>
+                                            <option value="<?= $a['is_active']; ?>"><?= $a['is_active'] ? 'Active' : 'Not Active'; ?></option>
                                             <option disabled>--</option>
-                                            <option value="1">-- Active --</option>
-                                            <option value="0">-- Not Active --</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Not Active</option>
                                         </select>
                                     </div>
                                 </div>
@@ -244,7 +243,7 @@ foreach ($account as $a) :
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-danger">Submit</button>
                     </div>
                 </form>
             </div>

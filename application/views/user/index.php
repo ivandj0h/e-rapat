@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col">
-                <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3">
                     <div class="card-header">
                         Hello <strong><?= $user['name']; ?></strong>, Here is your profile data.
                     </div>

@@ -1,10 +1,18 @@
+.fixed-top {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+}
+
 .sidebar {
 	position: sticky !important;
 	top: 0 !important;
 	width: 16rem !important;
 	height: 100%;
 	padding-top: 0rem;
-	z-index: 1111;
+	z-index: 200;
 	overflow-x: hidden;
 }
 
@@ -35,6 +43,16 @@
 	vertical-align: middle;
 	width: 20px;
 	border-radius: 50%;
+}
+
+.modal-md {
+	max-width: 60%;
+	z-index: 10;
+}
+
+.modal-lg {
+	max-width: 80% !important;
+	z-index: 10;
 }
 
 .border-left {

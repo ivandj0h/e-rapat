@@ -7,7 +7,7 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->model('Menu_model', 'menu');
+        // $this->load->model('Menu_model', 'menu');
         $this->load->model('Menu_model');
     }
 
@@ -17,9 +17,7 @@ class Menu extends CI_Controller
         $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
         $data['menu'] = $this->Menu_model->get_all();
 
-        // set Rules for menu
         $this->form_validation->set_rules('menu', 'Menu', 'required');
-
 
         if ($this->form_validation->run() == false) {
 
@@ -32,22 +30,34 @@ class Menu extends CI_Controller
 
             $data = array('menu' => $this->input->post('menu'));
 
-            // calling model to save data
             $this->Menu_model->insert_menu($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Added!</div>');
+            // $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
             redirect('menu');
         }
     }
 
     public function updatemenu()
     {
-        // get post id
         $id = $this->input->post('id');
         $data = array('menu' => $this->input->post('menu'));
 
-        // calling model to update data
-        $this->Menu_model->update_menu($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
+        // $this->Menu_model->update_menu($id, $data);
+        // $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
+        // redirect('menu');
+        $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
+        redirect('menu');
+    }
+
+
+    public function deletemenu()
+    {
+        $id = $this->input->post('id');
+
+        // $this->Menu_model->delete_menu($id);
+        // $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Deleted!</div>');
+        // redirect('menu');
+        $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
         redirect('menu');
     }
 
@@ -56,10 +66,9 @@ class Menu extends CI_Controller
         $data['title'] = 'SubMenu Management';
         $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['subMenu'] = $this->menu->getSubMenu();
-        $data['menu'] = $this->db->get('user_menu')->result_array();
+        $data['subMenu'] = $this->Menu_model->getSubMenu();
+        $data['menu'] = $this->Menu_model->get_all();
 
-        // set Rules for menu
         $this->form_validation->set_rules('title', 'menu', 'required');
         $this->form_validation->set_rules('menu_id', 'id menu', 'required');
         $this->form_validation->set_rules('url', 'url', 'required');
@@ -72,29 +81,44 @@ class Menu extends CI_Controller
             $this->load->view('menu/submenu', $data);
             $this->load->view('layout/footer');
         } else {
+
             $data = [
                 'title'     => $this->input->post('title'),
-                'menu_id'   => $this->input->post('menu_id'),
+                'menu_id'   => intval($this->input->post('menu_id', true)),
                 'url'       => $this->input->post('url'),
                 'icon'      => $this->input->post('icon'),
-                'is_active' => $this->input->post('is_active')
+                'is_active' => intval($this->input->post('is_active', true)),
             ];
 
-            // calling model to save data
             $this->Menu_model->insert_sub_menu($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> New subMenu was Added!</div>');
             redirect('menu/submenu');
         }
     }
 
-    public function deletemenu()
+    public function updatesubmenu()
     {
-        // get post id
+        if ($this->input->post('id')) {
+            $data = array(
+                'title'     => $this->input->post('title'),
+                'menu_id'   => $this->input->post('menu_id'),
+                'url'       => $this->input->post('url'),
+                'icon'      => $this->input->post('icon'),
+                'is_active' => intval($this->input->post('is_active', true)),
+            );
+
+            $this->Menu_model->update_sub_menu($data, $this->input->post('id', true));
+        }
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
+        redirect('menu/submenu');
+    }
+
+    public function deletesubmenu()
+    {
         $id = $this->input->post('id');
 
-        // calling model to delete data
-        $this->Menu_model->delete($id);
+        $this->Menu_model->delete_sub_menu($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Deleted!</div>');
-        redirect('menu');
+        redirect('menu/submenu');
     }
 }
