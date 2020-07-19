@@ -1,5 +1,5 @@
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('/user'); ?>">
@@ -40,7 +40,8 @@
                                      FROM `user_sub_menu` JOIN `user_menu` 
                                        ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
                                     WHERE `user_sub_menu`.`menu_id` = $menuId
-                                      AND `user_sub_menu`.`is_active` = 1";
+                                      AND `user_sub_menu`.`is_active` = 1
+                                 ORDER BY `user_sub_menu`.`id` ASC";
 
                 $subMenu = $this->db->query($querySubMenu)->result_array();
                 ?>
@@ -76,10 +77,7 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider mt-3">
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+
 
         </ul>
         <!-- End of Sidebar -->

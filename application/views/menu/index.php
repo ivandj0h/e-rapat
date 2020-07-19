@@ -52,7 +52,7 @@
                                             <td class="text-left"><?= $m['menu']; ?></td>
                                             <td class="text-center">
                                                 <span class="badge badge-dark" data-toggle="modal" data-target="#menuEdit<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#menuDel<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#menuDelete<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -139,13 +139,14 @@ foreach ($menu as $a) :
 <!-- End of Modal Edit -->
 
 <!-- Start of Modal Delete -->
-<div class="modal fade" id="menuDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+<div class="modal fade" id="menuDelete<?= $m['id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="menuDelete" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="<?= base_url('menu/deletemenu'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
-                    <p>Are you sure want to delete <b><?= $menu; ?> ?</b></p>
+                    <p>Are you sure want to delete <b><?= $a['menu']; ?> ?</b></p>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
@@ -156,4 +157,5 @@ foreach ($menu as $a) :
         </div>
     </div>
 </div>
+
 <!-- End of Modal Delete -->
