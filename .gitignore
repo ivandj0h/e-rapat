@@ -29,6 +29,9 @@ license.txt
 /nbproject/
 .idea/*
 
+## templates
+vendor/
+
 ## Sublime Text cache files
 *.tmlanguage.cache
 *.tmPreferences.cache

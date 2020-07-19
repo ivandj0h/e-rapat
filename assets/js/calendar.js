@@ -18,13 +18,19 @@ jQuery(document).ready(function () {
 
 (function () {
 	"use strict";
-
+	// ------------------------------------------------------- //
+	// Calendar
+	// ------------------------------------------------------ //
 	jQuery(function () {
+		// page is ready
 		jQuery("#calendar").fullCalendar({
 			themeSystem: "bootstrap4",
+			// emphasizes business hours
 			businessHours: false,
 			defaultView: "month",
+			// event dragging & resizing
 			editable: true,
+			// header
 			header: {
 				left: "title",
 				center: "month,agendaWeek,agendaDay",

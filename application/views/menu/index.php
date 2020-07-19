@@ -8,8 +8,14 @@
         <div class="breadcrumb"></div>
         <!-- End of Breadcumb -->
 
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        </div>
+
         <!-- Start Content Table -->
-        <div class="row mb-4">
+        <div class="row form-heigt">
             <div class="col-lg-12">
 
                 <!-- Check for error using form validation -->
@@ -42,16 +48,13 @@
                             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">No</th>
                                         <th class="text-center w-20">Menu Name</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1; ?>
                                     <?php foreach ($menu as $m) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++; ?>.</td>
                                             <td class="text-left"><?= $m['menu']; ?></td>
                                             <td class="text-center">
                                                 <span class="badge badge-dark" data-toggle="modal" data-target="#menuEdit<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
