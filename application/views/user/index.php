@@ -38,8 +38,8 @@
                                         <span class="badge badge-danger">Not Active</span>
                                     <?php } ?>
                                 </p>
-                                <p class="card-text"><small class="text-muted">Date Joined : <strong><?= date('d F Y', $user['date_created']); ?></small></strong></p>
-                                <p class="card-text"><small class="text-muted">Last Updated : <strong><?= date('d F Y', $user['date_updated']); ?></small></strong></p>
+                                <p class="card-text"><small class="text-muted">Date Joined : <strong><?= date('d F Y', $user['date_created']); ?></strong> - Time : <strong><?= date('h:m', $user['date_updated']); ?></strong></small></p>
+                                <p class="card-text"><small class="text-muted">Last Updated : <strong><?= date('d F Y', $user['date_updated']); ?></strong> - Time : <strong><?= date('H:m', $user['date_updated']); ?></strong></small></p>
                                 <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Edit Profile</a>
                             </div>
                         </div>

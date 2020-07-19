@@ -6,6 +6,21 @@ class Account_model extends CI_Model
     public $table = 'meeting_users';
     public $table2 = 'view_user_department';
     public $role = 'user_role';
+    public $department = 'meeting_department';
+
+    public function get_all_users()
+    {
+        return $this->db->get($this->table2)->result_array();
+    }
+    public function get_admin($where)
+    {
+        return $this->db->get_where($this->table2, ['email' => $where])->row_array();
+    }
+
+    public function get_all_department()
+    {
+        return $this->db->get($this->department)->result_array();
+    }
 
     public function get_where($where)
     {
@@ -18,18 +33,20 @@ class Account_model extends CI_Model
         return $this->db->where($where)->get($this->table2);
     }
 
-    public function get_where_role($where)
+    public function get_where_role()
     {
-
-        return $this->db->where($where)->get($this->role);
+        return $this->db->get($this->role)->result_array();
     }
 
-    public function update_account($id, $data)
+    public function get_where_user_role($where)
     {
+        return $this->db->get_where($this->role, ['id' => $where])->row_array();
+    }
 
-        $this->db->set('menu', $data);
-        $this->db->where('id', $id);
-        return $this->db->update($this->table);
+    public function update_account($data)
+    {
+        $this->db->where('id', $data['id']);
+        return $this->db->update($this->table, $data);
     }
 
     public function reset_password($id, $data)

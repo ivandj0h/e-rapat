@@ -7,14 +7,14 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        // $this->load->model('Menu_model', 'menu');
+        $this->load->model('Account_model');
         $this->load->model('Menu_model');
     }
 
     public function index()
     {
         $data['title'] = 'Menu Management';
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['menu'] = $this->Menu_model->get_all();
 
         $this->form_validation->set_rules('menu', 'Menu', 'required');
@@ -54,17 +54,17 @@ class Menu extends CI_Controller
     {
         $id = $this->input->post('id');
 
-        // $this->Menu_model->delete_menu($id);
-        // $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Deleted!</div>');
+        $this->Menu_model->delete_menu($id);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Deleted!</div>');
         // redirect('menu');
-        $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
+        // $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
         redirect('menu');
     }
 
     public function submenu()
     {
         $data['title'] = 'SubMenu Management';
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         $data['subMenu'] = $this->Menu_model->getSubMenu();
         $data['menu'] = $this->Menu_model->get_all();
