@@ -9,47 +9,40 @@ class Account_model extends CI_Model
 
     public function get_where($where)
     {
-        // Run this Query
-        $query = $this->db->where($where)->get($this->table);
-
-        // Return result of the Query
-        return $query;
+        return $this->db->get_where($this->table2, ['id' => $where])->row_array();
     }
 
     public function get_where_dept($where)
     {
-        // Run this Query
-        $query = $this->db->where($where)->get($this->table2);
 
-        // Return result of the Query
-        return $query;
+        return $this->db->where($where)->get($this->table2);
     }
 
     public function get_where_role($where)
     {
-        // Run this Query
-        $query = $this->db->where($where)->get($this->role);
 
-        // Return result of the Query
-        return $query;
+        return $this->db->where($where)->get($this->role);
     }
 
     public function update_account($id, $data)
     {
-        // Run this Query
+
         $this->db->set('menu', $data);
         $this->db->where('id', $id);
         $query = $this->db->update('meeting_users');
 
-        // Return result of the Query
         return $query;
+    }
+
+
+    public function reset_password($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update($this->table, $data);
     }
 
     public function delete_account($id)
     {
-        $query = $this->db->where('id', $id)->delete($this->table);
-
-        // Return result of the Query
-        return $query;
+        return $this->db->where('id', $id)->delete($this->table);
     }
 }

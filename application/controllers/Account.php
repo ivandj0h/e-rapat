@@ -7,7 +7,6 @@ class Account extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        // load the menu model
         $this->load->model('Account_model');
         $this->load->library('form_validation');
     }
@@ -19,9 +18,6 @@ class Account extends CI_Controller
         $data['user'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
         $data['account'] = $this->db->get('view_user_department')->result_array();
         $data['department'] = $this->db->get('meeting_department')->result_array();
-
-        // var_dump($data['department']);
-        // die;
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -38,8 +34,6 @@ class Account extends CI_Controller
         $data['account'] = $this->db->get('view_user_department')->result_array();
         $data['department'] = $this->db->get('meeting_department')->result_array();
 
-
-        // set Rules for menu
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[meeting_users.email]', [
             "is_unique" => "This Email already registered!"
@@ -71,11 +65,7 @@ class Account extends CI_Controller
 
             $this->db->insert('meeting_users', $data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Account has been Added!.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>');
+            <strong>Success!</strong> Account has been Added!.</div>');
             redirect('account/index');
         }
     }
@@ -100,7 +90,6 @@ class Account extends CI_Controller
 
     public function updateuser()
     {
-        // set Rules for menu
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
 
         if ($this->form_validation->run() == true) {
@@ -117,32 +106,38 @@ class Account extends CI_Controller
             $this->db->where('id', $data['id']);
             $this->db->update('meeting_users', $data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Account has beed Updated!.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>');
+            <strong>Success!</strong> Account has beed Updated!.</div>');
             redirect('account/index');
         }
     }
 
-    public function delete($id)
+    public function delete()
     {
-        // load the menu model
-        $this->load->model('Account_model');
+        $id = $this->input->post('id');
 
-        // var_dump($where);
-        // die;
+        $data = $this->Account_model->get_where($id);
+        $old_images = $data['image'];
+
+        if ($old_images != 'default-avatar.jpg') {
+            unlink(FCPATH . 'assets/img/profile/' . $old_images);
+        }
+
         $this->Account_model->delete_account($id);
-
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Account has beed deleted!.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>');
+        <strong>Success!</strong> Account has beed deleted!.</div>');
         redirect('account/index');
+    }
 
-        // echo 'Berhasil menghapus ' . $id;
+
+    public function resetpass()
+    {
+        $id = $this->input->post('id');
+        $password = "admin"; // $2y$10$rlSQG0XGwZnCtqv61NLKkONCAL1SUJdVeJ/95FFWOxSEeGJ9rqLwW
+        $data = ['password' => password_hash($password, PASSWORD_DEFAULT),];
+
+        $this->Account_model->reset_password($id, $data);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Password has beed Updated!.</div>');
+        redirect('account/index');
     }
 }

@@ -2,7 +2,7 @@
            <footer class="footer bg-white">
                <div class="container my-auto">
                    <div class="copyright text-center my-auto">
-                       <span>Copyright &copy; E-MEETING <?= date('Y'); ?></span>
+                       <span>Copyright &copy; e-rapat <?= date('Y'); ?></span>
                    </div>
                </div>
            </footer>
@@ -32,7 +32,7 @@
                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                        <div class="modal-footer">
                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                           <a class="btn btn-primary" href="<?= base_url('/auth/logout'); ?>">Logout</a>
+                           <a class="btn btn-danger" href="<?= base_url('/auth/logout'); ?>">Logout</a>
                        </div>
                    </div>
                </div>
@@ -71,11 +71,11 @@
                    $(this).next('.custom-file-label').addClass('selected').html(fileName);
                });
 
-               $(".alert-success").fadeTo(1000, 500).slideUp(500, function() {
+               $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {
                    $(".alert-success").slideUp(500);
                });
 
-               $(".alert-danger").fadeTo(1000, 500).slideUp(500, function() {
+               $(".alert-danger").fadeTo(2000, 500).slideUp(500, function() {
                    $(".alert-danger").slideUp(500);
                });
 
