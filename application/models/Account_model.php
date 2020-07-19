@@ -34,7 +34,6 @@ class Account_model extends CI_Model
         return $query;
     }
 
-
     public function reset_password($id, $data)
     {
         $this->db->where('id', $id);

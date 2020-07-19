@@ -10,9 +10,6 @@
         <!-- End of Breadcumb -->
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-        </div>
         <?= $this->session->flashdata('messages'); ?>
 
         <div class="row">
@@ -49,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col border-left">
+            <div class="col">
                 <div class="card ml-4">
                     <div class="card-header">
                         Hello <strong><?= $user['name']; ?></strong>, Here you can change your password.
