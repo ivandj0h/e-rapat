@@ -39,25 +39,9 @@ function check_access($role_id, $menu_id)
     if ($result->num_rows() > 0) {
         return "checked = 'checked'";
     }
-}
-
-function greetings()
-{
-    date_default_timezone_set('Asia/Jakarta');
-
-    $Hour = date('G');
-
-    if ($Hour >= 5 && $Hour <= 11) {
-        echo "Selamat Pagi";
-    } else if ($Hour >= 12 && $Hour <= 18) {
-        echo "Selamat Siang";
-    } else if ($Hour >= 19 || $Hour <= 4) {
-        echo "Selamat Malam";
-    }
-}
-
-function get_date_today()
-{
-    setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US.8859-1', 'en_US', 'American', 'ENG', 'English');
-    return strftime("%A, %d %B %Y") . "\n";
+    // second way to query with where condition
+    // $ci->db->get_where('user_access_menu', [
+    //     'role_id' => $role_id,
+    //     'menu_id' => $menu_id
+    // ]);
 }

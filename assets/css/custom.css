@@ -20,20 +20,15 @@
 	position: relative !important;
 }
 
-.dashboard_box {
-	background-color: #ffffff !important;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.contents {
+	margin-top: 65px;
+	background-color: #ffffff;
 }
 
 .breadcrumb {
-	/* border-bottom: 1px solid #eeeeee; */
-	/* background-color: #ffffff; */
-	margin-top: 45px;
-}
-
-.jumbotron {
-	border: 1px solid #dddddd;
+	border-bottom: 1px solid #eeeeee;
 	background-color: #ffffff;
+	margin-top: 85px;
 }
 
 .avatar {
@@ -45,10 +40,6 @@
 .border-left {
 	border-left: 1px solid #eeeeee;
 	margin-left: -100;
-}
-
-.list-group-item {
-	border-width: 0 0 0px !important;
 }
 
 .menu ul {
@@ -66,39 +57,8 @@
 	background: #671f79;
 }
 
-ul.timeline {
-	list-style-type: none;
-	position: relative;
-}
-ul.timeline:before {
-	content: " ";
-	background: #d4d9df;
-	display: inline-block;
-	position: absolute;
-	left: 29px;
-	width: 2px;
-	height: 100%;
-	z-index: 400;
-}
-ul.timeline > li {
-	margin: 20px 0;
-	padding-left: 20px;
-}
-ul.timeline > li:before {
-	content: " ";
-	background: white;
-	display: inline-block;
-	position: absolute;
-	border-radius: 50%;
-	border: 3px solid #22c0e8;
-	left: 20px;
-	width: 20px;
-	height: 20px;
-	z-index: 400;
-}
-
 .form-heigt {
-	height: 10px !important;
+	height: 1500px !important;
 }
 
 .datepicker td,
@@ -106,21 +66,6 @@ ul.timeline > li:before {
 	width: 1.5em;
 	height: 1.5em;
 	border: 1px solid #eee;
-}
-
-btn {
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	-ms-border-radius: 0px;
-	-o-border-radius: 0px;
-	border-radius: 0px;
-	outline: none !important;
-	border: none;
-}
-.btn:active {
-	border-style: outset !important;
-	border: none !important;
-	outline: none !important;
 }
 
 .border {
