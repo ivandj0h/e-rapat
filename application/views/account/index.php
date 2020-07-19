@@ -55,7 +55,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php foreach ($account as $a) : ?>
                                         <tr>
                                             <td class="text-center"><img src="<?= base_url('assets/img/profile/') ?><?= $a['image']; ?>" class="rounded mx-auto d-block" width="30"></td>
@@ -254,7 +253,6 @@ foreach ($account as $a) :
 <?php endforeach; ?>
 <!-- End of Modal Edit -->
 
-
 <!-- Start of Modal Delete -->
 <?php
 foreach ($account as $a) :
@@ -292,7 +290,7 @@ foreach ($account as $a) :
                 <form action="<?= base_url('account/resetpass/'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to Reset Password for Account <b><?= $a['name']; ?> ?</b></p>
+                        <p>Are you sure want to Reset Password for <strong><?= $a['name']; ?> ?</strong></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">

@@ -13,3 +13,4 @@ E-RAPAT is application for meeting administration in research & dev center, mini
 Here is the screenshoot of the application.
 
 ![Login](captured/login.jpg "This is the Screenshoot")
+![Sub Menu](captured/sub_menu.jpg "This is the Screenshoot")
