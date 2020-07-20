@@ -7,6 +7,7 @@ class Account_model extends CI_Model
     public $table2 = 'view_user_department';
     public $role = 'user_role';
     public $department = 'meeting_department';
+    protected $user_access_menu = 'user_access_menu';
 
     public function get_all_users()
     {
@@ -64,5 +65,20 @@ class Account_model extends CI_Model
     public function delete_account($id)
     {
         return $this->db->where('id', $id)->delete($this->table);
+    }
+
+    public function get_user_access_menu($data)
+    {
+        return $this->db->get_where($this->user_access_menu, $data);
+    }
+
+    public function insert_user_access_menu($data)
+    {
+        return $this->db->insert($this->user_access_menu, $data);
+    }
+
+    public function delete_user_access_menu($id)
+    {
+        return $this->db->where('id', $id)->delete($this->user_access_menu);
     }
 }
