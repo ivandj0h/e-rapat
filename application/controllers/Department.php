@@ -30,9 +30,9 @@ class Department extends CI_Controller
             $data = array('department_name' => $this->input->post('department_name'));
 
             // calling model to save data
-            $this->Department_model->insert($data);
+            $this->Department_model->insert_department($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> New Menu was Added!</div>');
-            redirect('department');
+            redirect('admin/department');
         }
     }
 
@@ -45,7 +45,7 @@ class Department extends CI_Controller
         // calling model to update data
         $this->Department_model->update($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Updated!</div>');
-        redirect('department');
+        redirect('admin/department');
     }
 
     public function deletedepartment()
@@ -56,6 +56,6 @@ class Department extends CI_Controller
         // calling model to delete data
         $this->Department_model->delete($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Deleted!</div>');
-        redirect('department');
+        redirect('admin/department');
     }
 }

@@ -32,7 +32,6 @@ class Menu extends CI_Controller
 
             $this->Menu_model->insert_menu($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Added!</div>');
-            // $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
             redirect('menu');
         }
     }
