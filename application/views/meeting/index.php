@@ -8,14 +8,8 @@
         <div class="breadcrumb"></div>
         <!-- End of Breadcumb -->
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-        </div>
-
         <!-- Start Content Table -->
-        <div class="row form-heigt">
+        <div class="row">
             <div class="col-lg-12">
 
                 <!-- Check for error using form validation -->
@@ -39,7 +33,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="meeting/create" class="btn btn-success btn-icon-split mb-4">
+                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addMeeting">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-file"></i>
                                 </span>
@@ -54,7 +48,7 @@
                                         <th class="text-center w-20">End</th>
                                         <th class="text-center w-20">Agenda</th>
                                         <th class="text-center w-20">Department</th>
-                                        <th class="text-center w-20">Requested</th>
+                                        <th class="text-center w-20">Upload</th>
                                         <th class="text-center w-20">Status</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
@@ -69,7 +63,14 @@
                                             <td class="text-center"><?= $a['end_time']; ?></td>
                                             <td><?= $a['agenda']; ?></td>
                                             <td><?= $a['department_name']; ?></td>
-                                            <td><?= $a['name']; ?></td>
+                                            <td>
+                                                <?php
+                                                if (empty($a['files_upload'])) { ?>
+                                                    <span class="badge badge-danger">No Files Uploaded</span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-secondary">Canceled</span>
+                                                <?php } ?>
+                                            </td>
                                             <td class="text-center">
                                                 <?php
                                                 if ($a['request_status'] == 0) { ?>
@@ -82,6 +83,7 @@
                                             </td>
                                             <td class="text-center" style="display: flex; justify-content: space-between;">
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-calendar-check"></i> Change Status</span>
+                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer"><i class="fas fa-fw fa-search"></i> Details</a>
                                                 <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
                                                 <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
@@ -103,7 +105,78 @@
 </div>
 <!-- End of Main Content -->
 
-<!-- =============================================================================================== -->
+<!-- Start of Modal Add -->
+<div class="modal fade" id="addMeeting" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addMeeting" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMeeting">Add New Meeting</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('meeting/addmeeting'); ?>" method="POST">
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="place_id" class="col-sm-2 col-form-label">Place name</label>
+                        <div class="col-sm-5">
+                            <select name="place_id" id="place_id" class="form-control">
+                                <option value="">-- Select Place --</option>
+                                <?php foreach ($place as $p) : ?>
+                                    <option value="<?= $p['id']; ?>">-- <?= $p['place_name']; ?> --</option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?= form_error('place_id', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Agenda</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="agenda" class="form-control form-control-user" id="agenda" value="<?= set_value('agenda'); ?>" placeholder="Agenda">
+                            <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" id="date_issues" name="date_issues" class="border">
+                            <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="start_time" class="col-sm-2 col-form-label">Start Meeting</label>
+                        <div class="col-sm-10">
+                            <input type="time" id="start_time" name="start_time" class="border">
+                            <?= form_error('Start Meeting', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="end_time" class="col-sm-2 col-form-label">End Meeting</label>
+                        <div class="col-sm-10">
+                            <input type="time" id="end_time" name="end_time" class="border">
+                            <?= form_error('End Meeting', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="end_time" class="col-sm-2 col-form-label">Upload File</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image" name="image">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Add -->
 
 <!-- Start of Modal Edit -->
 <?php

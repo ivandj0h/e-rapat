@@ -126,7 +126,7 @@ class Admin extends CI_Controller
                 'date_created' => time()
             ];
 
-            $this->db->insert('meeting_users', $data);
+            $this->Account_model->insert_account($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success!</strong> Account has been Added!.</div>');
             redirect('admin/account');

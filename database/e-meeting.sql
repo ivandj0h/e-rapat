@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2020 at 01:51 AM
+-- Generation Time: Jul 19, 2020 at 11:34 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `e-meeting`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_meeting_department` ()  NO SQL
+SELECT department_name, COUNT(id) AS total FROM view_meeting GROUP BY department_name$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting`
+--
+
+CREATE TABLE `meeting` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `place_id` int(11) NOT NULL,
+  `agenda` varchar(225) NOT NULL,
+  `files_upload` varchar(128) NOT NULL,
+  `date_issues` date NOT NULL,
+  `date_requested` date DEFAULT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `request_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `agenda`, `files_upload`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
+(14, 1, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '', '2020-07-18', '2020-07-15', '15:19:00', '16:02:00', 1),
+(15, 1, 1, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '', '2020-07-18', '2020-07-15', '19:42:00', '19:46:00', 2);
 
 -- --------------------------------------------------------
 
@@ -41,6 +77,25 @@ INSERT INTO `meeting_department` (`id`, `department_name`) VALUES
 (2, 'Department Two'),
 (3, 'Department Three'),
 (4, 'Department Four');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting_place`
+--
+
+CREATE TABLE `meeting_place` (
+  `id` int(11) NOT NULL,
+  `place_name` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting_place`
+--
+
+INSERT INTO `meeting_place` (`id`, `place_name`) VALUES
+(1, 'Meeting Room One'),
+(2, 'Meeting Room Two');
 
 -- --------------------------------------------------------
 
@@ -67,8 +122,7 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `uniqueid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `department_id`, `date_created`, `date_updated`) VALUES
-(1, '5f0b44d082841', 'Hitler', 'admin@admin.com', 'baray.jpg', '$2y$10$H6FPL5z4LSovh5./FO88juj8n97jaBdL2HrENlLI/ssIUvXyjYCqm', 1, 1, 1, 1594594034, 1594574032),
-(8, '5f0b5b181b087', 'kim jong un', 'user@user.com', '3.jpg', '$2y$10$/DLFkfbRVeZmpUqd3QSfGutnP.ZOSWj5gA9djipZsEBCecK608m7W', 2, 1, 3, 1594597197, 1594597362);
+(14, '5f14a617b785a', 'Ivandjoh', 'ivandi.gah@gmail.com', '4.jpeg', '$2y$10$di7WlZQU4FgFG3wcC86w1OZwFKqFedoGnM6cyW70jZRcvgQ3CbRpO', 1, 1, 1, 1595188759, 1595191485);
 
 -- --------------------------------------------------------
 
@@ -89,10 +143,16 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 2, 2),
 (4, 1, 3),
 (10, 1, 18),
-(11, 1, 5);
+(11, 1, 5),
+(14, 2, 2),
+(32, 1, 25),
+(35, 1, 26),
+(38, 2, 26),
+(40, 1, 27),
+(41, 2, 27),
+(42, 1, 28);
 
 -- --------------------------------------------------------
 
@@ -112,8 +172,7 @@ CREATE TABLE `user_menu` (
 INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
 (2, 'User'),
-(3, 'Menu'),
-(5, 'Account');
+(3, 'Menu');
 
 -- --------------------------------------------------------
 
@@ -157,10 +216,11 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
 (2, 2, 'Profile', 'user', 'fas fa-fw fa-user', 1),
 (3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
-(4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
-(5, 3, 'SubMenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
+(4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-bars', 1),
+(5, 3, 'SubMenu Management', 'menu/submenu', 'fas fa-fw fa-stream', 1),
 (17, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
-(18, 1, 'Account', 'account', 'fas fa-user-friends', 1);
+(18, 1, 'Account', 'admin/account', 'fas fa-user-friends', 1),
+(22, 1, 'Meeting', 'admin/meeting', 'fas fa-fw fa-calendar-alt', 1);
 
 -- --------------------------------------------------------
 
@@ -187,20 +247,62 @@ CREATE TABLE `view_user_department` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_user_meeting`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_user_meeting` (
+`id` int(11)
+,`user_id` int(11)
+,`place_id` int(11)
+,`agenda` varchar(225)
+,`files_upload` varchar(128)
+,`date_issues` date
+,`date_requested` date
+,`start_time` time
+,`end_time` time
+,`request_status` int(11)
+,`place_name` varchar(225)
+,`name` varchar(128)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_user_department`
 --
 DROP TABLE IF EXISTS `view_user_department`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_department`  AS  select `meeting_users`.`id` AS `id`,`meeting_users`.`name` AS `name`,`meeting_users`.`email` AS `email`,`meeting_users`.`image` AS `image`,`meeting_users`.`password` AS `password`,`meeting_users`.`role_id` AS `role_id`,`meeting_users`.`is_active` AS `is_active`,`meeting_department`.`department_name` AS `department_name`,`meeting_users`.`date_created` AS `date_created`,`user_role`.`role` AS `role`,`meeting_users`.`department_id` AS `department_id`,`meeting_users`.`uniqueid` AS `uniqueid`,`meeting_users`.`date_updated` AS `date_updated` from ((`meeting_users` join `meeting_department` on(`meeting_users`.`department_id` = `meeting_department`.`id`)) join `user_role` on(`meeting_users`.`role_id` = `user_role`.`id`)) ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_user_meeting`
+--
+DROP TABLE IF EXISTS `view_user_meeting`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`meeting`.`agenda` AS `agenda`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting_place`.`place_name` AS `place_name`,`meeting_users`.`name` AS `name` from ((`meeting` join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) join `meeting_users`) ;
+
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `meeting`
+--
+ALTER TABLE `meeting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `meeting_department`
 --
 ALTER TABLE `meeting_department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `meeting_place`
+--
+ALTER TABLE `meeting_place`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -238,28 +340,40 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT for table `meeting`
+--
+ALTER TABLE `meeting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `meeting_department`
 --
 ALTER TABLE `meeting_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `meeting_place`
+--
+ALTER TABLE `meeting_place`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `meeting_users`
 --
 ALTER TABLE `meeting_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -271,7 +385,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

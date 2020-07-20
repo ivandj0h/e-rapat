@@ -12,6 +12,7 @@ class Account_model extends CI_Model
     {
         return $this->db->get($this->table2)->result_array();
     }
+
     public function get_admin($where)
     {
         return $this->db->get_where($this->table2, ['email' => $where])->row_array();
@@ -41,6 +42,11 @@ class Account_model extends CI_Model
     public function get_where_user_role($where)
     {
         return $this->db->get_where($this->role, ['id' => $where])->row_array();
+    }
+
+    public function insert_account($data)
+    {
+        return $this->db->insert($this->table, $data);
     }
 
     public function update_account($data)

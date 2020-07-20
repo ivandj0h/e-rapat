@@ -8,14 +8,15 @@ class Meeting extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->helper('date');
+        $this->load->model('Account_model');
         $this->load->model('Meeting_model');
     }
 
     public function index()
     {
         $data['title'] = 'Meeting';
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
-        $data['meeting'] = $this->db->get('view_meeting')->result_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
         $data['place'] = $this->db->get('meeting_place')->result_array();
 
         $this->load->view('layout/header', $data);
@@ -25,39 +26,17 @@ class Meeting extends CI_Controller
         $this->load->view('layout/footer');
     }
 
-    public function create()
+    public function addmeeting()
     {
         $data['title'] = 'Meeting';
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
-        $data['meeting'] = $this->db->get('view_meeting')->result_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
         $data['place'] = $this->db->get('meeting_place')->result_array();
 
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
-        $this->load->view('meeting/create', $data);
-        $this->load->view('layout/footer');
-    }
-
-    public function request()
-    {
-        // get user id from session
-        $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
-        $user_id = $data['acc']['id'];
-
-        // set Rules for menu
-        $this->form_validation->set_rules('agenda', 'Agenda', 'required');
-        $this->form_validation->set_rules('place_id', 'Meeting Place', 'required');
-        $this->form_validation->set_rules('date_issues', 'Meeting Date', 'required');
-        $this->form_validation->set_rules('start_time', 'Start Meeting', 'required');
-        $this->form_validation->set_rules('end_time', 'End Meeting', 'required');
+        $this->form_validation->set_rules('place_id', 'Place Name', 'required');
+        $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim');
 
         if ($this->form_validation->run() == false) {
-
-            $data['title'] = 'Meeting';
-            $data['acc'] = $this->db->get_where('meeting_users', ['email' => $this->session->userdata('email')])->row_array();
-            $data['meeting'] = $this->db->get('view_meeting')->result_array();
-            $data['place'] = $this->db->get('meeting_place')->result_array();
 
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
@@ -67,8 +46,9 @@ class Meeting extends CI_Controller
         } else {
 
             $data = [
-                'user_id' => $user_id,
+                'user_id' => $data['user']['id'],
                 'place_id' => $this->input->post('place_id', true),
+                'unique_code' => uniqid(),
                 'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                 'date_issues' => $this->input->post('date_issues', true),
                 'date_requested' => date('Y-m-d'),
@@ -77,12 +57,25 @@ class Meeting extends CI_Controller
                 'request_status' => 0
             ];
 
-            // var_dump($data);
-            // die;
-            $this->db->insert('meeting', $data);
-            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Data Meeting has been requested!</div>');
+            $this->Meeting_model->insert_meeting($data);
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> New subMenu was Added!</div>');
             redirect('meeting');
         }
+    }
+
+    public function detailsmeeting($unique)
+    {
+        $data['title'] = 'Meeting';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting($unique);
+
+        // var_dump($data['meeting']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/details', $data);
+        $this->load->view('layout/footer');
     }
 
     public function updatestatus()
