@@ -31,7 +31,7 @@
                                 </span>
                                 <span class="text">Add New Role</span>
                             </a>
-                            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">Role Name</th>

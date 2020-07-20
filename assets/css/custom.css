@@ -79,6 +79,10 @@
 	height: 1500px !important;
 }
 
+.row-height-sm {
+	height: 800px !important;
+}
+
 .datepicker td,
 .datepicker th {
 	width: 1.5em;
