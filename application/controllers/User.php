@@ -8,13 +8,13 @@ class User extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->library('form_validation');
+        $this->load->model('Account_model');
     }
 
     public function index()
     {
         $data['title'] = 'Profile';
-        $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
-        $data['user'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -34,8 +34,7 @@ class User extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Profile';
-            $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
-            $data['user'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
+            $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
@@ -67,8 +66,7 @@ class User extends CI_Controller
     {
 
         $data['title'] = 'Edit Profile';
-        $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
-        $data['user'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         // give rules
         $this->form_validation->set_rules('name', 'Full Name', 'required|trim');

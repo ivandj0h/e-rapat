@@ -41,7 +41,7 @@ class Meeting extends CI_Controller
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
             $this->load->view('layout/topbar', $data);
-            $this->load->view('meeting/create', $data);
+            $this->load->view('meeting/index', $data);
             $this->load->view('layout/footer');
         } else {
 
@@ -57,6 +57,37 @@ class Meeting extends CI_Controller
                 'request_status' => 0
             ];
 
+            // Count total files
+            $countfiles = count($_FILES['files']['name']);
+
+            // Looping all files
+            for ($i = 0; $i < $countfiles; $i++) {
+                // check if files not empty
+                if (!empty($_FILES['files']['name'][$i])) {
+
+                    $_FILES['files']['name'][$i];
+                    $_FILES['files']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                    $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                    $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+                    // Set preference
+                    $config['upload_path'] = 'uploads/';
+                    $config['allowed_types'] = '*';
+                    $config['max_size']    = '2000';    // max_size in kb
+                    $config['file_name'] = $_FILES['files']['name'][$i];
+
+                    $this->load->library('upload', $config);
+
+
+                    if ($this->upload->do_upload('file')) {
+                        $new_files = $this->upload->data('file_name');
+                        $this->db->set('files', $new_files);
+                    } else {
+                        echo $this->upload->display_errors();
+                    }
+                }
+            }
             $this->Meeting_model->insert_meeting($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> New subMenu was Added!</div>');
             redirect('meeting');
