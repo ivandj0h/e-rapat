@@ -62,12 +62,12 @@ class Admin extends CI_Controller
             'menu_id' => $menu_id
         ];
 
-        $result = $this->db->get_where('user_access_menu', $data);
+        $result = $this->Account_model->get_user_access_menu($data);
 
         if ($result->num_rows() < 1) {
-            $this->db->insert('user_access_menu', $data);
+            $this->Account_model->insert_user_access_menu($data);
         } else {
-            $this->db->delete('user_access_menu', $data);
+            $this->Account_model->delete_user_access_menu($data['role_id']);
         }
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Congradulation!</strong> You have successfully change the Access!
