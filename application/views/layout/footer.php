@@ -50,19 +50,17 @@
 
            <!-- Page level plugins -->
            <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.js"></script>
-           <!-- <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.js"></script> -->
-           <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-           <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
 
            <!-- Calendar -->
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/moment.js"></script>
 
            <!-- Page level custom scripts -->
            <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/calendar.js"></script>
 
 
            <script>

@@ -16,16 +16,14 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
     <!-- Custom fonts for this template-->
-    <!-- <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
-    <!-- <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
-    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/calendar.css" rel="stylesheet">
 
 

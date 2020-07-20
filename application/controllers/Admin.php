@@ -8,6 +8,7 @@ class Admin extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Account_model');
+        $this->load->model('Department_model');
     }
 
     public function index()
@@ -53,7 +54,6 @@ class Admin extends CI_Controller
 
     public function changeaccess()
     {
-        // first, get data from ajax
         $role_id = $this->input->post('roleId');
         $menu_id = $this->input->post('menuId');
 
@@ -69,8 +69,6 @@ class Admin extends CI_Controller
         } else {
             $this->db->delete('user_access_menu', $data);
         }
-
-        // create Success Alert
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Congradulation!</strong> You have successfully change the Access!
       </div>');
@@ -199,5 +197,65 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> Password has beed Updated!.</div>');
         redirect('admin/account');
+    }
+
+
+    public function department()
+    {
+        $data['title']   = 'Department';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['dept'] = $this->Department_model->get_all_department();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('department/index', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function adddepartment()
+    {
+        $data['title']   = 'Department';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['dept'] = $this->Department_model->get_all_department();
+
+        $this->form_validation->set_rules('department_name', 'Department Name', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('department/index', $data);
+            $this->load->view('layout/footer');
+        } else {
+
+            $data = array('department_name' => $this->input->post('department_name'));
+
+            $this->Department_model->insert_department($data);
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Added!</div>');
+            redirect('admin/department');
+        }
+    }
+
+    public function editdepartment()
+    {
+
+        $id = $this->input->post('id');
+        $data = array('department_name' => $this->input->post('department_name'));
+
+
+        $this->Department_model->update_department($id, $data);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Updated!</div>');
+        redirect('admin/department');
+    }
+
+    public function deletedepartment()
+    {
+        $id = $this->input->post('id');
+
+        $this->Department_model->delete_department($id);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Deleted!</div>');
+        redirect('admin/department');
     }
 }

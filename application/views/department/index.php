@@ -16,7 +16,7 @@
                 <!-- Alert if Error occurred-->
                 <?php if (validation_errors()) : ?>
 
-                    <div class="alert alert-danger alert-dismissible fade show col-md-6" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
                         <h4 class="alert-heading">Error!</h4>
                         <hr>
                         <?= validation_errors(); ?>
@@ -84,7 +84,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('department'); ?>" method="POST">
+            <form action="<?= base_url('admin/adddepartment'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
@@ -105,17 +105,22 @@
 <?php
 foreach ($dept as $a) :
     $id = $a['id'];
-    $department_name = $a['department_name'];
 ?>
     <div class="modal fade" id="deptEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?= base_url('department/updatedepartment'); ?>" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="menuAdd">Edit Department</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('admin/editdepartment'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="department_name" class="form-control form-control-user" id="department_name" value="<?= $department_name; ?>" placeholder="department_name">
+                                <input type="text" name="department_name" class="form-control form-control-user" id="department_name" value="<?= $a['department_name']; ?>" placeholder="department_name">
                                 <?= form_error('department_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -136,15 +141,14 @@ foreach ($dept as $a) :
 <?php
 foreach ($dept as $a) :
     $id = $a['id'];
-    $place_name = $a['department_name'];
 ?>
     <div class="modal fade" id="deptDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?= base_url('department/deletedepartment'); ?>" method="POST">
+                <form action="<?= base_url('admin/deletedepartment'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $place_name; ?> ?</b></p>
+                        <p>Are you sure want to delete <b><?= $a['department_name']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
