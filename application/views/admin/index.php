@@ -13,7 +13,7 @@
             <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
         </div>
 
-        <div class="jumbotron">
+        <div class="jumbotron jumbotron-fluid">
             <h1>e-rapat</h1>
             <p>application for meeting administration in research & dev center, ministry of transportation republic of indonesia </p>
         </div>
