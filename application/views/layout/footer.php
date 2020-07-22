@@ -57,7 +57,7 @@
            <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
 
            <!-- Calendar -->
-           <script src="<?= base_url('assets/'); ?>js/moment.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/moment.min.js"></script>
 
            <!-- Page level custom scripts -->
            <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>

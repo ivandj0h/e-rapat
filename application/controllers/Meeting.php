@@ -132,9 +132,9 @@ class Meeting extends CI_Controller
         redirect('meeting');
     }
 
-    public function explores()
+    public function overview()
     {
-        $data['title'] = 'Explores Meeting';
+        $data['title'] = 'Overview';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
         $data['place'] = $this->db->get('meeting_place')->result_array();
@@ -142,7 +142,7 @@ class Meeting extends CI_Controller
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
-        $this->load->view('meeting/explores', $data);
+        $this->load->view('meeting/overview', $data);
         $this->load->view('layout/footer');
     }
 }

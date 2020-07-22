@@ -7,7 +7,7 @@ class Account_model extends CI_Model
     public $table2 = 'view_user_department';
     public $role = 'user_role';
     public $department = 'meeting_department';
-    protected $user_access_menu = 'user_access_menu';
+    public $user_access_menu = 'user_access_menu';
 
     public function get_all_users()
     {

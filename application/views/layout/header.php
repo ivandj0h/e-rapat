@@ -22,7 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
-    <link href="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/jqueryui/dataTables.jqueryui.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/calendar.css" rel="stylesheet">
 
