@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2020 at 07:43 AM
+-- Generation Time: Jul 23, 2020 at 02:33 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -41,7 +41,7 @@ CREATE TABLE `meeting` (
   `user_id` int(11) NOT NULL,
   `place_id` int(11) NOT NULL,
   `unique_code` varchar(100) NOT NULL,
-  `agenda` varchar(225) NOT NULL,
+  `agenda` text NOT NULL,
   `files` varchar(128) NOT NULL,
   `date_issues` date NOT NULL,
   `date_requested` date DEFAULT NULL,
@@ -55,9 +55,7 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `unique_code`, `agenda`, `files`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
-(8, 14, 1, '5f151615d7bb2', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '', '2020-07-20', '2020-07-20', '11:57:00', '12:57:00', 2),
-(9, 14, 1, '5f1516bce6e89', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '', '2020-07-20', '2020-07-20', '11:59:00', '12:59:00', 1),
-(10, 14, 2, '5f152e4aa1bb1', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium', '', '2020-07-19', '2020-07-20', '13:40:00', '14:40:00', 0);
+(30, 14, 1, '5f198307041c4', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 'SI_AGENDA_RAPAT.pdf', '2020-07-23', '2020-07-23', '20:00:00', '21:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -124,8 +122,8 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `uniqueid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `department_id`, `date_created`, `date_updated`) VALUES
-(14, '5f14a617b785a', 'Ivandjoh', 'ivandi.gah@gmail.com', '7b.jpg', '$2y$10$0rrXCLrtJVMPYTXqELd.GO7DG8KoMLjqbafsC6bzYulXWqWusGc7G', 1, 1, 1, 1595188759, 1595223295),
-(15, '5f14c0bfa4259', 'Arjuna Djoh', 'juna@gmail.com', '3.jpeg', '$2y$10$exVU.fONQ3CPhM87ZUv0buimW/hUb01.vCXk4FI.vT5Z21cIPMbz.', 2, 1, 2, 1595195583, 0);
+(14, '5f14a617b785a', 'administrator', 'admin@admin.com', '3.jpg', '$2y$10$xUr62tYeOZnLoIr5/zw9oOMAlCkBhX0/wRk0BRKPiz8VJZhojlRX2', 1, 1, 1, 1595188759, 1595264408),
+(15, '5f14c0bfa4259', 'User', 'user@user.com', '3.jpeg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1595264413);
 
 -- --------------------------------------------------------
 
@@ -145,7 +143,6 @@ CREATE TABLE `user_access_menu` (
 
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
-(2, 1, 2),
 (4, 1, 3),
 (10, 1, 18),
 (11, 1, 5),
@@ -157,7 +154,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (41, 2, 27),
 (42, 1, 28),
 (45, 1, 29),
-(46, 2, 29);
+(48, 1, 2),
+(51, 2, 30);
 
 -- --------------------------------------------------------
 
@@ -178,7 +176,8 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
 (2, 'User'),
 (3, 'Menu'),
-(29, 'Meeting');
+(29, 'Meeting'),
+(30, 'Overview');
 
 -- --------------------------------------------------------
 
@@ -227,7 +226,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (17, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
 (18, 1, 'Account', 'admin/account', 'fas fa-user-friends', 1),
 (22, 29, 'Meeting', 'meeting', 'fas fa-fw fa-calendar-alt', 1),
-(23, 29, 'Explores', 'meeting/explores', 'fas fa-fw fa-globe-americas', 1);
+(24, 1, 'Department', 'admin/department', 'fas fa-fw fa-project-diagram', 1),
+(25, 30, 'Overview', 'overview', 'fas fa-fw fa-compress-arrows-alt', 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,7 @@ CREATE TABLE `view_user_meeting` (
 ,`email` varchar(128)
 ,`image` varchar(128)
 ,`place_name` varchar(225)
-,`agenda` varchar(225)
+,`agenda` text
 ,`files_upload` varchar(128)
 ,`date_issues` date
 ,`date_requested` date
@@ -356,13 +356,13 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
 --
 ALTER TABLE `meeting_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `meeting_place`
@@ -380,13 +380,13 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -398,7 +398,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

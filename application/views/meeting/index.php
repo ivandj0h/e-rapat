@@ -131,21 +131,21 @@
                 <div class="form-group row">
                     <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
                     <div class="col-sm-10">
-                        <input type="text" id="date_issues" name="date_issues" class="border">
+                        <input type="text" id="date_issues" name="date_issues" class="border" placeholder="Input Date">
                         <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="start_time" class="col-sm-2 col-form-label">Start Meeting</label>
                     <div class="col-sm-10">
-                        <input type="text" id="start_time" name="start_time" class="border">
+                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Start Meeting">
                         <?= form_error('Start Meeting', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="end_time" class="col-sm-2 col-form-label">End Meeting</label>
                     <div class="col-sm-10">
-                        <input type="text" id="end_time" name="end_time" class="border">
+                        <input type="text" id="end_time" name="end_time" class="border" placeholder="End Meeting">
                         <?= form_error('End Meeting', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>

@@ -50,6 +50,11 @@
 	z-index: 10;
 }
 
+.dataTables_filter input {
+	border-radius: 5px !important;
+	border: 1px solid #dddddd !important;
+}
+
 th {
 	white-space: nowrap !important;
 }
