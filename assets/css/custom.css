@@ -50,6 +50,18 @@
 	z-index: 10;
 }
 
+th {
+	white-space: nowrap !important;
+}
+
+.action {
+	display: flex !important;
+	justify-content: space-between !important;
+	flex-wrap: wrap !important;
+	flex-direction: column !important;
+	padding-bottom: 2px;
+}
+
 .modal-lg {
 	max-width: 80% !important;
 	z-index: 10;

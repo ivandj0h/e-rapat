@@ -50,11 +50,11 @@
 
            <!-- Page level plugins -->
            <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.js"></script>
-           <!-- <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script> -->
-           <!-- <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script> -->
-           <!-- <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script> -->
-           <!-- <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script> -->
-           <!-- <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script> -->
+           <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
 
            <!-- DateTime -->
            <script src="<?= base_url('assets/'); ?>vendor/datetimepicker/jquery.datetimepicker.full.min.js"></script>
@@ -65,6 +65,33 @@
 
 
            <script>
+               // date handler
+               $("#date_issues").datetimepicker({
+                   timepicker: false,
+                   datepicker: true,
+                   format: "Y-m-d", // formatDate
+                   value: "2020-07-23", // defaultDate
+                   weeks: true,
+               });
+
+               // time handler
+               $("#start_time").datetimepicker({
+                   timepicker: true,
+                   datepicker: false,
+                   format: "H:i", // formatTime
+                   value: "00:00", // defaultTime
+                   hours12: false,
+               });
+
+               // time handler
+               $("#end_time").datetimepicker({
+                   timepicker: true,
+                   datepicker: false,
+                   format: "H:i", // formatTime
+                   value: "00:00", // defaultTime
+                   hours12: false,
+               });
+
                // upload user profile
                $('.custom-file-input').on('change', function() {
                    let fileName = $(this).val().split('\\').pop();
