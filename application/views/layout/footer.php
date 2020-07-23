@@ -61,37 +61,11 @@
            <script src="<?= base_url('assets/'); ?>js/moment.min.js"></script>
 
            <!-- Page level custom scripts -->
-           <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/datatables/datatables-demo.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/datetime/datetime-demo.js"></script>
 
 
            <script>
-               // date handler
-               $("#date_issues").datetimepicker({
-                   timepicker: false,
-                   datepicker: true,
-                   format: "Y-m-d", // formatDate
-                   value: "2020-07-23", // defaultDate
-                   weeks: true,
-               });
-
-               // time handler
-               $("#start_time").datetimepicker({
-                   timepicker: true,
-                   datepicker: false,
-                   format: "H:i", // formatTime
-                   value: "00:00", // defaultTime
-                   hours12: false,
-               });
-
-               // time handler
-               $("#end_time").datetimepicker({
-                   timepicker: true,
-                   datepicker: false,
-                   format: "H:i", // formatTime
-                   value: "00:00", // defaultTime
-                   hours12: false,
-               });
-
                // upload user profile
                $('.custom-file-input').on('change', function() {
                    let fileName = $(this).val().split('\\').pop();

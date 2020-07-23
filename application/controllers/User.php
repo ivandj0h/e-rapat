@@ -45,10 +45,6 @@ class User extends CI_Controller
 
             $session_id = $this->session->userdata('id');
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
-
-            // var_dump($session_id);
-            // die;
-            // $this->db->query("UPDATE `meeting_users` SET `password` = '$password' where `id` = 8");
             $this->db->query("UPDATE `meeting_users` SET `password` = '$password' where `id` = '$session_id'");
 
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
