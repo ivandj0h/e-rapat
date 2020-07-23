@@ -30,16 +30,11 @@ class Meeting_model extends CI_Model
 
     public function delete_meeting($id)
     {
-        // Running the Query
-        $query = $this->db->where('id', $id)->delete($this->meeting);
-
-        // Return result of the Query
-        return $query;
+        return $this->db->where('id', $id)->delete($this->meeting);
     }
 
     public function update_meeting_status($id, $data)
     {
-        // Running the Query
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
     }

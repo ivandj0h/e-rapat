@@ -7,8 +7,7 @@ class Department_model extends CI_Model
 
     public function get_all_department()
     {
-        return $this->db->get($this->department)
-            ->result_array();
+        return $this->db->get($this->department)->result_array();
     }
 
     public function insert_department($data)

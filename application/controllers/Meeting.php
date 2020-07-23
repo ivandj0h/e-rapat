@@ -57,12 +57,9 @@ class Meeting extends CI_Controller
                 'request_status' => 0
             ];
 
-            // Count total files
             $countfiles = count($_FILES['files']['name']);
 
-            // Looping all files
             for ($i = 0; $i < $countfiles; $i++) {
-                // check if files not empty
                 if (!empty($_FILES['files']['name'][$i])) {
 
                     $_FILES['files']['name'][$i];
@@ -71,10 +68,9 @@ class Meeting extends CI_Controller
                     $_FILES['file']['error'] = $_FILES['files']['error'][$i];
                     $_FILES['file']['size'] = $_FILES['files']['size'][$i];
 
-                    // Set preference
                     $config['upload_path'] = 'uploads/';
                     $config['allowed_types'] = '*';
-                    $config['max_size']    = '2000';    // max_size in kb
+                    $config['max_size']    = '2000';
                     $config['file_name'] = $_FILES['files']['name'][$i];
 
                     $this->load->library('upload', $config);
@@ -109,7 +105,6 @@ class Meeting extends CI_Controller
 
     public function editmeeting()
     {
-        // get post id
         $id = $this->input->post('id');
         $data = array(
             'place_id' => $this->input->post('place_id', true),
@@ -119,7 +114,6 @@ class Meeting extends CI_Controller
             'end_time' => $this->input->post('end_time', true),
         );
 
-        // calling model to update data
         $this->Meeting_model->update_meeting($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
         redirect('meeting');
@@ -135,11 +129,9 @@ class Meeting extends CI_Controller
 
     public function updatestatus()
     {
-        // get post id
         $id = $this->input->post('id');
         $data = array('request_status' => $this->input->post('request_status'));
 
-        // updating execution
         $this->Meeting_model->update_meeting_status($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Status Meeting has been Updated!</div>');
         redirect('meeting');
@@ -147,10 +139,8 @@ class Meeting extends CI_Controller
 
     public function delete()
     {
-        // get post id
         $id = $this->input->post('id');
 
-        // deleting execution
         $this->Meeting_model->delete_meeting($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Data Meeting has been Deleted!</div>');
         redirect('meeting');
