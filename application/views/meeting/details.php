@@ -91,11 +91,16 @@ foreach ($meeting as $a) :
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <ul class="list-group list-group-flush mt-3">
-                                        <li class="list-group-item">Cras justo odio</li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
+                                        <?php
+                                        if (empty($a['files_upload'])) {  ?>
+                                            <li class="list-group-item">
+                                                <span class="badge badge-danger">No files Uploaded</span>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li class="list-group-item">
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['unique_code']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>

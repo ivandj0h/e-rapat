@@ -109,6 +109,14 @@ class Meeting extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function meetingdownload($id)
+    {
+        $this->load->helper('download');
+        $data = $this->Meeting_model->get_meeting_download($id);
+        $path = file_get_contents("uploads/" . $data->files_upload);
+        force_download($data->files_upload, $path);
+    }
+
     public function updatestatus()
     {
         // get post id
