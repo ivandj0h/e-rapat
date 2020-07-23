@@ -107,6 +107,24 @@ class Meeting extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function editmeeting()
+    {
+        // get post id
+        $id = $this->input->post('id');
+        $data = array(
+            'place_id' => $this->input->post('place_id', true),
+            'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+            'date_issues' => $this->input->post('date_issues', true),
+            'start_time' => $this->input->post('start_time', true),
+            'end_time' => $this->input->post('end_time', true),
+        );
+
+        // calling model to update data
+        $this->Meeting_model->update_meeting($id, $data);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
+        redirect('meeting');
+    }
+
     public function meetingdownload($id)
     {
         // $this->load->helper('download');

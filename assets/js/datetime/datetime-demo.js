@@ -15,7 +15,7 @@ $(document).ready(function () {
 		forceParse: 0,
 	});
 
-	// time handler
+	// add start time handler
 	$("#start_time").datetimepicker({
 		timepicker: true,
 		datepicker: false,
@@ -24,7 +24,7 @@ $(document).ready(function () {
 		hours12: false,
 	});
 
-	// time handler
+	// add end time handler
 	$("#end_time").datetimepicker({
 		timepicker: true,
 		datepicker: false,

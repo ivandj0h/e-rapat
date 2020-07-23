@@ -64,44 +64,28 @@
            <script src="<?= base_url('assets/'); ?>js/datatables/datatables-demo.js"></script>
            <script src="<?= base_url('assets/'); ?>js/datetime/datetime-demo.js"></script>
 
-
+           <!-- Customs scripts -->
+           <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
            <script>
-               // upload user profile
-               $('.custom-file-input').on('change', function() {
-                   let fileName = $(this).val().split('\\').pop();
-                   $(this).next('.custom-file-label').addClass('selected').html(fileName);
-               });
-
-               $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {
-                   $(".alert-success").slideUp(500);
-               });
-
-               $(".alert-warning").fadeTo(3000, 500).slideUp(500, function() {
-                   $(".alert-warning").slideUp(500);
-               });
-
-               $(".alert-danger").fadeTo(2000, 500).slideUp(500, function() {
-                   $(".alert-danger").slideUp(500);
-               });
-
                // change menu access for checkbox
-               var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
-                   csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
-               $('.form-check-input').on('click', function() {
-                   const menuId = $(this).data('menu');
-                   const roleId = $(this).data('role');
+               var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+                   csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+               $(".form-check-input").on("click", function() {
+                   const menuId = $(this).data("menu");
+                   const roleId = $(this).data("role");
                    var dataJson = {
                        [csrfName]: csrfHash,
                        menuId: menuId,
-                       roleId: roleId
+                       roleId: roleId,
                    };
                    $.ajax({
                        url: "<?= base_url('admin/changeaccess'); ?>",
-                       type: 'post',
+                       type: "post",
                        data: dataJson,
                        success: function() {
-                           document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
-                       }
+                           document.location.href =
+                               "<?= base_url('admin/roleaccess/'); ?>" + roleId;
+                       },
                    });
                });
            </script>
