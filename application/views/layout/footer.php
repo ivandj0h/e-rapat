@@ -50,13 +50,14 @@
 
            <!-- Page level plugins -->
            <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.js"></script>
-           <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
+           <!-- <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script> -->
+           <!-- <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script> -->
+           <!-- <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script> -->
+           <!-- <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script> -->
+           <!-- <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script> -->
 
-           <!-- Calendar -->
+           <!-- DateTime -->
+           <script src="<?= base_url('assets/'); ?>vendor/datetimepicker/jquery.datetimepicker.full.min.js"></script>
            <script src="<?= base_url('assets/'); ?>js/moment.min.js"></script>
 
            <!-- Page level custom scripts -->
