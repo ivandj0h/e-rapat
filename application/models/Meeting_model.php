@@ -22,6 +22,12 @@ class Meeting_model extends CI_Model
         return $this->db->insert($this->meeting, $data);
     }
 
+    public function update_meeting($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+    }
+
     public function delete_meeting($id)
     {
         // Running the Query

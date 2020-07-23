@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2020 at 02:33 PM
+-- Generation Time: Jul 23, 2020 at 06:09 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -20,15 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `e-meeting`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_meeting_department` ()  NO SQL
-SELECT department_name, COUNT(id) AS total FROM view_meeting GROUP BY department_name$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -55,7 +46,8 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `unique_code`, `agenda`, `files`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
-(30, 14, 1, '5f198307041c4', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 'SI_AGENDA_RAPAT.pdf', '2020-07-23', '2020-07-23', '20:00:00', '21:00:00', 0);
+(30, 14, 1, '5f198307041c4', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 'SI_AGENDA_RAPAT.pdf', '2020-07-23', '2020-07-23', '20:00:00', '21:00:00', 0),
+(31, 14, 2, '5f19b220c0d52', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', '', '2020-07-22', '2020-07-23', '01:00:00', '02:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -122,7 +114,7 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `uniqueid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `department_id`, `date_created`, `date_updated`) VALUES
-(14, '5f14a617b785a', 'administrator', 'admin@admin.com', '3.jpg', '$2y$10$xUr62tYeOZnLoIr5/zw9oOMAlCkBhX0/wRk0BRKPiz8VJZhojlRX2', 1, 1, 1, 1595188759, 1595264408),
+(14, '5f14a617b785a', 'administrator', 'admin@admin.com', '1.jpeg', '$2y$10$xUr62tYeOZnLoIr5/zw9oOMAlCkBhX0/wRk0BRKPiz8VJZhojlRX2', 1, 1, 1, 1595188759, 1595264408),
 (15, '5f14c0bfa4259', 'User', 'user@user.com', '3.jpeg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1595264413);
 
 -- --------------------------------------------------------
@@ -356,7 +348,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
