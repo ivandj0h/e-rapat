@@ -1,10 +1,11 @@
 # Global files
-
+database/
 *.zip
 .svn
 .DS_Store
 thumbs.db
 readme.rst
+
 # Codeigniter files
 composer.json
 user_guide/

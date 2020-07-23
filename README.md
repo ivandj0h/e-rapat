@@ -22,6 +22,7 @@ or click the green button on top right of this list of repo's file.
 Here is the screenshoot of the application.
 
 ![Login](captured/login.jpg "This is the Screenshoot")
-![Sub Menu](captured/sub_menu.jpg "This is the Screenshoot")
+![Add New Meeting](captured/add_new_meeting.jpg "This is the Screenshoot")
 ![Meeting](captured/meeting.jpg "This is the Screenshoot")
 ![Meeting Details](captured/meeting_details.jpg "This is the Screenshoot")
+![Edit Meeting](captured/edit_meeting.jpg "This is the Screenshoot")
