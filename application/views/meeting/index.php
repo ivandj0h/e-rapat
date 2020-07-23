@@ -39,7 +39,7 @@
                                 </span>
                                 <span class="text">Add New Meeting</span>
                             </a>
-                            <table class="table table-responsive" id="dataTable" cellspacing="0">
+                            <table class="display" id="dataTable" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">Meeting Room</th>
@@ -72,11 +72,11 @@
                                                     <span class="badge badge-secondary">Canceled</span>
                                                 <?php } ?>
                                             </td>
-                                            <td class="text-center" style="display: flex; justify-content: space-between;">
-                                                <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-calendar-check"></i> Change Status</span>
-                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer"><i class="fas fa-fw fa-search"></i> Details</a>
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                            <td class="text-center action mx-2">
+                                                <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-calendar-check"></i> Change Status</span>
+                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -131,21 +131,21 @@
                 <div class="form-group row">
                     <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
                     <div class="col-sm-10">
-                        <input type="date" id="date_issues" name="date_issues" class="border">
+                        <input type="text" id="date_issues" name="date_issues" class="border">
                         <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="start_time" class="col-sm-2 col-form-label">Start Meeting</label>
                     <div class="col-sm-10">
-                        <input type="time" id="start_time" name="start_time" class="border">
+                        <input type="text" id="start_time" name="start_time" class="border">
                         <?= form_error('Start Meeting', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="end_time" class="col-sm-2 col-form-label">End Meeting</label>
                     <div class="col-sm-10">
-                        <input type="time" id="end_time" name="end_time" class="border">
+                        <input type="text" id="end_time" name="end_time" class="border">
                         <?= form_error('End Meeting', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
