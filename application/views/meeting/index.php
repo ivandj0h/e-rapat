@@ -60,7 +60,7 @@
                                             </td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
                                             <td class="text-center"><?= $a['end_time']; ?></td>
-                                            <td><?= $a['agenda']; ?></td>
+                                            <td><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td><?= $a['department_name']; ?></td>
                                             <td class="text-center">
                                                 <?php
