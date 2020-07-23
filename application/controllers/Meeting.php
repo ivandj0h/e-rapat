@@ -7,7 +7,7 @@ class Meeting extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper('date');
+        $this->load->helper(array('string', 'text'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
     }
@@ -100,8 +100,6 @@ class Meeting extends CI_Controller
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_one_meeting($unique);
 
-        // var_dump($data['meeting']);
-        // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
@@ -111,7 +109,7 @@ class Meeting extends CI_Controller
 
     public function meetingdownload($id)
     {
-        $this->load->helper('download');
+        // $this->load->helper('download');
         $data = $this->Meeting_model->get_meeting_download($id);
         $path = file_get_contents("uploads/" . $data->files_upload);
         force_download($data->files_upload, $path);
