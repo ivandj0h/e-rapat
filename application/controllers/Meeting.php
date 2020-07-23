@@ -131,18 +131,4 @@ class Meeting extends CI_Controller
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Data Meeting has been Deleted!</div>');
         redirect('meeting');
     }
-
-    public function overview()
-    {
-        $data['title'] = 'Overview';
-        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting'] = $this->Meeting_model->get_all_meeting();
-        $data['place'] = $this->db->get('meeting_place')->result_array();
-
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
-        $this->load->view('meeting/overview', $data);
-        $this->load->view('layout/footer');
-    }
 }
