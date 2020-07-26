@@ -8,14 +8,17 @@
         <div class="breadcrumb"></div>
         <!-- End of Breadcumb -->
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3 col-md-6">
 
-        <div class="jumbotron jumbotron-fluid">
-            <h1>e-rapat</h1>
-            <p>application for meeting administration in research & dev center, ministry of transportation republic of indonesia </p>
+                    </div>
+                    <div class="col-sm-9 col-md-6 bg-warning">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Content Row -->
