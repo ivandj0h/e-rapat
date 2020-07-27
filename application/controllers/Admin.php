@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         is_logged_in();
         $this->load->model('Account_model');
         $this->load->model('Department_model');
+        $this->load->model('Rooms_model');
     }
 
     public function index()
@@ -199,7 +200,7 @@ class Admin extends CI_Controller
         redirect('admin/account');
     }
 
-
+    // Department Section
     public function department()
     {
         $data['title']   = 'Department';
@@ -257,5 +258,56 @@ class Admin extends CI_Controller
         $this->Department_model->delete_department($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Deleted!</div>');
         redirect('admin/department');
+    }
+
+    // Media Meeting / Rooms
+    public function room()
+    {
+        $data['title']   = 'Media Meeting';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['rooms'] = $this->Rooms_model->get_all_rooms();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('rooms/index', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function addroom()
+    {
+        $data['title']   = 'Media Meeting';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['rooms'] = $this->Rooms_model->get_all_rooms();
+
+        $this->form_validation->set_rules('place_name', 'Media Meeting', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('rooms/index', $data);
+            $this->load->view('layout/footer');
+        } else {
+
+            $data = array('place_name' => $this->input->post('place_name'));
+
+            $this->Rooms_model->insert_room($data);
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Media Meeting has been Added!</div>');
+            redirect('admin/room');
+        }
+    }
+
+    public function editroom()
+    {
+
+        $id = $this->input->post('id');
+        $data = array('place_name' => $this->input->post('place_name'));
+
+
+        $this->Rooms_model->update_room($id, $data);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Media Meeting has been Updated!</div>');
+        redirect('admin/room');
     }
 }

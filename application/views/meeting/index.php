@@ -42,7 +42,7 @@
                             <table class="display" id="dataTable" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Meeting Room</th>
+                                        <th class="text-center w-20">Media Meeting</th>
                                         <th class="text-center w-20">Meeting Date</th>
                                         <th class="text-center w-20">Start</th>
                                         <th class="text-center w-20">End</th>
@@ -70,6 +70,8 @@
                                                     <span class="badge badge-danger">Booked</span>
                                                 <?php } elseif ($a['request_status'] == 2) { ?>
                                                     <span class="badge badge-secondary">Canceled</span>
+                                                <?php } elseif ($a['request_status'] == 3) { ?>
+                                                    <span class="badge badge-success">Open</span>
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center action mx-2">
@@ -110,7 +112,7 @@
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="place_id" class="col-sm-2 col-form-label">Place name</label>
+                    <label for="place_id" class="col-sm-2 col-form-label">Media Meeting</label>
                     <div class="col-sm-5">
                         <select name="place_id" id="place_id" class="form-control">
                             <option value="">-- Select Place --</option>
@@ -184,7 +186,7 @@ foreach ($meeting as $a) :
                     <div class="modal-body">
 
                         <div class="form-group row">
-                            <label for="place_id" class="col-sm-2 col-form-label">Place name</label>
+                            <label for="place_id" class="col-sm-2 col-form-label">Media Meeting</label>
                             <div class="col-sm-5">
                                 <select name="place_id" id="place_id" class="form-control">
                                     <option value="<?= $a['place_id']; ?>"><?= $a['place_name']; ?></option>
@@ -260,11 +262,14 @@ foreach ($meeting as $a) :
                                         <option value="<?= $a['request_status']; ?>">Booked</option>
                                     <?php } elseif ($a['request_status'] == 2) { ?>
                                         <option value="<?= $a['request_status']; ?>">Canceled</option>
+                                    <?php } elseif ($a['request_status'] == 3) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Open</option>
                                     <?php } ?>
 
                                     <option value="0">Requested</option>
                                     <option value="1">Booked</option>
                                     <option value="2">Canceled</option>
+                                    <option value="3">Open</option>
                                 </select>
                             </div>
                         </div>
