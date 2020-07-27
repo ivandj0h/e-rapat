@@ -29,30 +29,30 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Department</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Media Meeting</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#deptAdd">
+                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#roomAdd">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-file"></i>
                                 </span>
-                                <span class="text">Add New Department</span>
+                                <span class="text">Add New Media Meeting</span>
                             </a>
                             <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Department Name</th>
+                                        <th class="text-center w-20">Media Meeting</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dept as $d) : ?>
+                                    <?php foreach ($rooms as $d) : ?>
                                         <tr>
-                                            <td class="text-left"><?= $d['department_name']; ?></td>
+                                            <td class="text-left"><?= $d['place_name']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#deptEdit<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deptDel<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#roomEdit<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#roomDel<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -75,20 +75,20 @@
 <!-- =============================================================================================== -->
 
 <!-- Start of Modal Add -->
-<div class="modal fade" id="deptAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="deptAddMenuLabel" aria-hidden="true">
+<div class="modal fade" id="roomAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="roomAddLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deptAddMenuLabel">Add New Department</h5>
+                <h5 class="modal-title" id="roomAddLabel">Add New Media Meeting</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/adddepartment'); ?>" method="POST">
+            <form action="<?= base_url('admin/addroom'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="department_name" name="department_name" placeholder="Enter Department...">
+                        <input type="text" class="form-control" id="place_name" name="place_name" placeholder="Enter Media Meeting...">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -103,25 +103,25 @@
 
 <!-- Start of Modal Edit -->
 <?php
-foreach ($dept as $a) :
+foreach ($rooms as $a) :
     $id = $a['id'];
 ?>
-    <div class="modal fade" id="deptEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="roomEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuAdd">Edit Department</h5>
+                    <h5 class="modal-title" id="menuEdit">Edit Media Meeting</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('admin/editdepartment'); ?>" method="POST">
+                <form action="<?= base_url('admin/editroom'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="department_name" class="form-control form-control-user" id="department_name" value="<?= $a['department_name']; ?>" placeholder="department_name">
-                                <?= form_error('department_name', '<small class="text-danger">', '</small>'); ?>
+                                <input type="text" name="place_name" class="form-control form-control-user" id="place_name" value="<?= $a['place_name']; ?>" placeholder="Edit Media Meeting...">
+                                <?= form_error('place_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ foreach ($dept as $a) :
 
 <!-- Start of Modal Delete -->
 <?php
-foreach ($dept as $a) :
+foreach ($rooms as $a) :
     $id = $a['id'];
 ?>
     <div class="modal fade" id="deptDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">

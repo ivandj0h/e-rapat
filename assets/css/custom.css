@@ -55,6 +55,10 @@
 	border: 1px solid #dddddd !important;
 }
 
+table.dataTable tbody td {
+	vertical-align: top;
+}
+
 th {
 	white-space: nowrap !important;
 }

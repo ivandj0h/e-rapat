@@ -21,8 +21,10 @@ class Overview extends CI_Controller
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
         $data['place'] = $this->db->get('meeting_place')->result_array();
         $data['overview'] = $this->Overview_model->get_all_today();
+        $data['freeroom'] = $this->Overview_model->get_free_meeting_room();
 
-        // var_dump($data);
+
+        // var_dump($data['overview']);
         // die;
 
         $this->load->view('layout/header', $data);
