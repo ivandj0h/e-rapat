@@ -45,9 +45,16 @@ class Meeting extends CI_Controller
             $this->load->view('layout/footer');
         } else {
 
+            $a = $this->input->post('speakers_name');
+            $b = $this->input->post('participants_name');
+            $speakers = implode(',', (array) $a);
+            $participants = implode(',', (array) $b);
+
             $data = [
                 'user_id' => $data['user']['id'],
                 'place_id' => $this->input->post('place_id', true),
+                'speakers_name' => $speakers,
+                'members_name' => $participants,
                 'unique_code' => uniqid(),
                 'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                 'date_issues' => $this->input->post('date_issues', true),

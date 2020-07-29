@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2020 at 01:33 PM
+-- Generation Time: Jul 29, 2020 at 09:22 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -31,9 +31,9 @@ CREATE TABLE `meeting` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `place_id` int(11) NOT NULL,
-  `speaker_id` int(11) NOT NULL,
-  `member_id` int(11) NOT NULL,
-  `files_id` int(11) NOT NULL,
+  `speakers_name` varchar(225) NOT NULL,
+  `members_name` varchar(225) NOT NULL,
+  `files_name` varchar(225) NOT NULL,
   `unique_code` varchar(100) NOT NULL,
   `agenda` text NOT NULL,
   `date_issues` date NOT NULL,
@@ -67,28 +67,6 @@ INSERT INTO `meeting_department` (`id`, `department_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meeting_files`
---
-
-CREATE TABLE `meeting_files` (
-  `id` int(11) NOT NULL,
-  `files_name` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `meeting_member`
---
-
-CREATE TABLE `meeting_member` (
-  `id` int(11) NOT NULL,
-  `member_name` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `meeting_place`
 --
 
@@ -105,17 +83,6 @@ INSERT INTO `meeting_place` (`id`, `place_name`) VALUES
 (1, 'Meeting Room One'),
 (2, 'Skype Meeting'),
 (3, 'Zoom Meeting');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `meeting_speaker`
---
-
-CREATE TABLE `meeting_speaker` (
-  `id` int(11) NOT NULL,
-  `speaker_name` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -277,11 +244,46 @@ CREATE TABLE `view_user_department` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_user_meeting`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_user_meeting` (
+`id` int(11)
+,`user_id` int(11)
+,`place_id` int(11)
+,`name` varchar(128)
+,`role` varchar(128)
+,`department_name` varchar(225)
+,`unique_code` varchar(100)
+,`place_name` varchar(225)
+,`agenda` text
+,`date_issues` date
+,`date_requested` date
+,`start_time` time
+,`end_time` time
+,`request_status` int(11)
+,`speakers_name` varchar(225)
+,`members_name` varchar(225)
+,`files_name` varchar(225)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_user_department`
 --
 DROP TABLE IF EXISTS `view_user_department`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_department`  AS  select `meeting_users`.`id` AS `id`,`meeting_users`.`name` AS `name`,`meeting_users`.`email` AS `email`,`meeting_users`.`image` AS `image`,`meeting_users`.`password` AS `password`,`meeting_users`.`role_id` AS `role_id`,`meeting_users`.`is_active` AS `is_active`,`meeting_department`.`department_name` AS `department_name`,`meeting_users`.`date_created` AS `date_created`,`user_role`.`role` AS `role`,`meeting_users`.`department_id` AS `department_id`,`meeting_users`.`uniqueid` AS `uniqueid`,`meeting_users`.`date_updated` AS `date_updated` from ((`meeting_users` join `meeting_department` on(`meeting_users`.`department_id` = `meeting_department`.`id`)) join `user_role` on(`meeting_users`.`role_id` = `user_role`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_user_meeting`
+--
+DROP TABLE IF EXISTS `view_user_meeting`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`unique_code` AS `unique_code`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_name` AS `files_name` from ((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -301,27 +303,9 @@ ALTER TABLE `meeting_department`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `meeting_files`
---
-ALTER TABLE `meeting_files`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `meeting_member`
---
-ALTER TABLE `meeting_member`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `meeting_place`
 --
 ALTER TABLE `meeting_place`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `meeting_speaker`
---
-ALTER TABLE `meeting_speaker`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -371,28 +355,10 @@ ALTER TABLE `meeting_department`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `meeting_files`
---
-ALTER TABLE `meeting_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `meeting_member`
---
-ALTER TABLE `meeting_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `meeting_place`
 --
 ALTER TABLE `meeting_place`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `meeting_speaker`
---
-ALTER TABLE `meeting_speaker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting_users`

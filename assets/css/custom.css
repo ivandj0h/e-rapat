@@ -38,6 +38,16 @@
 	background-color: #ffffff;
 	margin-top: 85px;
 }
+.bootstrap-tagsinput {
+	line-height: 29px !important;
+}
+
+.bootstrap-tagsinput .tag {
+	margin-right: 2px;
+	color: #fff !important;
+	background-color: #6e707e !important;
+	padding: 2px;
+}
 
 .avatar {
 	vertical-align: middle;
