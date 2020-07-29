@@ -103,7 +103,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addMeeting">Add New Meeting</h5>
+                <h5 class="modal-title" id="addMeeting">Create New Meeting</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -115,19 +115,34 @@
                     <label for="place_id" class="col-sm-2 col-form-label">Media Meeting</label>
                     <div class="col-sm-5">
                         <select name="place_id" id="place_id" class="form-control">
-                            <option value="">-- Select Place --</option>
+                            <option value="" disabled>-- Select Media Meeting --</option>
+                            <?php $i = 1; ?>
                             <?php foreach ($place as $p) : ?>
-                                <option value="<?= $p['id']; ?>">-- <?= $p['place_name']; ?> --</option>
+                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['place_name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <?= form_error('place_id', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Agenda</label>
+                    <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
                     <div class="col-sm-10">
-                        <input type="text" name="agenda" class="form-control form-control-user" id="agenda" value="<?= set_value('agenda'); ?>" placeholder="Agenda">
+                        <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Describe Agenda here..."><?= set_value('agenda'); ?></textarea>
                         <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="speakers_name" class="col-sm-2 col-form-label">Speaker</label>
+                    <div class="col-sm-10">
+                        <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Add Speaker's Name...">
+                        <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="members_name" class="col-sm-2 col-form-label">Participants</label>
+                    <div class="col-sm-10">
+                        <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Add Participant's Name...">
+                        <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -161,8 +176,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Create Meeting</button>
                 </div>
             </div>
             </form>

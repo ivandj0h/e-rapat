@@ -41,7 +41,7 @@
            <!-- Bootstrap core JavaScript-->
            <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
            <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
            <!-- Core plugin JavaScript-->
            <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -51,7 +51,6 @@
            <!-- Page level plugins -->
            <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.js"></script>
            <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/jszip.min.js"></script>
            <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
            <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
            <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
@@ -66,7 +65,7 @@
 
            <!-- Chart Scripts -->
            <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/customsjs/chart-bar-demo.js"></script>
+           <!-- <script src="<?= base_url('assets/'); ?>js/customsjs/chart-bar-demo.js"></script> -->
 
            <!-- Customs scripts -->
            <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
