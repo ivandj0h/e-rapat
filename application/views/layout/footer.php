@@ -64,6 +64,10 @@
            <script src="<?= base_url('assets/'); ?>js/datatables/datatables-demo.js"></script>
            <script src="<?= base_url('assets/'); ?>js/datetime/datetime-demo.js"></script>
 
+           <!-- Chart Scripts -->
+           <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/customsjs/chart-bar-demo.js"></script>
+
            <!-- Customs scripts -->
            <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
            <script>
