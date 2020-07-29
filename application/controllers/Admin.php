@@ -10,12 +10,19 @@ class Admin extends CI_Controller
         $this->load->model('Account_model');
         $this->load->model('Department_model');
         $this->load->model('Rooms_model');
+        $this->load->model('Meeting_model');
+        $this->load->model('Overview_model');
     }
 
     public function index()
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['overview'] = $this->Overview_model->get_all_today();
+        $data['freeroom'] = $this->Overview_model->get_free_meeting_room();
+
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);

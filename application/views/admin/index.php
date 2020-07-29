@@ -17,6 +17,67 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary float-right">Todays Meeting</h6>
                             </div>
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <table class="table table-responsive" id="freeRoom" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center w-20">Meeting Room</th>
+                                                <th class="text-center w-20">Start</th>
+                                                <th class="text-center w-20">End</th>
+                                                <th class="text-center w-20">Status</th>
+                                                <th class="text-center w-20">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($freeroom as $a) : ?>
+                                                <tr>
+                                                    <td class="text-left"><?= $a['place_name']; ?></td>
+                                                    <td><?= $a['start_time']; ?></td>
+                                                    <td><?= $a['end_time']; ?></td>
+                                                    <td class="text-center">
+                                                        <?php
+                                                        if ($a['request_status'] == 3) { ?>
+                                                            <span class="badge badge-success">Open</span>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a class="badge badge-primary" href="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;" data-toggle="modal" data-target="#addMeeting"><i class="fas fa-fw fa-file "></i> Create</a>
+                                                    </td>
+                                                </tr>
+
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of DataTables -->
+                    </div>
+                    <div class="col-sm-9 col-md-6">
+                        <!-- Start of DataTales -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary float-right">Bar Chart</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                    <hr>
+                                    Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of DataTables -->
+                    </div>
+                    <div class="col-sm-3 col-md-6">
+                        <!-- Start of DataTales -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary float-right">Todays Meeting</h6>
+                            </div>
                             <!-- <div class="card-body"> -->
                             <!-- <div class="col-md-12"> -->
                             <ul class="list-group list-group-flush">
