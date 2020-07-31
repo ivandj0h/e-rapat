@@ -8,7 +8,10 @@ class Meeting_model extends CI_Model
 
     public function get_all_meeting()
     {
-        return $this->db->get($this->table)->result_array();
+        $this->db->from($this->table);
+        $this->db->order_by("name", "desc");
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function get_one_meeting($unique)
@@ -41,6 +44,6 @@ class Meeting_model extends CI_Model
 
     public function get_meeting_download($id)
     {
-        return $this->db->get_where($this->table, ['unique_code' => $id])->row();
+        return $this->db->get_where($this->table, ['files_upload' => $id])->row();
     }
 }
