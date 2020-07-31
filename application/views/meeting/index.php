@@ -44,11 +44,11 @@
                                     <tr>
                                         <th class="text-center w-20">Media Meeting</th>
                                         <th class="text-center w-20">Meeting Date</th>
+                                        <th class="text-center w-20">Speaker</th>
                                         <th class="text-center w-20">Start</th>
                                         <th class="text-center w-20">End</th>
                                         <th class="text-center w-20">Agenda</th>
                                         <th class="text-center w-20">Department</th>
-                                        <th class="text-center w-20">Status</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
@@ -56,24 +56,12 @@
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
                                             <td class="text-left"><?= $a['place_name']; ?></td>
-                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?>
-                                            </td>
+                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></td>
+                                            <td><?= $a['speakers_name']; ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
                                             <td class="text-center"><?= $a['end_time']; ?></td>
                                             <td><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td><?= $a['department_name']; ?></td>
-                                            <td class="text-center">
-                                                <?php
-                                                if ($a['request_status'] == 0) { ?>
-                                                    <span class="badge badge-primary">Requested</span>
-                                                <?php } elseif ($a['request_status'] == 1) { ?>
-                                                    <span class="badge badge-danger">Booked</span>
-                                                <?php } elseif ($a['request_status'] == 2) { ?>
-                                                    <span class="badge badge-secondary">Canceled</span>
-                                                <?php } elseif ($a['request_status'] == 3) { ?>
-                                                    <span class="badge badge-success">Open</span>
-                                                <?php } ?>
-                                            </td>
                                             <td class="text-center action mx-2">
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-calendar-check"></i> Change Status</span>
                                                 <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>

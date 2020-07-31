@@ -23,7 +23,7 @@ foreach ($meeting as $a) :
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="place_name" class="col-sm-2 col-form-label">Place name</label>
+                                <label for="place_name" class="col-sm-2 col-form-label">Media Meeting</label>
                                 <div class="col-sm-5">
                                     <strong><?= $a['place_name']; ?></strong>
                                 </div>
@@ -37,19 +37,33 @@ foreach ($meeting as $a) :
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Speaker</label>
                                 <div class="col-sm-10">
-                                    <strong><?= $a['speakers_name']; ?></strong>
+                                    <ul class="list-group">
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($speakers as $sp) : ?>
+                                            <li class="list-group-item reset-border">
+                                                <?= $i++; ?>. <strong><?= $sp; ?></strong>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Participants</label>
                                 <div class="col-sm-10">
-                                    <strong><?= $a['members_name']; ?></strong>
+                                    <ul class="list-group">
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($members as $mm) : ?>
+                                            <li class="list-group-item reset-border">
+                                                <?= $i++; ?>. <strong><?= $mm; ?></strong>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
                                 <div class="col-sm-10">
-                                    <strong><?= $a['date_issues']; ?></strong>
+                                    <strong><?= date("d-m-Y", strtotime($a['date_issues'])); ?></strong>
                                 </div>
                             </div>
                             <div class="form-group row">
