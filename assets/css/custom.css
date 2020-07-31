@@ -55,6 +55,11 @@
 	border-radius: 50%;
 }
 
+.reset-border {
+	border: none !important;
+	padding: 6px !important;
+}
+
 .modal-md {
 	max-width: 60%;
 	z-index: 10;

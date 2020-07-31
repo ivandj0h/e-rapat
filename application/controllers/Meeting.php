@@ -92,6 +92,12 @@ class Meeting extends CI_Controller
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_one_meeting($unique);
 
+        foreach ($data['meeting'] as $pecah) {
+            $data['speakers'] = explode(",", $pecah['speakers_name']);
+            $data['members'] = explode(",", $pecah['members_name']);
+        }
+
+
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
