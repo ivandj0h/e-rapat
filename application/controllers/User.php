@@ -103,9 +103,6 @@ class User extends CI_Controller
                     echo $this->upload->display_errors();
                 }
             }
-            // var_dump($image_upload);
-            // die;
-
             $this->db->set('name', $name);
             $this->db->where('email', $email);
             $this->db->update('meeting_users');

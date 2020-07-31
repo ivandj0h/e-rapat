@@ -64,31 +64,20 @@ class Meeting extends CI_Controller
                 'request_status' => 0
             ];
 
-            $countfiles = count($_FILES['files']['name']);
+            $files_name_upload = $_FILES['file']['name'];
 
-            for ($i = 0; $i < $countfiles; $i++) {
-                if (!empty($_FILES['files']['name'][$i])) {
+            if ($files_name_upload) {
+                $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
+                $config['max_size'] = '1024';
+                $config['upload_path'] = 'uploads/';
 
-                    $_FILES['files']['name'][$i];
-                    $_FILES['files']['type'][$i];
-                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-                    $_FILES['file']['error'] = $_FILES['files']['error'][$i];
-                    $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+                $this->load->library('upload', $config);
 
-                    $config['upload_path'] = 'uploads/';
-                    $config['allowed_types'] = '*';
-                    $config['max_size']    = '2000';
-                    $config['file_name'] = $_FILES['files']['name'][$i];
-
-                    $this->load->library('upload', $config);
-
-
-                    if ($this->upload->do_upload('file')) {
-                        $new_files = $this->upload->data('file_name');
-                        $this->db->set('files', $new_files);
-                    } else {
-                        echo $this->upload->display_errors();
-                    }
+                if ($this->upload->do_upload('file')) {
+                    $new_files_name = $this->upload->data('file_name');
+                    $this->db->set('files_upload', $new_files_name);
+                } else {
+                    echo $this->upload->display_errors();
                 }
             }
             $this->Meeting_model->insert_meeting($data);
@@ -113,8 +102,15 @@ class Meeting extends CI_Controller
     public function editmeeting()
     {
         $id = $this->input->post('id');
+        $a = $this->input->post('speakers_name');
+        $b = $this->input->post('participants_name');
+        $speakers = implode(',', (array) $a);
+        $participants = implode(',', (array) $b);
+
         $data = array(
             'place_id' => $this->input->post('place_id', true),
+            'speakers_name' => $speakers,
+            'members_name' => $participants,
             'agenda' => htmlspecialchars($this->input->post('agenda', true)),
             'date_issues' => $this->input->post('date_issues', true),
             'start_time' => $this->input->post('start_time', true),
@@ -128,10 +124,9 @@ class Meeting extends CI_Controller
 
     public function meetingdownload($id)
     {
-        // $this->load->helper('download');
+        $this->load->helper('download');
         $data = $this->Meeting_model->get_meeting_download($id);
-        $path = file_get_contents("uploads/" . $data->files_upload);
-        force_download($data->files_upload, $path);
+        force_download('uploads/' . $data->files_upload, NULL);
     }
 
     public function updatestatus()

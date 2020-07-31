@@ -170,7 +170,7 @@
                     <label for="end_time" class="col-sm-2 col-form-label">Upload File</label>
                     <div class="col-sm-10">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="files" name="files[]" multiple>
+                            <input type="file" class="custom-file-input" id="files" name="file">
                             <label class="custom-file-label" for="image">Choose file</label>
                         </div>
                     </div>
@@ -217,6 +217,20 @@ foreach ($meeting as $a) :
                             <div class="col-sm-10">
                                 <input type="text" name="agenda" class="form-control form-control-user" id="agenda" value="<?= $a['agenda']; ?>" placeholder="Agenda">
                                 <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="speakers_name" class="col-sm-2 col-form-label">Speaker</label>
+                            <div class="col-sm-10">
+                                <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= $a['speakers_name']; ?>" placeholder="Add Speaker's Name...">
+                                <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="members_name" class="col-sm-2 col-form-label">Participants</label>
+                            <div class="col-sm-10">
+                                <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= $a['members_name']; ?>" placeholder="Add Participant's Name...">
+                                <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">

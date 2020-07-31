@@ -35,6 +35,18 @@ foreach ($meeting as $a) :
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Speaker</label>
+                                <div class="col-sm-10">
+                                    <strong><?= $a['speakers_name']; ?></strong>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Participants</label>
+                                <div class="col-sm-10">
+                                    <strong><?= $a['members_name']; ?></strong>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
                                 <div class="col-sm-10">
                                     <strong><?= $a['date_issues']; ?></strong>
@@ -98,7 +110,7 @@ foreach ($meeting as $a) :
                                             </li>
                                         <?php } else { ?>
                                             <li class="list-group-item">
-                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['unique_code']); ?>"><?= $a['files_upload']; ?></a>
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
                                             </li>
                                         <?php } ?>
                                     </ul>
