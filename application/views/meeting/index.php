@@ -39,8 +39,10 @@
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
-
-                            <table class="table table-striped table-condensed" id="dataTable" cellspacing="0">
+                            <!-- <div>
+                                Toggle column: <a class="toggle-vis" data-column="0">Media Meeting</a> - <a class="toggle-vis" data-column="1">Meeting Date</a> - <a class="toggle-vis" data-column="2">Speaker</a> - <a class="toggle-vis" data-column="3">Start</a> - <a class="toggle-vis" data-column="4">End</a> - <a class="toggle-vis" data-column="5">Agenda</a> - <a class="toggle-vis" data-column="6">Department</a> - <a class="toggle-vis" data-column="7">Actions</a>
+                            </div> -->
+                            <table class="table table-striped table-condensed" id="meeting" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">Media Meeting</th>

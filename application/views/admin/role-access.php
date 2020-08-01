@@ -23,17 +23,19 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-striped table-condensed table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center w-5">No</th>
                                         <th class="text-center w-20">Menu Name</th>
                                         <th class="text-center w-20">Menu Access</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <?php $i = 1; ?>
                                     <?php foreach ($menu as $m) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td><?= $m['menu']; ?></td>
                                             <td class="text-center w-20">
                                                 <div class="form-check">

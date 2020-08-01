@@ -43,9 +43,10 @@
                     <div class="card-body">
                         <div class="table-responsive">
 
-                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-striped table-condensed table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center w-5">No</th>
                                         <th class="text-center w-20">Image</th>
                                         <th class="text-center w-20">Full Name</th>
                                         <th class="text-center w-20">Email</th>
@@ -56,8 +57,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 1; ?>
                                     <?php foreach ($account as $a) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-center"><img src="<?= base_url('assets/img/profile/') ?><?= $a['image']; ?>" class="rounded mx-auto d-block" width="30"></td>
                                             <td><?= $a['name']; ?></td>
                                             <td><?= $a['email']; ?></td>

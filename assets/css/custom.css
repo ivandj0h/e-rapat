@@ -49,6 +49,16 @@
 	padding: 2px;
 }
 
+.dataTables_scrollBody {
+	height: auto !important;
+}
+
+.toggle-vis {
+	cursor: pointer !important;
+	color: #3174c7 !important;
+	text-decoration: none !important;
+}
+
 .avatar {
 	vertical-align: middle;
 	width: 20px;

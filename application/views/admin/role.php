@@ -21,21 +21,23 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Menu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Role Access</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-striped table-condensed table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center w-5">No</th>
                                         <th class="text-center w-20">Role Name</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <?php $i = 1; ?>
                                     <?php foreach ($role as $r) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td><?= $r['role']; ?></td>
                                             <td class="text-center w-20">
                                                 <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>">
