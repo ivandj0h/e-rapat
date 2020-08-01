@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body">
                         <div class="col-lg-12">
-                            <table class="table table-striped table-condensed" id="freeRoom" cellspacing="0" style="width:100%">
+                            <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">Media Meeting</th>

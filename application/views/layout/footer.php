@@ -54,6 +54,7 @@
            <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
            <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
            <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
+           <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
 
            <!-- DateTime -->
            <script src="<?= base_url('assets/'); ?>vendor/datetimepicker/jquery.datetimepicker.full.min.js"></script>

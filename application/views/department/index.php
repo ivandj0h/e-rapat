@@ -39,16 +39,19 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-striped table-condensed table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center w-5">No</th>
                                         <th class="text-center w-20">Department Name</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 1; ?>
                                     <?php foreach ($dept as $d) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-left"><?= $d['department_name']; ?></td>
                                             <td class="text-center">
                                                 <span class="badge badge-dark" data-toggle="modal" data-target="#deptEdit<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>

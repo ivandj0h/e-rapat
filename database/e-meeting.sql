@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2020 at 08:48 PM
+-- Generation Time: Aug 01, 2020 at 07:57 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -48,7 +48,9 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
-(1, 14, 3, 'speaker one,speaker two', 'participant one,participant two', 'Capture.PNG', '5f24671c0af6f', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-08-01', '2020-08-01', '03:00:00', '04:00:00', 0);
+(1, 15, 3, 'andhita', 'anita,donnie,dhanny', '', '5f2590f0c37bc', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', '2020-08-03', '2020-08-01', '00:00:00', '01:00:00', 0),
+(2, 14, 2, 'rudi', 'ardy,susi', '', '5f25912bd2f1d', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', '2020-08-01', '2020-08-01', '18:00:00', '19:00:00', 0),
+(3, 15, 3, 'wulandari', 'anti,anita,sasa', '', '5f25931b1df1f', 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.', '2020-08-02', '2020-08-01', '00:00:00', '01:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -116,8 +118,8 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `uniqueid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `department_id`, `date_created`, `date_updated`) VALUES
-(14, '5f14a617b785a', 'administrator', 'admin@admin.com', 'bakso.jpg', '$2y$10$xUr62tYeOZnLoIr5/zw9oOMAlCkBhX0/wRk0BRKPiz8VJZhojlRX2', 1, 1, 1, 1595188759, 1595264408),
-(15, '5f14c0bfa4259', 'User', 'user@user.com', '7b.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1595264413);
+(14, '5f14a617b785a', 'administrator', 'admin@admin.com', '3.jpg', '$2y$10$xUr62tYeOZnLoIr5/zw9oOMAlCkBhX0/wRk0BRKPiz8VJZhojlRX2', 1, 1, 1, 1595188759, 1595264408),
+(15, '5f14c0bfa4259', 'User', 'user@user.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1595264413);
 
 -- --------------------------------------------------------
 
@@ -150,8 +152,9 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (48, 1, 2),
 (55, 2, 30),
 (56, 1, 31),
-(57, 1, 30),
-(58, 1, 3);
+(58, 1, 3),
+(59, 2, 32),
+(60, 1, 32);
 
 -- --------------------------------------------------------
 
@@ -173,7 +176,8 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (2, 'User'),
 (3, 'Menu'),
 (29, 'Meeting'),
-(30, 'Overview');
+(30, 'Overview'),
+(32, 'History');
 
 -- --------------------------------------------------------
 
@@ -224,7 +228,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (22, 29, 'Meeting', 'meeting', 'fas fa-fw fa-calendar-alt', 1),
 (24, 1, 'Department', 'admin/department', 'fas fa-fw fa-project-diagram', 1),
 (25, 30, 'Overview', 'overview', 'fas fa-fw fa-compress-arrows-alt', 1),
-(26, 1, 'Media Meeting', 'admin/room', 'fas fa-fw fa-phone-volume', 1);
+(26, 1, 'Media Meeting', 'admin/room', 'fas fa-fw fa-phone-volume', 1),
+(27, 32, 'History', 'history', 'fas fa-fw fa-file-signature', 1);
 
 -- --------------------------------------------------------
 
@@ -272,6 +277,8 @@ CREATE TABLE `view_user_meeting` (
 ,`speakers_name` varchar(225)
 ,`members_name` varchar(225)
 ,`files_upload` varchar(225)
+,`email` varchar(128)
+,`role_id` int(11)
 );
 
 -- --------------------------------------------------------
@@ -290,7 +297,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`unique_code` AS `unique_code`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload` from ((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`unique_code` AS `unique_code`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id` from ((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -353,7 +360,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -377,13 +384,13 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -395,7 +402,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
