@@ -7,4 +7,8 @@ $(document).ready(function () {
 		lengthMenu: [5, 10, 15],
 		scrollY: 300,
 	});
+	$("#dataHistory").DataTable({
+		lengthMenu: [5, 10, 15],
+		scrollY: 300,
+	});
 });
