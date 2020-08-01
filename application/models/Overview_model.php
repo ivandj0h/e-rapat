@@ -17,9 +17,9 @@ class Overview_model extends CI_Model
     public function get_free_meeting_room()
     {
         $todaydate = date('Y-m-d');
-        $ignore = array(0, 1, 2);
+        // $ignore = array(0, 1, 2);
         $this->db->where('date_issues', $todaydate);
-        $this->db->where_not_in('request_status', $ignore);
+        // $this->db->where_not_in('request_status', $ignore);
         return $this->db->get($this->table)->result_array();
     }
 }
