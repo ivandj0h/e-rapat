@@ -15,6 +15,62 @@ $(document).ready(function () {
 		forceParse: 0,
 	});
 
+	// date Search handler
+	$("#start_date").datetimepicker({
+		timepicker: false,
+		datepicker: true,
+		format: "Y-m-d",
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+
+	// date Search handler
+	$("#end_date").datetimepicker({
+		timepicker: false,
+		datepicker: true,
+		format: "Y-m-d",
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+
+	// date Search handler
+	$("#s_date").datetimepicker({
+		timepicker: false,
+		datepicker: true,
+		format: "Y-m-d",
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+
+	// date Search handler
+	$("#e_date").datetimepicker({
+		timepicker: false,
+		datepicker: true,
+		format: "Y-m-d",
+		weekStart: 1,
+		todayBtn: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+
 	// add start time handler
 	$("#start_time").datetimepicker({
 		timepicker: true,

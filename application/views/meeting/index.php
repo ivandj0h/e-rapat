@@ -29,17 +29,18 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addMeeting">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-file"></i>
+                            </span>
+                            <span class="text">Add New Meeting</span>
+                        </a>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Data Meeting</h6>
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addMeeting">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-file"></i>
-                                </span>
-                                <span class="text">Add New Meeting</span>
-                            </a>
-                            <table class="display" id="dataTable" cellspacing="0">
+
+                            <table class="table table-striped table-condensed" id="dataTable" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">Media Meeting</th>
