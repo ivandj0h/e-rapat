@@ -37,6 +37,7 @@
                                         <th class="text-center w-20">End</th>
                                         <th class="text-center w-20">Agenda</th>
                                         <th class="text-center w-20">Department</th>
+                                        <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,6 +51,9 @@
                                             <td class="text-center"><?= $a['end_time']; ?></td>
                                             <td><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td><?= $a['department_name']; ?></td>
+                                            <td class="text-center action mx-2">
+                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>
+                                            </td>
                                         </tr>
 
                                     <?php endforeach; ?>

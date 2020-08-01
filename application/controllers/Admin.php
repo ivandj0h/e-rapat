@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->helper(array('string', 'text'));
         $this->load->model('Account_model');
         $this->load->model('Department_model');
         $this->load->model('Rooms_model');
@@ -22,7 +23,8 @@ class Admin extends CI_Controller
         $data['place'] = $this->db->get('meeting_place')->result_array();
         $data['overview'] = $this->Overview_model->get_all_today();
         $data['freeroom'] = $this->Overview_model->get_free_meeting_room();
-
+        $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+        $data['dept'] = $this->Department_model->get_all_department();
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -266,6 +268,25 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Deleted!</div>');
         redirect('admin/department');
     }
+
+    public function searchdepartment()
+    {
+        $data['title'] = 'Dashboard';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['overview'] = $this->Overview_model->get_all_today();
+        $data['freeroom'] = $this->Overview_model->get_free_meeting_room();
+        $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+        $data['dept'] = $this->Department_model->get_all_department();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('admin/index', $data);
+        $this->load->view('layout/footer');
+    }
+
 
     // Media Meeting / Rooms
     public function room()

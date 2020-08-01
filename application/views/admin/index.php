@@ -8,207 +8,87 @@
         <div class="breadcrumb"></div>
         <!-- End of Breadcumb -->
 
+
         <div class="container-fluid">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-3 col-md-6">
-                        <!-- Start of DataTales -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-right">Todays Meeting</h6>
+            <!-- Start Content Table -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <?= form_open('admin/searchdepartment'); ?>
+
+                            <div class="form-group row">
+                                <div class="col-sm-5">
+                                    <select name="department_id" id="department_id" class="form-control">
+                                        <option value="">-- Select Department --</option>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($dept as $p) : ?>
+                                            <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['department_name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?= form_error('department_id', '<small class="text-danger">', '</small>'); ?>
+                                </div>
+                                <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
                             </div>
-                            <div class="card-body">
-                                <div class="col-md-12">
-                                    <table class="table table-responsive" id="freeRoom" cellspacing="0">
-                                        <thead>
+                            <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
+
+                            <?= form_close(); ?>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-lg-12">
+                                <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center w-20">Media Meeting</th>
+                                            <th class="text-center w-20">Meeting Date</th>
+                                            <th class="text-center w-20">Speakers</th>
+                                            <th class="text-center w-20">Participants</th>
+                                            <th class="text-center w-20">Start</th>
+                                            <th class="text-center w-20">End</th>
+                                            <th class="text-center w-20">Agenda</th>
+                                            <th class="text-center w-20">Department</th>
+                                            <th class="text-center w-20">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($meeting_admin as $a) : ?>
                                             <tr>
-                                                <th class="text-center w-20">Meeting Room</th>
-                                                <th class="text-center w-20">Start</th>
-                                                <th class="text-center w-20">End</th>
-                                                <th class="text-center w-20">Status</th>
-                                                <th class="text-center w-20">Actions</th>
+                                                <td class="text-left"><?= $a['place_name']; ?></td>
+                                                <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></td>
+                                                <td><?= $a['speakers_name']; ?></td>
+                                                <td><?= $a['members_name']; ?></td>
+                                                <td class="text-center"><?= $a['start_time']; ?></td>
+                                                <td class="text-center"><?= $a['end_time']; ?></td>
+                                                <td><?= word_limiter($a['agenda'], 5); ?></td>
+                                                <td><?= $a['department_name']; ?></td>
+                                                <td class="text-center action mx-2">
+                                                    <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($freeroom as $a) : ?>
-                                                <tr>
-                                                    <td class="text-left"><?= $a['place_name']; ?></td>
-                                                    <td><?= $a['start_time']; ?></td>
-                                                    <td><?= $a['end_time']; ?></td>
-                                                    <td class="text-center">
-                                                        <?php
-                                                        if ($a['request_status'] == 3) { ?>
-                                                            <span class="badge badge-success">Open</span>
-                                                        <?php } ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a class="badge badge-primary" href="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;" data-toggle="modal" data-target="#addMeeting"><i class="fas fa-fw fa-file "></i> Create</a>
-                                                    </td>
-                                                </tr>
 
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <!-- End of DataTables -->
-                    </div>
-                    <div class="col-sm-9 col-md-6">
-                        <!-- Start of DataTales -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-right">Bar Chart</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-md-12">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
-                                    <hr>
-                                    Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End of DataTables -->
-                    </div>
-                    <div class="col-sm-3 col-md-6">
-                        <!-- Start of DataTales -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-right">Todays Meeting</h6>
-                            </div>
-                            <!-- <div class="card-body"> -->
-                            <!-- <div class="col-md-12"> -->
-                            <ul class="list-group list-group-flush">
-                                <?php $i = 1; ?>
-                                <?php foreach ($overview as $m) : ?>
-
-                                    <li class="list-group-item">
-                                        <div class="accordion" id="accordion<?= $i; ?>">
-                                            <div class="card shadow">
-                                                <div class="card-body" id="heading<?= $i; ?>">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2 bd-highlight"><strong><?= date("d-m-Y", strtotime($m['date_issues'])); ?></strong></div>
-                                                        <div class="p-2 bd-highlight"><strong><?= $m['start_time']; ?></strong></div>
-                                                        <div class="p-2 bd-highlight"><strong><?= $m['end_time']; ?></strong></div>
-                                                        <div class="p-2 bd-highlight"><strong><?= $m['place_name']; ?></strong></div>
-                                                        <div class="p-2 bd-highlight">
-                                                            <?php
-                                                            if ($m['request_status'] == 0) { ?>
-                                                                <span class="badge badge-primary">Requested</span>
-                                                            <?php } elseif ($m['request_status'] == 1) { ?>
-                                                                <span class="badge badge-danger">Booked</span>
-                                                            <?php } elseif ($m['request_status'] == 2) { ?>
-                                                                <span class="badge badge-secondary">Canceled</span>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <div class="p-2 bd-highlight">
-                                                            <i class="fas fa-angle-double-down pointer-link" data-toggle="collapse" data-target="#collapseOne<?= $i; ?>"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr class="sidebar-divider mb-0">
-                                                <div id="collapseOne<?= $i; ?>" class="collapse mt-0 mb-3" aria-labelledby="heading<?= $i; ?>" data-parent="#accordion<?= $i; ?>">
-                                                    <div class="card-body">
-                                                        <!-- TimeLine -->
-                                                        <div class="container mt-5 mb-5">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <h4>Detail Rapat</h4>
-                                                                    <ul class="timeline">
-                                                                        <li>
-                                                                            <!-- <strong>//date('H:i:s', strtotime($m['start_time'] . ' + 30 minutes')); //</strong> -->
-                                                                            <strong><?= $m['start_time']; ?></strong>
-                                                                            <a href="#" class="float-right"><?= $m['department_name']; ?></a>
-                                                                            <p><?= $m['agenda']; ?></p>
-                                                                            <?php
-                                                                            if ($m['request_status'] == 0) { ?>
-                                                                                <span class="badge badge-primary">Requested</span>
-                                                                            <?php } elseif ($m['request_status'] == 1) { ?>
-                                                                                <span class="badge badge-danger">Booked</span>
-                                                                            <?php } elseif ($m['request_status'] == 2) { ?>
-                                                                                <span class="badge badge-secondary">Canceled</span>
-                                                                            <?php } ?>
-                                                                            <span class="badge badge-success"><?= $m['name']; ?></span>
-                                                                            <?php
-                                                                            if ($m['files_upload'] == '') { ?>
-                                                                                <span class="badge badge-danger">No File</span>
-                                                                            <?php } else { ?>
-                                                                                <span class="badge badge-danger"><?= $m['files_upload']; ?></span>
-                                                                            <?php } ?>
-                                                                        </li>
-
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End of TimeLine -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <?php $i++; ?>
-                                <?php endforeach; ?>
-                            </ul>
-                            <!-- </div> -->
-                            <!-- </div> -->
-                        </div>
-                        <!-- End of DataTables -->
-                    </div>
-                    <div class="col-sm-9 col-md-6">
-                        <!-- Start of DataTales -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary float-right">Available Meeting Rooms</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-md-12">
-                                    <table class="table table-responsive" id="freeRoom" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center w-20">Meeting Room</th>
-                                                <th class="text-center w-20">Start</th>
-                                                <th class="text-center w-20">End</th>
-                                                <th class="text-center w-20">Status</th>
-                                                <th class="text-center w-20">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($freeroom as $a) : ?>
-                                                <tr>
-                                                    <td class="text-left"><?= $a['place_name']; ?></td>
-                                                    <td><?= $a['start_time']; ?></td>
-                                                    <td><?= $a['end_time']; ?></td>
-                                                    <td class="text-center">
-                                                        <?php
-                                                        if ($a['request_status'] == 3) { ?>
-                                                            <span class="badge badge-success">Open</span>
-                                                        <?php } ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a class="badge badge-primary" href="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;" data-toggle="modal" data-target="#addMeeting"><i class="fas fa-fw fa-file "></i> Create</a>
-                                                    </td>
-                                                </tr>
-
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End of DataTables -->
                     </div>
                 </div>
             </div>
+            <!-- End of Content Table -->
+
+
+
+
+
         </div>
+
 
 
         <!-- Content Row -->
     </div>
 
-
+    <br /><br /><br />
 
 </div>
 <!-- /.container-fluid -->
