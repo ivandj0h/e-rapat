@@ -14,7 +14,7 @@ class Department extends CI_Controller
     {
         $data['title'] = 'Department';
         $data['acc'] = $this->db->get_where('view_user_department', ['email' => $this->session->userdata('email')])->row_array();
-        $data['dept'] = $this->Department_model->get_all();
+        $data['dept'] = $this->Department_model->get_all_department();
 
         // set Rules for menu
         $this->form_validation->set_rules('department_name', 'Department', 'required');

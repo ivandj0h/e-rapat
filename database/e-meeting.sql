@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2020 at 11:06 PM
+-- Generation Time: Aug 02, 2020 at 09:42 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -42,6 +42,14 @@ CREATE TABLE `meeting` (
   `end_time` time NOT NULL,
   `request_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`id`, `user_id`, `place_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_issues`, `date_requested`, `start_time`, `end_time`, `request_status`) VALUES
+(1, 14, 3, 'doddy', 'dhanny,dennie', '', '5f25dec5c4765', 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.', '2020-08-01', '2020-08-02', '05:00:00', '06:00:00', 0),
+(2, 15, 3, 'john doe', 'jane doe,jim smith', '', '5f2659a53f0d2', 'meeting pertama kali ini', '2020-08-02', '2020-08-02', '08:00:00', '09:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -141,11 +149,11 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (42, 1, 28),
 (45, 1, 29),
 (48, 1, 2),
-(55, 2, 30),
 (56, 1, 31),
 (58, 1, 3),
 (59, 2, 32),
-(62, 1, 32);
+(62, 1, 32),
+(63, 2, 29);
 
 -- --------------------------------------------------------
 
@@ -209,7 +217,7 @@ CREATE TABLE `user_sub_menu` (
 --
 
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
-(1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
+(1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 0),
 (2, 2, 'Profile', 'user', 'fas fa-fw fa-user', 1),
 (3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-bars', 1),
@@ -270,6 +278,7 @@ CREATE TABLE `view_user_meeting` (
 ,`files_upload` varchar(225)
 ,`email` varchar(128)
 ,`role_id` int(11)
+,`department_id` int(11)
 );
 
 -- --------------------------------------------------------
@@ -288,7 +297,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`unique_code` AS `unique_code`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id` from ((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`meeting`.`place_id` AS `place_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`role` AS `role`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`unique_code` AS `unique_code`,`meeting_place`.`place_name` AS `place_name`,`meeting`.`agenda` AS `agenda`,`meeting`.`date_issues` AS `date_issues`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`department_id` AS `department_id` from ((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_place` on(`meeting`.`place_id` = `meeting_place`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -351,7 +360,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -375,7 +384,7 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

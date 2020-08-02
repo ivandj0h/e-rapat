@@ -13,10 +13,10 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?= base_url('history'); ?>">Search by DateRange</a>
+                        <a class="nav-link" href="<?= base_url('history'); ?>">Search by DateRange</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('history/searchdept'); ?>">Search by Department</a>
+                        <a class="nav-link active" href="<?= base_url('history/searchdept'); ?>">Search by Department</a>
                     </li>
                 </ul>
             </div>
@@ -28,14 +28,22 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <?= form_open('history'); ?>
-                        <div class="col">
-                            <input type="text" id="s_date" name="from_date" class="border" placeholder="From">
-                            <input type="text" id="e_date" name="to_date" class="border" placeholder="To">
+                        <?= form_open('history/searchdept'); ?>
+
+                        <div class="form-group row">
+                            <div class="col-sm-5">
+                                <select name="department_id" id="department_id" class="form-control">
+                                    <option value="">-- Select Department --</option>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($dept as $p) : ?>
+                                        <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['department_name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
-                            <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Data History</h6>
+                            <?= form_error('department_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
                         </div>
+
                         <?= form_close(); ?>
                     </div>
                     <div class="card-body">
@@ -79,7 +87,13 @@
             </div>
         </div>
         <!-- End of Content Table -->
+
+
+        <!-- Content Row -->
     </div>
+
+    <br /><br /><br />
+
 </div>
 <!-- /.container-fluid -->
 
