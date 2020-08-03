@@ -40,10 +40,6 @@ class Menu extends CI_Controller
     {
         $id = $this->input->post('id');
         $data = array('menu' => $this->input->post('menu'));
-
-        // $this->Menu_model->update_menu($id, $data);
-        // $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
-        // redirect('menu');
         $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
         redirect('menu');
     }
@@ -55,8 +51,6 @@ class Menu extends CI_Controller
 
         $this->Menu_model->delete_menu($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Deleted!</div>');
-        // redirect('menu');
-        // $this->session->set_flashdata('messages', '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Attention!</strong> This feature are disabled!, contact Developer</div>');
         redirect('menu');
     }
 
