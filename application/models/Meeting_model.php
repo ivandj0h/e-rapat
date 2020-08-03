@@ -14,6 +14,15 @@ class Meeting_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_meeting_by_role($role)
+    {
+        $condition = "role_id = " . $role;
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where($condition);
+        return $this->db->get()->result_array();
+    }
+
     public function get_one_meeting($unique)
     {
         $this->db->where('unique_code', $unique);

@@ -30,4 +30,14 @@ class History_model extends CI_Model
         $this->db->where($condition);
         return $this->db->get()->result_array();
     }
+
+    public function get_all_history_meeting_by_department_admin($where)
+    {
+        // $condition = "department_id =" . "'" . $where['department_id'] . "'" . " AND " . "role_id = " . $role;
+        $condition = "department_id =" . "'" . $where['department_id'] . "'";
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where($condition);
+        return $this->db->get()->result_array();
+    }
 }
