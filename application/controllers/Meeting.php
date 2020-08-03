@@ -16,12 +16,10 @@ class Meeting extends CI_Controller
     {
         $data['title'] = 'Meeting';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        // $data['meeting'] = $this->Meeting_model->get_all_meeting();
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
         $data['place'] = $this->db->get('meeting_place')->result_array();
 
         if ($data['user']['role_id'] == '1') {
-
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
             $this->load->view('layout/topbar', $data);
@@ -47,12 +45,19 @@ class Meeting extends CI_Controller
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim');
 
         if ($this->form_validation->run() == false) {
-
-            $this->load->view('layout/header', $data);
-            $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
-            $this->load->view('meeting/index', $data);
-            $this->load->view('layout/footer');
+            if ($data['user']['role_id'] == '1') {
+                $this->load->view('layout/header', $data);
+                $this->load->view('layout/sidebar', $data);
+                $this->load->view('layout/topbar', $data);
+                $this->load->view('meeting/index', $data);
+                $this->load->view('layout/footer');
+            } else {
+                $this->load->view('layout/header', $data);
+                $this->load->view('layout/sidebar', $data);
+                $this->load->view('layout/topbar', $data);
+                $this->load->view('meeting/userindex', $data);
+                $this->load->view('layout/footer');
+            }
         } else {
 
             $a = $this->input->post('speakers_name');
@@ -106,7 +111,6 @@ class Meeting extends CI_Controller
             $data['speakers'] = explode(",", $pecah['speakers_name']);
             $data['members'] = explode(",", $pecah['members_name']);
         }
-
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
