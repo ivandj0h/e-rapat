@@ -3,13 +3,34 @@ html {
 }
 
 body {
-	padding-top: 90px;
+	padding-top: 50px;
 }
 
 @media (min-width: 768px) {
 	html {
 		font-size: 16px;
 	}
+}
+
+.shadow {
+	box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+.btn {
+	border-radius: 0%;
+}
+
+a:link,
+a:visited {
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a:hover,
+a:active {
+	background-color: #eeeeee;
 }
 
 .container {

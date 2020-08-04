@@ -80,6 +80,6 @@ class Auth extends CI_Controller
     $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Congradulation!</strong> Logged out Success!.</div>');
 
-    redirect('auth');
+    redirect('welcome');
   }
 }

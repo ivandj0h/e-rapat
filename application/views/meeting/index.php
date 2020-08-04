@@ -166,7 +166,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Upload File</label>
+                    <label for="end_time" class="col-sm-2 col-form-label">Upload Notulen</label>
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="files" name="file">
+                            <label class="custom-file-label" for="image">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
                     <div class="col-sm-10">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="files" name="file">
