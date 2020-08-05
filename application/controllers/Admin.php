@@ -287,6 +287,18 @@ class Admin extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function subdepartment()
+    {
+        $data['title']   = 'SubDepartment';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['subdepartment'] = $this->Department_model->getSubDepartment();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('department/subdepartment', $data);
+        $this->load->view('layout/footer');
+    }
 
     // Media Meeting / Rooms
     public function room()
