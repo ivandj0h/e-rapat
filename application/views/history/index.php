@@ -16,8 +16,8 @@
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <input type="text" id="start_date" name="from_date" class="border" placeholder="From">
-                            <input type="text" id="end_date" name="to_date" class="border" placeholder="To">
+                            <input type="text" id="start_date" name="from_date" class="border" placeholder="From" autocomplete="off">
+                            <input type="text" id="end_date" name="to_date" class="border" placeholder="To" autocomplete="off">
                             <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
                             <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Data History</h6>
