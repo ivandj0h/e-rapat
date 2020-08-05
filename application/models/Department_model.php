@@ -6,6 +6,7 @@ class Department_model extends CI_Model
     protected $department = 'meeting_department';
     protected $subdepartment = 'meeting_sub_department';
 
+    // Department Section
     public function get_all_department()
     {
         return $this->db->get($this->department)->result_array();
@@ -28,7 +29,7 @@ class Department_model extends CI_Model
         return $this->db->delete($this->department);
     }
 
-    // Sub Department
+    // Sub Department Section
     public function getSubDepartment()
     {
         $query = "SELECT `meeting_sub_department`.*, `meeting_department`.`department_name`

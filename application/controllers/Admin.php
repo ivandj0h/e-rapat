@@ -287,20 +287,64 @@ class Admin extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    // Sub Department Section
     public function subdepartment()
     {
         $data['title']   = 'SubDepartment';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['dept'] = $this->Department_model->get_all_department();
         $data['subdepartment'] = $this->Department_model->getSubDepartment();
 
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
-        $this->load->view('department/subdepartment', $data);
-        $this->load->view('layout/footer');
+        $this->form_validation->set_rules('department_id', 'id department', 'required');
+        $this->form_validation->set_rules('sub_department_name', 'sub department', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('department/subdepartment', $data);
+            $this->load->view('layout/footer');
+        } else {
+
+            $data = [
+                'department_id'         => intval($this->input->post('department_id', true)),
+                'sub_department_name'   => $this->input->post('sub_department_name'),
+                'is_active'             => intval($this->input->post('is_active', true)),
+            ];
+
+            $this->Department_model->insert_sub_department($data);
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> New SubDepartment was Added!</div>');
+            redirect('admin/subdepartment');
+        }
     }
 
-    // Media Meeting / Rooms
+
+    public function updatesubdepartment()
+    {
+        if ($this->input->post('id')) {
+            $data = array(
+                'department_id'         => intval($this->input->post('department_id', true)),
+                'sub_department_name'   => $this->input->post('sub_department_name'),
+                'is_active'             => intval($this->input->post('is_active', true)),
+            );
+
+            $this->Department_model->update_sub_department($data, $this->input->post('id', true));
+        }
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> SubDepartment has been Updated!</div>');
+        redirect('admin/subdepartment');
+    }
+
+
+    public function deletesubdepartment()
+    {
+        $id = $this->input->post('id');
+
+        $this->Department_model->delete_sub_department($id);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> SubDepartment has been Deleted!</div>');
+        redirect('admin/subdepartment');
+    }
+
+    // Media Meeting / Rooms Section
     public function room()
     {
         $data['title']   = 'Media Meeting';

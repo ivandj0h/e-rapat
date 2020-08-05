@@ -21,8 +21,12 @@ $(document).ready(function () {
 		column.visible(!column.visible());
 	});
 	$("#freeRoom").DataTable({
-		lengthMenu: [5, 10, 15],
-		scrollY: 300,
+		lengthMenu: [
+			[5, 15, 30, -1],
+			[5, 10, 15, "All"],
+		],
+		// scrollY: 700,
+		pageLength: 5,
 	});
 	$("#dataHistory").DataTable({
 		lengthMenu: [5, 10, 15],

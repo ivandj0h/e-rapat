@@ -15,7 +15,7 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-breadcrumb d-none d-sm-block">You're in <strong><?= $title; ?></strong> Page Now</div>
+                        <div class="topbar-breadcrumb d-none d-sm-block float-right">You're in <strong><?= $title; ?></strong> Page Now</div>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
 
