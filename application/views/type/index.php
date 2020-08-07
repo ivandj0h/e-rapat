@@ -29,7 +29,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#roomAdd">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#typeAdd">
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
@@ -49,13 +49,13 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($rooms as $d) : ?>
+                                    <?php foreach ($type as $t) : ?>
                                         <tr>
                                             <td class="text-center"><?= $i++; ?></td>
-                                            <td class="text-left"><?= $d['place_name']; ?></td>
+                                            <td class="text-left"><?= $t['meeting_type']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#roomEdit<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#roomDel<?= $d['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#typeEdit<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#typeDel<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -78,20 +78,20 @@
 <!-- =============================================================================================== -->
 
 <!-- Start of Modal Add -->
-<div class="modal fade" id="roomAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="roomAddLabel" aria-hidden="true">
+<div class="modal fade" id="typeAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="typeAddLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="roomAddLabel">Add New Media Meeting</h5>
+                <h5 class="modal-title" id="typeAddLabel">Add New Media Type</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/addroom'); ?>" method="POST">
+            <form action="<?= base_url('type/addtype'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="place_name" name="place_name" placeholder="Enter Media Meeting...">
+                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Enter Media Type...">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -106,25 +106,25 @@
 
 <!-- Start of Modal Edit -->
 <?php
-foreach ($rooms as $a) :
+foreach ($type as $a) :
     $id = $a['id'];
 ?>
-    <div class="modal fade" id="roomEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="typeEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuEdit">Edit Media Meeting</h5>
+                    <h5 class="modal-title" id="typeEdit">Edit Media Type</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('admin/editroom'); ?>" method="POST">
+                <form action="<?= base_url('type/edittype'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="place_name" class="form-control form-control-user" id="place_name" value="<?= $a['place_name']; ?>" placeholder="Edit Media Meeting...">
-                                <?= form_error('place_name', '<small class="text-danger">', '</small>'); ?>
+                                <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Edit Media Type...">
+                                <?= form_error('meeting_type', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
@@ -142,16 +142,16 @@ foreach ($rooms as $a) :
 
 <!-- Start of Modal Delete -->
 <?php
-foreach ($rooms as $a) :
+foreach ($type as $a) :
     $id = $a['id'];
 ?>
-    <div class="modal fade" id="deptDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="typeDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?= base_url('admin/deletedepartment'); ?>" method="POST">
+                <form action="<?= base_url('type/deletetype'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $a['department_name']; ?> ?</b></p>
+                        <p>Are you sure want to delete <b><?= $a['meeting_type']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
