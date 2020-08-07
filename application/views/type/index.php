@@ -33,9 +33,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Media Meeting</span>
+                            <span class="text">Add New Media Type</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Media Meeting</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Media Type</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,7 +43,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Media Meeting</th>
+                                        <th class="text-center w-20">Media Type</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
@@ -91,7 +91,7 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Enter Media Type...">
+                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Enter Media Type..." autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -123,7 +123,7 @@ foreach ($type as $a) :
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Edit Media Type...">
+                                <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Edit Media Type..." autocomplete="off">
                                 <?= form_error('meeting_type', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
