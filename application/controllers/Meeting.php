@@ -10,6 +10,7 @@ class Meeting extends CI_Controller
         $this->load->helper(array('string', 'text'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
+        $this->load->model('Type_model');
     }
 
     public function index()
@@ -17,7 +18,8 @@ class Meeting extends CI_Controller
         $data['title'] = 'Meeting';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
-        $data['place'] = $this->db->get('meeting_place')->result_array();
+        // $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['types'] = $this->Type_model->getSubType();
 
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
