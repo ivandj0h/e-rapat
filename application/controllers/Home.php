@@ -22,6 +22,8 @@ class Home extends CI_Controller
 	public function index()
 	{
 		$data['title'] = 'E-RAPAT';
+		$this->load->view('layout/front_header', $data);
 		$this->load->view('frontend/home', $data);
+		$this->load->view('layout/front_footer', $data);
 	}
 }

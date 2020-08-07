@@ -1,32 +1,9 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v4.0.1">
-  <title><?= $title; ?></title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="<?= base_url('assets/'); ?>css/bootstrap-4.5.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Favicons -->
-  <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
-
-  <!-- Custom fonts for this template-->
-  <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="<?= base_url('assets/'); ?>css/front-customs.css" rel="stylesheet">
-</head>
-
 <body>
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow fixed-top">
     <h5 class="my-0 mr-md-auto font-weight-normal"><i class="fas fa-calendar-alt"></i> <?= $title; ?></h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="<?= base_url('home') ?>">Home</a>
       <a class="p-2 text-dark" href="<?= base_url('about') ?>">About</a>
-      <a class="p-2 text-dark" href="<?= base_url('calendar') ?>">Calendar</a>
     </nav>
     <a class="btn btn-primary" href="<?= base_url('auth') ?>">Login</a>
   </div>
@@ -84,14 +61,3 @@
         </div>
       </div>
     </footer> -->
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
-  <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Customs scripts -->
-  <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
-</body>
-
-</html>
