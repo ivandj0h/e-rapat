@@ -19,6 +19,13 @@ class Home extends CI_Controller
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		Parent::__construct();
+		$this->load->model("calendar_model");
+	}
+
 	public function index()
 	{
 		$data['title'] = 'E-RAPAT';

@@ -25,7 +25,7 @@ foreach ($meeting as $a) :
                             <div class="form-group row">
                                 <label for="place_name" class="col-sm-2 col-form-label">Media Meeting</label>
                                 <div class="col-sm-5">
-                                    <strong><?= $a['place_name']; ?></strong>
+                                    <strong><?= $a['meeting_subtype']; ?></strong>
                                 </div>
                             </div>
                             <div class="form-group row">
