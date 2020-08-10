@@ -16,6 +16,13 @@ class Type_model extends CI_Model
         return $this->db->insert($this->type, $data);
     }
 
+    function get_id_type($id)
+    {
+        // return $this->db->get_where($this->table_sub_type, array('type_id' => $id));
+        $this->db->where('type_id', $id);
+        return $this->db->get($this->table_sub_type)->result_array();
+    }
+
     public function update_type($id, $data)
     {
         $this->db->where('id', $id);

@@ -18,7 +18,7 @@ class Meeting extends CI_Controller
         $data['title'] = 'Meeting';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
-        // $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['alltype'] = $this->Type_model->get_all_type();
         $data['types'] = $this->Type_model->getSubType();
 
         if ($data['user']['role_id'] == '1') {
@@ -41,9 +41,9 @@ class Meeting extends CI_Controller
         $data['title'] = 'Meeting';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
-        $data['place'] = $this->db->get('meeting_place')->result_array();
+        // $data['place'] = $this->db->get('meeting_place')->result_array();
 
-        $this->form_validation->set_rules('place_id', 'Place Name', 'required');
+        $this->form_validation->set_rules('type_id', 'Media Name', 'required');
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim');
 
         if ($this->form_validation->run() == false) {
@@ -69,7 +69,7 @@ class Meeting extends CI_Controller
 
             $data = [
                 'user_id' => $data['user']['id'],
-                'place_id' => $this->input->post('place_id', true),
+                'sub_type_id' => $this->input->post('meeting_subtype', true),
                 'speakers_name' => $speakers,
                 'members_name' => $participants,
                 'unique_code' => uniqid(),
@@ -80,6 +80,9 @@ class Meeting extends CI_Controller
                 'end_time' => $this->input->post('end_time', true),
                 'request_status' => 0
             ];
+
+            // var_dump($data);
+            // die;
 
             $files_name_upload = $_FILES['file']['name'];
 
@@ -130,7 +133,7 @@ class Meeting extends CI_Controller
         $participants = implode(',', (array) $b);
 
         $data = array(
-            'place_id' => $this->input->post('place_id', true),
+            'sub_type_id' => $this->input->post('meeting_subtype', true),
             'speakers_name' => $speakers,
             'members_name' => $participants,
             'agenda' => htmlspecialchars($this->input->post('agenda', true)),
@@ -168,5 +171,14 @@ class Meeting extends CI_Controller
         $this->Meeting_model->delete_meeting($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Data Meeting has been Deleted!</div>');
         redirect('meeting');
+    }
+
+    function get_media_meeting()
+    {
+        $id_type = $this->input->post('id_type');
+
+        $data = $this->Type_model->get_id_type($id_type);
+
+        echo json_encode($data);
     }
 }

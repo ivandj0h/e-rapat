@@ -58,7 +58,7 @@
                                 <tbody>
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
-                                            <td class="text-left"><?= $a['place_name']; ?></td>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></td>
                                             <td><?= $a['speakers_name']; ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
@@ -111,16 +111,25 @@
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="place_id" class="col-sm-2 col-form-label">Media Meeting</label>
+                    <label for="type_id" class="col-sm-2 col-form-label">Media Meeting</label>
                     <div class="col-sm-5">
-                        <select name="place_id" id="place_id" class="form-control">
-                            <option value="" disabled>-- Select Media Meeting --</option>
+                        <select name="type_id" id="type_id" class="form-control">
+                            <option value='0'>-- Select Media Meeting --</option>
                             <?php $i = 1; ?>
-                            <?php foreach ($place as $p) : ?>
-                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['place_name']; ?></option>
+                            <?php foreach ($alltype as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <?= form_error('place_id', '<small class="text-danger">', '</small>'); ?>
+                        <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="meeting_subtype" id="meeting_subtype">
+                            <option value='0'>--Select SubMedia Meeting--</option>
+                            <!-- Type akan diload menggunakan ajax, dan ditampilkan disini -->
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -147,31 +156,22 @@
                 <div class="form-group row">
                     <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
                     <div class="col-sm-10">
-                        <input type="text" id="date_issues" name="date_issues" class="border" placeholder="Input Date">
+                        <input type="text" id="date_issues" name="date_issues" class="border" placeholder="Input Date" autocomplete="off">
                         <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="start_time" class="col-sm-2 col-form-label">Start Meeting</label>
                     <div class="col-sm-10">
-                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Start Meeting">
+                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Start Meeting" autocomplete="off">
                         <?= form_error('Start Meeting', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="end_time" class="col-sm-2 col-form-label">End Meeting</label>
                     <div class="col-sm-10">
-                        <input type="text" id="end_time" name="end_time" class="border" placeholder="End Meeting">
+                        <input type="text" id="end_time" name="end_time" class="border" placeholder="End Meeting" autocomplete="off">
                         <?= form_error('End Meeting', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Upload Notulen</label>
-                    <div class="col-sm-10">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="files" name="file">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -198,7 +198,7 @@
 <?php
 foreach ($meeting as $a) :
     $id = $a['id'];
-    $place_name = $a['place_name'];
+    $meeting_subtype = $a['meeting_subtype'];
     $request_status = $a['request_status'];
 ?>
     <div class="modal fade" id="meetingEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -207,23 +207,34 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/editmeeting'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-
                         <div class="form-group row">
-                            <label for="place_id" class="col-sm-2 col-form-label">Media Meeting</label>
+                            <label for="type_id" class="col-sm-2 col-form-label">Media Meeting</label>
                             <div class="col-sm-5">
-                                <select name="place_id" id="place_id" class="form-control">
-                                    <option value="<?= $a['place_id']; ?>"><?= $a['place_name']; ?></option>
-                                    <?php foreach ($place as $p) : ?>
-                                        <option value="<?= $p['id']; ?>">-- <?= $p['place_name']; ?> --</option>
+                                <select name="type_id" id="type_id2" class="form-control">
+                                    <option value="<?= $a['type_id']; ?>"><?= $a['meeting_type']; ?></option>
+                                    <option value='0'>-- Select Media Meeting --</option>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($alltype as $p) : ?>
+                                        <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <?= form_error('place_id', '<small class="text-danger">', '</small>'); ?>
+                                <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Agenda</label>
+                            <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="meeting_subtype" id="meeting_subtype2">
+                                    <option value="<?= $a['sub_type_id']; ?>"><?= $a['meeting_subtype']; ?></option>
+                                    <option value='0'>--Select SubMedia Meeting--</option>
+                                    <!-- Type akan diload menggunakan ajax, dan ditampilkan disini -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
                             <div class="col-sm-10">
-                                <input type="text" name="agenda" class="form-control form-control-user" id="agenda" value="<?= $a['agenda']; ?>" placeholder="Agenda">
+                                <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Describe Agenda here..."><?= $a['agenda']; ?></textarea>
                                 <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -277,7 +288,7 @@ foreach ($meeting as $a) :
 <?php
 foreach ($meeting as $a) :
     $id = $a['id'];
-    $place_name = $a['place_name'];
+    $meeting_subtype = $a['meeting_subtype'];
     $request_status = $a['request_status'];
 ?>
     <div class="modal fade" id="meetingStatus<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -286,7 +297,7 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/updatestatus'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to Change Status of <b><?= $place_name; ?> ?</b></p>
+                        <p>Are you sure want to Change Status of <b><?= $meeting_subtype; ?> ?</b></p>
                         <div class="form-group row">
                             <label for="place_id" class="col-sm-3 col-form-label">Status name : </label>
                             <div class="col-sm-5">
@@ -327,7 +338,7 @@ foreach ($meeting as $a) :
 <?php
 foreach ($meeting as $a) :
     $id = $a['id'];
-    $place_name = $a['place_name'];
+    $meeting_subtype = $a['meeting_subtype'];
 ?>
     <div class="modal fade" id="meetingDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -335,7 +346,7 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/delete'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $place_name; ?> ?</b></p>
+                        <p>Are you sure want to delete <b><?= $meeting_subtype; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
