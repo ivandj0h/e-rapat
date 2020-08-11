@@ -61,9 +61,15 @@ foreach ($meeting as $a) :
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
+                                <label for="date_issues" class="col-sm-2 col-form-label">Start Date</label>
                                 <div class="col-sm-10">
-                                    <strong><?= date("d-m-Y", strtotime($a['date_issues'])); ?></strong>
+                                    <strong><?= date("d-m-Y", strtotime($a['start_date'])); ?></strong>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="date_issues" class="col-sm-2 col-form-label">End Date</label>
+                                <div class="col-sm-10">
+                                    <strong><?= date("d-m-Y", strtotime($a['end_date'])); ?></strong>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -100,7 +106,7 @@ foreach ($meeting as $a) :
                                             <tr>
                                                 <td class="text-center"><span class="badge badge-secondary"><?= $a['name']; ?></span></td>
                                                 <td class="text-center"><span class="badge badge-success"><?= $a['department_name']; ?></span></td>
-                                                <td class="text-center"><span class="badge badge-primary"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></span></td>
+                                                <td class="text-center"><span class="badge badge-primary"><?= date("d-m-Y", strtotime($a['date_requested'])); ?></span></td>
                                                 <td class="text-center">
                                                     <?php
                                                     if ($a['request_status'] == 0) { ?>
