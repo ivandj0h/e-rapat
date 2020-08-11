@@ -22,7 +22,7 @@ class Home extends CI_Controller
 
 	public function __construct()
 	{
-		Parent::__construct();
+		parent::__construct();
 		$this->load->model("calendar_model");
 	}
 

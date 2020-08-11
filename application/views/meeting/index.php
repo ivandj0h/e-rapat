@@ -59,7 +59,7 @@
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?></td>
-                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></td>
+                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td><?= $a['speakers_name']; ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
                                             <td class="text-center"><?= $a['end_time']; ?></td>
@@ -87,6 +87,42 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Start of Notification -->
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="3000" data-autohide="true">
+                    <div class="toast-header">
+                        <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
+
+                        <strong class="mr-auto">Notifikasi</strong>
+                        <small>File Upload</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Anda Belum Mengunduh Berkas Undangan Rapat!
+                        <hr />
+                        <small>@Administrator</small>
+                    </div>
+                </div>
+
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
+                    <div class="toast-header">
+                        <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
+
+                        <strong class="mr-auto">Notifikasi</strong>
+                        <small>File Upload</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Anda Belum Mengunduh Berkas Notulen!
+                        <hr />
+                        <small>@Administrator</small>
+                    </div>
+                </div>
+                <!-- End of Notification -->
             </div>
         </div>
         <!-- End of Content Table -->
@@ -140,23 +176,30 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="speakers_name" class="col-sm-2 col-form-label">Speaker</label>
+                    <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
                     <div class="col-sm-10">
                         <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Add Speaker's Name...">
                         <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="members_name" class="col-sm-2 col-form-label">Participants</label>
+                    <label for="members_name" class="col-sm-2 col-form-label">Peserta</label>
                     <div class="col-sm-10">
                         <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Add Participant's Name...">
                         <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
+                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                     <div class="col-sm-10">
-                        <input type="text" id="date_issues" name="date_issues" class="border" placeholder="Input Date" autocomplete="off">
+                        <input type="text" id="start_date" name="start_date" class="border" placeholder="Input Date" autocomplete="off">
+                        <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="end_date" name="end_date" class="border" placeholder="Input Date" autocomplete="off">
                         <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
@@ -239,23 +282,30 @@ foreach ($meeting as $a) :
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="speakers_name" class="col-sm-2 col-form-label">Speaker</label>
+                            <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
                             <div class="col-sm-10">
                                 <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= $a['speakers_name']; ?>" placeholder="Add Speaker's Name...">
                                 <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="members_name" class="col-sm-2 col-form-label">Participants</label>
+                            <label for="members_name" class="col-sm-2 col-form-label">Peserta</label>
                             <div class="col-sm-10">
                                 <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= $a['members_name']; ?>" placeholder="Add Participant's Name...">
                                 <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
+                            <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-10">
-                                <input type="date" id="date_issues" name="date_issues" class="border" value="<?= $a['date_issues']; ?>">
+                                <input type="date" id="start_date" name="start_date" class="border" value="<?= $a['start_date']; ?>">
+                                <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" id="end_date" name="end_date" class="border" value="<?= $a['end_date']; ?>">
                                 <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>

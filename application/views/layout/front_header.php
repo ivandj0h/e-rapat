@@ -19,7 +19,5 @@
     <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/'); ?>css/front-customs.css" rel="stylesheet">
 
-    <!-- Import Full Calendar Files -->
-    <link rel="stylesheet" href="<?= base_url('vendor/'); ?>fullcalendar/lib/main.min.css" />
 
 </head>
