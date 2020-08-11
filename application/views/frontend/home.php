@@ -18,7 +18,7 @@
 
   <!-- <iframe src="http://localhost/calendars/guest.php"></iframe> -->
 
-  <iframe src="http://localhost/calendar" style="	position: fixed;
+  <iframe src="http://localhost/cals" style="	position: fixed;
   padding-top:100px;
 	left: 0;
 	bottom: 0;

@@ -140,7 +140,8 @@ class Meeting extends CI_Controller
             'speakers_name' => $speakers,
             'members_name' => $participants,
             'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-            'date_issues' => $this->input->post('date_issues', true),
+            'start_date' => $this->input->post('start_date', true),
+            'end_date' => $this->input->post('end_date', true),
             'start_time' => $this->input->post('start_time', true),
             'end_time' => $this->input->post('end_time', true),
         );
