@@ -156,6 +156,8 @@
                        });
                    });
                });
+
+               $('.toast').toast('show');
            </script>
            </body>
 

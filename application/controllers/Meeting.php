@@ -64,8 +64,10 @@ class Meeting extends CI_Controller
 
             $a = $this->input->post('speakers_name');
             $b = $this->input->post('participants_name');
+            // start_date
             $speakers = implode(',', (array) $a);
             $participants = implode(',', (array) $b);
+
 
             $data = [
                 'user_id' => $data['user']['id'],
@@ -74,7 +76,8 @@ class Meeting extends CI_Controller
                 'members_name' => $participants,
                 'unique_code' => uniqid(),
                 'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                'date_issues' => $this->input->post('date_issues', true),
+                'start_date' => $this->input->post('start_date', true),
+                'end_date' => $this->input->post('end_date', true),
                 'date_requested' => date('Y-m-d'),
                 'start_time' => $this->input->post('start_time', true),
                 'end_time' => $this->input->post('end_time', true),
@@ -180,5 +183,11 @@ class Meeting extends CI_Controller
         $data = $this->Type_model->get_id_type($id_type);
 
         echo json_encode($data);
+    }
+
+    function checkupload()
+    {
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        echo $data['meeting'];
     }
 }

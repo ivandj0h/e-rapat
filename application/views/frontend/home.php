@@ -16,28 +16,18 @@
 
   </div>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-10 col-lg-8">
-        <form class="card card-sm">
-          <div class="card-body row no-gutters align-items-center">
-            <div class="col-auto">
-              <i class="fas fa-search h4 text-body"></i>
-            </div>
-            <!--end of col-->
-            <div class="col">
-              <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
-            </div>
-            <!--end of col-->
-            <div class="col-auto">
-              <button class="btn btn-lg btn-success" type="submit">Search</button>
-            </div>
-            <!--end of col-->
-          </div>
-        </form>
-      </div>
-      <!--end of col-->
-    </div>
-  </div>
+  <!-- <iframe src="http://localhost/calendars/guest.php"></iframe> -->
 
-  <div id="calendar"></div>
+  <iframe src="http://localhost/calendar" style="	position: fixed;
+  padding-top:100px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	margin: 0;
+	overflow: hidden;
+	z-index: 1;">
+    Your browser doesn't support iframes
+  </iframe>

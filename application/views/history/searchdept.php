@@ -65,7 +65,7 @@
                                 <tbody>
                                     <?php foreach ($meeting_admin as $a) : ?>
                                         <tr>
-                                            <td class="text-left"><?= $a['place_name']; ?></td>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></td>
                                             <td><?= $a['speakers_name']; ?></td>
                                             <td><?= $a['members_name']; ?></td>
