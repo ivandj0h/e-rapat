@@ -51,7 +51,7 @@
                                         <th class="text-center w-20">Start</th>
                                         <th class="text-center w-20">End</th>
                                         <th class="text-center w-20">Agenda</th>
-                                        <th class="text-center w-20">Department</th>
+                                        <th class="text-center w-20">SubDepartment</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
                                 </thead>
@@ -64,7 +64,7 @@
                                             <td class="text-center"><?= $a['start_time']; ?></td>
                                             <td class="text-center"><?= $a['end_time']; ?></td>
                                             <td><?= word_limiter($a['agenda'], 5); ?></td>
-                                            <td><?= $a['department_name']; ?></td>
+                                            <td><?= $a['sub_department_name']; ?></td>
                                             <td class="text-center action mx-2">
                                                 <?php if ($a['request_status'] == '0') { ?>
                                                     <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-flushed"></i> Status Requested</span>
@@ -80,7 +80,6 @@
                                                 <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
-
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

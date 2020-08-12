@@ -51,7 +51,8 @@
                                         <th class="text-center w-20">Full Name</th>
                                         <th class="text-center w-20">Email</th>
                                         <th class="text-center w-20">Role</th>
-                                        <th class="text-center w-20">Department</th>
+                                        <th class="text-center w-20">Sekretariat</th>
+                                        <th class="text-center w-20">Bagian</th>
                                         <th class="text-center w-20">Active</th>
                                         <th class="text-center w-20">Actions</th>
                                     </tr>
@@ -74,6 +75,7 @@
 
                                             </td>
                                             <td><?= $a['department_name']; ?></td>
+                                            <td><?= $a['sub_department_name']; ?></td>
                                             <td class="text-center">
                                                 <?php
                                                 if ($a['is_active'] == 1) { ?>
@@ -127,10 +129,10 @@
                         <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     <div class="form-group">
-                        <select name="department_id" id="department_id" class="form-control">
-                            <option value="">-- Select Department --</option>
-                            <?php foreach ($department as $d) : ?>
-                                <option value="<?= $d['id']; ?>"><?= $d['department_name']; ?></option>
+                        <select name="sub_department_id" id="sub_department_id" class="form-control">
+                            <option value="">-- Select Bagian --</option>
+                            <?php foreach ($subdept as $d) : ?>
+                                <option value="<?= $d['id']; ?>"><?= $d['sub_department_name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -205,11 +207,11 @@ foreach ($account as $a) :
                                         <label for="name" class="col-form-label">Department Name</label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <select class="custom-select mr-sm-2" select name="department_id" id="department_id">
-                                            <option value="<?= $a['department_id']; ?>"><?= $a['department_name']; ?></option>
-                                            <option disabled>-- Select Department --</option>
-                                            <?php foreach ($department as $d) : ?>
-                                                <option value="<?= $d['id']; ?>"><?= $d['department_name']; ?></option>
+                                        <select class="custom-select mr-sm-2" select name="sub_department_id" id="sub_department_id">
+                                            <option value="<?= $a['sub_department_id']; ?>"><?= $a['department_name']; ?></option>
+                                            <option disabled>-- Select Bagian --</option>
+                                            <?php foreach ($subdept as $d) : ?>
+                                                <option value="<?= $d['id']; ?>"><?= $d['sub_department_name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
