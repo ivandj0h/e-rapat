@@ -22,7 +22,8 @@ class Admin extends CI_Controller
         $data['place'] = $this->db->get('meeting_place')->result_array();
         $data['overview'] = $this->Overview_model->get_all_today();
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
-        $data['dept'] = $this->Department_model->get_all_department();
+        // $data['dept'] = $this->Department_model->get_all_department();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -87,7 +88,8 @@ class Admin extends CI_Controller
         $data['title']   = 'Account';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        // $data['department'] = $this->Account_model->get_all_department();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -101,13 +103,14 @@ class Admin extends CI_Controller
         $data['title']   = 'Account';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        // $data['department'] = $this->Account_model->get_all_department();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[meeting_users.email]', [
             "is_unique" => "This Email already registered!"
         ]);
-        $this->form_validation->set_rules('department_id', 'Department Name', 'required');
+        $this->form_validation->set_rules('sub_department_id', 'Nama Bagian', 'required');
 
         if ($this->form_validation->run() == false) {
 
@@ -128,7 +131,7 @@ class Admin extends CI_Controller
                 'password' => password_hash($password, PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => intval($this->input->post('is_active', true)),
-                'department_id' => intval($this->input->post('department_id')),
+                'sub_department_id' => intval($this->input->post('sub_department_id')),
                 'date_created' => time()
             ];
 
@@ -144,7 +147,8 @@ class Admin extends CI_Controller
         $data['title']   = 'Account';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        // $data['department'] = $this->Account_model->get_all_department();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
@@ -164,7 +168,7 @@ class Admin extends CI_Controller
                 'email' => htmlspecialchars($this->input->post('email')),
                 'role_id' => $this->input->post('role_id', true),
                 'is_active' => intval($this->input->post('is_active')),
-                'department_id' => intval($this->input->post('department_id')),
+                'sub_department_id' => intval($this->input->post('sub_department_id')),
                 'date_updated' => time()
             ];
 

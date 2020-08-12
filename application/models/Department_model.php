@@ -5,6 +5,7 @@ class Department_model extends CI_Model
 {
     protected $department = 'meeting_department';
     protected $subdepartment = 'meeting_sub_department';
+    protected $viewsubdepartment = 'view_user_department';
 
     // Department Section
     public function get_all_department()
@@ -38,6 +39,11 @@ class Department_model extends CI_Model
            ";
 
         return $this->db->query($query)->result_array();
+    }
+
+    public function view_sub_department()
+    {
+        return $this->db->get($this->subdepartment)->result_array();
     }
 
     public function insert_sub_department($data)
