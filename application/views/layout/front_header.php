@@ -16,8 +16,10 @@
     <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
 
     <!-- Custom fonts for this template-->
-    <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url('assets/'); ?>css/front-customs.css" rel="stylesheet">
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
 
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <link href="<?= base_url('assets/'); ?>css/front-customs.css" rel="stylesheet">
 
 </head>
