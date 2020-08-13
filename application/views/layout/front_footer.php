@@ -9,15 +9,17 @@
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 <script>
   $(document).ready(function() {
+    $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar({
       initialView: 'dayGridMonth',
       themeSystem: "bootstrap4",
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,listWeek'
+        right: 'month,basicWeek,basicDay'
       },
-      eventColor: '#0062cc',
+      eventColor: '#09223d',
+      editable: true,
       events: [{
           "id": "1",
           "title": "administrator",

@@ -1,6 +1,23 @@
-<div class="col-lg-10" style="float:none;margin:auto;overflow: auto;padding-top: 30px;">
-  <h1 class="display-4">e-rapat</h1>
-  <p class="lead"><small class="small-fonts"> <strong>e-rapat</strong> application is a platform developed by the Ministry of Transportation of the Republic of Indonesia to facilitate arranging meeting activities because it is well scheduled according to what has been made by each user of this system..</small></p>
+<div class="col-lg-10" style="float:none;margin:auto;overflow: auto;padding-top: 50px;">
+  <div class="jumbotron">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+
+    <p class="lead">
+      <?php
+      $sess_id = $this->session->userdata('email');
+      if ($sess_id) {
+        echo 'Anda Login Sebagai <strong>' . $user['name'] . '</strong>';
+      } else {
+        echo 'Maaf, Anda harus Login terlebih Dahulu untuk Membuat Rapat <br />'; ?>
+        <a class="btn btn-primary btn-lg" href="<?= base_url('auth') ?>">Login</a>
+      <?php
+      }
+      ?>
+      </a>
+    </p>
+  </div>
 </div>
 
 

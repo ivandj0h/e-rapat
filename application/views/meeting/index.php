@@ -175,17 +175,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
+                    <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
                     <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Add Speaker's Name...">
-                        <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
+                        <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Tambah Pimpinan Rapat">
+                        <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="members_name" class="col-sm-2 col-form-label">Peserta</label>
+                    <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
                     <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Add Participant's Name...">
-                        <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
+                        <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
+                        <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -281,17 +281,17 @@ foreach ($meeting as $a) :
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
+                            <div class="col-sm-10">
+                                <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= $a['members_name']; ?>" placeholder="Add Participant's Name...">
+                                <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
                             <div class="col-sm-10">
                                 <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= $a['speakers_name']; ?>" placeholder="Add Speaker's Name...">
                                 <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="members_name" class="col-sm-2 col-form-label">Peserta</label>
-                            <div class="col-sm-10">
-                                <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= $a['members_name']; ?>" placeholder="Add Participant's Name...">
-                                <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
