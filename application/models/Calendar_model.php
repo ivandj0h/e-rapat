@@ -2,31 +2,26 @@
 
 class Calendar_model extends CI_Model
 {
-    public function get_list($table, $where = FALSE)
+    function fetch_all_event()
     {
-        if ($where) {
-            $this->db->where($where);
-        }
-        return $this->db->get($table)->result();
+        $this->db->order_by('id');
+        return $this->db->get('view_user_meeting');
     }
 
-    public function insert($table, $param)
+    function insert_event($data)
     {
-        $this->db->insert($table, $param);
-        return $this->db->insert_id();
+        $this->db->insert('events', $data);
     }
 
-    public function update($table, $set, $where)
+    function update_event($data, $id)
     {
-        $this->db->where($where);
-        $this->db->update($table, $set);
-        return $this->db->affected_rows();
+        $this->db->where('id', $id);
+        $this->db->update('events', $data);
     }
 
-    public function delete($table, $where)
+    function delete_event($id)
     {
-        $this->db->where($where);
-        $this->db->delete($table);
-        return $this->db->affected_rows();
+        $this->db->where('id', $id);
+        $this->db->delete('events');
     }
 }
