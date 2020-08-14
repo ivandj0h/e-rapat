@@ -33,9 +33,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Meeting</span>
+                            <span class="text">Tambah Rapat Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Meeting</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Meeting</h6>
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
@@ -45,14 +45,14 @@
                             <table class="table table-striped table-condensed" id="meeting" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Media Meeting</th>
-                                        <th class="text-center w-20">Meeting Date</th>
-                                        <th class="text-center w-20">Speaker</th>
-                                        <th class="text-center w-20">Start</th>
-                                        <th class="text-center w-20">End</th>
+                                        <th class="text-center w-20">Media Rapat</th>
+                                        <th class="text-center w-20">Tanggal Rapat</th>
+                                        <th class="text-center w-20">Narasumber</th>
+                                        <th class="text-center w-20">Mulai</th>
+                                        <th class="text-center w-20">Akhir</th>
                                         <th class="text-center w-20">Agenda</th>
-                                        <th class="text-center w-20">SubDepartment</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Bagian</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,7 +137,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addMeeting">Create New Meeting</h5>
+                <h5 class="modal-title" id="addMeeting">Buat Rapat Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

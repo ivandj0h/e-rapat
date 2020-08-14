@@ -13,7 +13,7 @@ class User extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Profile';
+        $data['title'] = 'Profil Pengguna';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         $this->load->view('layout/header', $data);
@@ -61,7 +61,7 @@ class User extends CI_Controller
     public function edit()
     {
 
-        $data['title'] = 'Edit Profile';
+        $data['title'] = 'Profil Pengguna';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         // give rules

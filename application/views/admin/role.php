@@ -21,7 +21,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Role Access</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Pengaturan Hak Akses</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -29,8 +29,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Role Name</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Hak Akses</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
