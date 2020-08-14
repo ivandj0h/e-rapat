@@ -13,10 +13,10 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('history'); ?>">Search by DateRange</a>
+                        <a class="nav-link" href="<?= base_url('history'); ?>">Rentang Tanggal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?= base_url('history/searchdept'); ?>">Search by Department</a>
+                        <a class="nav-link active" href="<?= base_url('history/searchdept'); ?>">Bidang</a>
                     </li>
                 </ul>
             </div>

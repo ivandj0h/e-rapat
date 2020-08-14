@@ -9,6 +9,9 @@
     <meta name="generator" content="Jekyll v4.0.1">
     <title><?= $title; ?></title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
+
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/'); ?>css/bootstrap-4.5.min.css" rel="stylesheet" type="text/css">
 

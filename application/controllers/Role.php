@@ -13,7 +13,7 @@ class Role extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Role Management';
+        $data['title'] = 'Master Data Akses';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['role'] = $this->Role_model->get_all_role();
 

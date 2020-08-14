@@ -18,8 +18,8 @@ class Type_model extends CI_Model
 
     function get_id_type($id)
     {
-        // return $this->db->get_where($this->table_sub_type, array('type_id' => $id));
         $this->db->where('type_id', $id);
+        $this->db->where('is_active', 1);
         return $this->db->get($this->table_sub_type)->result_array();
     }
 

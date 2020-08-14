@@ -17,7 +17,7 @@ class History extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'History';
+        $data['title'] = 'Riwayat Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting_user'] = $this->History_model->get_all_history_meeting($this->session->userdata('email'));
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
@@ -66,7 +66,7 @@ class History extends CI_Controller
 
     public function searchdept()
     {
-        $data['title'] = 'History';
+        $data['title'] = 'Riwayat Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting_user'] = $this->History_model->get_all_history_meeting($this->session->userdata('email'));
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
