@@ -13,10 +13,10 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?= base_url('history'); ?>">Search by DateRange</a>
+                        <a class="nav-link active" href="<?= base_url('history'); ?>">Rentang Tanggal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('history/searchdept'); ?>">Search by Department</a>
+                        <a class="nav-link" href="<?= base_url('history/searchdept'); ?>">Bidang</a>
                     </li>
                 </ul>
             </div>
@@ -32,9 +32,9 @@
                         <div class="col">
                             <input type="text" id="s_date" name="from_date" class="border" placeholder="From">
                             <input type="text" id="e_date" name="to_date" class="border" placeholder="To">
-                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
+                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Pencarian Rapat</button>
                             <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Data History</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>
                         </div>
                         <?= form_close(); ?>
                     </div>

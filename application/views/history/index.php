@@ -18,9 +18,9 @@
                         <div class="col">
                             <input type="text" id="start_date" name="from_date" class="border" placeholder="From" autocomplete="off">
                             <input type="text" id="end_date" name="to_date" class="border" placeholder="To" autocomplete="off">
-                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
+                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Pencarian Rapat</button>
                             <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Data History</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>
                         </div>
                         <?= form_close(); ?>
                     </div>
@@ -30,15 +30,14 @@
                         <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="text-center w-20">Media Meeting</th>
-                                    <th class="text-center w-20">Meeting Date</th>
-                                    <th class="text-center w-20">Speakers</th>
-                                    <th class="text-center w-20">Participants</th>
-                                    <th class="text-center w-20">Start</th>
-                                    <th class="text-center w-20">End</th>
+                                    <th class="text-center w-20">Media Rapat</th>
+                                    <th class="text-center w-20">Tanggal Rapat</th>
+                                    <th class="text-center w-20">Narasumber</th>
+                                    <th class="text-center w-20">Mulai</th>
+                                    <th class="text-center w-20">Akhir</th>
                                     <th class="text-center w-20">Agenda</th>
-                                    <th class="text-center w-20">Department</th>
-                                    <th class="text-center w-20">Actions</th>
+                                    <th class="text-center w-20">Nama Bagian</th>
+                                    <th class="text-center w-20">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

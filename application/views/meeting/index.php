@@ -149,7 +149,7 @@
                     <label for="type_id" class="col-sm-2 col-form-label">Media Meeting</label>
                     <div class="col-sm-5">
                         <select name="type_id" id="type_id" class="form-control">
-                            <option value='0'>-- Select Media Meeting --</option>
+                            <option value='0'>-- Pilih Media Rapat --</option>
                             <?php $i = 1; ?>
                             <?php foreach ($alltype as $p) : ?>
                                 <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
@@ -162,8 +162,8 @@
                     <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="meeting_subtype" id="meeting_subtype">
-                            <option value='0'>--Select SubMedia Meeting--</option>
-                            <!-- Type akan diload menggunakan ajax, dan ditampilkan disini -->
+                            <option value='0'>-- Pilih SubMedia Rapat --</option>
+                            <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
                         </select>
                     </div>
                 </div>
@@ -254,7 +254,7 @@ foreach ($meeting as $a) :
                             <div class="col-sm-5">
                                 <select name="type_id" id="type_id2" class="form-control">
                                     <option value="<?= $a['type_id']; ?>"><?= $a['meeting_type']; ?></option>
-                                    <option value='0'>-- Select Media Meeting --</option>
+                                    <option value='0'>-- Pilih Media Rapat --</option>
                                     <?php $i = 1; ?>
                                     <?php foreach ($alltype as $p) : ?>
                                         <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
@@ -268,8 +268,8 @@ foreach ($meeting as $a) :
                             <div class="col-sm-5">
                                 <select class="form-control" name="meeting_subtype" id="meeting_subtype2">
                                     <option value="<?= $a['sub_type_id']; ?>"><?= $a['meeting_subtype']; ?></option>
-                                    <option value='0'>--Select SubMedia Meeting--</option>
-                                    <!-- Type akan diload menggunakan ajax, dan ditampilkan disini -->
+                                    <option value='0'>-- Pilih SubMedia Rapat --</option>
+                                    <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
                                 </select>
                             </div>
                         </div>
