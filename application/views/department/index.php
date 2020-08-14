@@ -33,9 +33,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Department</span>
+                            <span class="text">Tambah Sekretariat Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Department</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Sekretariat</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,8 +43,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Department Name</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Sekretariat</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,10 +79,10 @@
 
 <!-- Start of Modal Add -->
 <div class="modal fade" id="deptAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="deptAddMenuLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deptAddMenuLabel">Add New Department</h5>
+                <h5 class="modal-title" id="deptAddMenuLabel">Tambah Sekretariat Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -91,12 +91,12 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="department_name" name="department_name" placeholder="Enter Department...">
+                        <input type="text" class="form-control" id="department_name" name="department_name" placeholder="Masukan Nama Sekretariat..." autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -110,10 +110,10 @@ foreach ($dept as $a) :
     $id = $a['id'];
 ?>
     <div class="modal fade" id="deptEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuAdd">Edit Department</h5>
+                    <h5 class="modal-title" id="menuAdd">Ubah Data Sekretariat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,15 +123,15 @@ foreach ($dept as $a) :
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="department_name" class="form-control form-control-user" id="department_name" value="<?= $a['department_name']; ?>" placeholder="department_name">
+                                <input type="text" name="department_name" class="form-control form-control-user" id="department_name" value="<?= $a['department_name']; ?>" placeholder="Ubah Nama Sekretariat..." autocomplete="off">
                                 <?= form_error('department_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Update!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -151,12 +151,12 @@ foreach ($dept as $a) :
                 <form action="<?= base_url('admin/deletedepartment'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $a['department_name']; ?> ?</b></p>
+                        <p>Yakin ingin menghapus <strong><?= $a['department_name']; ?> ?</strong></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus Data</button>
                     </div>
                 </form>
             </div>

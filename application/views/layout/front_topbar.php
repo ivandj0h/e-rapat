@@ -9,7 +9,7 @@
             <?php
             $sess_id = $this->session->userdata('email');
             if ($sess_id) {
-                echo $user['name'];
+                echo 'Beralih ke Cpanel ' . $user['name'];
             } else {
                 echo 'Login';
             }

@@ -13,7 +13,7 @@ class Menu extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Menu Management';
+        $data['title'] = 'Pengelolaan Menu';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['menu'] = $this->Menu_model->get_all();
 
@@ -56,7 +56,7 @@ class Menu extends CI_Controller
 
     public function submenu()
     {
-        $data['title'] = 'SubMenu Management';
+        $data['title'] = 'Pengelolaan SubMenu';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         $data['subMenu'] = $this->Menu_model->getSubMenu();

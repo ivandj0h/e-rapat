@@ -47,9 +47,9 @@ class Auth extends CI_Controller
           $this->session->set_userdata($data);
           if ($user['role_id'] == 1) {
 
-            redirect('meeting');
+            redirect('user');
           } else {
-            redirect('meeting');
+            redirect('home');
           }
         } else {
           $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">

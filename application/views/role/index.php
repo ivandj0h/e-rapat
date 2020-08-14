@@ -29,13 +29,13 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#menuAdd">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#roleAdd">
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Tambah Menu Baru</span>
+                            <span class="text">Tambah Role Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Menu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Role</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,19 +43,19 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Nama Menu</th>
+                                        <th class="text-center w-20">Nama Role</th>
                                         <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($menu as $m) : ?>
+                                    <?php foreach ($role as $r) : ?>
                                         <tr>
                                             <td class="text-center"><?= $i++; ?></td>
-                                            <td class="text-left"><?= $m['menu']; ?></td>
+                                            <td class="text-left"><?= $r['role']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#menuEdit<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#menuDelete<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#roleEdit<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#roleDel<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
 
@@ -78,25 +78,25 @@
 <!-- =============================================================================================== -->
 
 <!-- Start of Modal Add -->
-<div class="modal fade" id="menuAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="menuAdd" aria-hidden="true">
+<div class="modal fade" id="roleAdd" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="roleAddMenuLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="menuAdd">Tambah Menu Baru</h5>
+                <h5 class="modal-title" id="roleAddMenuLabel">Tambah Role Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('menu'); ?>" method="POST">
+            <form action="<?= base_url('role'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="menu" name="menu" placeholder="Masukan Nama Menu..." autocomplete="off">
+                        <input type="text" class="form-control" id="role" name="role" placeholder="Masukan Role..." autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
@@ -106,33 +106,32 @@
 
 <!-- Start of Modal Edit -->
 <?php
-foreach ($menu as $a) :
-    $id = $a['id'];
-    $menu = $a['menu'];
+foreach ($role as $rl) :
+    $id = $rl['id'];
 ?>
-    <div class="modal fade" id="menuEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="menuEdit" aria-hidden="true">
+    <div class="modal fade" id="roleEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuAdd">Ubah Data Menu</h5>
+                    <h5 class="modal-title" id="menuAdd">Ubah Data Role</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('menu/updatemenu'); ?>" method="POST">
+                <form action="<?= base_url('role/updaterole'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="menu" class="form-control form-control-user" id="menu" value="<?= $menu; ?>" placeholder="Masukan Nama Menu..." autocomplete="off">
-                                <?= form_error('menu', '<small class="text-danger">', '</small>'); ?>
+                                <input type="text" name="role" class="form-control form-control-user" id="role" value="<?= $rl['role']; ?>" placeholder="Ubah Data Role..." autocomplete="off">
+                                <?= form_error('role', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Update!</button>
                     </div>
                 </form>
             </div>
@@ -142,23 +141,26 @@ foreach ($menu as $a) :
 <!-- End of Modal Edit -->
 
 <!-- Start of Modal Delete -->
-
-<div class="modal fade" id="menuDelete<?= $m['id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="menuDelete" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="<?= base_url('menu/deletemenu'); ?>" method="POST">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
-                <div class="modal-body">
-                    <p>Are you sure want to delete <b><?= $a['menu']; ?> ?</b></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus Data!</button>
-                </div>
-            </form>
+<?php
+foreach ($role as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="roleDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?= base_url('role/deleterole'); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Are you sure want to delete <b><?= $a['role']; ?> ?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
+<?php endforeach; ?>
 <!-- End of Modal Delete -->
