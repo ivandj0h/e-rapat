@@ -348,26 +348,37 @@ foreach ($meeting as $a) :
                     <div class="modal-body">
                         <p>Are you sure want to Change Status of <b><?= $meeting_subtype; ?> ?</b></p>
                         <div class="form-group row">
-                            <label for="place_id" class="col-sm-3 col-form-label">Status name : </label>
+                            <label for="place_id" class="col-sm-3 col-form-label">Status Rapat</label>
                             <div class="col-sm-5">
                                 <select name="request_status" id="request_status" class="form-control">
 
                                     <?php
                                     if ($a['request_status'] == 0) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Requested</option>
+                                        <option value="<?= $a['request_status']; ?>">Permintaan</option>
                                     <?php } elseif ($a['request_status'] == 1) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Booked</option>
+                                        <option value="<?= $a['request_status']; ?>">Sudah Dipesan</option>
                                     <?php } elseif ($a['request_status'] == 2) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Canceled</option>
+                                        <option value="<?= $a['request_status']; ?>">Pembatalan</option>
                                     <?php } elseif ($a['request_status'] == 3) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Open</option>
+                                        <option value="<?= $a['request_status']; ?>">Tersedia</option>
+                                    <?php } elseif ($a['request_status'] == 4) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Perubahan Jadwal</option>
                                     <?php } ?>
 
-                                    <option value="0">Requested</option>
-                                    <option value="1">Booked</option>
-                                    <option value="2">Canceled</option>
-                                    <option value="3">Open</option>
+                                    <option value="" disabled>--</option>
+                                    <option value="0">Permintaan</option>
+                                    <option value="1">Sudah Dipesan</option>
+                                    <option value="2">Pembatalan</option>
+                                    <option value="3">Tersedia</option>
+                                    <option value="4">Perubahan Jadwal</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="remark_status" class="col-sm-3 col-form-label">Keterangan Status</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control form-control-user" name="remark_status" id="remark_status" placeholder="Describe Agenda here..."><?= $a['remark_status']; ?></textarea>
+                                <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>

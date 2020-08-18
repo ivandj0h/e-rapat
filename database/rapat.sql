@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Agu 2020 pada 06.40
+-- Waktu pembuatan: 18 Agu 2020 pada 12.13
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.8
 
@@ -41,21 +41,22 @@ CREATE TABLE `meeting` (
   `end_date` date NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  `request_status` int(11) NOT NULL
+  `request_status` int(11) NOT NULL,
+  `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `meeting`
 --
 
-INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`) VALUES
-(1, 14, 2, 'narasumber', 'peserta', '', '5f326fb9aca6d', 'testing', '2020-08-11', '2020-08-11', '2020-08-11', '17:00:00', '18:00:00', 0),
-(2, 14, 6, 'speaker', 'participant,participant2', '', '5f335cc7f101a', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2020-08-12', '2020-08-11', '2020-08-11', '10:00:00', '11:00:00', 0),
-(3, 15, 1, 'testing', 'test,test-test', '', '5f3384701dea5', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0),
-(4, 15, 1, 'adi', 'anto', '', '5f338a6bbbbf7', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '15:00:00', '16:00:00', 0),
-(5, 18, 3, 'humas', 'humas1,humas2', '', '5f338be9e8c46', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0),
-(6, 18, 1, 'xein', '', '', '5f33905333ad1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-13', '2020-08-13', '16:00:00', '17:00:00', 0),
-(7, 14, 6, 'ddd', 'hahaha', '', '5f3397c78057b', 'asdsdasd', '2020-08-12', '2020-08-13', '2020-08-14', '14:00:00', '15:00:00', 0);
+INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
+(1, 14, 2, 'narasumber', 'peserta', '', '5f326fb9aca6d', 'testing', '2020-08-11', '2020-08-11', '2020-08-11', '17:00:00', '18:00:00', 2, ''),
+(2, 14, 6, 'speaker', 'participant,participant2', '', '5f335cc7f101a', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2020-08-12', '2020-08-11', '2020-08-11', '10:00:00', '11:00:00', 0, ''),
+(3, 15, 1, 'testing', 'test,test-test', '', '5f3384701dea5', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0, ''),
+(4, 15, 1, 'adi', 'anto', '', '5f338a6bbbbf7', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '15:00:00', '16:00:00', 0, ''),
+(5, 18, 3, 'humas', 'humas1,humas2', '', '5f338be9e8c46', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0, ''),
+(6, 18, 1, 'xein', '', '', '5f33905333ad1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-13', '2020-08-13', '16:00:00', '17:00:00', 0, ''),
+(7, 14, 6, 'ddd', 'hahaha', '', '5f3397c78057b', 'asdsdasd', '2020-08-12', '2020-08-13', '2020-08-14', '14:00:00', '15:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -145,9 +146,10 @@ INSERT INTO `meeting_sub_type` (`id`, `type_id`, `meeting_subtype`, `is_active`)
 (2, 1, 'Google Duo', 1),
 (3, 1, 'Microsoft Skype', 1),
 (4, 1, 'Whatsapp', 1),
-(5, 2, 'Ruangan Meeting Pertama', 1),
-(6, 2, 'Ruangan Meeting Kedua', 1),
-(7, 2, 'Ruangan Meeting Ketiga', 1);
+(5, 2, 'Ruangan Rapat Garuda', 1),
+(6, 2, 'Ruangan Rapat LRT', 1),
+(7, 2, 'Ruangan Rapat Rajawali', 1),
+(8, 2, 'Ruangan Rapat Perpustakaan', 1);
 
 -- --------------------------------------------------------
 
@@ -400,6 +402,7 @@ CREATE TABLE `view_user_meeting` (
 ,`start_date` date
 ,`end_date` date
 ,`date_requested` date
+,`remark_status` text
 );
 
 -- --------------------------------------------------------
@@ -436,7 +439,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -541,7 +544,7 @@ ALTER TABLE `meeting_sub_department`
 -- AUTO_INCREMENT untuk tabel `meeting_sub_type`
 --
 ALTER TABLE `meeting_sub_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `meeting_type`
