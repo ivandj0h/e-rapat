@@ -33,6 +33,10 @@
 	background-color: #ffffff;
 }
 
+.section-max-width {
+	max-width: 800px;
+}
+
 .breadcrumb {
 	border-bottom: 1px solid #eeeeee;
 	background-color: #ffffff;

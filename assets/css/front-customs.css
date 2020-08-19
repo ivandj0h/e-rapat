@@ -13,6 +13,10 @@ body {
 	}
 }
 
+.section-max-width {
+	max-width: 800px;
+}
+
 .form-control-borderless {
 	border: none;
 }
