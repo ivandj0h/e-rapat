@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Agu 2020 pada 12.13
+-- Waktu pembuatan: 19 Agu 2020 pada 10.49
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.8
 
@@ -50,13 +50,7 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
-(1, 14, 2, 'narasumber', 'peserta', '', '5f326fb9aca6d', 'testing', '2020-08-11', '2020-08-11', '2020-08-11', '17:00:00', '18:00:00', 2, ''),
-(2, 14, 6, 'speaker', 'participant,participant2', '', '5f335cc7f101a', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2020-08-12', '2020-08-11', '2020-08-11', '10:00:00', '11:00:00', 0, ''),
-(3, 15, 1, 'testing', 'test,test-test', '', '5f3384701dea5', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0, ''),
-(4, 15, 1, 'adi', 'anto', '', '5f338a6bbbbf7', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '15:00:00', '16:00:00', 0, ''),
-(5, 18, 3, 'humas', 'humas1,humas2', '', '5f338be9e8c46', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-12', '2020-08-12', '13:00:00', '14:00:00', 0, ''),
-(6, 18, 1, 'xein', '', '', '5f33905333ad1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2020-08-12', '2020-08-13', '2020-08-13', '16:00:00', '17:00:00', 0, ''),
-(7, 14, 6, 'ddd', 'hahaha', '', '5f3397c78057b', 'asdsdasd', '2020-08-12', '2020-08-13', '2020-08-14', '14:00:00', '15:00:00', 0, '');
+(1, 14, 1, 'Prof Gozali', 'Sesban', 'Und_Kick_off_Meeting_Roadmap_Kerjasama_Balitbang_13_Agustus.pdf', '5f3ccb5c1d1ca', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-08-19', '2020-08-18', '2020-08-18', '09:00:00', '10:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -520,7 +514,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `meeting_department`
