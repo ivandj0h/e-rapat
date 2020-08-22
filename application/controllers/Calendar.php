@@ -17,6 +17,8 @@ class Calendar extends CI_Controller
         $data['title'] = 'E-RAPAT';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
+        $this->load->view('layout/calendar_header', $data);
         $this->load->view('frontend/getcalendar', $data);
+        $this->load->view('layout/calendar_footer', $data);
     }
 }
