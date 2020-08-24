@@ -392,7 +392,7 @@ $(document).ready(function () {
 		$("#editTitle").val(event.title);
 		$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
 		$("#edit-calendar-type").val(event.calendar);
-		$("#edit-event-desc").val(event.description);
+		$("#edit-event-desc").val(event.agenda);
 		$(".eventName").text(event.title);
 		$(".eventDate").text(event.start.format("DD-MM-YYYY"));
 		$(".eventHourStart").text(event.start.format("HH:mm"));
@@ -410,7 +410,7 @@ $(document).ready(function () {
 			var startDate = $("input#editStartDate").val();
 			var endDate = $("input#editEndDate").val();
 			var calendar = $("#edit-calendar-type").val();
-			var description = $("#edit-event-desc").val();
+			var agenda = $("#edit-event-desc").val();
 			$("#editEventModal").modal("hide");
 			var eventData;
 			if (title) {
@@ -418,7 +418,7 @@ $(document).ready(function () {
 				event.start = startDate;
 				event.end = endDate;
 				event.calendar = calendar;
-				event.description = description;
+				event.agenda = agenda;
 				event.allDay = statusAllDay;
 				$("#calendar").fullCalendar("updateEvent", event);
 			} else {

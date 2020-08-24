@@ -139,25 +139,13 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <label class="col-xs-4" for="title">Event title</label>
+                                    <label class="col-xs-4" for="title">Nama Bagian</label>
                                     <input class="inputModal" disabled id="editTitle" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <label class="col-xs-4" for="starts-at">Starts at</label>
-                                    <input class="inputModal" disabled id="editStartDate" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <label class="col-xs-4" for="ends-at">Ends at</label>
-                                    <input class="inputModal" disabled id="editEndDate" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <label class="col-xs-4" for="edit-event-desc">Description</label>
+                                    <label class="col-xs-4" for="edit-event-desc">Agenda Rapat</label>
                                     <textarea rows="4" cols="50" class="inputModal" disabled id="edit-event-desc"></textarea>
                                 </div>
                             </div>

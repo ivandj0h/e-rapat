@@ -47,7 +47,7 @@
                                     <tr>
                                         <th class="text-center w-20">Media Rapat</th>
                                         <th class="text-center w-20">Tanggal Rapat</th>
-                                        <th class="text-center w-20">Narasumber</th>
+                                        <th class="text-center w-20">Pimpinan Rapat</th>
                                         <th class="text-center w-20">Mulai</th>
                                         <th class="text-center w-20">Akhir</th>
                                         <th class="text-center w-20">Agenda</th>
@@ -60,7 +60,7 @@
                                         <tr>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?></td>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                            <td><?= $a['speakers_name']; ?></td>
+                                            <td><?= $a['members_name']; ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
                                             <td class="text-center"><?= $a['end_time']; ?></td>
                                             <td><?= word_limiter($a['agenda'], 5); ?></td>
@@ -189,31 +189,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                    <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal Rapat</label>
                     <div class="col-sm-10">
-                        <input type="text" id="start_date" name="start_date" class="border" placeholder="Input Date" autocomplete="off">
-                        <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
+                        <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                    <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
                     <div class="col-sm-10">
-                        <input type="text" id="end_date" name="end_date" class="border" placeholder="Input Date" autocomplete="off">
-                        <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
+                        <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="start_time" class="col-sm-2 col-form-label">Start Meeting</label>
+                    <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
                     <div class="col-sm-10">
-                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Start Meeting" autocomplete="off">
-                        <?= form_error('Start Meeting', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
+                        <?= form_error('Jam Awal Rapat', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">End Meeting</label>
+                    <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
                     <div class="col-sm-10">
-                        <input type="text" id="end_time" name="end_time" class="border" placeholder="End Meeting" autocomplete="off">
-                        <?= form_error('End Meeting', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
+                        <?= form_error('Jam Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -226,8 +226,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
-                    <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Create Meeting</button>
+                    <div class="actions">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Create Meeting</button>
+                    </div> 
                 </div>
             </div>
             </form>
@@ -295,27 +297,27 @@ foreach ($meeting as $a) :
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                            <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
                             <div class="col-sm-10">
                                 <input type="date" id="start_date" name="start_date" class="border" value="<?= $a['start_date']; ?>">
                                 <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                            <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
                             <div class="col-sm-10">
                                 <input type="date" id="end_date" name="end_date" class="border" value="<?= $a['end_date']; ?>">
                                 <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="start_time_edit" class="col-sm-2 col-form-label">Start Meeting</label>
+                            <label for="start_time_edit" class="col-sm-2 col-form-label">Jam Awal</label>
                             <div class="col-sm-10">
                                 <input type="time" id="start_time" name="start_time" class="border" value="<?= $a['start_time']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="end_time_edit" class="col-sm-2 col-form-label">End Meeting</label>
+                            <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
                             <div class="col-sm-10">
                                 <input type="time" id="end_time" name="end_time" class="border" value="<?= $a['end_time']; ?>">
                             </div>
@@ -419,3 +421,15 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Delete -->
+
+
+<!-- Jquery Area -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(':submit').prop('disabled',true);
+    $('#files').keyup(function(){
+        $(':submit').prop('disabled', this.value == "" ? true : false);     
+    })
+});  
+</script> -->
