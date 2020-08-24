@@ -181,7 +181,7 @@ $(document).ready(function () {
 				$(".fc-content").css("height", "auto");
 			}
 		},
-		eventLimitClick: function (cellInfo, event) {},
+		eventLimitClick: function (cellInfo, event) { },
 		eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
@@ -285,7 +285,7 @@ $(document).ready(function () {
 		selectLongPressDelay: 0,
 
 		events: {
-			url: "http://localhost/rapat/calendar/get_data_calendar",
+			url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
 			success: function (response) {
 				return response[0].value;
 				// console.log(response[0].value);
