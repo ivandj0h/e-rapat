@@ -315,3 +315,43 @@ class Auth extends CI_Controller
     }
   }
 }
+
+
+            <div class="row">
+                <div class="col-sm-3 col-md-6">
+                    <!-- Start of Charts -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Bar Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="chart-bar">
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
+                                <hr>
+                                Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Charts -->
+                </div>
+                <div class="col-sm-9 col-md-6">
+                    <!-- Start of Charts -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Bar Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="chart-bar">
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
+                                <hr>
+                                Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Charts -->
+                </div>
+            </div>

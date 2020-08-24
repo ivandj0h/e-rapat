@@ -33,10 +33,34 @@
 	background-color: #ffffff;
 }
 
+.section-max-width {
+	max-width: 800px;
+}
+
 .breadcrumb {
 	border-bottom: 1px solid #eeeeee;
 	background-color: #ffffff;
 	margin-top: 85px;
+}
+.bootstrap-tagsinput {
+	line-height: 29px !important;
+}
+
+.bootstrap-tagsinput .tag {
+	margin-right: 2px;
+	color: #fff !important;
+	background-color: #6e707e !important;
+	padding: 2px;
+}
+
+.dataTables_scrollBody {
+	height: auto !important;
+}
+
+.toggle-vis {
+	cursor: pointer !important;
+	color: #3174c7 !important;
+	text-decoration: none !important;
 }
 
 .avatar {
@@ -45,9 +69,39 @@
 	border-radius: 50%;
 }
 
+.button-sharp {
+	border-radius: unset;
+}
+
+.reset-border {
+	border: none !important;
+	padding: 6px !important;
+}
+
 .modal-md {
 	max-width: 60%;
 	z-index: 10;
+}
+
+.dataTables_filter input {
+	border-radius: 5px !important;
+	border: 1px solid #dddddd !important;
+}
+
+table.dataTable tbody td {
+	vertical-align: top;
+}
+
+th {
+	white-space: nowrap !important;
+}
+
+.action {
+	display: flex !important;
+	justify-content: space-between !important;
+	flex-wrap: wrap !important;
+	flex-direction: column !important;
+	padding-bottom: 2px;
 }
 
 .modal-lg {

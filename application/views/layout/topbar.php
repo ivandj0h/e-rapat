@@ -15,10 +15,10 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-breadcrumb d-none d-sm-block">You're in <strong><?= $title; ?></strong> Page Now</div>
+                        <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>" target="_blank">
+                            <span class="btn btn-light">Lihat Kalendar</span>
+                        </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
-
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

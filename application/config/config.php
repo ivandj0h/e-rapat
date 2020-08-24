@@ -23,7 +23,9 @@ date_default_timezone_set("Asia/Jakarta");
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/rapat/';
+// $config['base_url'] = 'http://10.151.0.197/rapat/';
+//$config['base_url'] = 'http://localhost/rapat/';
+$config['base_url'] = 'http://192.168.64.2/rapat/';
 
 /*
 |--------------------------------------------------------------------------
@@ -448,7 +450,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = false;
 $config['csrf_token_name'] = 'csrf_e_meeting';
 $config['csrf_cookie_name'] = 'csrf_cookie_e-meeting';
 $config['csrf_expire'] = 7200;

@@ -32,44 +32,54 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Account</h6>
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addAccount">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-file"></i>
+                            </span>
+                            <span class="text">Tambah Data Akun</span>
+                        </a>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Akun</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <a href="#" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addAccount">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-file"></i>
-                                </span>
-                                <span class="text">Add New Account</span>
-                            </a>
-                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+
+                            <table class="table table-striped table-condensed table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Image</th>
-                                        <th class="text-center w-20">Full Name</th>
+                                        <th class="text-center w-5">No</th>
+                                        <th class="text-center w-20">Foto</th>
+                                        <th class="text-center w-20">Zoom Id</th>
+                                        <th class="text-center w-20">Nama Lengkap</th>
                                         <th class="text-center w-20">Email</th>
                                         <th class="text-center w-20">Role</th>
-                                        <th class="text-center w-20">Department</th>
-                                        <th class="text-center w-20">Active</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Sekretariat</th>
+                                        <th class="text-center w-20">Bagian</th>
+                                        <th class="text-center w-20">Aktif</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $i = 1; ?>
                                     <?php foreach ($account as $a) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-center"><img src="<?= base_url('assets/img/profile/') ?><?= $a['image']; ?>" class="rounded mx-auto d-block" width="30"></td>
+                                            <td><?= $a['zoomid']; ?></td>
                                             <td><?= $a['name']; ?></td>
                                             <td><?= $a['email']; ?></td>
                                             <td class="text-center">
 
                                                 <?php if ($a['role'] == 'Admin') {
-                                                    echo '<span class="badge badge-secondary">Admin</span>';
+                                                    echo '<span class="badge badge-danger">Admin</span>';
+                                                } elseif ($a['role'] == 'User') {
+                                                    echo '<span class="badge badge-success">User</span>';
                                                 } else {
-                                                    echo '<span class="badge badge-primary">User</span>';
+                                                    echo '<span class="badge badge-primary">' . $a['role'] . '</span>';
                                                 } ?>
 
                                             </td>
                                             <td><?= $a['department_name']; ?></td>
+                                            <td><?= $a['sub_department_name']; ?></td>
                                             <td class="text-center">
                                                 <?php
                                                 if ($a['is_active'] == 1) { ?>
@@ -106,7 +116,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addAccount">Add New Account</h5>
+                <h5 class="modal-title" id="addAccount">Tambah Data Akun</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,6 +124,10 @@
             <form action="<?= base_url('admin/addaccount'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="zoomid" name="zoomid" value="<?= set_value('zoomid'); ?>" placeholder="Zoom Id">
+                        <?= form_error('zoomid', '<small class="text-danger">', '</small>'); ?>
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" value="<?= set_value('name'); ?>" placeholder="Full Name">
                         <?= form_error('name', '<small class="text-danger">', '</small>'); ?>
@@ -123,26 +137,34 @@
                         <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     <div class="form-group">
-                        <select name="department_id" id="department_id" class="form-control">
-                            <option value="">-- Select Department --</option>
-                            <?php foreach ($department as $d) : ?>
-                                <option value="<?= $d['id']; ?>"><?= $d['department_name']; ?></option>
+                        <select name="sub_department_id" id="sub_department_id" class="form-control">
+                            <option value="">-- Pilih Nama Bagian --</option>
+                            <?php foreach ($subdept as $d) : ?>
+                                <option value="<?= $d['id']; ?>"><?= $d['sub_department_name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    Do you want to Activate this Account? <br>
+                    <div class="form-group">
+                        <select class="custom-select mr-sm-2" select name="role_id" id="role_id">
+                            <option value="">-- Pilih Hak Akses --</option>
+                            <?php foreach ($roles as $r) : ?>
+                                <option value="<?= $r['id']; ?>"><?= $r['role']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    Apakah anda ingin mengaktifkan Akun ini? <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active1" value="1" checked>
-                        <label class="form-check-label" for="is_active1">Active</label>
+                        <label class="form-check-label" for="is_active1">Aktif</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active2" value="0">
-                        <label class="form-check-label" for="is_active2">Not Active</label>
+                        <label class="form-check-label" for="is_active2">Tidak Aktif</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -160,7 +182,7 @@ foreach ($account as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAccount">Edit Account</h5>
+                    <h5 class="modal-title" id="addAccount">Ubah Data Akun</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -169,7 +191,6 @@ foreach ($account as $a) :
                     <input type="hidden" name="id" value="<?= $a['id']; ?>">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <img src="<?= base_url('assets/img/profile/') . $a['image']; ?>" class="img-thumbnail">
@@ -181,58 +202,65 @@ foreach ($account as $a) :
                                         <label for="name" class="col-form-label">Email</label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="email" name="email" value="<?= $a['email']; ?>">
-                                    </div>
-                                    <div class="col-sm-2">
-
+                                        <input type="text" class="form-control" id="email" name="email" value="<?= $a['email']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label for="name" class="col-form-label">Full Name</label>
+                                        <label for="zoomid" class="col-form-label">Zoom Id</label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="email" name="name" value="<?= $a['name']; ?>">
+                                        <input type="text" class="form-control" id="zoomid" name="zoomid" value="<?= $a['zoomid']; ?>">
+                                        <?= form_error('zoomid', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="name" class="col-form-label">Nama Lengkap</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" id="name" name="name" value="<?= $a['name']; ?>">
                                         <?= form_error('name', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label for="name" class="col-form-label">Department Name</label>
+                                        <label for="name" class="col-form-label">Nama Bagian</label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <select class="custom-select mr-sm-2" select name="department_id" id="department_id">
-                                            <option value="<?= $a['department_id']; ?>"><?= $a['department_name']; ?></option>
-                                            <option disabled>-- Select Department --</option>
-                                            <?php foreach ($department as $d) : ?>
-                                                <option value="<?= $d['id']; ?>"><?= $d['department_name']; ?></option>
+                                        <select class="custom-select mr-sm-2" select name="sub_department_id" id="sub_department_id">
+                                            <option value="<?= $a['sub_department_id']; ?>"><?= $a['sub_department_name']; ?></option>
+                                            <option disabled>-- Select Bagian --</option>
+                                            <?php foreach ($subdept as $d) : ?>
+                                                <option value="<?= $d['id']; ?>"><?= $d['sub_department_name']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label for="name" class="col-form-label">Role Account</label>
+                                        <label for="name" class="col-form-label">Hak Akses Akun</label>
                                     </div>
                                     <div class="col-sm-7">
                                         <select class="custom-select mr-sm-2" select name="role_id" id="role_id">
                                             <option value="<?= $a['role_id']; ?>"><?= $a['role']; ?></option>
                                             <option disabled>--</option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">User</option>
+                                            <?php foreach ($roles as $r) : ?>
+                                                <option value="<?= $r['id']; ?>"><?= $r['role']; ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
-                                        <label for="name" class="col-form-label">Status Account</label>
+                                        <label for="name" class="col-form-label">Status Akun</label>
                                     </div>
                                     <div class="col-sm-7">
                                         <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
-                                            <option value="<?= $a['is_active']; ?>"><?= $a['is_active'] ? 'Active' : 'Not Active'; ?></option>
+                                            <option value="<?= $a['is_active']; ?>"><?= $a['is_active'] ? 'Aktif' : 'Tidak Aktif'; ?></option>
                                             <option disabled>--</option>
-                                            <option value="1">Active</option>
-                                            <option value="0">Not Active</option>
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
                                         </select>
                                     </div>
                                 </div>
@@ -242,8 +270,8 @@ foreach ($account as $a) :
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -263,12 +291,12 @@ foreach ($account as $a) :
                 <form action="<?= base_url('admin/deleteaccount'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $a['name']; ?> ?</b></p>
+                        <p>Yakin ingin menghapus <b><?= $a['name']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus Data!</button>
                     </div>
                 </form>
             </div>
@@ -288,12 +316,12 @@ foreach ($account as $a) :
                 <form action="<?= base_url('admin/forceresetpass'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to Reset Password for <strong><?= $a['name']; ?> ?</strong></p>
+                        <p>Yakin ingin mereset Password <strong><?= $a['name']; ?> ?</strong></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Reset Password!</button>
                     </div>
                 </form>
             </div>

@@ -23,9 +23,9 @@ foreach ($meeting as $a) :
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="place_name" class="col-sm-2 col-form-label">Place name</label>
+                                <label for="place_name" class="col-sm-2 col-form-label">Media Meeting</label>
                                 <div class="col-sm-5">
-                                    <strong><?= $a['place_name']; ?></strong>
+                                    <strong><?= $a['meeting_subtype']; ?></strong>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -35,9 +35,41 @@ foreach ($meeting as $a) :
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date_issues" class="col-sm-2 col-form-label">Meeting Date</label>
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Speaker</label>
                                 <div class="col-sm-10">
-                                    <strong><?= $a['date_issues']; ?></strong>
+                                    <ul class="list-group">
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($speakers as $sp) : ?>
+                                            <li class="list-group-item reset-border">
+                                                <?= $i++; ?>. <strong><?= $sp; ?></strong>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Participants</label>
+                                <div class="col-sm-10">
+                                    <ul class="list-group">
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($members as $mm) : ?>
+                                            <li class="list-group-item reset-border">
+                                                <?= $i++; ?>. <strong><?= $mm; ?></strong>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="date_issues" class="col-sm-2 col-form-label">Start Date</label>
+                                <div class="col-sm-10">
+                                    <strong><?= date("d-m-Y", strtotime($a['start_date'])); ?></strong>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="date_issues" class="col-sm-2 col-form-label">End Date</label>
+                                <div class="col-sm-10">
+                                    <strong><?= date("d-m-Y", strtotime($a['end_date'])); ?></strong>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -74,7 +106,7 @@ foreach ($meeting as $a) :
                                             <tr>
                                                 <td class="text-center"><span class="badge badge-secondary"><?= $a['name']; ?></span></td>
                                                 <td class="text-center"><span class="badge badge-success"><?= $a['department_name']; ?></span></td>
-                                                <td class="text-center"><span class="badge badge-primary"><?= date("d-m-Y", strtotime($a['date_issues'])); ?></span></td>
+                                                <td class="text-center"><span class="badge badge-primary"><?= date("d-m-Y", strtotime($a['date_requested'])); ?></span></td>
                                                 <td class="text-center">
                                                     <?php
                                                     if ($a['request_status'] == 0) { ?>
@@ -91,11 +123,25 @@ foreach ($meeting as $a) :
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <ul class="list-group list-group-flush mt-3">
-                                        <li class="list-group-item">Cras justo odio</li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
+                                        <?php
+                                        if (empty($a['files_upload'])) {  ?>
+                                            <li class="list-group-item">
+                                                <span class="badge badge-danger">File yang di Unggah belum ada!</span>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li class="list-group-item">
+                                                Undangan Rapat :
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Notulen Rapat :
+                                                <span class="badge badge-danger">Notulen Rapat Belum Ada</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Absensi Rapat :
+                                                <span class="badge badge-danger">Absensi Rapat Belum Ada</span>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>

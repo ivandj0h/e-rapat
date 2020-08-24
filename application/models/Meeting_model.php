@@ -8,7 +8,19 @@ class Meeting_model extends CI_Model
 
     public function get_all_meeting()
     {
-        return $this->db->get($this->table)->result_array();
+        $this->db->from($this->table);
+        $this->db->order_by("name", "desc");
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_all_meeting_by_role($role)
+    {
+        $condition = "role_id = " . $role;
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where($condition);
+        return $this->db->get()->result_array();
     }
 
     public function get_one_meeting($unique)
@@ -22,19 +34,44 @@ class Meeting_model extends CI_Model
         return $this->db->insert($this->meeting, $data);
     }
 
+    public function update_meeting($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+    }
+
     public function delete_meeting($id)
     {
-        // Running the Query
-        $query = $this->db->where('id', $id)->delete($this->meeting);
-
-        // Return result of the Query
-        return $query;
+        return $this->db->where('id', $id)->delete($this->meeting);
     }
 
     public function update_meeting_status($id, $data)
     {
-        // Running the Query
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
+    }
+
+    public function get_meeting_download($id)
+    {
+        return $this->db->get_where($this->table, ['files_upload' => $id])->row();
+    }
+
+    private function _uploadImage()
+    {
+        $config['upload_path']          = 'uploads/';
+        $config['allowed_types']        = 'gif|jpg|jpeg|png|bmp|pdf';
+        $config['file_name']            = $this->product_id;
+        $config['overwrite']			= true;
+        $config['max_size']             = 1024; // 1MB
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('image')) {
+            return $this->upload->data("file_name");
+        }
+        
+        return "default.pdf";
     }
 }

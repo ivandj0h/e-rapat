@@ -13,7 +13,7 @@ class User extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Profile';
+        $data['title'] = 'Profil Pengguna';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         $this->load->view('layout/header', $data);
@@ -45,10 +45,6 @@ class User extends CI_Controller
 
             $session_id = $this->session->userdata('id');
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
-
-            // var_dump($session_id);
-            // die;
-            // $this->db->query("UPDATE `meeting_users` SET `password` = '$password' where `id` = 8");
             $this->db->query("UPDATE `meeting_users` SET `password` = '$password' where `id` = '$session_id'");
 
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -65,7 +61,7 @@ class User extends CI_Controller
     public function edit()
     {
 
-        $data['title'] = 'Edit Profile';
+        $data['title'] = 'Profil Pengguna';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
         // give rules
@@ -107,9 +103,6 @@ class User extends CI_Controller
                     echo $this->upload->display_errors();
                 }
             }
-            // var_dump($image_upload);
-            // die;
-
             $this->db->set('name', $name);
             $this->db->where('email', $email);
             $this->db->update('meeting_users');

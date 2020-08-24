@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Hello <strong><?= $user['name']; ?></strong>, Here is your profile data.
+                        Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
                     </div>
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -27,20 +27,21 @@
                             <div class="card-body">
                                 <h5 class="card-title"><strong><?= $user['name']; ?></strong></h5>
                                 <hr class="sidebar-divider d-none d-md-block">
-                                <p class="card-text">Login Name : <strong><?= $user['email']; ?></strong></p>
-                                <p class="card-text">Department Name : <strong><?= $user['department_name']; ?></strong></p>
-                                <p class="card-text">Role Access : <strong><?= $user['role']; ?></strong></p>
-                                <p class="card-text">Status Access :
+                                <p class="card-text">Email : <strong><?= $user['email']; ?></strong></p>
+                                <p class="card-text">Sekretariat : <strong><?= $user['department_name']; ?></strong></p>
+                                <p class="card-text">Bidang : <strong><?= $user['sub_department_name']; ?></strong></p>
+                                <p class="card-text">Hak Akses : <strong><?= $user['role']; ?></strong></p>
+                                <p class="card-text">Status :
                                     <?php
                                     if ($user['is_active'] == 1) { ?>
-                                        <span class="badge badge-success">Active</span>
+                                        <span class="badge badge-success">Aktif</span>
                                     <?php } elseif ($user['is_active'] == 0) { ?>
                                         <span class="badge badge-danger">Not Active</span>
                                     <?php } ?>
                                 </p>
-                                <p class="card-text"><small class="text-muted">Date Joined : <strong><?= date('d F Y', $user['date_created']); ?></strong> - Time : <strong><?= date('h:m', $user['date_updated']); ?></strong></small></p>
-                                <p class="card-text"><small class="text-muted">Last Updated : <strong><?= date('d F Y', $user['date_updated']); ?></strong> - Time : <strong><?= date('H:m', $user['date_updated']); ?></strong></small></p>
-                                <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Edit Profile</a>
+                                <p class="card-text"><small class="text-muted">Tanggal Daftar : <strong><?= date('d F Y', $user['date_created']); ?></strong> - Waktu : <strong><?= date('h:m', $user['date_updated']); ?></strong></small></p>
+                                <p class="card-text"><small class="text-muted">Akses Terakhir : <strong><?= date('d F Y', $user['date_updated']); ?></strong> - Waktu : <strong><?= date('H:m', $user['date_updated']); ?></strong></small></p>
+                                <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Ubah Data Profil</a>
                             </div>
                         </div>
                     </div>
@@ -49,7 +50,7 @@
             <div class="col">
                 <div class="card ml-4">
                     <div class="card-header">
-                        Hello <strong><?= $user['name']; ?></strong>, Here you can change your password.
+                        Hello <strong><?= $user['name']; ?></strong>, Anda dapat merubah Password anda disini.
                     </div>
                     <div class="card-body">
                         <form class="user" method="POST" action="<?= base_url('user/changepassword'); ?>">
@@ -80,3 +81,22 @@
 
 </div>
 <!-- End of Main Content -->
+
+<script>
+    var myDate = new Date();
+    var hrs = myDate.getHours();
+
+    var greet;
+
+    if (hrs < 12)
+        greet = 'Selamat Pagi ';
+    else if (hrs >= 12 && hrs <= 15)
+        greet = 'Selamat Siang ';
+    else if (hrs >= 15 && hrs <= 18)
+        greet = 'Selamat Sore ';
+    else if (hrs >= 18 && hrs <= 24)
+        greet = 'Selamat Malam';
+
+    document.getElementById('lblGreetings').innerHTML =
+        '<b>' + greet + '</b> ';
+</script>

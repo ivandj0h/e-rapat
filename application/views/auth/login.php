@@ -13,13 +13,13 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h3 text-primary-900 mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> E-RAPAT</h1>
-                                    <h1 class="h4 text-gray-500 mb-4">Account Login</h1>
+                                    <h1 class="h4 text-gray-500 mb-4">Control Panel</h1>
                                     <?= $this->session->flashdata('messages'); ?>
                                 </div>
                                 <form class="user" method="POST" action="<?= base_url('auth'); ?>">
                                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                                     <div class="form-group">
-                                        <input type="text" name="email" class="form-control form-control-user" id="email" value="<?= set_value('email'); ?>" placeholder="Email Address">
+                                        <input type="text" name="email" class="form-control form-control-user" id="email" value="<?= set_value('email'); ?>" placeholder="Email Address" autocomplete="off">
                                         <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">

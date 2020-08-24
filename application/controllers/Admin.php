@@ -7,14 +7,24 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->helper(array('string', 'text'));
         $this->load->model('Account_model');
         $this->load->model('Department_model');
+        $this->load->model('Meeting_model');
+        $this->load->model('Overview_model');
+        $this->load->model('Role_model');
     }
 
     public function index()
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['overview'] = $this->Overview_model->get_all_today();
+        $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+        // $data['dept'] = $this->Department_model->get_all_department();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -25,7 +35,7 @@ class Admin extends CI_Controller
 
     public function role()
     {
-        $data['title'] = 'Role';
+        $data['title'] = 'Pengaturan Hak Akses';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['role'] = $this->Account_model->get_where_role();
 
@@ -65,21 +75,22 @@ class Admin extends CI_Controller
         $result = $this->Account_model->get_user_access_menu($data);
 
         if ($result->num_rows() < 1) {
-            $this->Account_model->insert_user_access_menu($data);
+            $this->db->insert('user_access_menu', $data);
         } else {
-            $this->Account_model->delete_user_access_menu($data['role_id']);
+            $this->db->delete('user_access_menu', $data);
         }
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congradulation!</strong> You have successfully change the Access!
+        <strong>Selamat!</strong> Anda berhasil merubah Hak Akses!
       </div>');
     }
 
     public function account()
     {
-        $data['title']   = 'Account';
+        $data['title']   = 'Master Data Akun';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        $data['roles'] = $this->Role_model->get_all_role();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -90,16 +101,17 @@ class Admin extends CI_Controller
 
     public function addaccount()
     {
-        $data['title']   = 'Account';
+        $data['title']   = 'Master Data Akun';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        $data['roles'] = $this->Role_model->get_all_role();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[meeting_users.email]', [
-            "is_unique" => "This Email already registered!"
+            "is_unique" => "Email ini telah terdaftar!"
         ]);
-        $this->form_validation->set_rules('department_id', 'Department Name', 'required');
+        $this->form_validation->set_rules('sub_department_id', 'Nama Bagian', 'required');
 
         if ($this->form_validation->run() == false) {
 
@@ -110,36 +122,38 @@ class Admin extends CI_Controller
             $this->load->view('layout/footer');
         } else {
 
-            $uniqueid = uniqid();
+            // $uniqueid = uniqid();
             $password = "admin"; // $2y$10$rlSQG0XGwZnCtqv61NLKkONCAL1SUJdVeJ/95FFWOxSEeGJ9rqLwW
             $data = [
-                'uniqueid' => $uniqueid,
+                // 'uniqueid' => $uniqueid,
+                'zoomid' => htmlspecialchars($this->input->post('zoomid', true)),
                 'name' => htmlspecialchars($this->input->post('name', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'image' => "default-avatar.jpg",
                 'password' => password_hash($password, PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => intval($this->input->post('is_active', true)),
-                'department_id' => intval($this->input->post('department_id')),
+                'sub_department_id' => intval($this->input->post('sub_department_id')),
                 'date_created' => time()
             ];
 
             $this->Account_model->insert_account($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Account has been Added!.</div>');
+            <strong>Selamat!</strong> Akun Baru berhasil dibuat!.</div>');
             redirect('admin/account');
         }
     }
 
     public function updateaccount()
     {
-        $data['title']   = 'Account';
+        $data['title']   = 'Master Data Akun';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['account'] = $this->Account_model->get_all_users();
-        $data['department'] = $this->Account_model->get_all_department();
+        $data['roles'] = $this->Role_model->get_all_role();
+        $data['subdept'] = $this->Department_model->view_sub_department();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        // $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
 
         if ($this->form_validation->run() == false) {
 
@@ -152,17 +166,18 @@ class Admin extends CI_Controller
 
             $data = [
                 'id' => intval($this->input->post('id')),
+                'zoomid' => htmlspecialchars($this->input->post('zoomid')),
                 'name' => htmlspecialchars($this->input->post('name')),
-                'email' => htmlspecialchars($this->input->post('email')),
+                // 'email' => htmlspecialchars($this->input->post('email')),
                 'role_id' => $this->input->post('role_id', true),
                 'is_active' => intval($this->input->post('is_active')),
-                'department_id' => intval($this->input->post('department_id')),
+                'sub_department_id' => intval($this->input->post('sub_department_id')),
                 'date_updated' => time()
             ];
 
             $this->Account_model->update_account($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> Account has beed Updated!.</div>');
+            <strong>Selamat!</strong> Akun Baru berhasil diubah!.</div>');
             redirect('admin/account');
         }
     }
@@ -180,7 +195,7 @@ class Admin extends CI_Controller
 
         $this->Account_model->delete_account($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Account has beed deleted!.</div>');
+        <strong>Selamat!</strong> Akun Baru berhasil dihapus!.</div>');
         redirect('admin/account');
     }
 
@@ -195,14 +210,14 @@ class Admin extends CI_Controller
 
         $this->Account_model->reset_password($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Password has beed Updated!.</div>');
+        <strong>Selamat!</strong> Password Berhasil dipulihkan! <strong>(default password -> admin)</strong>.</div>');
         redirect('admin/account');
     }
 
-
+    // Department Section
     public function department()
     {
-        $data['title']   = 'Department';
+        $data['title']   = 'Master Data Sekretariat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['dept'] = $this->Department_model->get_all_department();
 
@@ -215,7 +230,7 @@ class Admin extends CI_Controller
 
     public function adddepartment()
     {
-        $data['title']   = 'Department';
+        $data['title']   = 'Master Data Sekretariat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['dept'] = $this->Department_model->get_all_department();
 
@@ -233,7 +248,7 @@ class Admin extends CI_Controller
             $data = array('department_name' => $this->input->post('department_name'));
 
             $this->Department_model->insert_department($data);
-            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Added!</div>');
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Sekretariat berhasil ditambahkan!</div>');
             redirect('admin/department');
         }
     }
@@ -246,7 +261,7 @@ class Admin extends CI_Controller
 
 
         $this->Department_model->update_department($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Updated!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Sekretariat berhasil diubah!</div>');
         redirect('admin/department');
     }
 
@@ -255,7 +270,82 @@ class Admin extends CI_Controller
         $id = $this->input->post('id');
 
         $this->Department_model->delete_department($id);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Department has been Deleted!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Sekretariat berhasil dihapus!</div>');
         redirect('admin/department');
+    }
+
+    public function searchdepartment()
+    {
+        $data['title'] = 'Master Data Sekretariat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        $data['place'] = $this->db->get('meeting_place')->result_array();
+        $data['overview'] = $this->Overview_model->get_all_today();
+        $data['freeroom'] = $this->Overview_model->get_free_meeting_room();
+        $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+        $data['dept'] = $this->Department_model->get_all_department();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('admin/index', $data);
+        $this->load->view('layout/footer');
+    }
+
+    // Sub Department Section
+    public function subdepartment()
+    {
+        $data['title']   = 'Master Data Bidang';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['dept'] = $this->Department_model->get_all_department();
+        $data['subdepartment'] = $this->Department_model->getSubDepartment();
+
+        $this->form_validation->set_rules('department_id', 'id department', 'required');
+        $this->form_validation->set_rules('sub_department_name', 'sub department', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('department/subdepartment', $data);
+            $this->load->view('layout/footer');
+        } else {
+
+            $data = [
+                'department_id'         => intval($this->input->post('department_id', true)),
+                'sub_department_name'   => $this->input->post('sub_department_name'),
+                'is_active'             => intval($this->input->post('is_active', true)),
+            ];
+
+            $this->Department_model->insert_sub_department($data);
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Bagian berhasil ditambahkan!</div>');
+            redirect('admin/subdepartment');
+        }
+    }
+
+
+    public function updatesubdepartment()
+    {
+        if ($this->input->post('id')) {
+            $data = array(
+                'department_id'         => intval($this->input->post('department_id', true)),
+                'sub_department_name'   => $this->input->post('sub_department_name'),
+                'is_active'             => intval($this->input->post('is_active', true)),
+            );
+
+            $this->Department_model->update_sub_department($data, $this->input->post('id', true));
+        }
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Bagian berhasil diubah!</div>');
+        redirect('admin/subdepartment');
+    }
+
+
+    public function deletesubdepartment()
+    {
+        $id = $this->input->post('id');
+
+        $this->Department_model->delete_sub_department($id);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Bagian berhasil dihapus!</div>');
+        redirect('admin/subdepartment');
     }
 }
