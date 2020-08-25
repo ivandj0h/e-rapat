@@ -35,13 +35,10 @@
                             </span>
                             <span class="text">Tambah Rapat Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Meeting</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat</h6>
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
-                            <!-- <div>
-                                Toggle column: <a class="toggle-vis" data-column="0">Media Meeting</a> - <a class="toggle-vis" data-column="1">Meeting Date</a> - <a class="toggle-vis" data-column="2">Speaker</a> - <a class="toggle-vis" data-column="3">Start</a> - <a class="toggle-vis" data-column="4">End</a> - <a class="toggle-vis" data-column="5">Agenda</a> - <a class="toggle-vis" data-column="6">Department</a> - <a class="toggle-vis" data-column="7">Actions</a>
-                            </div> -->
                             <table class="table table-striped table-condensed" id="meeting" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -58,7 +55,14 @@
                                 <tbody>
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
-                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
+                                            <?php if ($a['files_upload'] == '') { ?>
+                                                <!-- Start of Notification -->
+                                                <td colspan="8" class="text-danger">Anda Belum Mengunduh Berkas Undangan Rapat!</td>
+                                                <!-- End of Notification -->
+                                            <?php } ?>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td><?= $a['members_name']; ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
@@ -87,25 +91,9 @@
                     </div>
                 </div>
 
-                <!-- Start of Notification -->
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="3000" data-autohide="true">
-                    <div class="toast-header">
-                        <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
 
-                        <strong class="mr-auto">Notifikasi</strong>
-                        <small>File Upload</small>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        Anda Belum Mengunduh Berkas Undangan Rapat!
-                        <hr />
-                        <small>@Administrator</small>
-                    </div>
-                </div>
 
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
+                <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
                     <div class="toast-header">
                         <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
 
@@ -120,7 +108,7 @@
                         <hr />
                         <small>@Administrator</small>
                     </div>
-                </div>
+                </div> -->
                 <!-- End of Notification -->
             </div>
         </div>
@@ -170,7 +158,7 @@
                 <div class="form-group row">
                     <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Describe Agenda here..."><?= set_value('agenda'); ?></textarea>
+                        <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
                         <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
@@ -226,8 +214,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Close</button>
-                    <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Create Meeting</button>
+                    <div class="actions">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Batal</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
+                    </div>
                 </div>
             </div>
             </form>
@@ -322,8 +312,8 @@ foreach ($meeting as $a) :
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Ubah Rapat</button>
                         </div>
                     </div>
                 </form>
@@ -384,7 +374,7 @@ foreach ($meeting as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-danger">Confirm!</button>
                     </div>
                 </form>
@@ -419,3 +409,15 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Delete -->
+
+
+<!-- Jquery Area -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(':submit').prop('disabled',true);
+    $('#files').keyup(function(){
+        $(':submit').prop('disabled', this.value == "" ? true : false);     
+    })
+});  
+</script> -->

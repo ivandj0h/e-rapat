@@ -283,7 +283,7 @@ $(document).ready(function () {
 		longPressDelay: 0,
 		eventLongPressDelay: 0,
 		selectLongPressDelay: 0,
-
+		// themeSystem: 'bootstrap',
 		events: {
 			url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
 			success: function (response) {
