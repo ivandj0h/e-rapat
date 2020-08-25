@@ -15,8 +15,8 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>">
-                            <span class="btn btn-light">Lihat Kalendar</span>
+                        <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>" target="_blank">
+                            <span class="btn btn-secondary">Lihat Kalendar</span>
                         </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->

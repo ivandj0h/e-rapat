@@ -36,9 +36,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New SubMenu</span>
+                            <span class="text">Tambah SubMenu</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data SubMenu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data SubMenu</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -46,12 +46,12 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">No</th>
-                                        <th class="text-center w-20">Parent Menu Name</th>
-                                        <th class="text-center w-20">Sub Menu Name</th>
-                                        <th class="text-center w-20">Url Name</th>
-                                        <th class="text-center w-20">Icon Name</th>
-                                        <th class="text-center w-20">Active</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Menu Utama</th>
+                                        <th class="text-center w-20">Nama SubMenu</th>
+                                        <th class="text-center w-20">Nama URL</th>
+                                        <th class="text-center w-20">Name Icon</th>
+                                        <th class="text-center w-20">Status</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,14 +66,14 @@
                                             <td class="text-center">
                                                 <?php
                                                 if ($sm['is_active'] == 1) { ?>
-                                                    <span class="badge badge-success">Active</span>
+                                                    <span class="badge badge-success">Aktif</span>
                                                 <?php } elseif ($sm['is_active'] == 0) { ?>
-                                                    <span class="badge badge-danger">Not Active</span>
+                                                    <span class="badge badge-danger">Non Aktif</span>
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
                                             </td>
                                         </tr>
 

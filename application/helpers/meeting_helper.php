@@ -64,3 +64,11 @@ function check_access($role_id, $menu_id)
         return "checked = 'checked'";
     }
 }
+
+function getPotongAngka($angka)
+{
+    $angka = (int)$angka;
+    $i_str = (string)$angka;
+    $angkax = substr($i_str, 0, -2);
+    return (int)$angkax;
+}
