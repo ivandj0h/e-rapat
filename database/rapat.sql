@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2020 at 06:42 PM
+-- Generation Time: Aug 25, 2020 at 04:33 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -44,14 +44,6 @@ CREATE TABLE `meeting` (
   `request_status` int(11) NOT NULL,
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meeting`
---
-
-INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
-(1, 14, 1, 'Prof Gozali', 'Sesban', 'Und_Kick_off_Meeting_Roadmap_Kerjasama_Balitbang_13_Agustus.pdf', '5f3ccb5c1d1ca', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-08-19', '2020-08-06', '2020-08-06', '09:00:00', '10:00:00', 2, ''),
-(2, 14, 5, 'prof user', 'ivandjoh', '', '5f4282e68233d', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-08-23', '2020-08-07', '2020-08-07', '09:00:00', '10:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -516,7 +508,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`

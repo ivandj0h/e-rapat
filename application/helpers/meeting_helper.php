@@ -65,10 +65,27 @@ function check_access($role_id, $menu_id)
     }
 }
 
-function getPotongAngka($angka)
+function check_upload_exist($userid)
 {
-    $angka = (int)$angka;
-    $i_str = (string)$angka;
-    $angkax = substr($i_str, 0, -2);
-    return (int)$angkax;
+    $ci = get_instance();
+    $ci->db->where($userid);
+    $res['file'] = $ci->db->get('view_user_meeting')->result_array();
+
+
+
+    if ($res['file'] == '') {
+        return "<a href=\"#\" class=\"btn btn-danger btn-icon-split\" data-toggle=\"modal\" data-target=\"#noMeeting\">
+            <span class=\"icon text-white-50\">
+                <i class=\"fas fa-file\"></i>
+            </span>
+            <span class=\"text\">Tambah Rapat Baru</span>
+        </a>";
+    } else {
+        return "<a href=\"#\" class=\"btn btn-success btn-icon-split\" data-toggle=\"modal\" data-target=\"#addMeeting\">
+        <span class=\"icon text-white-50\">
+            <i class=\"fas fa-file\"></i>
+        </span>
+        <span class=\"text\">Tambah Rapat Baru</span>
+    </a>";
+    }
 }
