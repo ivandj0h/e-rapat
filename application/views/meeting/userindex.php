@@ -29,12 +29,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addMeeting">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-file"></i>
-                            </span>
-                            <span class="text">Tambah Rapat Baru</span>
-                        </a>
+                        <?= check_upload_exist($this->session->userdata('id')); ?>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat</h6>
                     </div>
                     <div class="card-body">
@@ -128,7 +123,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
+                    <label for="meeting_subtype" class="col-sm-2 col-form-label">SubMedia Meeting</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="meeting_subtype" id="meeting_subtype">
                             <option value='0'>-- Pilih SubMedia Rapat --</option>
@@ -137,7 +132,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
+                    <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
                     <div class="col-sm-10">
                         <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
                         <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
@@ -451,6 +446,31 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Delete -->
+
+<!-- Start of Modal Disabled Create Meeting -->
+<div class="modal fade" id="noMeeting" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="noMeeting" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noMeeting">Buat Rapat Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Maaf Anda tidak dapat membuat meeting</p>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" value="<?= $id; ?>">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger">Confirm!</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Disabled Create Meeting -->
+
 
 
 <!-- Jquery Area -->

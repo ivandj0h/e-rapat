@@ -48,7 +48,7 @@ class Calendar extends CI_Controller
                     $color = '#dc3545';
                 }
                 $values[] = array(
-                    '_id' => $result[$row]['id'],
+                    '_id' => $result[$row]['sub_department_id'],
                     'title' => $result[$row]['sub_department_name'],
                     'media' => $result[$row]['meeting_type'],
                     'calendar' => $result[$row]['meeting_type'],

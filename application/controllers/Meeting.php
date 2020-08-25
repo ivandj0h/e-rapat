@@ -20,7 +20,10 @@ class Meeting extends CI_Controller
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
         $data['alltype'] = $this->Type_model->get_all_type();
         $data['types'] = $this->Type_model->getSubType();
+        $data['fp'] = $this->Meeting_model->get_info_upload($this->session->userdata('id'));
 
+        // var_dump($data['fp']);
+        // die;
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
@@ -41,7 +44,6 @@ class Meeting extends CI_Controller
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
-        // $data['place'] = $this->db->get('meeting_place')->result_array();
 
         $this->form_validation->set_rules('type_id', 'Media Name', 'required');
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim');
@@ -83,7 +85,7 @@ class Meeting extends CI_Controller
                 'end_time' => $this->input->post('end_time', true),
                 'request_status' => 0
             ];
-            
+
             $files_name_upload = $_FILES['file']['name'];
 
             if ($files_name_upload) {
