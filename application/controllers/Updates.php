@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Berita extends CI_Controller
+class Updates extends CI_Controller
 {
 
     public function __construct()
@@ -12,14 +12,13 @@ class Berita extends CI_Controller
         $this->load->model('Account_model');
     }
 
-    function index()
+    public function index()
     {
         $data['title'] = 'E-RAPAT';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
-        $this->load->view('layout/front_header', $data);
-        $this->load->view('layout/front_topbar', $data);
+        $this->load->view('layout/calendar_header', $data);
         $this->load->view('frontend/getupdates', $data);
-        $this->load->view('layout/front_footer', $data);
+        $this->load->view('layout/calendar_footer', $data);
     }
 }

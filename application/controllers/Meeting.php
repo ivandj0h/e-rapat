@@ -83,10 +83,7 @@ class Meeting extends CI_Controller
                 'end_time' => $this->input->post('end_time', true),
                 'request_status' => 0
             ];
-
-            // var_dump($data);
-            // die;
-
+            
             $files_name_upload = $_FILES['file']['name'];
 
             if ($files_name_upload) {
