@@ -50,6 +50,7 @@ class Calendar extends CI_Controller
                 $values[] = array(
                     '_id' => $result[$row]['id'],
                     'title' => $result[$row]['sub_department_name'],
+                    'bagid' => $result[$row]['sub_department_id'],
                     'media' => $result[$row]['meeting_type'],
                     'calendar' => $result[$row]['meeting_type'],
                     'zoomid' => $result[$row]['zoomid'],
