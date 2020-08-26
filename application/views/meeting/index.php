@@ -57,14 +57,17 @@
                                         <tr>
                                             <?php if ($a['files_upload'] == '') { ?>
                                                 <!-- Start of Notification -->
-                                                <td colspan="8">woiii</td>
+                                                <td colspan="8" class="text-danger">Anda Belum Mengunduh Berkas Undangan Rapat! Untuk Tanggal <strong><?= date("d-m-Y", strtotime($a['start_date'])); ?></strong> Pukul <strong><?= date("H:i", strtotime($a['start_time'])); ?></strong> s/d Pukul <strong><?= date("H:i", strtotime($a['end_time'])); ?></strong>. <span class="btn btn-danger" data-toggle="modal" data-target="#meetingUpload<?= $a['id']; ?>" style="cursor:pointer;margin:2px;padding:2px;">Upload Undangan Rapat</span>
+                                                </td>
                                                 <!-- End of Notification -->
                                             <?php } ?>
-                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td><?= $a['members_name']; ?></td>
-                                            <td class="text-center"><?= $a['start_time']; ?></td>
-                                            <td class="text-center"><?= $a['end_time']; ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td><?= $a['sub_department_name']; ?></td>
                                             <td class="text-center action mx-2">
@@ -88,26 +91,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
-                    <div class="toast-header">
-                        <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
-
-                        <strong class="mr-auto">Notifikasi</strong>
-                        <small>File Upload</small>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        Anda Belum Mengunduh Berkas Notulen!
-                        <hr />
-                        <small>@Administrator</small>
-                    </div>
-                </div> -->
-                <!-- End of Notification -->
             </div>
         </div>
         <!-- End of Content Table -->
@@ -381,6 +364,67 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Change Status -->
+
+<!-- Start of Modal Upload Undangan -->
+<?php
+foreach ($meeting as $a) :
+    $id = $a['id'];
+    $meeting_subtype = $a['meeting_subtype'];
+    $request_status = $a['request_status'];
+?>
+    <div class="modal fade" id="meetingUpload<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <form action="<?= base_url('meeting/updatestatus'); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Are you sure want to Change Status of <b><?= $meeting_subtype; ?> ?</b></p>
+                        <div class="form-group row">
+                            <label for="place_id" class="col-sm-3 col-form-label">Status Rapat</label>
+                            <div class="col-sm-5">
+                                <select name="request_status" id="request_status" class="form-control">
+
+                                    <?php
+                                    if ($a['request_status'] == 0) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Permintaan</option>
+                                    <?php } elseif ($a['request_status'] == 1) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Sudah Dipesan</option>
+                                    <?php } elseif ($a['request_status'] == 2) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Pembatalan</option>
+                                    <?php } elseif ($a['request_status'] == 3) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Tersedia</option>
+                                    <?php } elseif ($a['request_status'] == 4) { ?>
+                                        <option value="<?= $a['request_status']; ?>">Perubahan Jadwal</option>
+                                    <?php } ?>
+
+                                    <option value="" disabled>--</option>
+                                    <option value="0">Permintaan</option>
+                                    <option value="1">Sudah Dipesan</option>
+                                    <option value="2">Pembatalan</option>
+                                    <option value="3">Tersedia</option>
+                                    <option value="4">Perubahan Jadwal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="remark_status" class="col-sm-3 col-form-label">Keterangan Status</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control form-control-user" name="remark_status" id="remark_status" placeholder="Describe Agenda here..."><?= $a['remark_status']; ?></textarea>
+                                <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Upload Undangan -->
 
 <!-- Start of Modal Delete -->
 <?php

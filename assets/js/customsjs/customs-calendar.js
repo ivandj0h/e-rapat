@@ -298,7 +298,12 @@ $(document).ready(function () {
 	});
 
 	$("#type_filter").select2({
-		placeholder: "Filter Types",
+		placeholder: "Pilih Media Meeting",
+		allowClear: true,
+	});
+
+	$("#bagian_filter").select2({
+		placeholder: "Pilih Bagian Kerja",
 		allowClear: true,
 	});
 

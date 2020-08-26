@@ -92,23 +92,41 @@
                 <h3 class="panel-title">Filter Kalender</h3>
             </div>
             <div class="panel-body">
-                <div class="col-lg-10">
-                    <label for="calendar_view">Berdasarkan Unit Kerja</label>
+                <div class="col-lg-5">
+                    <label for="calendar_view">Berdasarkan Media Meeting</label>
                     <div class="input-group">
                         <select class="filter" id="type_filter" multiple="multiple">
                             <option value='all'>Semua Bidang</option>
-                            <option value='2'>Bidang Keuangan dan Perlengkapan</option>
-                            <option value='3'>Bidang Perencanaan dan Kerja Sama</option>
-                            <option value='4'>Bidang Kepegawaian</option>
-                            <option value='5'>Bidang Data Humas dan Publikasi</option>
-                            <option value='6'>Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Udara</option>
-                            <option value='7'>Bidang Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara</option>
-                            <option value='8'>Bidang Pelaporan dan Evaluasi Puslitbang Transportasi LSDP</option>
-                            <option value='9'>Bidang Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP</option>
-                            <option value='10'>Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian</option>
-                            <option value='11'>Bidang Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian</option>
-                            <option value='12'>Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda</option>
-                            <option value='13'>Bidang Pengembangan Teknologi dan Penunjang Transportasi Antar Moda</option>
+                            <option value='0' disabled>-- Media Online --</option>
+                            <option value='1'>Google Zoom</option>
+                            <option value='2'>Google Duo</option>
+                            <option value='3'>Microsoft Skype</option>
+                            <option value='4'>Whatsapp</option>
+                            <option value='0' disabled>-- Media Offline --</option>
+                            <option value='5'>Ruangan Rapat Garuda</option>
+                            <option value='6'>Ruangan Rapat LRT</option>
+                            <option value='7'>Ruangan Rapat Rajawali</option>
+                            <option value='8'>Ruangan Rapat Perpustakaan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <label for="calendar_view">Berdasarkan Bagian Kerja</label>
+                    <div class="input-group">
+                        <select class="filter" id="bagian_filter" multiple="multiple">
+                            <option value='all'>Semua Bagian</option>
+                            <option value='2'>Bagian Keuangan dan Perlengkapan</option>
+                            <option value='3'>Bagian Perencanaan dan Kerja Sama</option>
+                            <option value='4'>Bagian Kepegawaian</option>
+                            <option value='5'>Bagian Data Humas dan Publikasi</option>
+                            <option value='6'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Udara</option>
+                            <option value='7'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara</option>
+                            <option value='8'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi LSDP</option>
+                            <option value='9'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP</option>
+                            <option value='10'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian</option>
+                            <option value='11'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian</option>
+                            <option value='12'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda</option>
+                            <option value='13'>Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda</option>
                         </select>
                     </div>
                 </div>
