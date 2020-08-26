@@ -14,6 +14,12 @@ $(document).ready(function () {
 				displayEventDate = "All Day";
 			}
 
+			if (event.speakers_name.length == 0) {
+				displaySpeakerName = "<span style='color:red'>N/A</span>";
+			} else {
+				displaySpeakerName = event.speakers_name;
+			}
+
 			if (event.calendar == "Online") {
 				element.popover({
 					title:
@@ -35,11 +41,11 @@ $(document).ready(function () {
 						"<p><strong>Zoom ID :</strong> " +
 						event.zoomid +
 						"</p>" +
-						"<p><strong>Nama Pembicara :</strong> " +
-						event.speakers_name +
-						"</p>" +
 						"<p><strong>Nama Pimpinan Rapat :</strong> " +
 						event.members_name +
+						"</p>" +
+						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						displaySpeakerName +
 						"</p>" +
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
@@ -79,11 +85,11 @@ $(document).ready(function () {
 						"<p><strong>Tempat Rapat :</strong> " +
 						event.location +
 						"</p>" +
-						"<p><strong>Nama Pembicara :</strong> " +
-						event.speakers_name +
-						"</p>" +
 						"<p><strong>Nama Pimpinan Rapat :</strong> " +
 						event.members_name +
+						"</p>" +
+						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						displaySpeakerName +
 						"</p>" +
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
@@ -112,6 +118,7 @@ $(document).ready(function () {
 
 			var show_media,
 				show_type = true,
+				show_bagian = true,
 				show_calendar = true;
 
 			var media = $("input:checkbox.filter:checked")
@@ -120,7 +127,12 @@ $(document).ready(function () {
 				})
 				.get();
 			var types = $("#type_filter").val();
+			var bagian = $("#bagian_filter").val();
 			var calendars = $("#calendar_filter").val();
+
+			console.log(types);
+			console.log(bagian);
+			console.log(calendars);
 
 			show_media = media.indexOf(event.media) >= 0;
 
@@ -132,6 +144,14 @@ $(document).ready(function () {
 				}
 			}
 
+			if (bagian && bagian.length > 0) {
+				if (bagian[0] == 'all') {
+					show_bagian = true;
+				} else {
+					show_bagian = bagian.indexOf(event.bagid) >= 0;
+				}
+			}
+
 			if (calendars && calendars.length > 0) {
 				if (calendars[0] == "all") {
 					show_calendar = true;
@@ -140,7 +160,7 @@ $(document).ready(function () {
 				}
 			}
 
-			return show_media && show_type && show_calendar;
+			return show_media && show_type && show_bagian && show_calendar;
 		},
 		customButtons: {
 			printButton: {
@@ -173,7 +193,7 @@ $(document).ready(function () {
 		},
 
 		loading: function (bool) {
-			//alert('events are being rendered');
+			console.log('events are being rendered');
 		},
 		eventAfterAllRender: function (view) {
 			if (view.name == "month") {
@@ -196,12 +216,12 @@ $(document).ready(function () {
 			//$(".dropNewEvent").hide();
 		},
 		dayClick: function (startDate, jsEvent, view) {
-			//var today = moment();
-			//var startDate;
-			//if(view.name == "month"){
-			//  startDate.set({ hours: today.hours(), minute: today.minutes() });
-			//  alert('Clicked on: ' + startDate.format());
-			//}
+			// var today = moment();
+			// var startDate;
+			// if (view.name == "month") {
+			// 	startDate.set({ hours: today.hours(), minute: today.minutes() });
+			// 	alert('Clicked on: ' + startDate.format());
+			// }
 		},
 		select: function (startDate, endDate, jsEvent, view) {
 			var today = moment();

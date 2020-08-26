@@ -2,6 +2,37 @@ body {
   font-family: Roboto;
   padding: 30px;
 }
+
+.chkdanger {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: rgb(190, 16, 16);
+  border-radius: 10px;
+}
+
+.chksuccess {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: rgb(4, 116, 32);
+  border-radius: 10px;
+}
+
 .dropNewEvent {
   font-family: Roboto;
   font-size: 13px;

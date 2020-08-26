@@ -133,8 +133,8 @@
                 <div class="col-lg-2">
                     <label for="calendar_view">Berdasarkan Tipe Media</label>
                     <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="Online" checked>Online</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="Offline" checked>Offline</label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="Online" checked><span class="chksuccess">Media Online</span></label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="Offline" checked><span class="chkdanger">Media Offline</span></label>
                     </div>
                 </div>
             </div>
