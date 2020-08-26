@@ -8,10 +8,31 @@ $(document).ready(function () {
 			var endTimeEventInfo = moment(event.end).format("HH:mm");
 			var displayEventDate;
 
+			var today = new Date();
+			var time = today.getHours() + ":" + today.getMinutes();
+
 			if (event.allDay == false) {
 				displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
 			} else {
 				displayEventDate = "All Day";
+			}
+
+			if (event.speakers_name.length == 0) {
+				displaySpeakerName = "<span style='color:red'>N/A</span>";
+			} else {
+				displaySpeakerName = event.speakers_name;
+			}
+
+			var cek_status = Date.parse(today.toISOString());
+			var jamAwal = Date.parse(event.start);
+			var jamAkhir = Date.parse(event.end);
+
+			if (cek_status > jamAwal && cek_status < jamAkhir) {
+				var displayStatus =
+					"<span style='color:red'>Rapat Sedang Berlangsung</span>";
+			} else {
+				var displayStatus =
+					"<span style='color:blue'>Rapat Telah Berakhir</span>";
 			}
 
 			if (event.calendar == "Online") {
@@ -35,14 +56,17 @@ $(document).ready(function () {
 						"<p><strong>Zoom ID :</strong> " +
 						event.zoomid +
 						"</p>" +
-						"<p><strong>Nama Pembicara :</strong> " +
-						event.speakers_name +
-						"</p>" +
 						"<p><strong>Nama Pimpinan Rapat :</strong> " +
 						event.members_name +
 						"</p>" +
+						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						displaySpeakerName +
+						"</p>" +
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
+						"</p>" +
+						"<p><strong>Status Rapat :</strong> " +
+						displayStatus +
 						"</p>" +
 						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
 						event.agenda +
@@ -79,14 +103,17 @@ $(document).ready(function () {
 						"<p><strong>Tempat Rapat :</strong> " +
 						event.location +
 						"</p>" +
-						"<p><strong>Nama Pembicara :</strong> " +
-						event.speakers_name +
-						"</p>" +
 						"<p><strong>Nama Pimpinan Rapat :</strong> " +
 						event.members_name +
 						"</p>" +
+						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						displaySpeakerName +
+						"</p>" +
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
+						"</p>" +
+						"<p><strong>Status Rapat :</strong> " +
+						displayStatus +
 						"</p>" +
 						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
 						event.agenda +
@@ -112,6 +139,7 @@ $(document).ready(function () {
 
 			var show_media,
 				show_type = true,
+				show_bagian = true,
 				show_calendar = true;
 
 			var media = $("input:checkbox.filter:checked")
@@ -120,6 +148,7 @@ $(document).ready(function () {
 				})
 				.get();
 			var types = $("#type_filter").val();
+			var bagian = $("#bagian_filter").val();
 			var calendars = $("#calendar_filter").val();
 
 			show_media = media.indexOf(event.media) >= 0;
@@ -132,6 +161,14 @@ $(document).ready(function () {
 				}
 			}
 
+			if (bagian && bagian.length > 0) {
+				if (bagian[0] == "all") {
+					show_bagian = true;
+				} else {
+					show_bagian = bagian.indexOf(event.bagid) >= 0;
+				}
+			}
+
 			if (calendars && calendars.length > 0) {
 				if (calendars[0] == "all") {
 					show_calendar = true;
@@ -140,7 +177,7 @@ $(document).ready(function () {
 				}
 			}
 
-			return show_media && show_type && show_calendar;
+			return show_media && show_type && show_bagian && show_calendar;
 		},
 		customButtons: {
 			printButton: {
@@ -173,7 +210,7 @@ $(document).ready(function () {
 		},
 
 		loading: function (bool) {
-			//alert('events are being rendered');
+			console.log("events are being rendered");
 		},
 		eventAfterAllRender: function (view) {
 			if (view.name == "month") {
@@ -185,10 +222,10 @@ $(document).ready(function () {
 		eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
-		eventDragStart: function (event, jsEvent, ui, view) {
-			var draggedEventIsAllDay;
-			draggedEventIsAllDay = event.allDay;
-		},
+		// eventDragStart: function (event, jsEvent, ui, view) {
+		// 	var draggedEventIsAllDay;
+		// 	draggedEventIsAllDay = event.allDay;
+		// },
 		eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
@@ -196,12 +233,12 @@ $(document).ready(function () {
 			//$(".dropNewEvent").hide();
 		},
 		dayClick: function (startDate, jsEvent, view) {
-			//var today = moment();
-			//var startDate;
-			//if(view.name == "month"){
-			//  startDate.set({ hours: today.hours(), minute: today.minutes() });
-			//  alert('Clicked on: ' + startDate.format());
-			//}
+			// var today = moment();
+			// var startDate;
+			// if (view.name == "month") {
+			// 	startDate.set({ hours: today.hours(), minute: today.minutes() });
+			// 	alert('Clicked on: ' + startDate.format());
+			// }
 		},
 		select: function (startDate, endDate, jsEvent, view) {
 			var today = moment();
@@ -298,7 +335,12 @@ $(document).ready(function () {
 	});
 
 	$("#type_filter").select2({
-		placeholder: "Filter Types",
+		placeholder: "Pilih Media Meeting",
+		allowClear: true,
+	});
+
+	$("#bagian_filter").select2({
+		placeholder: "Pilih Bagian Kerja",
 		allowClear: true,
 	});
 
@@ -392,7 +434,7 @@ $(document).ready(function () {
 		$("#editTitle").val(event.title);
 		$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
 		$("#edit-calendar-type").val(event.calendar);
-		$("#edit-event-desc").val(event.description);
+		$("#edit-event-desc").val(event.agenda);
 		$(".eventName").text(event.title);
 		$(".eventDate").text(event.start.format("DD-MM-YYYY"));
 		$(".eventHourStart").text(event.start.format("HH:mm"));
@@ -410,7 +452,7 @@ $(document).ready(function () {
 			var startDate = $("input#editStartDate").val();
 			var endDate = $("input#editEndDate").val();
 			var calendar = $("#edit-calendar-type").val();
-			var description = $("#edit-event-desc").val();
+			var agenda = $("#edit-event-desc").val();
 			$("#editEventModal").modal("hide");
 			var eventData;
 			if (title) {
@@ -418,7 +460,7 @@ $(document).ready(function () {
 				event.start = startDate;
 				event.end = endDate;
 				event.calendar = calendar;
-				event.description = description;
+				event.agenda = agenda;
 				event.allDay = statusAllDay;
 				$("#calendar").fullCalendar("updateEvent", event);
 			} else {

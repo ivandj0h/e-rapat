@@ -14,7 +14,7 @@
     <title><?= $title; ?></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
+    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/transport.svg">
 
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>/css/bootstrap4.css">

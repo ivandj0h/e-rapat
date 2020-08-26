@@ -24,7 +24,8 @@ date_default_timezone_set("Asia/Jakarta");
 |
 */
 // $config['base_url'] = 'http://10.151.0.197/rapat/';
-$config['base_url'] = 'http://localhost/rapat/';
+//$config['base_url'] = 'http://localhost/rapat/';
+$config['base_url'] = 'http://192.168.64.2/rapat/';
 
 /*
 |--------------------------------------------------------------------------
