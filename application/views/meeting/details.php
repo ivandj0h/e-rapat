@@ -126,11 +126,20 @@ foreach ($meeting as $a) :
                                         <?php
                                         if (empty($a['files_upload'])) {  ?>
                                             <li class="list-group-item">
-                                                <span class="badge badge-danger">No files Uploaded</span>
+                                                <span class="badge badge-danger">File yang di Unggah belum ada!</span>
                                             </li>
                                         <?php } else { ?>
                                             <li class="list-group-item">
+                                                Undangan Rapat :
                                                 <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Notulen Rapat :
+                                                <span class="badge badge-danger">Notulen Rapat Belum Ada</span>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Absensi Rapat :
+                                                <span class="badge badge-danger">Absensi Rapat Belum Ada</span>
                                             </li>
                                         <?php } ?>
                                     </ul>

@@ -36,20 +36,20 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Sub Department</span>
+                            <span class="text">Tambah Bidang Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Sub Department</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Bidang</h6>
                     </div>
                     <div class="card-body">
                         <div class="col-md-12">
                             <table class="table table-hover" id="freeRoom" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">No</th>
-                                        <th class="text-center w-20">Sub Department Name</th>
-                                        <th class="text-center w-20">Department Name</th>
-                                        <th class="text-center w-20">Active</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center w-30">Nama Bidang</th>
+                                        <th class="text-center w-30">Nama Sekretariat</th>
+                                        <th class="text-center w-20">Status</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +96,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addSubDepartment">Add New addSubDepartment</h5>
+                <h5 class="modal-title" id="addSubDepartment">Tambah Bidang Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -105,29 +105,29 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="sub_department_name" name="sub_department_name" placeholder="Enter SubDepartment Name..." autocomplete="off">
+                        <input type="text" class="form-control" id="sub_department_name" name="sub_department_name" placeholder="Tambah Nama Bidang..." autocomplete="off">
                     </div>
                     <div class="form-group">
                         <select name="department_id" id="department_id" class="form-control">
-                            <option value="">-- Select Department --</option>
+                            <option value="">-- Pilih Nama Sekretariat --</option>
                             <?php foreach ($dept as $m) : ?>
                                 <option value="<?= $m['id']; ?>"><?= $m['department_name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    Do you want to Activate this menu? <br>
+                    Apakah anda ingin mengaktifkan Menu ini? <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active1" value="1" checked>
-                        <label class="form-check-label" for="is_active1">Active</label>
+                        <label class="form-check-label" for="is_active1">Aktif</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active2" value="0">
-                        <label class="form-check-label" for="is_active2">Not Active</label>
+                        <label class="form-check-label" for="is_active2">Tidak Aktif</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -145,7 +145,7 @@ foreach ($subdepartment as $sp) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSubDepartment">Edit SubDepartment</h5>
+                    <h5 class="modal-title" id="editSubDepartment">Ubah Data Bidang</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -155,7 +155,7 @@ foreach ($subdepartment as $sp) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="sub_department_name" name="sub_department_name" value="<?= $sp['sub_department_name']; ?>" autocomplete="off">
+                            <input type="text" class="form-control" id="sub_department_name" name="sub_department_name" value="<?= $sp['sub_department_name']; ?>" placeholder="Masukan Nama Bidang..." autocomplete="off">
                         </div>
                         <div class="form-group">
                             <select class="custom-select mr-sm-2" select name="department_id" id="department_id">
@@ -176,8 +176,8 @@ foreach ($subdepartment as $sp) :
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -202,8 +202,8 @@ foreach ($subdepartment as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus Data!</button>
                     </div>
                 </form>
             </div>

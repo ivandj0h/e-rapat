@@ -14,7 +14,7 @@ class Type extends CI_Controller
     // Media Meeting Type
     public function index()
     {
-        $data['title']   = 'Media Type';
+        $data['title']   = 'Master Data Media';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['type'] = $this->Type_model->get_all_type();
 
@@ -27,11 +27,11 @@ class Type extends CI_Controller
 
     public function addtype()
     {
-        $data['title']   = 'Media Type';
+        $data['title']   = 'Master Data Media';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['type'] = $this->Type_model->get_all_type();
 
-        $this->form_validation->set_rules('meeting_type', 'Media Type', 'required|trim');
+        $this->form_validation->set_rules('meeting_type', 'Master Data Media', 'required|trim');
         if ($this->form_validation->run() == false) {
 
             $this->load->view('layout/header', $data);
@@ -70,12 +70,12 @@ class Type extends CI_Controller
 
     public function subtype()
     {
-        $data['title']   = 'SubMedia Type';
+        $data['title']   = 'Master Data SubMedia';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['type'] = $this->Type_model->get_all_type();
         $data['subtype'] = $this->Type_model->getSubType();
 
-        $this->form_validation->set_rules('meeting_subtype', 'SubMedia Type', 'required|trim');
+        $this->form_validation->set_rules('meeting_subtype', 'Master Data SubMedia', 'required|trim');
         $this->form_validation->set_rules('type_id', 'id Type', 'required');
 
         if ($this->form_validation->run() == false) {

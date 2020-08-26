@@ -15,9 +15,8 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <div class="topbar-breadcrumb d-none d-sm-block">You're in <strong><?= $title; ?></strong> Page Now</div>
-                        <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/home'); ?>">
-                            <span class="text-gray-600">View Frontend</span>
+                        <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>" target="_blank">
+                            <span class="btn btn-secondary">Lihat Kalendar</span>
                         </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->

@@ -15,7 +15,7 @@ class Meeting extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Meeting';
+        $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
         $data['alltype'] = $this->Type_model->get_all_type();
@@ -38,7 +38,7 @@ class Meeting extends CI_Controller
 
     public function addmeeting()
     {
-        $data['title'] = 'Meeting';
+        $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
         // $data['place'] = $this->db->get('meeting_place')->result_array();
@@ -83,10 +83,7 @@ class Meeting extends CI_Controller
                 'end_time' => $this->input->post('end_time', true),
                 'request_status' => 0
             ];
-
-            // var_dump($data);
-            // die;
-
+            
             $files_name_upload = $_FILES['file']['name'];
 
             if ($files_name_upload) {
@@ -111,7 +108,7 @@ class Meeting extends CI_Controller
 
     public function detailsmeeting($unique)
     {
-        $data['title'] = 'Meeting';
+        $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_one_meeting($unique);
 

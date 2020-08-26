@@ -33,9 +33,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Menu</span>
+                            <span class="text">Tambah Menu Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Menu</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Menu</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,8 +43,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Menu Name</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Menu</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,7 +82,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="menuAdd">Add New Menu</h5>
+                <h5 class="modal-title" id="menuAdd">Tambah Menu Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -91,12 +91,12 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="menu" name="menu" placeholder="Enter Menu...">
+                        <input type="text" class="form-control" id="menu" name="menu" placeholder="Masukan Nama Menu..." autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -114,7 +114,7 @@ foreach ($menu as $a) :
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuAdd">Edit Menu</h5>
+                    <h5 class="modal-title" id="menuAdd">Ubah Data Menu</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,15 +124,15 @@ foreach ($menu as $a) :
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="menu" class="form-control form-control-user" id="menu" value="<?= $menu; ?>" placeholder="menu">
+                                <input type="text" name="menu" class="form-control form-control-user" id="menu" value="<?= $menu; ?>" placeholder="Masukan Nama Menu..." autocomplete="off">
                                 <?= form_error('menu', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Update!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -153,8 +153,8 @@ foreach ($menu as $a) :
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Confirm!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus Data!</button>
                 </div>
             </form>
         </div>

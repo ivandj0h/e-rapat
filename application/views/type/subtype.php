@@ -36,9 +36,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New SubMedia Type</span>
+                            <span class="text">Tambah Data SubMedia</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data SubMedia Type</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data SubMedia</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -46,10 +46,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-20">No</th>
-                                        <th class="text-center w-20">Media Type</th>
-                                        <th class="text-center w-20">SubMedia Type</th>
-                                        <th class="text-center w-20">Active</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Media</th>
+                                        <th class="text-center w-20">Nama SubMedia</th>
+                                        <th class="text-center w-20">Status</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,14 +57,14 @@
                                     <?php foreach ($subtype as $sm) : ?>
                                         <tr>
                                             <td class="text-center"><?= $i++; ?></td>
-                                            <td><?= $sm['meeting_type']; ?></td>
-                                            <td><?= $sm['meeting_subtype']; ?></td>
+                                            <td class="text-center"><?= $sm['meeting_type']; ?></td>
+                                            <td><strong><?= $sm['meeting_subtype']; ?></strong></td>
                                             <td class="text-center">
                                                 <?php
                                                 if ($sm['is_active'] == 1) { ?>
-                                                    <span class="badge badge-success">Active</span>
+                                                    <span class="badge badge-success">Aktif</span>
                                                 <?php } elseif ($sm['is_active'] == 0) { ?>
-                                                    <span class="badge badge-danger">Not Active</span>
+                                                    <span class="badge badge-danger">Tidak Aktif</span>
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
@@ -96,7 +96,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addSubMediaType">Add New SubMedia Type</h5>
+                <h5 class="modal-title" id="addSubMediaType">Tambah Data SubMedia</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -105,29 +105,29 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="meeting_subtype" name="meeting_subtype" placeholder="Enter SubMedia Type..." autocomplete="off">
+                        <input type="text" class="form-control" id="meeting_subtype" name="meeting_subtype" placeholder="Tambah Data SubMedia..." autocomplete="off">
                     </div>
                     <div class="form-group">
                         <select name="type_id" id="type_id" class="form-control">
-                            <option value="">-- Select Media Type --</option>
+                            <option value="">-- Pilih Nama Media --</option>
                             <?php foreach ($type as $m) : ?>
                                 <option value="<?= $m['id']; ?>"><?= $m['meeting_type']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    Do you want to Activate this SubMedia Type? <br>
+                    Apakah anda ingin mengaktifkan SubMedia? <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active1" value="1" checked>
-                        <label class="form-check-label" for="is_active1">Active</label>
+                        <label class="form-check-label" for="is_active1">Aktif</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active2" value="0">
-                        <label class="form-check-label" for="is_active2">Not Active</label>
+                        <label class="form-check-label" for="is_active2">Tidak Aktif</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -168,16 +168,16 @@ foreach ($subtype as $s) :
                         </div>
                         <div class="form-group">
                             <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
-                                <option value="<?= $s['is_active']; ?>"><?= $s['is_active'] ? 'Active' : 'Not Active'; ?></option>
+                                <option value="<?= $s['is_active']; ?>"><?= $s['is_active'] ? 'Aktif' : 'Tidak Aktif'; ?></option>
                                 <option disabled>--</option>
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -202,8 +202,8 @@ foreach ($subtype as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus Data</button>
                     </div>
                 </form>
             </div>

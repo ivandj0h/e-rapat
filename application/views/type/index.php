@@ -33,9 +33,9 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Add New Media Type</span>
+                            <span class="text">Tambah Data Media</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Media Type</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Media</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,8 +43,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center w-5">No</th>
-                                        <th class="text-center w-20">Media Type</th>
-                                        <th class="text-center w-20">Actions</th>
+                                        <th class="text-center w-20">Nama Media</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,7 +82,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="typeAddLabel">Add New Media Type</h5>
+                <h5 class="modal-title" id="typeAddLabel">Tambah Data Media</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -91,12 +91,12 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Enter Media Type..." autocomplete="off">
+                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Tambah Data Media..." autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>
@@ -113,7 +113,7 @@ foreach ($type as $a) :
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="typeEdit">Edit Media Type</h5>
+                    <h5 class="modal-title" id="typeEdit">Ubah Data Media</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,15 +123,15 @@ foreach ($type as $a) :
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Edit Media Type..." autocomplete="off">
+                                <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Ubah Data Media..." autocomplete="off">
                                 <?= form_error('meeting_type', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Update!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </form>
             </div>
@@ -151,12 +151,12 @@ foreach ($type as $a) :
                 <form action="<?= base_url('type/deletetype'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $a['meeting_type']; ?> ?</b></p>
+                        <p>Yakin ingin menghapus Data Media <b><?= $a['meeting_type']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus Data</button>
                     </div>
                 </form>
             </div>
