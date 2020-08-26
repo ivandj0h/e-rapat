@@ -222,10 +222,10 @@ $(document).ready(function () {
 		eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
-		eventDragStart: function (event, jsEvent, ui, view) {
-			var draggedEventIsAllDay;
-			draggedEventIsAllDay = event.allDay;
-		},
+		// eventDragStart: function (event, jsEvent, ui, view) {
+		// 	var draggedEventIsAllDay;
+		// 	draggedEventIsAllDay = event.allDay;
+		// },
 		eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
@@ -291,8 +291,11 @@ $(document).ready(function () {
 
 			//newEvent(startDate, endDate);
 		},
-		eventClick: function (event, jsEvent, view) {
-			editEvent(event);
+		// eventClick: function (event, jsEvent, view) {
+		// editEvent(event);
+		//},
+		eventClick: function (event, element) {
+			$(element).popover("show");
 		},
 		locale: "ID",
 		timezone: "local",
