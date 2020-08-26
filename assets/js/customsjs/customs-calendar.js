@@ -8,6 +8,11 @@ $(document).ready(function () {
 			var endTimeEventInfo = moment(event.end).format("HH:mm");
 			var displayEventDate;
 
+
+
+			var today = new Date();
+			var time = today.getHours() + ":" + today.getMinutes();
+
 			if (event.allDay == false) {
 				displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
 			} else {
@@ -18,6 +23,16 @@ $(document).ready(function () {
 				displaySpeakerName = "<span style='color:red'>N/A</span>";
 			} else {
 				displaySpeakerName = event.speakers_name;
+			}
+
+			var cek_status = Date.parse(today.toISOString());
+			var jamAwal = Date.parse(event.start);
+			var jamAkhir = Date.parse(event.end);
+
+			if (cek_status > jamAwal && cek_status < jamAkhir) {
+				var displayStatus = "<span style='color:red'>Rapat Sedang Berlangsung</span>";
+			} else {
+				var displayStatus = "<span style='color:blue'>Rapat Telah Berakhir</span>";
 			}
 
 			if (event.calendar == "Online") {
@@ -49,6 +64,9 @@ $(document).ready(function () {
 						"</p>" +
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
+						"</p>" +
+						"<p><strong>Status Rapat :</strong> " +
+						displayStatus +
 						"</p>" +
 						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
 						event.agenda +
@@ -94,6 +112,9 @@ $(document).ready(function () {
 						"<p><strong>Waktu Rapat :</strong> " +
 						displayEventDate +
 						"</p>" +
+						"<p><strong>Status Rapat :</strong> " +
+						displayStatus +
+						"</p>" +
 						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
 						event.agenda +
 						"</div>" +
@@ -129,10 +150,6 @@ $(document).ready(function () {
 			var types = $("#type_filter").val();
 			var bagian = $("#bagian_filter").val();
 			var calendars = $("#calendar_filter").val();
-
-			console.log(types);
-			console.log(bagian);
-			console.log(calendars);
 
 			show_media = media.indexOf(event.media) >= 0;
 
