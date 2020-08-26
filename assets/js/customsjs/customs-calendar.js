@@ -8,8 +8,6 @@ $(document).ready(function () {
 			var endTimeEventInfo = moment(event.end).format("HH:mm");
 			var displayEventDate;
 
-
-
 			var today = new Date();
 			var time = today.getHours() + ":" + today.getMinutes();
 
@@ -30,9 +28,11 @@ $(document).ready(function () {
 			var jamAkhir = Date.parse(event.end);
 
 			if (cek_status > jamAwal && cek_status < jamAkhir) {
-				var displayStatus = "<span style='color:red'>Rapat Sedang Berlangsung</span>";
+				var displayStatus =
+					"<span style='color:red'>Rapat Sedang Berlangsung</span>";
 			} else {
-				var displayStatus = "<span style='color:blue'>Rapat Telah Berakhir</span>";
+				var displayStatus =
+					"<span style='color:blue'>Rapat Telah Berakhir</span>";
 			}
 
 			if (event.calendar == "Online") {
@@ -162,7 +162,7 @@ $(document).ready(function () {
 			}
 
 			if (bagian && bagian.length > 0) {
-				if (bagian[0] == 'all') {
+				if (bagian[0] == "all") {
 					show_bagian = true;
 				} else {
 					show_bagian = bagian.indexOf(event.bagid) >= 0;
@@ -210,7 +210,7 @@ $(document).ready(function () {
 		},
 
 		loading: function (bool) {
-			console.log('events are being rendered');
+			console.log("events are being rendered");
 		},
 		eventAfterAllRender: function (view) {
 			if (view.name == "month") {
@@ -218,7 +218,7 @@ $(document).ready(function () {
 				$(".fc-content").css("height", "auto");
 			}
 		},
-		eventLimitClick: function (cellInfo, event) { },
+		eventLimitClick: function (cellInfo, event) {},
 		eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
@@ -291,11 +291,8 @@ $(document).ready(function () {
 
 			//newEvent(startDate, endDate);
 		},
-		// eventClick: function (event, jsEvent, view) {
-		// editEvent(event);
-		//},
-		eventClick: function (event, element) {
-			$(element).popover("show");
+		eventClick: function (event, jsEvent, view) {
+			editEvent(event);
 		},
 		locale: "ID",
 		timezone: "local",
@@ -323,9 +320,9 @@ $(document).ready(function () {
 		longPressDelay: 0,
 		eventLongPressDelay: 0,
 		selectLongPressDelay: 0,
-		// themeSystem: 'bootstrap',
+
 		events: {
-			url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
+			url: "http://localhost/rapat/calendar/get_data_calendar",
 			success: function (response) {
 				return response[0].value;
 				// console.log(response[0].value);
