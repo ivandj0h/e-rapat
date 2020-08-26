@@ -14,7 +14,7 @@ body {
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-  background-color: rgb(190, 16, 16);
+  background-color: #dc3545;
   border-radius: 10px;
 }
 
@@ -29,8 +29,13 @@ body {
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-  background-color: rgb(4, 116, 32);
+  background-color: #28a745;
   border-radius: 10px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
 }
 
 .dropNewEvent {
