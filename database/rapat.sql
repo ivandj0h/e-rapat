@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 26, 2020 at 10:07 AM
+-- Host: 127.0.0.1
+-- Generation Time: Aug 26, 2020 at 08:25 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -44,14 +44,6 @@ CREATE TABLE `meeting` (
   `request_status` int(11) NOT NULL,
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meeting`
---
-
-INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
-(1, 15, 1, '', 'ivandi djoh gah', '', '5f460108076e9', 'Ada banyak variasi tulisan Lorem Ipsum yang tersedia, tapi kebanyakan sudah mengalami perubahan bentuk, entah karena unsur humor atau kalimat yang diacak hingga nampak sangat tidak masuk akal. Jika anda ingin menggunakan tulisan Lorem Ipsum, anda harus yakin tidak ada bagian yang memalukan yang tersembunyi di tengah naskah tersebut. Semua generator Lorem Ipsum di internet cenderung untuk mengulang bagian-bagian tertentu. Karena itu inilah generator pertama yang sebenarnya di internet. Ia menggunakan kamus perbendaharaan yang terdiri dari 200 kata Latin, yang digabung dengan banyak contoh struktur kalimat untuk menghasilkan Lorem Ipsun yang nampak masuk akal. Karena itu Lorem Ipsun yang dihasilkan akan selalu bebas dari pengulangan, unsur humor yang sengaja dimasukkan, kata yang tidak sesuai dengan karakteristiknya dan lain sebagainya.', '2020-08-26', '2020-08-05', '2020-08-05', '08:00:00', '09:00:00', 1, ''),
-(2, 15, 6, '', 'hshshshshs', 'SS.png', '5f46135b7a55d', 'Ada banyak variasi tulisan Lorem Ipsum yang tersedia, tapi kebanyakan sudah mengalami perubahan bentuk, entah karena unsur humor atau kalimat yang diacak hingga nampak sangat tidak masuk akal. Jika anda ingin menggunakan tulisan Lorem Ipsum, anda harus yakin tidak ada bagian yang memalukan yang tersembunyi di tengah naskah tersebut. Semua generator Lorem Ipsum di internet cenderung untuk mengulang bagian-bagian tertentu. Karena itu inilah generator pertama yang sebenarnya di internet. Ia menggunakan kamus perbendaharaan yang terdiri dari 200 kata Latin, yang digabung dengan banyak contoh struktur kalimat untuk menghasilkan Lorem Ipsun yang nampak masuk akal. Karena itu Lorem Ipsun yang dihasilkan akan selalu bebas dari pengulangan, unsur humor yang sengaja dimasukkan, kata yang tidak sesuai dengan karakteristiknya dan lain sebagainya.', '2020-08-26', '2020-08-26', '2020-08-26', '08:58:00', '09:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -106,18 +98,18 @@ CREATE TABLE `meeting_sub_department` (
 
 INSERT INTO `meeting_sub_department` (`id`, `department_id`, `sub_department_name`, `is_active`) VALUES
 (1, 1, 'Administrator', 1),
-(2, 2, 'Bagian Keuangan dan Perlengkapan', 1),
-(3, 2, 'Bagian Perencanaan dan Kerja Sama', 1),
-(4, 2, 'Bagian Kepegawaian', 1),
-(5, 2, 'Bagian Data Humas dan Publikasi', 1),
-(6, 3, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Udara', 1),
-(7, 3, 'Bagian Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara', 1),
-(8, 4, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi LSDP', 1),
-(9, 4, 'Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP', 1),
-(10, 5, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian', 1),
-(11, 5, 'Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian', 1),
-(12, 6, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda', 1),
-(13, 6, 'Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda', 1);
+(2, 2, 'Bidang Keuangan dan Perlengkapan', 1),
+(3, 2, 'Bidang Perencanaan dan Kerja Sama', 1),
+(4, 2, 'Bidang Kepegawaian', 1),
+(5, 2, 'Bidang Data Humas dan Publikasi', 1),
+(6, 3, 'Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Udara', 1),
+(7, 3, 'Bidang Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara', 1),
+(8, 4, 'Bidang Pelaporan dan Evaluasi Puslitbang Transportasi LSDP', 1),
+(9, 4, 'Bidang Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP', 1),
+(10, 5, 'Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian', 1),
+(11, 5, 'Bidang Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian', 1),
+(12, 6, 'Bidang Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda', 1),
+(13, 6, 'Bidang Pengembangan Teknologi dan Penunjang Transportasi Antar Moda', 1);
 
 -- --------------------------------------------------------
 
@@ -191,8 +183,8 @@ CREATE TABLE `meeting_users` (
 
 INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `sub_department_id`, `date_created`, `date_updated`) VALUES
 (14, '717 771 7448', 'administrator', 'admin@admin.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
-(15, '652 729 1800', 'Admin Keuangan', 'user@user.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
-(18, '986 6178 9524', 'Admin Humas', 'humas@humas.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 2, 1, 5, 1597213397, 1598262757);
+(15, '5f14c0bfa4259', 'Admin Keuangan', 'user@user.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
+(18, '5f338ad554752', 'Admin Humas', 'humas@humas.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 3, 1, 5, 1597213397, 1597381280);
 
 -- --------------------------------------------------------
 
@@ -516,7 +508,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
