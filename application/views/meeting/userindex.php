@@ -91,6 +91,26 @@
                         </div>
                     </div>
                 </div>
+
+
+
+                <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
+                    <div class="toast-header">
+                        <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
+
+                        <strong class="mr-auto">Notifikasi</strong>
+                        <small>File Upload</small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Anda Belum Mengunduh Berkas Notulen!
+                        <hr />
+                        <small>@Administrator</small>
+                    </div>
+                </div> -->
+                <!-- End of Notification -->
             </div>
         </div>
         <!-- End of Content Table -->

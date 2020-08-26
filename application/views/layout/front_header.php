@@ -13,7 +13,7 @@
     <title><?= $title; ?></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/calendar.svg">
+    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>img/transport.svg">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/bootstrap-4.5.min.css" type="text/css">
