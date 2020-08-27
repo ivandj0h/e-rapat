@@ -30,12 +30,23 @@ $(document).ready(function () {
 			if (cek_status < jamAwal) {
 				var displayStatus =
 					"<span style='color:green'>Rapat belum dimulai</span>";
-			} else if (cek_status > jamAwal && cek_status < jamAkhir) {
+			}
+			if (cek_status < jamAwal && event.statuses) {
+				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
+			}
+			if (cek_status > jamAwal && cek_status < jamAkhir) {
 				var displayStatus =
-					"<span style='color:red'>Rapat sedang berlangsung</span>";
-			} else {
+					"<span style='color:blue'>Rapat sedang berlangsung</span>";
+			}
+			if (cek_status > jamAwal && cek_status < jamAkhir && event.statuses) {
+				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
+			}
+			if (cek_status > jamAkhir) {
 				var displayStatus =
-					"<span style='color:blue'>Rapat telah berakhir (Expired!)</span>";
+					"<span style='color:red'>Rapat telah berakhir (Expired!)</span>";
+			}
+			if (cek_status > jamAkhir && event.statuses) {
+				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
 			}
 
 			if (event.submediaid !== "1") {
@@ -60,6 +71,53 @@ $(document).ready(function () {
 						'">Rapat : ' +
 						event.calendar +
 						"</div>",
+					content:
+						'<div class="popoverInfoCalendar">' +
+						"<p>Nama Bagian : <strong>" +
+						event.title +
+						"</strong></p>" +
+						"<p>Rapat : <strong>" +
+						event.media +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
+						event.submedia +
+						"</strong></p>" +
+						displayMediaId +
+						"<p>Nama Pimpinan Rapat : <strong>" +
+						event.members_name +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
+						displaySpeakerName +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
+						displayEventDate +
+						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
+						displayStatus +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
+						event.agenda +
+						"</strong></p></div>" +
+						"</div>",
+					delay: {
+						show: "800",
+						hide: "50",
+					},
+					trigger: "hover",
+					placement: "top",
+					html: true,
+					container: "body",
+				});
+			} else if (event.statuses == "1") {
+				element.popover({
+					title:
+						'<div class="popoverTitleCalendar" style="background-color:' +
+						event.backgroundColor +
+						"; color:" +
+						event.textColor +
+						'">Rapat : ' +
+						event.calendar +
+						" (Dibatalkan)</div>",
 					content:
 						'<div class="popoverInfoCalendar">' +
 						"<p>Nama Bagian : <strong>" +
@@ -150,6 +208,9 @@ $(document).ready(function () {
 			}
 			if (event.media == "Offline") {
 				element.css("background-color", "#dc3545");
+			}
+			if (event.statuses == "1") {
+				element.css("background-color", "#000000");
 			}
 
 			var show_media,

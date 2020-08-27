@@ -47,6 +47,9 @@ class Calendar extends CI_Controller
                 if ($result[$row]['meeting_type'] == 'Offline') {
                     $color = '#dc3545';
                 }
+                if ($result[$row]['request_status'] == '1') {
+                    $color = '#000000';
+                }
                 $values[] = array(
                     '_id' => $result[$row]['sub_department_id'],
                     'title' => $result[$row]['sub_department_name'],
@@ -63,6 +66,7 @@ class Calendar extends CI_Controller
                     'start' => implode("T", array($result[$row]['start_date'], $result[$row]['start_time'])),
                     'end' => implode("T", array($result[$row]['end_date'], $result[$row]['end_time'])),
                     'type' => $result[$row]['sub_type_id'],
+                    'statuses' => $result[$row]['request_status'],
                     'className' => 'colorAppointment',
                     'username' => $result[$row]['name'],
                     'location' => $result[$row]['meeting_subtype'],

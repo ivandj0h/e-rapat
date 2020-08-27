@@ -180,10 +180,17 @@ class Meeting extends CI_Controller
     public function updatestatus()
     {
         $id = $this->input->post('id');
-        $data = array('request_status' => $this->input->post('request_status'));
+        $data = array(
+            'request_status' => $this->input->post('request_status'),
+            'start_date' => $this->input->post('start_date', true),
+            'end_date' => $this->input->post('end_date', true),
+            'start_time' => $this->input->post('start_time', true),
+            'end_time' => $this->input->post('end_time', true),
+            'remark_status' => htmlspecialchars($this->input->post('remark_status', true)),
+        );
 
         $this->Meeting_model->update_meeting_status($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Status Meeting has been Updated!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil merubah Status!</div>');
         redirect('meeting');
     }
 

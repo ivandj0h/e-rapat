@@ -64,14 +64,18 @@
                                             <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td class="text-center">
                                                 <?php
-                                                if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
-                                                    status_all_upload($a);
-                                                } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                    status_undangan_upload($a);
-                                                } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                    status_notulen_upload($a);
+                                                if ($a['request_status'] == '1') {
+                                                    status_all_cancel_upload($a);
                                                 } else {
-                                                    status_no_upload($a);
+                                                    if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
+                                                        status_all_upload($a);
+                                                    } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
+                                                        status_undangan_upload($a);
+                                                    } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
+                                                        status_notulen_upload($a);
+                                                    } else {
+                                                        status_no_upload($a);
+                                                    }
                                                 }
                                                 ?>
                                             </td>
@@ -79,14 +83,12 @@
                                                 <?php
                                                 $date_now = date("Y-m-d");
                                                 if ($date_now <= $a['start_date']) {
-                                                    // form_editable_date($a);
                                                     if ($a['type_id'] == '1') {
                                                         status_meeting_online($a);
                                                     } else {
                                                         status_meeting_offline($a);
                                                     }
                                                 } else {
-                                                    // expired_form_editable_date($a);
                                                     status_meeting_expired($a);
                                                 }
                                                 ?>
@@ -197,14 +199,6 @@ foreach ($meeting as $a) :
                                 <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
-                        <?php
-                        $date_now = date("Y-m-d");
-                        if ($date_now <= $a['start_date']) {
-                            form_editable_date($a);
-                        } else {
-                            expired_form_editable_date($a);
-                        }
-                        ?>
                         <div class="modal-footer">
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -230,7 +224,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addMeeting">Buat Rapat Baru</h5>
+                    <h5 class="modal-title" id="addMeeting">Status Rapat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -238,10 +232,29 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/updatestatus'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <?= form_updateable_status($a); ?>
+                        <?php
+                        $date_now = date("Y-m-d");
+                        if ($date_now <= $a['start_date']) {
+                            if ($a['request_status'] == '1') {
+                                form_cancel_status($a);
+                            } else {
+                                if ($a['type_id'] == '1') {
+                                    form_change_status_online($a);
+                                } else {
+                                    form_change_status_offline($a);
+                                }
+                            }
+                        } else {
+                            form_expired_status($a);
+                        }
+                        ?>
                     </div>
                     <div class="modal-footer">
-                        <?= form_disable_footer($a); ?>
+                        <div class="actions">
+                            <input type="hidden" name="id" value="<?= $id; ?>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+                            <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -372,9 +385,15 @@ foreach ($meeting as $a) :
                 $('button').attr('disabled', false);
             }
         })
+
         $('#addMeeting').on('hidden.bs.modal', function() {
             location.reload();
         })
+        $('#meetingStatus').on('hidden.bs.modal', function() {
+            location.reload();
+        })
+
+
         $("#yourBox").click(function() {
             if ($(this).is(":checked")) {
                 $("#onlineId").removeAttr("disabled");
@@ -383,12 +402,28 @@ foreach ($meeting as $a) :
                 $("#onlineId").attr("disabled", "disabled");
             }
         });
+
         $(".dissable").attr("disabled", "disabled");
         $("#type_id").on("change", function() {
             if ($(this).val() === "2") {
                 $(".dissable").attr("disabled", "disabled");
             } else {
                 $(".dissable").removeAttr("disabled");
+            }
+        });
+
+        var maxchars = 1000;
+        $('textarea').on('keyup', function(e) {
+            var textarea_value = $("#texta").val();
+            var keyCode = e.which;
+            $(this).val($(this).val().substring(0, maxchars));
+            var tlength = $(this).val().length;
+            remain = maxchars - parseInt(tlength);
+            $('#remain').text(remain);
+            if (textarea_value != '' && keyCode != 32 && keyCode != 8) {
+                $('button[type=submit]').attr('disabled', false);
+            } else {
+                $('button[type=submit]').attr('disabled', true);
             }
         });
     });
