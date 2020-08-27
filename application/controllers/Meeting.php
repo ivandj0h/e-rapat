@@ -155,14 +155,9 @@ class Meeting extends CI_Controller
         $participants = implode(',', (array) $b);
 
         $data = array(
-            // 'sub_type_id' => $this->input->post('meeting_subtype', true),
             'speakers_name' => $speakers,
             'members_name' => $participants,
             'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-            'start_date' => $this->input->post('start_date', true),
-            'end_date' => $this->input->post('end_date', true),
-            'start_time' => $this->input->post('start_time', true),
-            'end_time' => $this->input->post('end_time', true),
         );
 
         $this->Meeting_model->update_meeting($id, $data);

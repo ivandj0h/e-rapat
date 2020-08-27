@@ -30,22 +30,13 @@ $(document).ready(function () {
 			if (cek_status < jamAwal) {
 				var displayStatus =
 					"<span style='color:green'>Rapat belum dimulai</span>";
-			}
-			if (cek_status < jamAwal && event.statuses) {
-				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
-			}
-			if (cek_status > jamAwal && cek_status < jamAkhir) {
+			} else if (cek_status > jamAwal && cek_status < jamAkhir) {
 				var displayStatus =
 					"<span style='color:blue'>Rapat sedang berlangsung</span>";
-			}
-			if (cek_status > jamAwal && cek_status < jamAkhir && event.statuses) {
-				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
-			}
-			if (cek_status > jamAkhir) {
+			} else if (cek_status > jamAkhir) {
 				var displayStatus =
 					"<span style='color:red'>Rapat telah berakhir (Expired!)</span>";
-			}
-			if (cek_status > jamAkhir && event.statuses) {
+			} else if (event.statuses == "1") {
 				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
 			}
 
@@ -138,7 +129,6 @@ $(document).ready(function () {
 						"</strong></p>" +
 						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
-						"</strong></p>" +
 						"<p>Status Rapat : <strong>" +
 						displayStatus +
 						"</strong></p>" +
