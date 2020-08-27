@@ -13,7 +13,6 @@
             <div class="col-lg-12">
 
                 <!-- Check for error using form validation -->
-                <!-- Alert if Error occurred-->
                 <?php if (validation_errors()) : ?>
 
                     <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
@@ -29,12 +28,9 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addMeeting">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-file"></i>
-                            </span>
-                            <span class="text">Tambah Rapat Baru</span>
-                        </a>
+                        <?php
+                        add_meeting_enable();
+                        ?>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat</h6>
                     </div>
                     <div class="card-body">
@@ -42,13 +38,13 @@
                             <table class="table table-striped table-condensed" id="meeting" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center w-20">Media Rapat</th>
-                                        <th class="text-center w-20">Tanggal Rapat</th>
-                                        <th class="text-center w-20">Pimpinan Rapat</th>
+                                        <th class="text-center w-20">Tanggal</th>
                                         <th class="text-center w-20">Mulai</th>
                                         <th class="text-center w-20">Akhir</th>
+                                        <th class="text-center w-20">Nama Bidang</th>
+                                        <th class="text-center w-20">Media</th>
+                                        <th class="text-center w-20">Pimpinan</th>
                                         <th class="text-center w-20">Agenda</th>
-                                        <th class="text-center w-20">Nama Bagian</th>
                                         <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
@@ -63,26 +59,18 @@
                                             <?php } ?>
                                         </tr>
                                         <tr>
-                                            <td class="text-left"><?= $a['meeting_subtype']; ?>
+
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                            <td><?= $a['members_name']; ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
-                                            <td><?= word_limiter($a['agenda'], 5); ?></td>
-                                            <td><?= $a['sub_department_name']; ?></td>
+                                            <td class="text-center"><?= $a['sub_department_name']; ?></td>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?>
+                                            <td class="text-center"><?= $a['members_name']; ?></td>
+                                            <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td class="text-center action mx-2">
-                                                <?php if ($a['request_status'] == '0') { ?>
-                                                    <span class="badge badge-primary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-flushed"></i> Status Requested</span>
-                                                <?php } else if ($a['request_status'] == '1') { ?>
-                                                    <span class="badge badge-danger" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-angry"></i> Status Booked</span>
-                                                <?php } else if ($a['request_status'] == '2') { ?>
-                                                    <span class="badge badge-secondary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-tired"></i> Status Cancel</span>
-                                                <?php } else { ?>
-                                                    <span class="badge badge-success" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-grin-hearts"></i> Status Open</span>
-                                                <?php } ?>
-                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <?php status_meeting_offline($a); ?>
+                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -122,7 +110,7 @@
 <!-- End of Main Content -->
 
 <!-- Start of Modal Add -->
-<div class="modal fade" id="addMeeting" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addMeeting" aria-hidden="true">
+<div class="modal fade" id="addMeeting" tabindex="-1" role="dialog" aria-labelledby="addMeeting" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -131,7 +119,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open_multipart('meeting/addmeeting'); ?>
+            <?= form_open_multipart('meeting'); ?>
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
             <div class="modal-body">
                 <div class="form-group row">
@@ -148,7 +136,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
+                    <label for="meeting_subtype" class="col-sm-2 col-form-label">SubMedia Meeting</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="meeting_subtype" id="meeting_subtype">
                             <option value='0'>-- Pilih SubMedia Rapat --</option>
@@ -157,7 +145,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
+                    <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
                     <div class="col-sm-10">
                         <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
                         <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
@@ -217,7 +205,7 @@
                 <div class="modal-footer">
                     <div class="actions">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Batal</button>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
+                        <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Buat Rapat</button>
                     </div>
                 </div>
             </div>
@@ -241,27 +229,15 @@ foreach ($meeting as $a) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="type_id" class="col-sm-2 col-form-label">Media Meeting</label>
-                            <div class="col-sm-5">
-                                <select name="type_id" id="type_id2" class="form-control">
-                                    <option value="<?= $a['type_id']; ?>"><?= $a['meeting_type']; ?></option>
-                                    <option value='0'>-- Pilih Media Rapat --</option>
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($alltype as $p) : ?>
-                                        <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
+                            <label for="members_name" class="col-sm-2 col-form-label">Rapat</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_type']; ?>" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="type_id" class="col-sm-2 col-form-label">SubMedia Meeting</label>
-                            <div class="col-sm-5">
-                                <select class="form-control" name="meeting_subtype" id="meeting_subtype2">
-                                    <option value="<?= $a['sub_type_id']; ?>"><?= $a['meeting_subtype']; ?></option>
-                                    <option value='0'>-- Pilih SubMedia Rapat --</option>
-                                    <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
-                                </select>
+                            <label for="members_name" class="col-sm-2 col-form-label">Media Rapat</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_subtype']; ?>" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -472,14 +448,40 @@ foreach ($meeting as $a) :
 <?php endforeach; ?>
 <!-- End of Modal Delete -->
 
+<!-- Start of Modal Disabled Create Meeting -->
+<div class="modal fade" id="noMeeting" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="noMeeting" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noMeeting">Buat Rapat Baru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">Maaf Anda tidak dapat membuat meeting</p>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" value="<?= $id; ?>">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Disabled Create Meeting -->
+
+
 
 <!-- Jquery Area -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-    $(':submit').prop('disabled',true);
-    $('#files').keyup(function(){
-        $(':submit').prop('disabled', this.value == "" ? true : false);     
-    })
-});  
-</script> -->
+    $(document).ready(function() {
+        $('input[type=file]').change(function() {
+            if ($('input[type=file]').val() == '') {
+                $('button').attr('disabled', true)
+            } else {
+                $('button').attr('disabled', false);
+            }
+        })
+    });
+</script>

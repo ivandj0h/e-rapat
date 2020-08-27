@@ -27,12 +27,15 @@ $(document).ready(function () {
 			var jamAwal = Date.parse(event.start);
 			var jamAkhir = Date.parse(event.end);
 
-			if (cek_status > jamAwal && cek_status < jamAkhir) {
+			if (cek_status < jamAwal) {
 				var displayStatus =
-					"<span style='color:red'>Rapat Sedang Berlangsung</span>";
+					"<span style='color:blue'>Rapat belum dimulai</span>";
+			} else if (cek_status > jamAwal && cek_status < jamAkhir) {
+				var displayStatus =
+					"<span style='color:red'>Rapat sedang berlangsung</span>";
 			} else {
 				var displayStatus =
-					"<span style='color:blue'>Rapat Telah Berakhir</span>";
+					"<span style='color:blue'>Rapat telah berakhir</span>";
 			}
 
 			if (event.calendar == "Online") {
@@ -47,30 +50,30 @@ $(document).ready(function () {
 						"</div>",
 					content:
 						'<div class="popoverInfoCalendar">' +
-						"<p><strong>Nama Bagian :</strong> " +
+						"<p>Nama Bagian : <strong>" +
 						event.title +
-						"</p>" +
-						"<p><strong>Media Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
 						event.calendar +
-						"</p>" +
-						"<p><strong>Zoom ID :</strong> " +
+						"</strong></p>" +
+						"<p>Zoom ID : <strong>" +
 						event.zoomid +
-						"</p>" +
-						"<p><strong>Nama Pimpinan Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Pimpinan Rapat : <strong>" +
 						event.members_name +
-						"</p>" +
-						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
 						displaySpeakerName +
-						"</p>" +
-						"<p><strong>Waktu Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
-						"</p>" +
-						"<p><strong>Status Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
 						displayStatus +
-						"</p>" +
-						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
 						event.agenda +
-						"</div>" +
+						"</strong></p></div>" +
 						"</div>",
 					delay: {
 						show: "800",
@@ -82,7 +85,6 @@ $(document).ready(function () {
 					container: "body",
 				});
 			} else {
-				// console.log(event.calendar);
 				element.popover({
 					title:
 						'<div class="popoverTitleCalendar" style="background-color:' +
@@ -94,30 +96,30 @@ $(document).ready(function () {
 						"</div>",
 					content:
 						'<div class="popoverInfoCalendar">' +
-						"<p><strong>Nama Bagian :</strong> " +
+						"<p>Nama Bagian : <strong>" +
 						event.title +
-						"</p>" +
-						"<p><strong>Media Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
 						event.calendar +
-						"</p>" +
-						"<p><strong>Tempat Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Tempat Rapat : <strong>" +
 						event.location +
-						"</p>" +
-						"<p><strong>Nama Pimpinan Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Pimpinan Rapat : <strong>" +
 						event.members_name +
-						"</p>" +
-						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
 						displaySpeakerName +
-						"</p>" +
-						"<p><strong>Waktu Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
-						"</p>" +
-						"<p><strong>Status Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
 						displayStatus +
-						"</p>" +
-						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
 						event.agenda +
-						"</div>" +
+						"</strong></p></div>" +
 						"</div>",
 					delay: {
 						show: "800",
@@ -311,8 +313,8 @@ $(document).ready(function () {
 		timeFormat: "HH:mm",
 		defaultTimedEventDuration: "01:00:00",
 		editable: true,
-		minTime: "07:00:00",
-		maxTime: "18:00:00",
+		minTime: "01:00:00",
+		maxTime: "24:00:00",
 		slotLabelFormat: "HH:mm",
 		weekends: true,
 		nowIndicator: true,
@@ -320,13 +322,11 @@ $(document).ready(function () {
 		longPressDelay: 0,
 		eventLongPressDelay: 0,
 		selectLongPressDelay: 0,
-		// themeSystem: 'bootstrap',
 		events: {
 			// url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
 			url: "http://localhost/rapat/calendar/get_data_calendar",
 			success: function (response) {
 				return response[0].value;
-				// console.log(response[0].value);
 			},
 		},
 	});

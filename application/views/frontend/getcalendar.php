@@ -81,7 +81,6 @@
                     <div class="form-group">
                         <input class='showHideWeekend' type="checkbox" checked>
                         <label for="ShowWeekends">Tampilkan / Sembunyikan Akhir Pekan (Sabtu - Minggu)</label>
-                        <!-- <div class="input-group"> -->
                     </div>
                 </div>
             </div>

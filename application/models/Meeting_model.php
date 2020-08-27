@@ -10,8 +10,7 @@ class Meeting_model extends CI_Model
     {
         $this->db->from($this->table);
         $this->db->order_by("name", "desc");
-        $query = $this->db->get();
-        return $query->result_array();
+        return $this->db->get()->result_array();
     }
 
     public function get_all_meeting_by_role($role)
@@ -56,22 +55,28 @@ class Meeting_model extends CI_Model
         return $this->db->get_where($this->table, ['files_upload' => $id])->row();
     }
 
-    private function _uploadImage()
+    public function get_info_upload($userid)
     {
-        $config['upload_path']          = 'uploads/';
-        $config['allowed_types']        = 'gif|jpg|jpeg|png|bmp|pdf';
-        $config['file_name']            = $this->product_id;
-        $config['overwrite']			= true;
-        $config['max_size']             = 1024; // 1MB
-        // $config['max_width']            = 1024;
-        // $config['max_height']           = 768;
+        $condition = "user_id = " . $userid;
+        $this->db->select('files_upload');
+        $this->db->from($this->table);
+        $this->db->where($condition);
+        return $this->db->get()->result_array();
+    }
 
-        $this->load->library('upload', $config);
+    public function cek_waktu_rapat($id)
+    {
+        $this->db->select("CONCAT(start_date, ' ', start_time) as timestampStart");
+        $this->db->from($this->table);
+        $this->db->where($id);
+        return $this->db->get()->row();
+    }
 
-        if ($this->upload->do_upload('image')) {
-            return $this->upload->data("file_name");
-        }
-        
-        return "default.pdf";
+    public function cek_media_rapat($id)
+    {
+        $this->db->select("type_id");
+        $this->db->from($this->table);
+        $this->db->where($id);
+        return $this->db->get()->row();
     }
 }
