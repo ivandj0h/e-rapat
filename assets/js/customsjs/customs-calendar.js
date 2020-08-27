@@ -43,7 +43,7 @@ $(document).ready(function () {
 					"<p>" +
 					event.submedia +
 					" ID : <strong>" +
-					event.zoomid +
+					event.otherid +
 					"</strong></p>";
 			} else {
 				displayMediaId =

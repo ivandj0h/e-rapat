@@ -54,6 +54,7 @@ class Calendar extends CI_Controller
                     'media' => $result[$row]['meeting_type'],
                     'submedia' => $result[$row]['meeting_subtype'],
                     'submediaid' => $result[$row]['sub_type_id'],
+                    'otherid' => $result[$row]['other_online_id'],
                     'calendar' => $result[$row]['meeting_type'],
                     'zoomid' => $result[$row]['zoomid'],
                     'speakers_name' => $result[$row]['speakers_name'],

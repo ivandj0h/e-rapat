@@ -178,15 +178,27 @@ function show_add_meeting()
                 </div>
             </div>
             <!-- End Form Add Meeting -->
-    <?php
+            <?php
         } else {
             foreach ($meeting as $a) :
                 if (empty($a['files_upload1'])) {
-                    echo '<small class="text-danger"><strong>Maaf!</strong>, Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>NOTULENSI RAPAT</strong></small>';
-                    form_disable_footer();
+                    disable_add_one($a);
+            ?>
+                    <div class="modal-footer">
+                        <?=
+                            form_disable_footer();
+                        ?>
+                    </div>
+                <?php
                 } else if (empty($a['files_upload2'])) {
-                    echo '<small class="text-danger"><strong>Maaf!</strong>, Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>ABSENSI RAPAT</strong></small>';
-                    form_disable_footer();
+                    disable_add_two($a);
+                ?>
+                    <div class="modal-footer">
+                        <?=
+                            form_disable_footer();
+                        ?>
+                    </div>
+    <?php
                 }
             endforeach;
         }
@@ -315,66 +327,26 @@ function status_no_upload($a)
 // can't change status if meeting already expired
 function form_updateable_status($a)
 { ?>
-    <p class="text-danger text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
-    <hr class="garisbawah">
-    </hr>
-    <div class="form-group row">
-        <label for="place_id" class="col-sm-2 col-form-label">Status Rapat</label>
-        <div class="col-sm-10">
-            <?php
-            if ($a['request_status'] == 0) { ?>
-                <input type="text" class="border" value="Sudah Dipesan" disabled>
-            <?php } elseif ($a['request_status'] == 1) { ?>
-                <input type="text" class="border" value="Perubahan Jadwal" disabled>
-            <?php } else { ?>
-                <input type="text" class="border" value="Pembatalan" disabled>
-            <?php }  ?>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
-        <div class="col-sm-10">
-            <input type="text" class="border" value="<?= $a['start_date']; ?>" disabled>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
-        <div class="col-sm-10">
-            <input type="text" class="border" value="<?= $a['end_date']; ?>" disabled>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="start_time_edit" class="col-sm-2 col-form-label">Jam Awal</label>
-        <div class="col-sm-10">
-            <input type="text" class="border" value="<?= $a['start_time']; ?>" disabled>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
-        <div class="col-sm-10">
-            <input type="text" class="border" value="<?= $a['end_time']; ?>" disabled>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
-        <div class="col-sm-10">
-            <?php
-            if (empty($a['remark_status'])) { ?>
-                <input type="text" class="border" value="Tidak ada" disabled>
-            <?php } else { ?>
-                <textarea class="form-control form-control-user" disabled><?= $a['remark_status']; ?></textarea>
-            <?php } ?>
-        </div>
-    </div>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
+<?php }
+
+// can't add meeting num one
+function disable_add_one($a)
+{ ?>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>NOTULENSI RAPAT</strong>.</p>
+<?php }
+
+// can't add meeting num two
+function disable_add_two($a)
+{ ?>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>ABSENSI RAPAT</strong>.</p>
 <?php }
 
 // Modal Disabled footer
 function form_disable_footer()
 { ?>
-    <div class="modal-footer">
-        <div class="actions">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
-        </div>
+    <div class="actions">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
     </div>
 
 <?php }
