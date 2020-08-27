@@ -69,22 +69,43 @@ class Meeting extends CI_Controller
             $speakers = implode(',', (array) $a);
             $participants = implode(',', (array) $b);
 
+            $sub_type_id = $this->input->post('meeting_subtype', true);
 
-            $data = [
-                'user_id' => $data['user']['id'],
-                'sub_type_id' => $this->input->post('meeting_subtype', true),
-                'speakers_name' => $speakers,
-                'members_name' => $participants,
-                'unique_code' => uniqid(),
-                'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                'start_date' => $this->input->post('start_date', true),
-                'end_date' => $this->input->post('end_date', true),
-                'date_requested' => date('Y-m-d'),
-                'start_time' => $this->input->post('start_time', true),
-                'end_time' => $this->input->post('end_time', true),
-                'request_status' => 0
-            ];
+            if ($sub_type_id != '1') {
+                $data = [
+                    'user_id' => $data['user']['id'],
+                    'sub_type_id' => $sub_type_id,
+                    'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
+                    'speakers_name' => $speakers,
+                    'members_name' => $participants,
+                    'unique_code' => uniqid(),
+                    'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                    'start_date' => $this->input->post('start_date', true),
+                    'end_date' => $this->input->post('end_date', true),
+                    'date_requested' => date('Y-m-d'),
+                    'start_time' => $this->input->post('start_time', true),
+                    'end_time' => $this->input->post('end_time', true),
+                    'request_status' => 0
+                ];
+            } else {
+                $data = [
+                    'user_id' => $data['user']['id'],
+                    'sub_type_id' => $sub_type_id,
+                    'speakers_name' => $speakers,
+                    'members_name' => $participants,
+                    'unique_code' => uniqid(),
+                    'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                    'start_date' => $this->input->post('start_date', true),
+                    'end_date' => $this->input->post('end_date', true),
+                    'date_requested' => date('Y-m-d'),
+                    'start_time' => $this->input->post('start_time', true),
+                    'end_time' => $this->input->post('end_time', true),
+                    'request_status' => 0
+                ];
+            }
 
+            // var_dump($data);
+            // die;
             $files_name_upload = $_FILES['file']['name'];
 
             if ($files_name_upload) {
