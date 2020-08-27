@@ -79,8 +79,8 @@ function show_add_meeting()
     $alltype = $ci->Type_model->get_all_type();
     if ($ci->session->userdata('email')) {
         $meeting = $ci->Meeting_model->get_all_meeting_by_role($ci->session->userdata('role_id'));
-        if (empty($meeting)) { ?>
 
+        if (empty($meeting) || $meeting[0]['request_status'] == '1') { ?>
             <!-- Start Form Add Meeting -->
             <div class="form-group row">
                 <label for="type_id" class="col-sm-2 col-form-label">Tipe Rapat</label>
@@ -173,7 +173,7 @@ function show_add_meeting()
             </div>
             <div class="modal-footer">
                 <div class="actions">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
                     <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Buat Rapat</button>
                 </div>
             </div>
@@ -227,11 +227,11 @@ function status_meeting_offline($a)
 function status_meeting_online($a)
 { ?>
     <?php if ($a['request_status'] == '0') { ?>
-        <span class="badge badge-danger" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-angry"></i> Status Booked</span>
-    <?php } else if ($a['request_status'] == '2') { ?>
-        <span class="badge badge-secondary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-tired"></i> Status Cancel</span>
+        <span class="badge badge-danger" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-angry"></i> Booked</span>
+    <?php } else if ($a['request_status'] == '1') { ?>
+        <span class="badge badge-secondary" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-tired"></i> Pembatalan</span>
     <?php } else { ?>
-        <span class="badge badge-success" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-grin-hearts"></i> Status Open</span>
+        <span class="badge badge-success" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-grin-hearts"></i> Perubahan Jadwal</span>
     <?php }
 }
 // if meeting already expired
@@ -294,6 +294,18 @@ function form_editable_date($a)
     </div>
 <?php }
 
+/*
+*
+all about status part
+*
+*/
+function status_all_cancel_upload($a)
+{ ?>
+    <a href="#" class="badge badge-secondary">Undangan Rapat</a> <br>
+    <a href="#" class="badge badge-secondary">Notulen Rapat</a> <br>
+    <a href="#" class="badge badge-secondary">Absensi Rapat</a>
+<?php }
+
 function status_all_upload($a)
 { ?>
     <a href="#" class="badge badge-success">Undangan Rapat</a> <br>
@@ -322,12 +334,65 @@ function status_no_upload($a)
     <a href="#" class="badge badge-danger">Absensi Rapat</a>
 <?php }
 
-
+// can't change status if meeting already Canceled
+function form_cancel_status($a)
+{ ?>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah dibatalkan, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
+<?php }
 
 // can't change status if meeting already expired
-function form_updateable_status($a)
+function form_expired_status($a)
 { ?>
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
+<?php }
+
+// can change status Online Meeting if meeting not expired
+function form_change_status_online($a)
+{ ?>
+    <div class="form-group row">
+        <label for="place_id" class="col-sm-2 col-form-label">Status Rapat</label>
+        <div class="col-sm-5">
+            <select name="request_status" id="request_status" class="form-control">
+
+                <?php
+                if ($a['request_status'] == 0) { ?>
+                    <option value="<?= $a['request_status']; ?>">Booked</option>
+                <?php } elseif ($a['request_status'] == 1) { ?>
+                    <option value="<?= $a['request_status']; ?>">Pembatalan</option>
+                <?php } elseif ($a['request_status'] == 2) { ?>
+                    <option value="<?= $a['request_status']; ?>">Perubahan Jadwal</option>
+                <?php } ?>
+
+                <option value="" disabled>--</option>
+                <option value="0">Booked</option>
+                <option value="1">Pembatalan</option>
+                <option value="2">Perubahan Jadwal</option>
+            </select>
+        </div>
+    </div>
+    <?php
+    $date_now = date("Y-m-d");
+    if ($date_now <= $a['start_date']) {
+        form_editable_date($a);
+    } else {
+        expired_form_editable_date($a);
+    }
+    ?>
+    <div class="form-group row">
+        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
+        <div class="col-sm-10">
+            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..."><?= $a['remark_status']; ?></textarea>
+            Batas Maksimum <span id="remain">1000</span> Karakter
+            <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+<?php }
+
+
+// can change status Offline Meeting if meeting not expired
+function form_change_status_offline($a)
+{ ?>
+    <p class="text-primary text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
 <?php }
 
 // can't add meeting num one
