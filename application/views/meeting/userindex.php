@@ -28,9 +28,12 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <?php
-                        add_meeting_enable();
-                        ?>
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-backdrop="static" data-target="#addMeeting">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-file"></i>
+                            </span>
+                            <span class="text">Tambah Rapat Baru</span>
+                        </a>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat</h6>
                     </div>
                     <div class="card-body">
@@ -45,21 +48,13 @@
                                         <th class="text-center w-20">Media</th>
                                         <th class="text-center w-20">Pimpinan</th>
                                         <th class="text-center w-20">Agenda</th>
+                                        <th class="text-center w-20">File Upload</th>
                                         <th class="text-center w-20">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
-                                            <?php if ($a['files_upload'] == '') { ?>
-                                                <!-- Start of Notification -->
-                                                <td colspan="8" class="text-danger">Anda Belum Mengunduh Berkas Undangan Rapat! Untuk Tanggal <strong><?= date("d-m-Y", strtotime($a['start_date'])); ?></strong> Pukul <strong><?= date("H:i", strtotime($a['start_time'])); ?></strong> s/d Pukul <strong><?= date("H:i", strtotime($a['end_time'])); ?></strong>. <span class="btn btn-danger" data-toggle="modal" data-target="#meetingUpload<?= $a['id']; ?>" style="cursor:pointer;margin:2px;padding:2px;">Upload Undangan Rapat</span>
-                                                </td>
-                                                <!-- End of Notification -->
-                                            <?php } ?>
-                                        </tr>
-                                        <tr>
-
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
@@ -67,10 +62,36 @@
                                             <td class="text-left"><?= $a['meeting_subtype']; ?>
                                             <td class="text-center"><?= $a['members_name']; ?></td>
                                             <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
+                                            <td class="text-center">
+                                                <?php
+                                                if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
+                                                    status_all_upload($a);
+                                                } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
+                                                    status_undangan_upload($a);
+                                                } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
+                                                    status_notulen_upload($a);
+                                                } else {
+                                                    status_no_upload($a);
+                                                }
+                                                ?>
+                                            </td>
                                             <td class="text-center action mx-2">
-                                                <?php status_meeting_offline($a); ?>
+                                                <?php
+                                                $date_now = date("Y-m-d");
+                                                if ($date_now <= $a['start_date']) {
+                                                    // form_editable_date($a);
+                                                    if ($a['type_id'] == '1') {
+                                                        status_meeting_online($a);
+                                                    } else {
+                                                        status_meeting_offline($a);
+                                                    }
+                                                } else {
+                                                    // expired_form_editable_date($a);
+                                                    status_meeting_expired($a);
+                                                }
+                                                ?>
                                                 <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a>
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
+                                                <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -119,95 +140,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open_multipart('meeting'); ?>
+            <?= form_open_multipart('meeting/addmeeting'); ?>
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
             <div class="modal-body">
-                <div class="form-group row">
-                    <label for="type_id" class="col-sm-2 col-form-label">Media Meeting</label>
-                    <div class="col-sm-5">
-                        <select name="type_id" id="type_id" class="form-control">
-                            <option value='0'>-- Pilih Media Rapat --</option>
-                            <?php $i = 1; ?>
-                            <?php foreach ($alltype as $p) : ?>
-                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="meeting_subtype" class="col-sm-2 col-form-label">SubMedia Meeting</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="meeting_subtype" id="meeting_subtype">
-                            <option value='0'>-- Pilih SubMedia Rapat --</option>
-                            <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
-                        <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
-                    <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Tambah Pimpinan Rapat">
-                        <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
-                    <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
-                        <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
-                        <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
-                        <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
-                        <?= form_error('Jam Awal Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
-                        <?= form_error('Jam Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
-                    <div class="col-sm-10">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="files" name="file">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="actions">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Batal</button>
-                        <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Buat Rapat</button>
-                    </div>
-                </div>
+                <?= show_add_meeting(); ?>
             </div>
             </form>
         </div>
@@ -261,32 +197,14 @@ foreach ($meeting as $a) :
                                 <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
-                            <div class="col-sm-10">
-                                <input type="date" id="start_date" name="start_date" class="border" value="<?= $a['start_date']; ?>">
-                                <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
-                            <div class="col-sm-10">
-                                <input type="date" id="end_date" name="end_date" class="border" value="<?= $a['end_date']; ?>">
-                                <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="start_time_edit" class="col-sm-2 col-form-label">Jam Awal</label>
-                            <div class="col-sm-10">
-                                <input type="time" id="start_time" name="start_time" class="border" value="<?= $a['start_time']; ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
-                            <div class="col-sm-10">
-                                <input type="time" id="end_time" name="end_time" class="border" value="<?= $a['end_time']; ?>">
-                            </div>
-                        </div>
+                        <?php
+                        $date_now = date("Y-m-d");
+                        if ($date_now <= $a['start_date']) {
+                            form_editable_date($a);
+                        } else {
+                            expired_form_editable_date($a);
+                        }
+                        ?>
                         <div class="modal-footer">
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -306,6 +224,7 @@ foreach ($meeting as $a) :
     $id = $a['id'];
     $meeting_subtype = $a['meeting_subtype'];
     $request_status = $a['request_status'];
+    $remark_status = $a['remark_status'];
 ?>
     <div class="modal fade" id="meetingStatus<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
@@ -313,46 +232,10 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/updatestatus'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to Change Status of <b><?= $meeting_subtype; ?> ?</b></p>
-                        <div class="form-group row">
-                            <label for="place_id" class="col-sm-3 col-form-label">Status Rapat</label>
-                            <div class="col-sm-5">
-                                <select name="request_status" id="request_status" class="form-control">
-
-                                    <?php
-                                    if ($a['request_status'] == 0) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Permintaan</option>
-                                    <?php } elseif ($a['request_status'] == 1) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Sudah Dipesan</option>
-                                    <?php } elseif ($a['request_status'] == 2) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Pembatalan</option>
-                                    <?php } elseif ($a['request_status'] == 3) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Tersedia</option>
-                                    <?php } elseif ($a['request_status'] == 4) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Perubahan Jadwal</option>
-                                    <?php } ?>
-
-                                    <option value="" disabled>--</option>
-                                    <option value="0">Permintaan</option>
-                                    <option value="1">Sudah Dipesan</option>
-                                    <option value="2">Pembatalan</option>
-                                    <option value="3">Tersedia</option>
-                                    <option value="4">Perubahan Jadwal</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="remark_status" class="col-sm-3 col-form-label">Keterangan Status</label>
-                            <div class="col-sm-5">
-                                <textarea class="form-control form-control-user" name="remark_status" id="remark_status" placeholder="Describe Agenda here..."><?= $a['remark_status']; ?></textarea>
-                                <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
-                            </div>
-                        </div>
+                        <?= form_updateable_status($a); ?>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <?= form_disable_footer($a); ?>
                     </div>
                 </form>
             </div>
@@ -483,5 +366,24 @@ foreach ($meeting as $a) :
                 $('button').attr('disabled', false);
             }
         })
+        $('#addMeeting').on('hidden.bs.modal', function() {
+            location.reload();
+        })
+        $("#yourBox").click(function() {
+            if ($(this).is(":checked")) {
+                $("#onlineId").removeAttr("disabled");
+                $("#onlineId").focus();
+            } else {
+                $("#onlineId").attr("disabled", "disabled");
+            }
+        });
+        $(".dissable").attr("disabled", "disabled");
+        $("#type_id").on("change", function() {
+            if ($(this).val() === "2") {
+                $(".dissable").attr("disabled", "disabled");
+            } else {
+                $(".dissable").removeAttr("disabled");
+            }
+        });
     });
 </script>

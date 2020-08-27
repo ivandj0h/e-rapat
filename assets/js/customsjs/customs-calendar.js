@@ -29,13 +29,25 @@ $(document).ready(function () {
 
 			if (cek_status < jamAwal) {
 				var displayStatus =
-					"<span style='color:blue'>Rapat belum dimulai</span>";
+					"<span style='color:green'>Rapat belum dimulai</span>";
 			} else if (cek_status > jamAwal && cek_status < jamAkhir) {
 				var displayStatus =
 					"<span style='color:red'>Rapat sedang berlangsung</span>";
 			} else {
 				var displayStatus =
-					"<span style='color:blue'>Rapat telah berakhir</span>";
+					"<span style='color:blue'>Rapat telah berakhir (Expired!)</span>";
+			}
+
+			if (event.submediaid !== "1") {
+				displayMediaId =
+					"<p>" +
+					event.submedia +
+					" ID : <strong>" +
+					event.zoomid +
+					"</strong></p>";
+			} else {
+				displayMediaId =
+					"<p>Zoom ID : <strong>" + event.zoomid + "</strong></p>";
 			}
 
 			if (event.calendar == "Online") {
@@ -45,7 +57,7 @@ $(document).ready(function () {
 						event.backgroundColor +
 						"; color:" +
 						event.textColor +
-						'">Media Rapat : ' +
+						'">Rapat : ' +
 						event.calendar +
 						"</div>",
 					content:
@@ -53,12 +65,13 @@ $(document).ready(function () {
 						"<p>Nama Bagian : <strong>" +
 						event.title +
 						"</strong></p>" +
+						"<p>Rapat : <strong>" +
+						event.media +
+						"</strong></p>" +
 						"<p>Media Rapat : <strong>" +
-						event.calendar +
+						event.submedia +
 						"</strong></p>" +
-						"<p>Zoom ID : <strong>" +
-						event.zoomid +
-						"</strong></p>" +
+						displayMediaId +
 						"<p>Nama Pimpinan Rapat : <strong>" +
 						event.members_name +
 						"</strong></p>" +
