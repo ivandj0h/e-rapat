@@ -413,7 +413,7 @@ foreach ($meeting as $a) :
         });
 
         var maxchars = 1000;
-        $('textarea').on('keyup', function(e) {
+        $('#texta').on('keyup', function(e) {
             var textarea_value = $("#texta").val();
             var keyCode = e.which;
             $(this).val($(this).val().substring(0, maxchars));
