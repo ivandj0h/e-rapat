@@ -157,7 +157,7 @@
                    });
                });
 
-               $('.toast').toast('show');
+               //    $('.toast').toast('show');
            </script>
            </body>
 

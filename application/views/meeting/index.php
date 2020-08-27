@@ -55,14 +55,6 @@
                                 <tbody>
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
-                                            <?php if ($a['files_upload'] == '') { ?>
-                                                <!-- Start of Notification -->
-                                                <td colspan="8" class="text-danger">Anda Belum Mengunduh Berkas Undangan Rapat! Untuk Tanggal <strong><?= date("d-m-Y", strtotime($a['start_date'])); ?></strong> Pukul <strong><?= date("H:i", strtotime($a['start_time'])); ?></strong> s/d Pukul <strong><?= date("H:i", strtotime($a['end_time'])); ?></strong>. <span class="btn btn-danger" data-toggle="modal" data-target="#meetingUpload<?= $a['id']; ?>" style="cursor:pointer;margin:2px;padding:2px;">Upload Undangan Rapat</span>
-                                                </td>
-                                                <!-- End of Notification -->
-                                            <?php } ?>
-                                        </tr>
-                                        <tr>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td><?= $a['members_name']; ?></td>

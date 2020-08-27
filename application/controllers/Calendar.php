@@ -52,6 +52,8 @@ class Calendar extends CI_Controller
                     'title' => $result[$row]['sub_department_name'],
                     'bagid' => $result[$row]['sub_department_id'],
                     'media' => $result[$row]['meeting_type'],
+                    'submedia' => $result[$row]['meeting_subtype'],
+                    'submediaid' => $result[$row]['sub_type_id'],
                     'calendar' => $result[$row]['meeting_type'],
                     'zoomid' => $result[$row]['zoomid'],
                     'speakers_name' => $result[$row]['speakers_name'],

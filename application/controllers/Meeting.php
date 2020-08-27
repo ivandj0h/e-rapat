@@ -17,6 +17,27 @@ class Meeting extends CI_Controller
     {
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+
+        if ($data['user']['role_id'] == '1') {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('meeting/index', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('meeting/userindex', $data);
+            $this->load->view('layout/footer');
+        }
+    }
+
+    public function addmeeting()
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
         $data['alltype'] = $this->Type_model->get_all_type();
         $data['types'] = $this->Type_model->getSubType();
@@ -64,10 +85,6 @@ class Meeting extends CI_Controller
                 'request_status' => 0
             ];
 
-            // $avail_time = $this->Meeting_model->cek_waktu_rapat($this->session->userdata('id'));
-            // $avail_media = $this->Meeting_model->cek_media_rapat($this->session->userdata('id'));
-
-            // if (count($avail_time) > 0 || count($avail_media) > 0) {
             $files_name_upload = $_FILES['file']['name'];
 
             if ($files_name_upload) {
@@ -87,10 +104,6 @@ class Meeting extends CI_Controller
             $this->Meeting_model->insert_meeting($data);
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil membuat rapat!</div>');
             redirect('meeting', 'refresh');
-            // } else {
-            // $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error!</strong> New subMenu was Added!</div>');
-            // redirect('meeting', 'refresh');
-            // }
         }
     }
 
@@ -121,7 +134,7 @@ class Meeting extends CI_Controller
         $participants = implode(',', (array) $b);
 
         $data = array(
-            'sub_type_id' => $this->input->post('meeting_subtype', true),
+            // 'sub_type_id' => $this->input->post('meeting_subtype', true),
             'speakers_name' => $speakers,
             'members_name' => $participants,
             'agenda' => htmlspecialchars($this->input->post('agenda', true)),
