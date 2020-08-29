@@ -20,7 +20,14 @@ $(document).ready(function () {
 			if (event.speakers_name.length == 0) {
 				displaySpeakerName = "<span style='color:red'>N/A</span>";
 			} else {
-				displaySpeakerName = event.speakers_name;
+				var nameArr = event.speakers_name.split(",");
+				var displaySpeakerName = "<ul>";
+
+				nameArr.forEach(function (name) {
+					displaySpeakerName += "<li>" + name + "</li>";
+				});
+
+				displaySpeakerName += "</ul>";
 			}
 
 			var cek_status = Date.parse(today.toISOString());
