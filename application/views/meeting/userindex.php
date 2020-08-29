@@ -251,6 +251,7 @@ foreach ($meeting as $a) :
                     </div>
                     <div class="modal-footer">
                         <div class="actions">
+
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
                             <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
@@ -280,28 +281,7 @@ foreach ($meeting as $a) :
                         <div class="form-group row">
                             <label for="place_id" class="col-sm-3 col-form-label">Status Rapat</label>
                             <div class="col-sm-5">
-                                <select name="request_status" id="request_status" class="form-control">
 
-                                    <?php
-                                    if ($a['request_status'] == 0) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Permintaan</option>
-                                    <?php } elseif ($a['request_status'] == 1) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Sudah Dipesan</option>
-                                    <?php } elseif ($a['request_status'] == 2) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Pembatalan</option>
-                                    <?php } elseif ($a['request_status'] == 3) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Tersedia</option>
-                                    <?php } elseif ($a['request_status'] == 4) { ?>
-                                        <option value="<?= $a['request_status']; ?>">Perubahan Jadwal</option>
-                                    <?php } ?>
-
-                                    <option value="" disabled>--</option>
-                                    <option value="0">Permintaan</option>
-                                    <option value="1">Sudah Dipesan</option>
-                                    <option value="2">Pembatalan</option>
-                                    <option value="3">Tersedia</option>
-                                    <option value="4">Perubahan Jadwal</option>
-                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -427,4 +407,8 @@ foreach ($meeting as $a) :
             }
         });
     });
+
+    function myFunction() {
+        document.getElementById("start_date").disabled = true;
+    }
 </script>

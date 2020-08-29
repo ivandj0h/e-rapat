@@ -269,27 +269,27 @@ function form_editable_date($a)
     <div class="form-group row">
         <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
         <div class="col-sm-10">
-            <input type="date" id="start_date" name="start_date" class="border" value="<?= $a['start_date']; ?>">
+            <input type="date" id="start_date" name="start_date" class="tt" class="border" value="<?= $a['start_date']; ?>">
             <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
     <div class="form-group row">
         <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
         <div class="col-sm-10">
-            <input type="date" id="end_date" name="end_date" class="border" value="<?= $a['end_date']; ?>">
+            <input type="date" id="end_date" name="end_date" class="tt" value="<?= $a['end_date']; ?>">
             <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
     <div class="form-group row">
         <label for="start_time_edit" class="col-sm-2 col-form-label">Jam Awal</label>
         <div class="col-sm-10">
-            <input type="time" id="start_time" name="start_time" class="border" value="<?= $a['start_time']; ?>">
+            <input type="time" id="start_time" name="start_time" class="tt" value="<?= $a['start_time']; ?>">
         </div>
     </div>
     <div class="form-group row">
         <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
         <div class="col-sm-10">
-            <input type="time" id="end_time" name="end_time" class="border" value="<?= $a['end_time']; ?>">
+            <input type="time" id="end_time" name="end_time" class="tt" value="<?= $a['end_time']; ?>">
         </div>
     </div>
 <?php }
@@ -352,7 +352,7 @@ function form_change_status_online($a)
     <div class="form-group row">
         <label for="place_id" class="col-sm-2 col-form-label">Status Rapat</label>
         <div class="col-sm-5">
-            <select name="request_status" id="request_status" class="form-control">
+            <select name="request_status" id="request_status" class="form-control ">
 
                 <?php
                 if ($a['request_status'] == 0) { ?>
