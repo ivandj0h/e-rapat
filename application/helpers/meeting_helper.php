@@ -73,133 +73,13 @@ function check_access($role_id, $menu_id)
 // Show Meeting Form
 function show_add_meeting()
 {
-    $ci = get_instance();
-    $alltype = $ci->Type_model->get_all_type();
-    if ($ci->session->userdata('email')) {
-        $meeting = $ci->Meeting_model->get_all_meeting_by_sesi($ci->session->userdata('email'));
-
-        foreach ($meeting as $element) :
-
-
-            if (empty($meeting) || $meeting[0]['request_status'] == '0' || $meeting[0]['request_status'] == '1') {
-
-?>
-                <!-- Start Form Add Meeting -->
-                <div class="form-group row">
-                    <label for="type_id" class="col-sm-2 col-form-label">Tipe Rapat</label>
-                    <div class="col-sm-5">
-                        <select name="type_id" id="type_id" class="form-control">
-                            <option value='0'>-- Pilih Tipe Rapat --</option>
-                            <?php $i = 1; ?>
-                            <?php foreach ($alltype as $p) : ?>
-                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="meeting_subtype" class="col-sm-2 col-form-label">Media Rapat</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="meeting_subtype" id="meeting_subtype">
-                            <option value='0'>-- Pilih Media Rapat --</option>
-                            <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row" id="other_online_id">
-                    <label for="other_online_id" class="col-sm-2 col-form-label">ID Rapat lain</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="onlineId" name="other_online_id" class="border" placeholder="ID Rapat" autocomplete="off" disabled>
-                        <br />
-                        <input type="checkbox" class="dissable" id="yourBox" />
-                        <small class="text-danger"> Aktifkan CkeckBox ini dan Isikan kolom tersebut dengan ID Rapat yang lain jika anda tidak menggunakan ZOOM Meeting</small>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
-                        <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
-                    <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Tambah Pimpinan Rapat">
-                        <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
-                    <div class="col-sm-10">
-                        <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
-                        <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
-                        <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
-                        <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
-                        <?= form_error('Jam Awal Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
-                        <?= form_error('Jam Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
-                    <div class="col-sm-10">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="files" name="file">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="actions">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
-                    </div>
-                </div>
-                <!-- End Form Add Meeting -->
-            <?php
-            } else if ($element['id'] > 1 || empty($element['files_upload1'])) {
-                disable_add_one($element);
-            ?>
-                <div class="modal-footer">
-                    <?=
-                        form_disable_footer();
-                    ?>
-                </div>
-    <?php
-            }
-        endforeach;
-    }
+    enable_add_new();
 }
 
 // Show Expired Status
 function status_meeting_expired($a)
 { ?>
-    <span class="badge badge-dark" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-angry"></i> Status Expired!</span>
+    <span class="badge badge-dark" data-toggle="modal" data-target="#expiredMeeting" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-angry"></i> Status Expired!</span>
 <?php }
 
 // Show Offline Status
@@ -225,6 +105,7 @@ function status_meeting_online($a)
         <span class="badge badge-success" data-toggle="modal" data-target="#meetingStatus<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-grin-hearts"></i> Perubahan Jadwal</span>
     <?php }
 }
+
 // if meeting already expired
 function expired_form_editable_date($a)
 { ?>
@@ -337,6 +218,9 @@ function form_expired_status($a)
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
 <?php }
 
+
+
+
 // can change status Online Meeting if meeting not expired
 function form_change_status_online($a)
 { ?>
@@ -362,11 +246,14 @@ function form_change_status_online($a)
         </div>
     </div>
     <?php
-    $date_now = date("Y-m-d");
-    if ($date_now <= $a['start_date']) {
-        form_editable_date($a);
-    } else {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+    $datedb = $a['start_date'];
+    $timedb = $a['start_time'];
+    if ($datenow > $datedb && $timenow > $timedb) {
         expired_form_editable_date($a);
+    } else {
+        form_editable_date($a);
     }
     ?>
     <div class="form-group row">
@@ -405,11 +292,14 @@ function form_change_status_offline($a)
         </div>
     </div>
     <?php
-    $date_now = date("Y-m-d");
-    if ($date_now <= $a['start_date']) {
-        form_editable_date($a);
-    } else {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+    $datedb = $a['start_date'];
+    $timedb = $a['start_time'];
+    if ($datenow > $datedb && $timenow > $timedb) {
         expired_form_editable_date($a);
+    } else {
+        form_editable_date($a);
     }
     ?>
     <div class="form-group row">
@@ -420,6 +310,112 @@ function form_change_status_offline($a)
             <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
+<?php }
+
+// Add new Meeting
+function enable_add_new()
+{
+    $ci = get_instance();
+    $alltype = $ci->Type_model->get_all_type();
+
+?>
+    <!-- Start Form Add Meeting -->
+    <div class="form-group row">
+        <label for="type_id" class="col-sm-2 col-form-label">Tipe Rapat</label>
+        <div class="col-sm-5">
+            <select name="type_id" id="type_id" class="form-control">
+                <option value='0'>-- Pilih Tipe Rapat --</option>
+                <?php $i = 1; ?>
+                <?php foreach ($alltype as $p) : ?>
+                    <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_type']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <?= form_error('type_id', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="meeting_subtype" class="col-sm-2 col-form-label">Media Rapat</label>
+        <div class="col-sm-5">
+            <select class="form-control" name="meeting_subtype" id="meeting_subtype">
+                <option value='0'>-- Pilih Media Rapat --</option>
+                <!-- SubMedia Rapat akan diload menggunakan ajax, dan ditampilkan disini -->
+            </select>
+        </div>
+    </div>
+    <div class="form-group row" id="other_online_id">
+        <label for="other_online_id" class="col-sm-2 col-form-label">ID Rapat lain</label>
+        <div class="col-sm-10">
+            <input type="text" id="onlineId" name="other_online_id" class="border" placeholder="ID Rapat" autocomplete="off" disabled>
+            <br />
+            <input type="checkbox" class="dissable" id="yourBox" />
+            <small class="text-danger"> Aktifkan CkeckBox ini dan Isikan kolom tersebut dengan ID Rapat yang lain jika anda tidak menggunakan ZOOM Meeting</small>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
+        <div class="col-sm-10">
+            <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
+            <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
+        <div class="col-sm-10">
+            <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Tambah Pimpinan Rapat">
+            <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
+        <div class="col-sm-10">
+            <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
+            <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
+            <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
+            <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
+            <?= form_error('Jam Awal Rapat', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
+            <?= form_error('Jam Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="files" name="file">
+                <label class="custom-file-label" for="image">Choose file</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="actions">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
+        </div>
+    </div>
+    <!-- End Form Add Meeting -->
 <?php }
 
 // can't add meeting num one

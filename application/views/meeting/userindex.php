@@ -81,17 +81,21 @@
                                             </td>
                                             <td class="text-center action mx-2">
                                                 <?php
-                                                $date_now = date("Y-m-d");
-                                                if ($date_now < $a['start_date']) {
-                                                    // status_meeting_expired($a);
-                                                    // } elseif ($date_now == $a['start_date'] && $date_now >= $a['start_date']) {
+                                                $datenow = strtotime(date("Y-m-d"));
+                                                $timenow = strtotime(date("H:i:s"));
+                                                $datedb = strtotime($a['start_date']);
+                                                $timedb = strtotime($a['start_time']);
+
+                                                // var_dump($timedb);
+                                                // die;
+                                                if ($datenow >= $datedb && $timenow >= $timedb) {
+                                                    status_meeting_expired($a);
+                                                } else {
                                                     if ($a['type_id'] == '1') {
                                                         status_meeting_online($a);
                                                     } else {
                                                         status_meeting_offline($a);
                                                     }
-                                                } else {
-                                                    status_meeting_expired($a);
                                                 }
                                                 ?>
                                                 <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a>
@@ -147,7 +151,7 @@
             <?= form_open_multipart('meeting/addmeeting'); ?>
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
             <div class="modal-body">
-                <?= show_add_meeting(); ?>
+                <?= enable_add_new(); ?>
             </div>
             </form>
         </div>
@@ -439,12 +443,34 @@ foreach ($meeting as $a) :
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id" value="<?= $id; ?>">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
 </div>
 <!-- End of Modal Disabled Create Meeting -->
+
+<!-- Start of Modal Expired Meeting -->
+<div class="modal fade" id="expiredMeeting" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="expiredMeeting" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="expiredMeeting">Rapat Kadaluarsa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="id" value="<?= $id; ?>">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Expired Meeting -->
 
 
 
