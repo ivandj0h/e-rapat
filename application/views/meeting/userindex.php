@@ -82,7 +82,9 @@
                                             <td class="text-center action mx-2">
                                                 <?php
                                                 $date_now = date("Y-m-d");
-                                                if ($date_now <= $a['start_date']) {
+                                                if ($date_now < $a['start_date']) {
+                                                    // status_meeting_expired($a);
+                                                    // } elseif ($date_now == $a['start_date'] && $date_now >= $a['start_date']) {
                                                     if ($a['type_id'] == '1') {
                                                         status_meeting_online($a);
                                                     } else {
@@ -251,7 +253,6 @@ foreach ($meeting as $a) :
                     </div>
                     <div class="modal-footer">
                         <div class="actions">
-
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
                             <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
@@ -264,45 +265,138 @@ foreach ($meeting as $a) :
 <?php endforeach; ?>
 <!-- End of Modal Change Status -->
 
-<!-- Start of Modal Upload Undangan -->
+<!-- Start of Modal Upload Notulen -->
 <?php
 foreach ($meeting as $a) :
     $id = $a['id'];
-    $meeting_subtype = $a['meeting_subtype'];
-    $request_status = $a['request_status'];
 ?>
-    <div class="modal fade" id="meetingUpload<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="uploadNotulen<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <form action="<?= base_url('meeting/updatestatus'); ?>" method="POST">
-                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
-                    <div class="modal-body">
-                        <p>Are you sure want to Change Status of <b><?= $meeting_subtype; ?> ?</b></p>
-                        <div class="form-group row">
-                            <label for="place_id" class="col-sm-3 col-form-label">Status Rapat</label>
-                            <div class="col-sm-5">
-
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="remark_status" class="col-sm-3 col-form-label">Keterangan Status</label>
-                            <div class="col-sm-5">
-                                <textarea class="form-control form-control-user" name="remark_status" id="remark_status" placeholder="Describe Agenda here..."><?= $a['remark_status']; ?></textarea>
-                                <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadNotulen">Unggah Berkas Notulen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?= form_open_multipart('meeting/uploadnotulen'); ?>
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Nama Bagian</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= $a['sub_department_name']; ?></strong>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Agenda Rapat</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= word_limiter($a['agenda'], 100); ?></strong>
+                            </div>
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Berkas Notulen</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="notulen" name="notulen">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?= $id; ?>">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Unggah Berkas Notulen!</button>
+                </div>
                 </form>
             </div>
         </div>
     </div>
 <?php endforeach; ?>
-<!-- End of Modal Upload Undangan -->
+<!-- End of Modal Upload Notulen -->
+
+<!-- Start of Modal Upload Absensi -->
+<?php
+foreach ($meeting as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="uploadAbsensi<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadAbsensi">Unggah Berkas Absensi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?= form_open_multipart('meeting/uploadabsensi'); ?>
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Nama Bagian</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= $a['sub_department_name']; ?></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Agenda Rapat</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= word_limiter($a['agenda'], 100); ?></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Berkas Absensi</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="absensi" name="absensi">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?= $id; ?>">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Unggah Berkas Absensi!</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Upload Absensi -->
+
+<!-- Start of Modal Upload Error -->
+<div class="modal fade" id="errorAbsensi" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorAbsensi">Unggah Berkas Absensi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger text-center text-uppercase">Silahkan Unggah File <strong>NOTULENSI RAPAT</strong> terlebih dahulu.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Upload Error -->
 
 <!-- Start of Modal Delete -->
 <?php
@@ -358,13 +452,13 @@ foreach ($meeting as $a) :
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('input[type=file]').change(function() {
-            if ($('input[type=file]').val() == '') {
-                $('button').attr('disabled', true)
-            } else {
-                $('button').attr('disabled', false);
-            }
-        })
+        // $('input[type=file]').change(function() {
+        //     if ($('input[type=file]').val() == '') {
+        //         $('button[type=submit]').attr('disabled', true);
+        //     } else {
+        //         $('button[type=submit]').attr('disabled', false);
+        //     }
+        // })
 
         $('#addMeeting').on('hidden.bs.modal', function() {
             location.reload();
@@ -372,7 +466,6 @@ foreach ($meeting as $a) :
         $('#meetingStatus').on('hidden.bs.modal', function() {
             location.reload();
         })
-
 
         $("#yourBox").click(function() {
             if ($(this).is(":checked")) {
@@ -408,7 +501,7 @@ foreach ($meeting as $a) :
         });
     });
 
-    function myFunction() {
-        document.getElementById("start_date").disabled = true;
-    }
+    // function myFunction() {
+    //     document.getElementById("start_date").disabled = true;
+    // }
 </script>

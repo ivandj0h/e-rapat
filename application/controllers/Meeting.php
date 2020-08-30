@@ -17,7 +17,7 @@ class Meeting extends CI_Controller
     {
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
 
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
@@ -38,7 +38,7 @@ class Meeting extends CI_Controller
     {
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_role($this->session->userdata('role_id'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
         $data['alltype'] = $this->Type_model->get_all_type();
         $data['types'] = $this->Type_model->getSubType();
 
@@ -104,27 +104,33 @@ class Meeting extends CI_Controller
                 ];
             }
 
-            // var_dump($data);
-            // die;
-            $files_name_upload = $_FILES['file']['name'];
+            if (empty($_FILES['file']['name'])) {
+                $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Maaf!</strong> Anda belum mengunggah Undangan Rapat!</div>');
+                redirect('meeting', 'refresh');
+            } else {
 
-            if ($files_name_upload) {
-                $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
-                $config['max_size'] = '1024';
-                $config['upload_path'] = 'uploads/';
 
-                $this->load->library('upload', $config);
+                $files_name_upload = $_FILES['file']['name'];
 
-                if ($this->upload->do_upload('file')) {
-                    $new_files_name = $this->upload->data('file_name');
-                    $this->db->set('files_upload', $new_files_name);
-                } else {
-                    echo $this->upload->display_errors();
+                if ($files_name_upload) {
+                    $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
+                    $config['max_size'] = '1024';
+                    $config['upload_path'] = 'uploads/';
+
+                    $this->load->library('upload', $config);
+
+                    if ($this->upload->do_upload('file')) {
+                        $new_files_name = $this->upload->data('file_name');
+                        $this->db->set('files_upload', $new_files_name);
+                    } else {
+                        echo $this->upload->display_errors();
+                    }
                 }
+                $this->Meeting_model->insert_meeting($data);
+                $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil membuat rapat!</div>');
+                redirect('meeting', 'refresh');
             }
-            $this->Meeting_model->insert_meeting($data);
-            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil membuat rapat!</div>');
-            redirect('meeting', 'refresh');
         }
     }
 
@@ -163,6 +169,76 @@ class Meeting extends CI_Controller
         $this->Meeting_model->update_meeting($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
         redirect('meeting');
+    }
+
+    public function uploadnotulen()
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+
+        $config = array(
+            'upload_path' => "uploads/",
+            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+            'encrypt_name' => false,
+            'overwrite' => TRUE,
+            'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+        );
+
+        $id = $this->input->post('id');
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('notulen')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $error);
+            $this->load->view('meeting/userindex', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $notulensi = $this->upload->data('file_name');
+            $this->db->set('files_upload1', $notulensi);
+
+            $this->db->where('id', $id);
+            $this->db->update('meeting');
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> File Notulensi Rapat berhasil di unggah!</div>');
+            redirect('meeting');
+        }
+    }
+
+    public function uploadabsensi()
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+
+        $config = array(
+            'upload_path' => "uploads/",
+            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+            'encrypt_name' => false,
+            'overwrite' => TRUE,
+            'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+        );
+
+        $id = $this->input->post('id');
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('absensi')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $error);
+            $this->load->view('meeting/userindex', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $absensi = $this->upload->data('file_name');
+            $this->db->set('files_upload2', $absensi);
+
+            $this->db->where('id', $id);
+            $this->db->update('meeting');
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> File Absensi Rapat berhasil di unggah!</div>');
+            redirect('meeting');
+        }
     }
 
     public function meetingdownload($id)

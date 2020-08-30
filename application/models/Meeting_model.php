@@ -22,6 +22,15 @@ class Meeting_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function get_all_meeting_by_sesi($sesi)
+    {
+        $this->db->select("*");
+        $this->db->from($this->table);
+        $this->db->where('email', $sesi);
+
+        return $this->db->get()->result_array();
+    }
+
     public function get_one_meeting($unique)
     {
         $this->db->where('unique_code', $unique);
@@ -37,6 +46,12 @@ class Meeting_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
+    }
+
+    public function upload_notulen($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($this->meeting);
     }
 
     public function delete_meeting($id)
