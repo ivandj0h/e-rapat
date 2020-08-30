@@ -70,38 +70,79 @@ class Meeting extends CI_Controller
             $participants = implode(',', (array) $b);
 
             $sub_type_id = $this->input->post('meeting_subtype', true);
+            $datenow = strtotime(date('Y-m-d'));
+            $timenow = strtotime(date("H:i:s"));
+            $end_date = strtotime($this->input->post('end_date', true));
+            $end_time = strtotime($this->input->post('end_time', true));
 
-            if ($sub_type_id != '1') {
-                $data = [
-                    'user_id' => $data['user']['id'],
-                    'sub_type_id' => $sub_type_id,
-                    'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
-                    'speakers_name' => $speakers,
-                    'members_name' => $participants,
-                    'unique_code' => uniqid(),
-                    'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                    'start_date' => $this->input->post('start_date', true),
-                    'end_date' => $this->input->post('end_date', true),
-                    'date_requested' => date('Y-m-d'),
-                    'start_time' => $this->input->post('start_time', true),
-                    'end_time' => $this->input->post('end_time', true),
-                    'request_status' => 0
-                ];
+            if ($datenow >= $end_date && $timenow >= $end_time) {
+                $request_status = 3;
+                if ($sub_type_id != '1') {
+                    $data = [
+                        'user_id' => $data['user']['id'],
+                        'sub_type_id' => $sub_type_id,
+                        'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
+                        'speakers_name' => $speakers,
+                        'members_name' => $participants,
+                        'unique_code' => uniqid(),
+                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                        'start_date' => $this->input->post('start_date', true),
+                        'end_date' => $this->input->post('end_date', true),
+                        'date_requested' =>  date('Y-m-d'),
+                        'start_time' => $this->input->post('start_time', true),
+                        'end_time' => $this->input->post('end_time', true),
+                        'request_status' => $request_status
+                    ];
+                } else {
+                    $data = [
+                        'user_id' => $data['user']['id'],
+                        'sub_type_id' => $sub_type_id,
+                        'speakers_name' => $speakers,
+                        'members_name' => $participants,
+                        'unique_code' => uniqid(),
+                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                        'start_date' => $this->input->post('start_date', true),
+                        'end_date' => $this->input->post('end_date', true),
+                        'date_requested' =>  date('Y-m-d'),
+                        'start_time' => $this->input->post('start_time', true),
+                        'end_time' => $this->input->post('end_time', true),
+                        'request_status' => $request_status
+                    ];
+                }
             } else {
-                $data = [
-                    'user_id' => $data['user']['id'],
-                    'sub_type_id' => $sub_type_id,
-                    'speakers_name' => $speakers,
-                    'members_name' => $participants,
-                    'unique_code' => uniqid(),
-                    'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                    'start_date' => $this->input->post('start_date', true),
-                    'end_date' => $this->input->post('end_date', true),
-                    'date_requested' => date('Y-m-d'),
-                    'start_time' => $this->input->post('start_time', true),
-                    'end_time' => $this->input->post('end_time', true),
-                    'request_status' => 0
-                ];
+                $request_status = 0;
+                if ($sub_type_id != '1') {
+                    $data = [
+                        'user_id' => $data['user']['id'],
+                        'sub_type_id' => $sub_type_id,
+                        'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
+                        'speakers_name' => $speakers,
+                        'members_name' => $participants,
+                        'unique_code' => uniqid(),
+                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                        'start_date' => $this->input->post('start_date', true),
+                        'end_date' => $this->input->post('end_date', true),
+                        'date_requested' =>  date('Y-m-d'),
+                        'start_time' => $this->input->post('start_time', true),
+                        'end_time' => $this->input->post('end_time', true),
+                        'request_status' => $request_status
+                    ];
+                } else {
+                    $data = [
+                        'user_id' => $data['user']['id'],
+                        'sub_type_id' => $sub_type_id,
+                        'speakers_name' => $speakers,
+                        'members_name' => $participants,
+                        'unique_code' => uniqid(),
+                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+                        'start_date' => $this->input->post('start_date', true),
+                        'end_date' => $this->input->post('end_date', true),
+                        'date_requested' =>  date('Y-m-d'),
+                        'start_time' => $this->input->post('start_time', true),
+                        'end_time' => $this->input->post('end_time', true),
+                        'request_status' => $request_status
+                    ];
+                }
             }
 
             if (empty($_FILES['file']['name'])) {
@@ -251,14 +292,31 @@ class Meeting extends CI_Controller
     public function updatestatus()
     {
         $id = $this->input->post('id');
-        $data = array(
-            'request_status' => $this->input->post('request_status'),
-            'start_date' => $this->input->post('start_date', true),
-            'end_date' => $this->input->post('end_date', true),
-            'start_time' => $this->input->post('start_time', true),
-            'end_time' => $this->input->post('end_time', true),
-            'remark_status' => htmlspecialchars($this->input->post('remark_status', true)),
-        );
+        $datenow = strtotime(date('Y-m-d'));
+        $timenow = strtotime(date("H:i:s"));
+        $end_date = strtotime($this->input->post('end_date', true));
+        $end_time = strtotime($this->input->post('end_time', true));
+        $request_status = '3';
+
+        if ($datenow >= $end_date && $timenow >= $end_time) {
+            $data = array(
+                'request_status' => $request_status,
+                'start_date' => $this->input->post('start_date', true),
+                'end_date' => $this->input->post('end_date', true),
+                'start_time' => $this->input->post('start_time', true),
+                'end_time' => $this->input->post('end_time', true),
+                'remark_status' => htmlspecialchars($this->input->post('remark_status', true)),
+            );
+        } else {
+            $data = array(
+                'request_status' => $this->input->post('request_status'),
+                'start_date' => $this->input->post('start_date', true),
+                'end_date' => $this->input->post('end_date', true),
+                'start_time' => $this->input->post('start_time', true),
+                'end_time' => $this->input->post('end_time', true),
+                'remark_status' => htmlspecialchars($this->input->post('remark_status', true)),
+            );
+        }
 
         $this->Meeting_model->update_meeting_status($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil merubah Status!</div>');
