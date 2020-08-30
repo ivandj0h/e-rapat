@@ -355,3 +355,37 @@ class Auth extends CI_Controller
                     <!-- End of Charts -->
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (empty($meeting) || $meeting[0]['request_status'] == '0' || $meeting[0]['request_status'] == '1') { 
+        } else {
+            foreach ($meeting as $a) :
+                if ($a['id'] > 1 && $a['files_upload1'] == '') {
+                    
+
+                } else if (empty($a['files_upload2'])) {
+                    disable_add_two($a);
+                ?>
+                    <div class="modal-footer">
+                        <?=
+                            form_disable_footer();
+                        ?>
+                    </div>
+    <?php
+                }
+            endforeach;
+        }
+    } else {
+        redirect('auth');
+    }
