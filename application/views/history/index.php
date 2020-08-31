@@ -30,32 +30,40 @@
                         <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="text-center w-20">Media Rapat</th>
-                                    <th class="text-center w-20">Tanggal Rapat</th>
-                                    <th class="text-center w-20">Narasumber</th>
+                                    <th class="text-center w-20">Tanggal</th>
                                     <th class="text-center w-20">Mulai</th>
                                     <th class="text-center w-20">Akhir</th>
+                                    <th class="text-center w-20">Nama Bidang</th>
+                                    <th class="text-center w-20">Tipe Rapat</th>
+                                    <th class="text-center w-20">Media</th>
+                                    <th class="text-center w-20">Pimpinan</th>
                                     <th class="text-center w-20">Agenda</th>
-                                    <th class="text-center w-20">Nama Bagian</th>
                                     <th class="text-center w-20">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($meeting_user as $a) : ?>
                                     <tr>
-                                        <td class="text-left"><?= $a['meeting_subtype']; ?></td>
                                         <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                        <td><?= $a['speakers_name']; ?></td>
-                                        <td><?= $a['members_name']; ?></td>
                                         <td class="text-center"><?= $a['start_time']; ?></td>
                                         <td class="text-center"><?= $a['end_time']; ?></td>
-                                        <td><?= word_limiter($a['agenda'], 5); ?></td>
-                                        <td><?= $a['department_name']; ?></td>
+                                        <td class="text-left"><?= $a['sub_department_name']; ?></td>
+                                        <td class="text-left">
+                                            <?php
+                                            if ($a['type_id'] == '1') { ?>
+                                                <span class="badge badge-success"><strong> Online</strong></span>
+                                            <?php } else { ?>
+                                                <span class="badge badge-danger"><strong> Offline</strong></span>
+                                            <?php }
+                                            ?>
+                                        </td>
+                                        <td class="text-left"><?= $a['meeting_subtype']; ?></td>
+                                        <td class="text-left"><?= $a['members_name']; ?></td>
+                                        <td><?= word_limiter($a['agenda'], 15); ?></td>
                                         <td class="text-center action mx-2">
                                             <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Details</a>
                                         </td>
                                     </tr>
-
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

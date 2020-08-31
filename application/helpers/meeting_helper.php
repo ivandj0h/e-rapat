@@ -9,10 +9,8 @@ function is_logged_in()
         $role_id = $ci->session->userdata('role_id');
         $menu = $ci->uri->segment(1);
 
-        // query to db to get the id
         $queryMenu = $ci->db->get_where('user_menu', ['menu' => $menu])->row_array();
 
-        // we just need the id
         $menu_id = $queryMenu['id'];
 
         $queryAccess = $ci->db->get_where('user_access_menu', [

@@ -19,7 +19,7 @@ class History extends CI_Controller
     {
         $data['title'] = 'Riwayat Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting_user'] = $this->History_model->get_all_history_meeting($this->session->userdata('email'));
+        $data['meeting_user'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
 
         $this->form_validation->set_rules('from_date', 'From Date', 'required');
@@ -46,7 +46,7 @@ class History extends CI_Controller
             }
         } else {
             $data['meeting_admin'] = $this->History_model->get_all_history_meeting_by_daterange_admin($where);
-            $data['meeting_user'] = $this->History_model->get_all_history_meeting_by_daterange($where, $this->session->userdata('role_id'));
+            $data['meeting_user'] = $this->History_model->get_all_history_meeting_by_daterange($where, $this->session->userdata('email'));
 
             if ($data['user']['role_id'] == 1) {
                 $this->load->view('layout/header', $data);
