@@ -23,8 +23,8 @@ date_default_timezone_set("Asia/Jakarta");
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/rapat/';
-// $config['base_url'] = 'http://192.168.64.2/rapat/';
+// $config['base_url'] = 'http://localhost/rapat/';
+$config['base_url'] = 'http://192.168.64.2/rapat/';
 
 /*
 |--------------------------------------------------------------------------
