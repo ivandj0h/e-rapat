@@ -7,7 +7,7 @@ class Meeting extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text'));
+        $this->load->helper(array('string', 'text', 'tanggal'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
@@ -43,8 +43,8 @@ class Meeting extends CI_Controller
         $data['types'] = $this->Type_model->getSubType();
 
 
-        $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim');
-        $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required');
+        $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
+        $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
         $this->form_validation->set_rules('start_date', 'Tanggal Awal Rapat', 'required');
         $this->form_validation->set_rules('end_date', 'Tanggal Akhir Rapat', 'required');
 
@@ -335,9 +335,7 @@ class Meeting extends CI_Controller
     function get_media_meeting()
     {
         $id_type = $this->input->post('id_type');
-
         $data = $this->Type_model->get_id_type($id_type);
-
         echo json_encode($data);
     }
 
