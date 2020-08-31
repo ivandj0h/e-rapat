@@ -373,19 +373,19 @@ function enable_add_new()
         </div>
     </div>
     <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal Rapat</label>
+        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
         <div class="col-sm-10">
             <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
             <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
         <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
         <div class="col-sm-10">
             <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
             <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
         </div>
-    </div>
+    </div> -->
     <div class="form-group row">
         <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
         <div class="col-sm-10">
