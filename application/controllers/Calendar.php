@@ -8,8 +8,9 @@ class Calendar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // was_logged_in();
+        $this->load->helper(array('string', 'text', 'tanggal'));
         $this->load->model('Account_model');
+        $this->load->model('Meeting_model');
     }
 
     public function index()
@@ -24,7 +25,6 @@ class Calendar extends CI_Controller
 
     public function get_data_calendar()
     {
-        // echo 'Here is the API';
         $hostname = 'localhost';
         $username = 'root';
         $password = '';

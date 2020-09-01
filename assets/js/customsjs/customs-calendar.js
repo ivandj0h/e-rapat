@@ -310,7 +310,7 @@ $(document).ready(function () {
 			// var startDate;
 			// if (view.name == "month") {
 			// 	startDate.set({ hours: today.hours(), minute: today.minutes() });
-			// 	alert('Clicked on: ' + startDate.format());
+			// 	alert("Clicked on: " + startDate.format());
 			// }
 		},
 		select: function (startDate, endDate, jsEvent, view) {
@@ -365,7 +365,7 @@ $(document).ready(function () {
 			//newEvent(startDate, endDate);
 		},
 		eventClick: function (event, jsEvent, view) {
-			editEvent(event);
+			// editEvent(event);
 		},
 		locale: "ID",
 		timezone: "local",
@@ -383,7 +383,7 @@ $(document).ready(function () {
 		defaultDate: new Date(),
 		timeFormat: "HH:mm",
 		defaultTimedEventDuration: "01:00:00",
-		editable: true,
+		editable: false,
 		minTime: "01:00:00",
 		maxTime: "24:00:00",
 		slotLabelFormat: "HH:mm",
@@ -474,82 +474,82 @@ $(document).ready(function () {
 
 	//EDIT EVENT CALENDAR
 
-	editEvent = function (event, element, view) {
-		$(".popover.fade.top").remove();
-		$(element).popover("hide");
+	// editEvent = function (event, element, view) {
+	// 	$(".popover.fade.top").remove();
+	// 	$(element).popover("hide");
 
-		//$(".dropdown").hide().css("visibility", "hidden");
+	// 	//$(".dropdown").hide().css("visibility", "hidden");
 
-		if (event.allDay == true) {
-			$("#editEventModal").find("#editEndDate").attr("disabled", true);
-			$("#editEventModal").find("#editEndDate").val("");
-			$(".allDayEdit").prop("checked", true);
-		} else {
-			$("#editEventModal").find("#editEndDate").attr("disabled", false);
-			$("#editEventModal")
-				.find("#editEndDate")
-				.val(event.end.format("ddd DD MMM YYYY HH:mm"));
-			$(".allDayEdit").prop("checked", false);
-		}
+	// 	if (event.allDay == true) {
+	// 		$("#editEventModal").find("#editEndDate").attr("disabled", true);
+	// 		$("#editEventModal").find("#editEndDate").val("");
+	// 		$(".allDayEdit").prop("checked", true);
+	// 	} else {
+	// 		$("#editEventModal").find("#editEndDate").attr("disabled", false);
+	// 		$("#editEventModal")
+	// 			.find("#editEndDate")
+	// 			.val(event.end.format("ddd DD MMM YYYY HH:mm"));
+	// 		$(".allDayEdit").prop("checked", false);
+	// 	}
 
-		$(".allDayEdit").on("change", function () {
-			if ($(this).is(":checked")) {
-				$("#editEventModal").find("#editEndDate").attr("disabled", true);
-				$("#editEventModal").find("#editEndDate").val("");
-				$(".allDayEdit").prop("checked", true);
-			} else {
-				$("#editEventModal").find("#editEndDate").attr("disabled", false);
-				$(".allDayEdit").prop("checked", false);
-			}
-		});
+	// 	$(".allDayEdit").on("change", function () {
+	// 		if ($(this).is(":checked")) {
+	// 			$("#editEventModal").find("#editEndDate").attr("disabled", true);
+	// 			$("#editEventModal").find("#editEndDate").val("");
+	// 			$(".allDayEdit").prop("checked", true);
+	// 		} else {
+	// 			$("#editEventModal").find("#editEndDate").attr("disabled", false);
+	// 			$(".allDayEdit").prop("checked", false);
+	// 		}
+	// 	});
 
-		$("#editTitle").val(event.title);
-		$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
-		$("#edit-calendar-type").val(event.calendar);
-		$("#edit-event-desc").val(event.agenda);
-		$(".eventName").text(event.title);
-		$(".eventDate").text(event.start.format("DD-MM-YYYY"));
-		$(".eventHourStart").text(event.start.format("HH:mm"));
-		$(".eventHourEnd").text(event.end.format("HH:mm"));
-		$("#editEventModal").modal("show");
-		$("#updateEvent").unbind();
-		$("#updateEvent").on("click", function () {
-			var statusAllDay;
-			if ($(".allDayEdit").is(":checked")) {
-				statusAllDay = true;
-			} else {
-				statusAllDay = false;
-			}
-			var title = $("input#editTitle").val();
-			var startDate = $("input#editStartDate").val();
-			var endDate = $("input#editEndDate").val();
-			var calendar = $("#edit-calendar-type").val();
-			var agenda = $("#edit-event-desc").val();
-			$("#editEventModal").modal("hide");
-			var eventData;
-			if (title) {
-				event.title = title;
-				event.start = startDate;
-				event.end = endDate;
-				event.calendar = calendar;
-				event.agenda = agenda;
-				event.allDay = statusAllDay;
-				$("#calendar").fullCalendar("updateEvent", event);
-			} else {
-				alert("Title can't be blank. Please try again.");
-			}
-		});
+	// 	$("#editTitle").val(event.title);
+	// 	$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
+	// 	$("#edit-calendar-type").val(event.calendar);
+	// 	$("#edit-event-desc").val(event.agenda);
+	// 	$(".eventName").text(event.title);
+	// 	$(".eventDate").text(event.start.format("DD-MM-YYYY"));
+	// 	$(".eventHourStart").text(event.start.format("HH:mm"));
+	// 	$(".eventHourEnd").text(event.end.format("HH:mm"));
+	// 	$("#editEventModal").modal("show");
+	// 	$("#updateEvent").unbind();
+	// 	$("#updateEvent").on("click", function () {
+	// 		var statusAllDay;
+	// 		if ($(".allDayEdit").is(":checked")) {
+	// 			statusAllDay = true;
+	// 		} else {
+	// 			statusAllDay = false;
+	// 		}
+	// 		var title = $("input#editTitle").val();
+	// 		var startDate = $("input#editStartDate").val();
+	// 		var endDate = $("input#editEndDate").val();
+	// 		var calendar = $("#edit-calendar-type").val();
+	// 		var agenda = $("#edit-event-desc").val();
+	// 		$("#editEventModal").modal("hide");
+	// 		var eventData;
+	// 		if (title) {
+	// 			event.title = title;
+	// 			event.start = startDate;
+	// 			event.end = endDate;
+	// 			event.calendar = calendar;
+	// 			event.agenda = agenda;
+	// 			event.allDay = statusAllDay;
+	// 			$("#calendar").fullCalendar("updateEvent", event);
+	// 		} else {
+	// 			alert("Title can't be blank. Please try again.");
+	// 		}
+	// 	});
 
-		$("#deleteEvent").on("click", function () {
-			$("#deleteEvent").unbind();
-			if (event._id.includes("_fc")) {
-				$("#calendar").fullCalendar("removeEvents", [event._id]);
-			} else {
-				$("#calendar").fullCalendar("removeEvents", [event._id]);
-			}
-			$("#editEventModal").modal("hide");
-		});
-	};
+	// 	$("#deleteEvent").on("click", function () {
+	// 		$("#deleteEvent").unbind();
+	// 		if (event._id.includes("_fc")) {
+	// 			$("#calendar").fullCalendar("removeEvents", [event._id]);
+	// 		} else {
+	// 			$("#calendar").fullCalendar("removeEvents", [event._id]);
+	// 		}
+	// 		$("#editEventModal").modal("hide");
+	// 	});
+	// };
 
 	//SET DEFAULT VIEW CALENDAR
 
@@ -609,14 +609,14 @@ $(document).ready(function () {
 
 	//CREATE NEW CALENDAR AND APPEND
 
-	$("#addCustomCalendar").on("click", function () {
-		var newCalendarName = $("#inputCustomCalendar").val();
-		$("#calendar_filter, #calendar-type, #edit-calendar-type").append(
-			$("<option>", {
-				value: newCalendarName,
-				text: newCalendarName,
-			})
-		);
-		$("#inputCustomCalendar").val("");
-	});
+	// $("#addCustomCalendar").on("click", function () {
+	// 	var newCalendarName = $("#inputCustomCalendar").val();
+	// 	$("#calendar_filter, #calendar-type, #edit-calendar-type").append(
+	// 		$("<option>", {
+	// 			value: newCalendarName,
+	// 			text: newCalendarName,
+	// 		})
+	// 	);
+	// 	$("#inputCustomCalendar").val("");
+	// });
 });

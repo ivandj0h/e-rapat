@@ -9,10 +9,8 @@ function is_logged_in()
         $role_id = $ci->session->userdata('role_id');
         $menu = $ci->uri->segment(1);
 
-        // query to db to get the id
         $queryMenu = $ci->db->get_where('user_menu', ['menu' => $menu])->row_array();
 
-        // we just need the id
         $menu_id = $queryMenu['id'];
 
         $queryAccess = $ci->db->get_where('user_access_menu', [
@@ -173,29 +171,29 @@ all about status part
 */
 function status_all_cancel_upload($a)
 { ?>
-    <a href="#" class="badge badge-secondary">Undangan Rapat</a> <br>
-    <a href="#" class="badge badge-secondary">Notulen Rapat</a> <br>
-    <a href="#" class="badge badge-secondary">Absensi Rapat</a>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#errorDownload" style="cursor:pointer;margin:2px;">Undangan Rapat</span><br>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#errorDownload" style="cursor:pointer;margin:2px;">Notulen Rapat</span><br>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#errorDownload" style="cursor:pointer;margin:2px;">Absensi Rapat</span>
 <?php }
 
 function status_all_upload($a)
 { ?>
-    <a href="#" class="badge badge-success">Undangan Rapat</a> <br>
-    <a href="#" class="badge badge-success">Notulen Rapat</a> <br>
-    <a href="#" class="badge badge-success">Absensi Rapat</a>
+    <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
+    <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>" class="badge badge-success">Notulen Rapat</a> <br>
+    <a href="<?= base_url('meeting/absensidownload/' . $a['files_upload2']); ?>" class="badge badge-success">Absensi Rapat</a>
 <?php }
 
 function status_undangan_upload($a)
 { ?>
-    <a href="#" class="badge badge-success">Undangan Rapat</a> <br>
+    <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
     <span class="badge badge-danger" data-toggle="modal" data-target="#uploadNotulen<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Notulen Rapat</span> <br>
     <span class="badge badge-danger" data-toggle="modal" data-target="#errorAbsensi" style="cursor:pointer;margin:2px;"> Absensi Rapat</span>
 <?php }
 
 function status_notulen_upload($a)
 { ?>
-    <a href="#" class="badge badge-success">Undangan Rapat</a> <br>
-    <a href="#" class="badge badge-success">Notulen Rapat</a> <br>
+    <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
+    <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>" class="badge badge-success">Notulen Rapat</a> <br>
     <span class="badge badge-danger" data-toggle="modal" data-target="#uploadAbsensi<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Absensi Rapat</span>
 <?php }
 
@@ -249,7 +247,7 @@ function form_change_status_online($a)
     $datenow = date("Y-m-d");
     $timenow = date("H:i:s");
     $datedb = $a['start_date'];
-    $timedb = $a['start_time'];
+    $timedb = $a['end_time'];
     if ($datenow > $datedb && $timenow > $timedb) {
         expired_form_editable_date($a);
     } else {
@@ -295,7 +293,7 @@ function form_change_status_offline($a)
     $datenow = date("Y-m-d");
     $timenow = date("H:i:s");
     $datedb = $a['start_date'];
-    $timedb = $a['start_time'];
+    $timedb = $a['end_time'];
     if ($datenow > $datedb && $timenow > $timedb) {
         expired_form_editable_date($a);
     } else {
@@ -375,17 +373,10 @@ function enable_add_new()
     <div class="form-group row">
         <label for="start_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
         <div class="col-sm-10">
-            <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Awal Rapat" autocomplete="off">
-            <?= form_error('Tanggal Awal Rapat', '<small class="text-danger">', '</small>'); ?>
+            <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Rapat" autocomplete="off">
+            <?= form_error('Tanggal Rapat', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
-    <!-- <div class="form-group row">
-        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir Rapat</label>
-        <div class="col-sm-10">
-            <input type="text" id="end_date" name="end_date" class="border" placeholder="Tanggal Akhir Rapat" autocomplete="off">
-            <?= form_error('Tanggal Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
-        </div>
-    </div> -->
     <div class="form-group row">
         <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
         <div class="col-sm-10">
@@ -428,6 +419,12 @@ function disable_add_one($a)
 function disable_add_two($a)
 { ?>
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>ABSENSI RAPAT</strong>.</p>
+<?php }
+
+// can't add meeting num two
+function disable_download($a)
+{ ?>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> File tidak bisa di unduh, karena Rapat sudah dibatalkan</p>
 <?php }
 
 // Modal Disabled footer

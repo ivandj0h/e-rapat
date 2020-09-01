@@ -84,8 +84,7 @@
                                                 $datenow = strtotime(date("Y-m-d"));
                                                 $timenow = strtotime(date("H:i:s"));
                                                 $datedb = strtotime($a['start_date']);
-                                                $timedb = strtotime($a['start_time']);
-
+                                                $timedb = strtotime($a['end_time']);
                                                 // var_dump($timedb);
                                                 // die;
                                                 if ($datenow >= $datedb && $timenow >= $timedb) {
@@ -98,7 +97,8 @@
                                                     }
                                                 }
                                                 ?>
-                                                <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a>
+                                                <!-- <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a> -->
+                                                <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
                                             </td>
                                         </tr>
@@ -108,9 +108,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-delay="5000" data-autohide="true">
                     <div class="toast-header">
                         <span class="rounded mr-2 bg-danger" style="width: 15px;height: 15px"></span>
@@ -217,6 +214,81 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Edit -->
+
+<!-- Start of Modal Detail -->
+<?php
+foreach ($meeting as $a) :
+    $id = $a['id'];
+    $meeting_subtype = $a['meeting_subtype'];
+    $request_status = $a['request_status'];
+?>
+    <div class="modal fade" id="meetingDetail<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header mb-2">
+                    <h6 class="modal-title" id="addMeeting"> Detail Rapat <strong><?= $a['sub_department_name']; ?></strong></h6>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label for="members_name" class="col-sm-2 col-form-label">Tanggal Rapat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-user" id="participants_name" value="<?= date("d-m-Y", strtotime($a['start_date'])); ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="members_name" class="col-sm-2 col-form-label">Tipe Rapat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_type']; ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="members_name" class="col-sm-2 col-form-label">Media Rapat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_subtype']; ?>" disabled>
+                        </div>
+                    </div>
+                    <?php
+                    if ($a['type_id'] == 1) { ?>
+                        <div class="form-group row">
+                            <label for="members_name" class="col-sm-2 col-form-label">ID Rapat</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_subtype']; ?> ID : <?= $a['zoomid']; ?>" disabled>
+                            </div>
+                        </div>
+                    <?php }
+                    ?>
+                    <div class="form-group row">
+                        <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control form-control-user textarea-autosize" disabled><?= $a['agenda']; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-user" value="<?= $a['members_name']; ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="members_name" class="col-sm-2 col-form-label">Narasumber Rapat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-user" value="<?= $a['speakers_name']; ?>" disabled>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Detail -->
+
 
 <!-- Start of Modal Change Status -->
 <?php
@@ -401,6 +473,29 @@ foreach ($meeting as $a) :
     </div>
 </div>
 <!-- End of Modal Upload Error -->
+
+<!-- Start of Modal Download Error -->
+<div class="modal fade" id="errorDownload" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorDownload">Unduh Berkas Rapat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?= disable_download($id); ?>
+            </div>
+            <div class="modal-footer">
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Download Error -->
 
 <!-- Start of Modal Delete -->
 <?php
