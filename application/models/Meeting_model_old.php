@@ -6,6 +6,17 @@ class Meeting_model extends CI_Model
     protected $table   = 'view_user_meeting';
     protected $meeting   = 'meeting';
 
+    public function start_exists($key)
+    {
+        $this->db->where('start_date', $key);
+        $query = $this->db->get($this->meeting);
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function get_all_meeting()
     {
         $this->db->from($this->table);

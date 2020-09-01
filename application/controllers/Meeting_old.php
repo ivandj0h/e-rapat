@@ -45,7 +45,8 @@ class Meeting extends CI_Controller
 
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
         $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('start_date', 'Tanggal Awal Rapat', 'required');
+        // $this->form_validation->set_rules('start_date', 'Tanggal Awal Rapat', 'callback_startime_exists|required');
+        $this->form_validation->set_rules('start_date', 'Tanggal Awal Rapat', 'required|is_unique[meeting.start_date]');
         $this->form_validation->set_rules('end_date', 'Tanggal Akhir Rapat', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -343,5 +344,10 @@ class Meeting extends CI_Controller
     {
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
         echo $data['meeting'];
+    }
+
+    function startime_exists($key)
+    {
+        $this->Meeting_model->start_exists($key);
     }
 }
