@@ -45,8 +45,9 @@ class Meeting extends CI_Controller
 
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
         $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('start_date', 'Tanggal Awal Rapat', 'required');
-        $this->form_validation->set_rules('end_date', 'Tanggal Akhir Rapat', 'required');
+        $this->form_validation->set_rules('start_date', 'Tanggal Rapat', 'required|is_unique[meeting.start_date]');
+        // $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'callback_startime_exists|required');
+        // $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'callback_startime_exists|required');
 
         if ($this->form_validation->run() == false) {
             if ($data['user']['role_id'] == '1') {
@@ -87,7 +88,7 @@ class Meeting extends CI_Controller
                         'unique_code' => uniqid(),
                         'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                         'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('end_date', true),
+                        'end_date' => $this->input->post('start_date', true),
                         'date_requested' =>  date('Y-m-d'),
                         'start_time' => $this->input->post('start_time', true),
                         'end_time' => $this->input->post('end_time', true),
@@ -102,7 +103,7 @@ class Meeting extends CI_Controller
                         'unique_code' => uniqid(),
                         'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                         'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('end_date', true),
+                        'end_date' => $this->input->post('start_date', true),
                         'date_requested' =>  date('Y-m-d'),
                         'start_time' => $this->input->post('start_time', true),
                         'end_time' => $this->input->post('end_time', true),
@@ -121,7 +122,7 @@ class Meeting extends CI_Controller
                         'unique_code' => uniqid(),
                         'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                         'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('end_date', true),
+                        'end_date' => $this->input->post('start_date', true),
                         'date_requested' =>  date('Y-m-d'),
                         'start_time' => $this->input->post('start_time', true),
                         'end_time' => $this->input->post('end_time', true),
@@ -136,7 +137,7 @@ class Meeting extends CI_Controller
                         'unique_code' => uniqid(),
                         'agenda' => htmlspecialchars($this->input->post('agenda', true)),
                         'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('end_date', true),
+                        'end_date' => $this->input->post('start_date', true),
                         'date_requested' =>  date('Y-m-d'),
                         'start_time' => $this->input->post('start_time', true),
                         'end_time' => $this->input->post('end_time', true),
@@ -282,11 +283,25 @@ class Meeting extends CI_Controller
         }
     }
 
-    public function meetingdownload($id)
+    public function undangandownload($id)
     {
         $this->load->helper('download');
-        $data = $this->Meeting_model->get_meeting_download($id);
+        $data = $this->Meeting_model->get_undangan_download($id);
         force_download('uploads/' . $data->files_upload, NULL);
+    }
+
+    public function notulendownload($id)
+    {
+        $this->load->helper('download');
+        $data = $this->Meeting_model->get_notulen_download($id);
+        force_download('uploads/' . $data->files_upload1, NULL);
+    }
+
+    public function absensidownload($id)
+    {
+        $this->load->helper('download');
+        $data = $this->Meeting_model->get_absensi_download($id);
+        force_download('uploads/' . $data->files_upload2, NULL);
     }
 
     public function updatestatus()
@@ -343,5 +358,10 @@ class Meeting extends CI_Controller
     {
         $data['meeting'] = $this->Meeting_model->get_all_meeting();
         echo $data['meeting'];
+    }
+
+    function startime_exists($key)
+    {
+        $this->Meeting_model->start_exists($key);
     }
 }
