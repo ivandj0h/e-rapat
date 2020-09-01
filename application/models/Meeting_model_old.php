@@ -8,7 +8,7 @@ class Meeting_model extends CI_Model
 
     public function start_exists($key)
     {
-        $this->db->where('start_date', $key);
+        $this->db->where('start_time', $key);
         $query = $this->db->get($this->meeting);
         if ($query->num_rows() > 0) {
             return true;
@@ -76,9 +76,19 @@ class Meeting_model extends CI_Model
         $this->db->update($this->table, $data);
     }
 
-    public function get_meeting_download($id)
+    public function get_undangan_download($id)
     {
         return $this->db->get_where($this->table, ['files_upload' => $id])->row();
+    }
+
+    public function get_notulen_download($id)
+    {
+        return $this->db->get_where($this->table, ['files_upload1' => $id])->row();
+    }
+
+    public function get_absensi_download($id)
+    {
+        return $this->db->get_where($this->table, ['files_upload2' => $id])->row();
     }
 
     public function get_info_upload($userid)

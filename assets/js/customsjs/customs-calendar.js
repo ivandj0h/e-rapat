@@ -394,8 +394,8 @@ $(document).ready(function () {
 		eventLongPressDelay: 0,
 		selectLongPressDelay: 0,
 		events: {
-			// url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
-			url: "http://localhost/rapat/calendar/get_data_calendar",
+			url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
+			// url: "http://localhost/rapat/calendar/get_data_calendar",
 			success: function (response) {
 				return response[0].value;
 			},
