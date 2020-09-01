@@ -20,19 +20,43 @@ $(document).ready(function () {
 			if (event.speakers_name.length == 0) {
 				displaySpeakerName = "<span style='color:red'>N/A</span>";
 			} else {
-				displaySpeakerName = event.speakers_name;
+				var nameArr = event.speakers_name.split(",");
+				var displaySpeakerName = "<ul>";
+
+				nameArr.forEach(function (name) {
+					displaySpeakerName += "<li>" + name + "</li>";
+				});
+
+				displaySpeakerName += "</ul>";
 			}
 
 			var cek_status = Date.parse(today.toISOString());
 			var jamAwal = Date.parse(event.start);
 			var jamAkhir = Date.parse(event.end);
 
-			if (cek_status > jamAwal && cek_status < jamAkhir) {
+			if (cek_status < jamAwal) {
 				var displayStatus =
-					"<span style='color:red'>Rapat Sedang Berlangsung</span>";
+					"<span style='color:green'>Rapat belum dimulai</span>";
+			} else if (cek_status > jamAwal && cek_status < jamAkhir) {
+				var displayStatus =
+					"<span style='color:blue'>Rapat sedang berlangsung</span>";
+			} else if (cek_status > jamAkhir) {
+				var displayStatus =
+					"<span style='color:red'>Rapat telah berakhir (Expired!)</span>";
+			} else if (event.statuses == "1") {
+				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
+			}
+
+			if (event.submediaid !== "1") {
+				displayMediaId =
+					"<p>" +
+					event.submedia +
+					" ID : <strong>" +
+					event.otherid +
+					"</strong></p>";
 			} else {
-				var displayStatus =
-					"<span style='color:blue'>Rapat Telah Berakhir</span>";
+				displayMediaId =
+					"<p>Zoom ID : <strong>" + event.zoomid + "</strong></p>";
 			}
 
 			if (event.calendar == "Online") {
@@ -42,35 +66,82 @@ $(document).ready(function () {
 						event.backgroundColor +
 						"; color:" +
 						event.textColor +
-						'">Media Rapat : ' +
+						'">Rapat : ' +
 						event.calendar +
 						"</div>",
 					content:
 						'<div class="popoverInfoCalendar">' +
-						"<p><strong>Nama Bagian :</strong> " +
+						"<p>Nama Bagian : <strong>" +
 						event.title +
-						"</p>" +
-						"<p><strong>Media Rapat :</strong> " +
-						event.calendar +
-						"</p>" +
-						"<p><strong>Zoom ID :</strong> " +
-						event.zoomid +
-						"</p>" +
-						"<p><strong>Nama Pimpinan Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Rapat : <strong>" +
+						event.media +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
+						event.submedia +
+						"</strong></p>" +
+						displayMediaId +
+						"<p>Nama Pimpinan Rapat : <strong>" +
 						event.members_name +
-						"</p>" +
-						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
 						displaySpeakerName +
-						"</p>" +
-						"<p><strong>Waktu Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
-						"</p>" +
-						"<p><strong>Status Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
 						displayStatus +
-						"</p>" +
-						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
 						event.agenda +
-						"</div>" +
+						"</strong></p></div>" +
+						"</div>",
+					delay: {
+						show: "800",
+						hide: "50",
+					},
+					trigger: "hover",
+					placement: "top",
+					html: true,
+					container: "body",
+				});
+			} else if (event.statuses == "1") {
+				element.popover({
+					title:
+						'<div class="popoverTitleCalendar" style="background-color:' +
+						event.backgroundColor +
+						"; color:" +
+						event.textColor +
+						'">Rapat : ' +
+						event.calendar +
+						" (Dibatalkan)</div>",
+					content:
+						'<div class="popoverInfoCalendar">' +
+						"<p>Nama Bagian : <strong>" +
+						event.title +
+						"</strong></p>" +
+						"<p>Rapat : <strong>" +
+						event.media +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
+						event.submedia +
+						"</strong></p>" +
+						displayMediaId +
+						"<p>Nama Pimpinan Rapat : <strong>" +
+						event.members_name +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
+						displaySpeakerName +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
+						displayEventDate +
+						"<p>Status Rapat : <strong>" +
+						displayStatus +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
+						event.agenda +
+						"</strong></p></div>" +
 						"</div>",
 					delay: {
 						show: "800",
@@ -82,7 +153,6 @@ $(document).ready(function () {
 					container: "body",
 				});
 			} else {
-				// console.log(event.calendar);
 				element.popover({
 					title:
 						'<div class="popoverTitleCalendar" style="background-color:' +
@@ -94,30 +164,30 @@ $(document).ready(function () {
 						"</div>",
 					content:
 						'<div class="popoverInfoCalendar">' +
-						"<p><strong>Nama Bagian :</strong> " +
+						"<p>Nama Bagian : <strong>" +
 						event.title +
-						"</p>" +
-						"<p><strong>Media Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
 						event.calendar +
-						"</p>" +
-						"<p><strong>Tempat Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Tempat Rapat : <strong>" +
 						event.location +
-						"</p>" +
-						"<p><strong>Nama Pimpinan Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Pimpinan Rapat : <strong>" +
 						event.members_name +
-						"</p>" +
-						"<p><strong>Nama Narasumber (Pembicara) :</strong> " +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
 						displaySpeakerName +
-						"</p>" +
-						"<p><strong>Waktu Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
-						"</p>" +
-						"<p><strong>Status Rapat :</strong> " +
+						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
 						displayStatus +
-						"</p>" +
-						'<div class="popoverDescCalendar"><strong>Agenda Rapat :</strong> ' +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
 						event.agenda +
-						"</div>" +
+						"</strong></p></div>" +
 						"</div>",
 					delay: {
 						show: "800",
@@ -135,6 +205,9 @@ $(document).ready(function () {
 			}
 			if (event.media == "Offline") {
 				element.css("background-color", "#dc3545");
+			}
+			if (event.statuses == "1") {
+				element.css("background-color", "#000000");
 			}
 
 			var show_media,
@@ -218,7 +291,7 @@ $(document).ready(function () {
 				$(".fc-content").css("height", "auto");
 			}
 		},
-		eventLimitClick: function (cellInfo, event) {},
+		eventLimitClick: function (cellInfo, event) { },
 		eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
 			$(".popover.fade.top").remove();
 		},
@@ -237,7 +310,7 @@ $(document).ready(function () {
 			// var startDate;
 			// if (view.name == "month") {
 			// 	startDate.set({ hours: today.hours(), minute: today.minutes() });
-			// 	alert('Clicked on: ' + startDate.format());
+			// 	alert("Clicked on: " + startDate.format());
 			// }
 		},
 		select: function (startDate, endDate, jsEvent, view) {
@@ -292,7 +365,7 @@ $(document).ready(function () {
 			//newEvent(startDate, endDate);
 		},
 		eventClick: function (event, jsEvent, view) {
-			editEvent(event);
+			// editEvent(event);
 		},
 		locale: "ID",
 		timezone: "local",
@@ -310,9 +383,9 @@ $(document).ready(function () {
 		defaultDate: new Date(),
 		timeFormat: "HH:mm",
 		defaultTimedEventDuration: "01:00:00",
-		editable: true,
-		minTime: "07:00:00",
-		maxTime: "18:00:00",
+		editable: false,
+		minTime: "01:00:00",
+		maxTime: "24:00:00",
 		slotLabelFormat: "HH:mm",
 		weekends: true,
 		nowIndicator: true,
@@ -320,12 +393,11 @@ $(document).ready(function () {
 		longPressDelay: 0,
 		eventLongPressDelay: 0,
 		selectLongPressDelay: 0,
-
 		events: {
-			url: "http://localhost/rapat/calendar/get_data_calendar",
+			url: "http://192.168.64.2/rapat/calendar/get_data_calendar",
+			// url: "http://localhost/rapat/calendar/get_data_calendar",
 			success: function (response) {
 				return response[0].value;
-				// console.log(response[0].value);
 			},
 		},
 	});
@@ -402,82 +474,82 @@ $(document).ready(function () {
 
 	//EDIT EVENT CALENDAR
 
-	editEvent = function (event, element, view) {
-		$(".popover.fade.top").remove();
-		$(element).popover("hide");
+	// editEvent = function (event, element, view) {
+	// 	$(".popover.fade.top").remove();
+	// 	$(element).popover("hide");
 
-		//$(".dropdown").hide().css("visibility", "hidden");
+	// 	//$(".dropdown").hide().css("visibility", "hidden");
 
-		if (event.allDay == true) {
-			$("#editEventModal").find("#editEndDate").attr("disabled", true);
-			$("#editEventModal").find("#editEndDate").val("");
-			$(".allDayEdit").prop("checked", true);
-		} else {
-			$("#editEventModal").find("#editEndDate").attr("disabled", false);
-			$("#editEventModal")
-				.find("#editEndDate")
-				.val(event.end.format("ddd DD MMM YYYY HH:mm"));
-			$(".allDayEdit").prop("checked", false);
-		}
+	// 	if (event.allDay == true) {
+	// 		$("#editEventModal").find("#editEndDate").attr("disabled", true);
+	// 		$("#editEventModal").find("#editEndDate").val("");
+	// 		$(".allDayEdit").prop("checked", true);
+	// 	} else {
+	// 		$("#editEventModal").find("#editEndDate").attr("disabled", false);
+	// 		$("#editEventModal")
+	// 			.find("#editEndDate")
+	// 			.val(event.end.format("ddd DD MMM YYYY HH:mm"));
+	// 		$(".allDayEdit").prop("checked", false);
+	// 	}
 
-		$(".allDayEdit").on("change", function () {
-			if ($(this).is(":checked")) {
-				$("#editEventModal").find("#editEndDate").attr("disabled", true);
-				$("#editEventModal").find("#editEndDate").val("");
-				$(".allDayEdit").prop("checked", true);
-			} else {
-				$("#editEventModal").find("#editEndDate").attr("disabled", false);
-				$(".allDayEdit").prop("checked", false);
-			}
-		});
+	// 	$(".allDayEdit").on("change", function () {
+	// 		if ($(this).is(":checked")) {
+	// 			$("#editEventModal").find("#editEndDate").attr("disabled", true);
+	// 			$("#editEventModal").find("#editEndDate").val("");
+	// 			$(".allDayEdit").prop("checked", true);
+	// 		} else {
+	// 			$("#editEventModal").find("#editEndDate").attr("disabled", false);
+	// 			$(".allDayEdit").prop("checked", false);
+	// 		}
+	// 	});
 
-		$("#editTitle").val(event.title);
-		$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
-		$("#edit-calendar-type").val(event.calendar);
-		$("#edit-event-desc").val(event.agenda);
-		$(".eventName").text(event.title);
-		$(".eventDate").text(event.start.format("DD-MM-YYYY"));
-		$(".eventHourStart").text(event.start.format("HH:mm"));
-		$(".eventHourEnd").text(event.end.format("HH:mm"));
-		$("#editEventModal").modal("show");
-		$("#updateEvent").unbind();
-		$("#updateEvent").on("click", function () {
-			var statusAllDay;
-			if ($(".allDayEdit").is(":checked")) {
-				statusAllDay = true;
-			} else {
-				statusAllDay = false;
-			}
-			var title = $("input#editTitle").val();
-			var startDate = $("input#editStartDate").val();
-			var endDate = $("input#editEndDate").val();
-			var calendar = $("#edit-calendar-type").val();
-			var agenda = $("#edit-event-desc").val();
-			$("#editEventModal").modal("hide");
-			var eventData;
-			if (title) {
-				event.title = title;
-				event.start = startDate;
-				event.end = endDate;
-				event.calendar = calendar;
-				event.agenda = agenda;
-				event.allDay = statusAllDay;
-				$("#calendar").fullCalendar("updateEvent", event);
-			} else {
-				alert("Title can't be blank. Please try again.");
-			}
-		});
+	// 	$("#editTitle").val(event.title);
+	// 	$("#editStartDate").val(event.start.format("dd MMM YYYY HH:mm"));
+	// 	$("#edit-calendar-type").val(event.calendar);
+	// 	$("#edit-event-desc").val(event.agenda);
+	// 	$(".eventName").text(event.title);
+	// 	$(".eventDate").text(event.start.format("DD-MM-YYYY"));
+	// 	$(".eventHourStart").text(event.start.format("HH:mm"));
+	// 	$(".eventHourEnd").text(event.end.format("HH:mm"));
+	// 	$("#editEventModal").modal("show");
+	// 	$("#updateEvent").unbind();
+	// 	$("#updateEvent").on("click", function () {
+	// 		var statusAllDay;
+	// 		if ($(".allDayEdit").is(":checked")) {
+	// 			statusAllDay = true;
+	// 		} else {
+	// 			statusAllDay = false;
+	// 		}
+	// 		var title = $("input#editTitle").val();
+	// 		var startDate = $("input#editStartDate").val();
+	// 		var endDate = $("input#editEndDate").val();
+	// 		var calendar = $("#edit-calendar-type").val();
+	// 		var agenda = $("#edit-event-desc").val();
+	// 		$("#editEventModal").modal("hide");
+	// 		var eventData;
+	// 		if (title) {
+	// 			event.title = title;
+	// 			event.start = startDate;
+	// 			event.end = endDate;
+	// 			event.calendar = calendar;
+	// 			event.agenda = agenda;
+	// 			event.allDay = statusAllDay;
+	// 			$("#calendar").fullCalendar("updateEvent", event);
+	// 		} else {
+	// 			alert("Title can't be blank. Please try again.");
+	// 		}
+	// 	});
 
-		$("#deleteEvent").on("click", function () {
-			$("#deleteEvent").unbind();
-			if (event._id.includes("_fc")) {
-				$("#calendar").fullCalendar("removeEvents", [event._id]);
-			} else {
-				$("#calendar").fullCalendar("removeEvents", [event._id]);
-			}
-			$("#editEventModal").modal("hide");
-		});
-	};
+	// 	$("#deleteEvent").on("click", function () {
+	// 		$("#deleteEvent").unbind();
+	// 		if (event._id.includes("_fc")) {
+	// 			$("#calendar").fullCalendar("removeEvents", [event._id]);
+	// 		} else {
+	// 			$("#calendar").fullCalendar("removeEvents", [event._id]);
+	// 		}
+	// 		$("#editEventModal").modal("hide");
+	// 	});
+	// };
 
 	//SET DEFAULT VIEW CALENDAR
 
@@ -537,14 +609,14 @@ $(document).ready(function () {
 
 	//CREATE NEW CALENDAR AND APPEND
 
-	$("#addCustomCalendar").on("click", function () {
-		var newCalendarName = $("#inputCustomCalendar").val();
-		$("#calendar_filter, #calendar-type, #edit-calendar-type").append(
-			$("<option>", {
-				value: newCalendarName,
-				text: newCalendarName,
-			})
-		);
-		$("#inputCustomCalendar").val("");
-	});
+	// $("#addCustomCalendar").on("click", function () {
+	// 	var newCalendarName = $("#inputCustomCalendar").val();
+	// 	$("#calendar_filter, #calendar-type, #edit-calendar-type").append(
+	// 		$("<option>", {
+	// 			value: newCalendarName,
+	// 			text: newCalendarName,
+	// 		})
+	// 	);
+	// 	$("#inputCustomCalendar").val("");
+	// });
 });

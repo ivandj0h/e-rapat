@@ -104,6 +104,23 @@ th {
 	padding-bottom: 2px;
 }
 
+textarea.textarea-autosize {
+	height: 12.25rem !important;
+	min-height: 2.25rem !important;
+	resize: none !important;
+	overflow-y: hidden !important;
+}
+
+textarea.textarea-autosize.form-control-lg {
+	height: 12.75rem !important;
+	min-height: 3.75rem !important;
+}
+
+textarea.textarea-autosize.form-control-sm {
+	height: 2rem !important;
+	min-height: 2rem !important;
+}
+
 .modal-lg {
 	max-width: 80% !important;
 	z-index: 10;

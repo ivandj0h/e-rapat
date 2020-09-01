@@ -81,7 +81,6 @@
                     <div class="form-group">
                         <input class='showHideWeekend' type="checkbox" checked>
                         <label for="ShowWeekends">Tampilkan / Sembunyikan Akhir Pekan (Sabtu - Minggu)</label>
-                        <!-- <div class="input-group"> -->
                     </div>
                 </div>
             </div>
@@ -156,9 +155,17 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="row">
-                            <div class="col-xs-12">
-                                <label class="col-xs-4" for="title">Nama Bagian</label>
-                                <input class="inputModal" disabled id="editTitle" />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="col-xs-4" for="title">Nama Bagian</label>
+                                    <input class="inputModal" disabled id="editTitle" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="col-xs-4" for="edit-event-desc">Agenda Rapat</label>
+                                    <textarea rows="4" cols="50" class="inputModal" disabled id="edit-event-desc"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="row">

@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 26, 2020 at 10:07 AM
+-- Host: 127.0.0.1
+-- Generation Time: Aug 31, 2020 at 11:56 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -30,10 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `meeting` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `other_online_id` varchar(150) NOT NULL,
   `sub_type_id` int(11) NOT NULL,
   `speakers_name` varchar(225) NOT NULL,
   `members_name` varchar(225) NOT NULL,
   `files_upload` varchar(225) NOT NULL,
+  `files_upload1` varchar(225) NOT NULL,
+  `files_upload2` varchar(225) NOT NULL,
   `unique_code` varchar(100) NOT NULL,
   `agenda` text NOT NULL,
   `date_requested` date NOT NULL,
@@ -44,14 +47,6 @@ CREATE TABLE `meeting` (
   `request_status` int(11) NOT NULL,
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meeting`
---
-
-INSERT INTO `meeting` (`id`, `user_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
-(1, 15, 1, '', 'ivandi djoh gah', '', '5f460108076e9', 'Ada banyak variasi tulisan Lorem Ipsum yang tersedia, tapi kebanyakan sudah mengalami perubahan bentuk, entah karena unsur humor atau kalimat yang diacak hingga nampak sangat tidak masuk akal. Jika anda ingin menggunakan tulisan Lorem Ipsum, anda harus yakin tidak ada bagian yang memalukan yang tersembunyi di tengah naskah tersebut. Semua generator Lorem Ipsum di internet cenderung untuk mengulang bagian-bagian tertentu. Karena itu inilah generator pertama yang sebenarnya di internet. Ia menggunakan kamus perbendaharaan yang terdiri dari 200 kata Latin, yang digabung dengan banyak contoh struktur kalimat untuk menghasilkan Lorem Ipsun yang nampak masuk akal. Karena itu Lorem Ipsun yang dihasilkan akan selalu bebas dari pengulangan, unsur humor yang sengaja dimasukkan, kata yang tidak sesuai dengan karakteristiknya dan lain sebagainya.', '2020-08-26', '2020-08-05', '2020-08-05', '08:00:00', '09:00:00', 1, ''),
-(2, 15, 6, '', 'hshshshshs', 'SS.png', '5f46135b7a55d', 'Ada banyak variasi tulisan Lorem Ipsum yang tersedia, tapi kebanyakan sudah mengalami perubahan bentuk, entah karena unsur humor atau kalimat yang diacak hingga nampak sangat tidak masuk akal. Jika anda ingin menggunakan tulisan Lorem Ipsum, anda harus yakin tidak ada bagian yang memalukan yang tersembunyi di tengah naskah tersebut. Semua generator Lorem Ipsum di internet cenderung untuk mengulang bagian-bagian tertentu. Karena itu inilah generator pertama yang sebenarnya di internet. Ia menggunakan kamus perbendaharaan yang terdiri dari 200 kata Latin, yang digabung dengan banyak contoh struktur kalimat untuk menghasilkan Lorem Ipsun yang nampak masuk akal. Karena itu Lorem Ipsun yang dihasilkan akan selalu bebas dari pengulangan, unsur humor yang sengaja dimasukkan, kata yang tidak sesuai dengan karakteristiknya dan lain sebagainya.', '2020-08-26', '2020-08-26', '2020-08-26', '08:58:00', '09:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -190,9 +185,10 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `sub_department_id`, `date_created`, `date_updated`) VALUES
-(14, '717 771 7448', 'administrator', 'admin@admin.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
-(15, '652 729 1800', 'Admin Keuangan', 'user@user.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
-(18, '986 6178 9524', 'Admin Humas', 'humas@humas.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 2, 1, 5, 1597213397, 1598262757);
+(14, '717 771 7448', 'administrator', 'admin@erapat.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
+(15, '234 234 2344', 'Admin Keuangan', 'keuangan@erapat.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
+(18, '456 456 4566', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 3, 1, 5, 1597213397, 1597381280),
+(19, '123 123 1233', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0);
 
 -- --------------------------------------------------------
 
@@ -309,7 +305,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (24, 1, 'Master Data Sekretariat', 'admin/department', 'fas fa-fw fa-project-diagram', 1),
 (25, 30, 'Overview', 'overview', 'fas fa-fw fa-compress-arrows-alt', 1),
 (27, 32, 'Riwayat Rapat', 'history', 'fas fa-fw fa-file-signature', 1),
-(28, 1, 'Master Data Bidang', 'admin/subdepartment', 'fas fa-fw fa-sitemap', 1),
+(28, 1, 'Master Data Bagian', 'admin/subdepartment', 'fas fa-fw fa-sitemap', 1),
 (29, 33, 'Master Data Media', 'type', 'fas fa-fw fa-phone-volume', 1),
 (30, 33, 'Master Data SubMedia', 'type/subtype', 'fas fa-fw fa-phone', 1),
 (31, 34, 'Master Data Akses', 'role', 'fas fa-fw fa-user-circle', 1);
@@ -385,6 +381,8 @@ CREATE TABLE `view_user_meeting` (
 ,`speakers_name` varchar(225)
 ,`members_name` varchar(225)
 ,`files_upload` varchar(225)
+,`files_upload1` varchar(225)
+,`files_upload2` varchar(225)
 ,`unique_code` varchar(100)
 ,`agenda` text
 ,`start_time` time
@@ -392,6 +390,7 @@ CREATE TABLE `view_user_meeting` (
 ,`request_status` int(11)
 ,`sub_type_id` int(11)
 ,`type_id` int(11)
+,`other_online_id` varchar(150)
 ,`meeting_subtype` varchar(225)
 ,`meeting_type` varchar(100)
 ,`start_date` date
@@ -435,7 +434,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`view_user_department`.`zoomid` AS `zoomid` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`files_upload1` AS `files_upload1`,`meeting`.`files_upload2` AS `files_upload2`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting`.`other_online_id` AS `other_online_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`view_user_department`.`zoomid` AS `zoomid` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -516,7 +515,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -552,7 +551,7 @@ ALTER TABLE `meeting_type`
 -- AUTO_INCREMENT for table `meeting_users`
 --
 ALTER TABLE `meeting_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`

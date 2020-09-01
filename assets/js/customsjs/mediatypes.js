@@ -24,6 +24,8 @@ $(document).ready(function () {
 						"<option value=" +
 						data[i].id +
 						">" +
+						data[i].id +
+						" . " +
 						data[i].meeting_subtype +
 						"</option>";
 				}
