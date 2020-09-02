@@ -25,6 +25,12 @@ class Meeting extends CI_Controller
             $this->load->view('layout/topbar', $data);
             $this->load->view('meeting/index', $data);
             $this->load->view('layout/footer');
+        } elseif ($data['user']['role_id'] == '4' && $data['user']['role_id'] == '5') {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('meeting/superuser', $data);
+            $this->load->view('layout/footer');
         } else {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);

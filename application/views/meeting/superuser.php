@@ -32,7 +32,8 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Tambah Rapat Baru</span>
+                            <!-- <span class="text">Tambah Rapat Baru</span> -->
+                            <span class="text">Tambah SuperUser</span>
                         </a>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat</h6>
                     </div>
