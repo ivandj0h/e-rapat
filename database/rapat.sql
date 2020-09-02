@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2020 at 11:56 PM
+-- Generation Time: Sep 02, 2020 at 05:48 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -69,7 +69,9 @@ INSERT INTO `meeting_department` (`id`, `department_name`) VALUES
 (3, 'Pusat Penelitian dan Pengembangan Transportasi Udara'),
 (4, 'Pusat Penelitian dan Pengembangan Transportasi LSDP'),
 (5, 'Pusat Penelitian dan Pengembangan Transportasi Jalan dan Perkertaapian'),
-(6, 'Pusat Penelitian dan Pengembangan Transportasi Antarmoda');
+(6, 'Pusat Penelitian dan Pengembangan Transportasi Antarmoda'),
+(7, 'Kaban'),
+(8, 'Sesban');
 
 -- --------------------------------------------------------
 
@@ -112,7 +114,9 @@ INSERT INTO `meeting_sub_department` (`id`, `department_id`, `sub_department_nam
 (10, 5, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian', 1),
 (11, 5, 'Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian', 1),
 (12, 6, 'Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda', 1),
-(13, 6, 'Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda', 1);
+(13, 6, 'Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda', 1),
+(14, 7, 'Kepala Badan Litbang Perhubungan', 1),
+(15, 8, 'Sekretaris Badan Litbang Perhubungan', 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +192,9 @@ INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password
 (14, '717 771 7448', 'administrator', 'admin@erapat.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
 (15, '234 234 2344', 'Admin Keuangan', 'keuangan@erapat.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
 (18, '456 456 4566', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 3, 1, 5, 1597213397, 1597381280),
-(19, '123 123 1233', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0);
+(19, '123 123 1233', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
+(20, '123 123 123', 'Kaban Litbang Perhubungan', 'kaban@erapat.com', 'default-avatar.jpg', '$2y$10$w5k9sGFC7SMC8whAPIp/dOknnlHLA.nOP1IypYw6JNVu2aDz0oEse', 4, 1, 14, 1599060092, 1599061311),
+(21, '321 321 321', 'Sesban Litbang Perhubungan', 'sesban@erapat.com', 'default-avatar.jpg', '$2y$10$7iKaePzZkNyVg37xciRbUOzFSQ58N92P8L95KwtgXGkzV8u8yBTge', 5, 1, 15, 1599060131, 1599061333);
 
 -- --------------------------------------------------------
 
@@ -227,7 +233,9 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (65, 2, 29),
 (66, 1, 34),
 (67, 3, 32),
-(68, 3, 2);
+(68, 3, 2),
+(69, 4, 2),
+(70, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -272,7 +280,9 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Admin'),
 (2, 'User'),
-(3, 'Report');
+(3, 'Report'),
+(4, 'Kaban'),
+(5, 'Sesban');
 
 -- --------------------------------------------------------
 
@@ -521,7 +531,7 @@ ALTER TABLE `meeting`
 -- AUTO_INCREMENT for table `meeting_department`
 --
 ALTER TABLE `meeting_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `meeting_place`
@@ -533,7 +543,7 @@ ALTER TABLE `meeting_place`
 -- AUTO_INCREMENT for table `meeting_sub_department`
 --
 ALTER TABLE `meeting_sub_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `meeting_sub_type`
@@ -551,13 +561,13 @@ ALTER TABLE `meeting_type`
 -- AUTO_INCREMENT for table `meeting_users`
 --
 ALTER TABLE `meeting_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -569,7 +579,7 @@ ALTER TABLE `user_menu`
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_sub_menu`
