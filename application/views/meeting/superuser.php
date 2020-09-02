@@ -100,6 +100,7 @@
                                                 <!-- <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a> -->
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Hapus Rapat</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
