@@ -62,22 +62,11 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <label for="calendar_view">Berdasarkan Bagian Kerja</label>
+                <label for="calendar_view">Berdasarkan Esalon 2</label>
                 <div class="input-group">
                     <select class="filter" id="bagian_filter" multiple="multiple">
-                        <option value='all'>Semua Bagian</option>
-                        <option value='2'>Bagian Keuangan dan Perlengkapan</option>
-                        <option value='3'>Bagian Perencanaan dan Kerja Sama</option>
-                        <option value='4'>Bagian Kepegawaian</option>
-                        <option value='5'>Bagian Data Humas dan Publikasi</option>
-                        <option value='6'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Udara</option>
-                        <option value='7'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara</option>
-                        <option value='8'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi LSDP</option>
-                        <option value='9'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP</option>
-                        <option value='10'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian</option>
-                        <option value='11'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian</option>
-                        <option value='12'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda</option>
-                        <option value='13'>Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda</option>
+                        <option value='all'>Semua Esalon 2</option>
+                        <?= get_dropdown_esalon_2(); ?>
                     </select>
                 </div>
             </div>

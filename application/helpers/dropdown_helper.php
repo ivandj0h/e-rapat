@@ -41,3 +41,12 @@ function get_dropdown_media_offline()
         echo "<option value=" . $st['id'] . ">" . $st['meeting_subtype'] . "</option>";
     }
 }
+
+function get_dropdown_esalon_2()
+{
+    $ci = get_instance();
+    $data['department'] = $ci->db->get('meeting_department')->result_array();
+    foreach ($data['department'] as $d) {
+        echo "<option value=" . $d['id'] . ">" . $d['department_name'] . "</option>";
+    }
+}
