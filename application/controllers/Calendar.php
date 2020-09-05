@@ -8,7 +8,7 @@ class Calendar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper(array('string', 'text', 'tanggal'));
+        $this->load->helper(array('string', 'text', 'tanggal', 'dropdown'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
     }
