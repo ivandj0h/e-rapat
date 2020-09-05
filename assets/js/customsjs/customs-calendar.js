@@ -412,7 +412,7 @@ $(document).ready(function () {
 	});
 
 	$("#bagian_filter").select2({
-		placeholder: "Pilih Bagian Kerja",
+		placeholder: "Pilih Esalon 2",
 		allowClear: true,
 	});
 

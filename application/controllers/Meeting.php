@@ -51,9 +51,8 @@ class Meeting extends CI_Controller
 
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
         $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('start_date', 'Tanggal Rapat', 'required|is_unique[meeting.start_date]');
-        // $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'callback_startime_exists|required');
-        // $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'callback_startime_exists|required');
+        $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'required|is_unique[meeting.start_date]');
+        $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'required|is_unique[meeting.end_time]');
 
         if ($this->form_validation->run() == false) {
             if ($data['user']['role_id'] == '1') {

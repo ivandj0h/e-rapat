@@ -216,9 +216,6 @@ function form_expired_status($a)
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
 <?php }
 
-
-
-
 // can change status Online Meeting if meeting not expired
 function form_change_status_online($a)
 { ?>
@@ -402,7 +399,7 @@ function enable_add_new()
     </div>
     <div class="modal-footer">
         <div class="actions">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+            <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
             <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
         </div>
     </div>

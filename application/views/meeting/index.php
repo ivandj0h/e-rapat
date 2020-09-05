@@ -18,7 +18,7 @@
                     <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
                         <h4 class="alert-heading">Error!</h4>
                         <hr>
-                        <?= validation_errors(); ?>
+                        <?= validation_errors('is_unique', 'Ruangan Sudah dibooking!'); ?>
                     </div>
                 <?php endif; ?>
 
