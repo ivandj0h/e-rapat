@@ -51,19 +51,13 @@
                 <label for="calendar_view">Berdasarkan Media Meeting</label>
                 <div class="input-group">
                     <select class="filter" id="type_filter" multiple="multiple">
-                        <!-- <option value='all'>Semua Bidang</option>
-                        <option value='0' disabled>-- Media Online --</option>
-                        <option value='1'>Google Zoom</option>
-                        <option value='2'>Google Duo</option>
-                        <option value='3'>Microsoft Skype</option>
-                        <option value='4'>Whatsapp</option>
-                        <option value='0' disabled>-- Media Offline --</option>
-                        <option value='5'>Ruangan Rapat Garuda</option>
-                        <option value='6'>Ruangan Rapat LRT</option>
-                        <option value='7'>Ruangan Rapat Rajawali</option>
-                        <option value='8'>Ruangan Rapat Perpustakaan</option> -->
-                        <option value='all'>Semua Bidang</option>
-                        <?= get_dropdown_media(); ?>
+                        <option value='all'>Semua Media Meeting</option>
+                        <?php
+                        echo "<option value='0' disabled>-- Media Online --</option>";
+                        get_dropdown_media_online();
+                        echo "<option value='0' disabled>-- Media Offline --</option>";
+                        get_dropdown_media_offline();
+                        ?>
                     </select>
                 </div>
             </div>
