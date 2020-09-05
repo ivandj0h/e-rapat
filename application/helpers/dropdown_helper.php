@@ -15,19 +15,29 @@ function get_dropdown_time()
     }
 }
 
-function get_dropdown_media()
+function get_dropdown_media_online()
 {
     $ci = get_instance();
-    $data['subtype'] = $ci->db->get('meeting_sub_type')->result_array();
-    if ($data['subtype'][0]['type_id'] == 1) {
-        echo "<option value='0' disabled>-- Media Online --</option>";
-        foreach ($data['subtype'] as $st) {
-            echo "<option value=" . $st['id'] . ">" . $st['meeting_subtype'] . "</option>";
-        }
-    } else if ($data['subtype'][0]['type_id'] != 1) {
-        echo "<option value='0' disabled>-- Media Offline --</option>";
-        foreach ($data['subtype'] as $st) {
-            echo "<option value=" . $st['id'] . ">" . $st['meeting_subtype'] . "</option>";
-        }
+    $condition = "type_id = 1";
+    $ci->db->select('*');
+    $ci->db->from('meeting_sub_type');
+    $ci->db->where($condition);
+    $data['subtype'] = $ci->db->get()->result_array();
+
+    foreach ($data['subtype'] as $st) {
+        echo "<option value=" . $st['id'] . ">" . $st['meeting_subtype'] . "</option>";
+    }
+}
+
+function get_dropdown_media_offline()
+{
+    $ci = get_instance();
+    $condition = "type_id = 2";
+    $ci->db->select('*');
+    $ci->db->from('meeting_sub_type');
+    $ci->db->where($condition);
+    $data['subtype'] = $ci->db->get()->result_array();
+    foreach ($data['subtype'] as $st) {
+        echo "<option value=" . $st['id'] . ">" . $st['meeting_subtype'] . "</option>";
     }
 }
