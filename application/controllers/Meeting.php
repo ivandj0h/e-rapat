@@ -150,16 +150,12 @@ class Meeting extends CI_Controller
                     ];
                 }
             }
-
             if (empty($_FILES['file']['name'])) {
                 $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Maaf!</strong> Anda belum mengunggah Undangan Rapat!</div>');
                 redirect('meeting', 'refresh');
             } else {
-
-
                 $files_name_upload = $_FILES['file']['name'];
-
                 if ($files_name_upload) {
                     $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
                     $config['max_size'] = '1024';
@@ -174,27 +170,32 @@ class Meeting extends CI_Controller
                         echo $this->upload->display_errors();
                     }
                 }
-                // $this->Meeting_model->insert_meeting($data);
-                // $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil membuat rapat!</div>');
-                // redirect('meeting', 'refresh');
-
             }
         }
     }
 
     public function store_meeting()
     {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
+        $data['alltype'] = $this->Type_model->get_all_type();
+        $data['types'] = $this->Type_model->getSubType();
+
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
         $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
         $this->form_validation->set_rules('start_date', 'Tanggal Rapat', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'required|is_unique[meeting.start_time]');
-        $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'required|is_unique[meeting.end_time]');
+        $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'required');
+        $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'required');
 
         if ($this->form_validation->run()) {
             $array = array(
-                'success' => '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil membuat rapat!</div>'
+                'success' => '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Mohon Menunggu!</strong>... <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button> <div id="countdown"></div></div>',
             );
+            $data = $this->Meeting_model->store_meeting();
         } else {
             $array = array(
                 'error'   => true,
@@ -205,7 +206,6 @@ class Meeting extends CI_Controller
                 'end_time_error' => form_error('end_time')
             );
         }
-
         echo json_encode($array);
     }
 

@@ -81,13 +81,19 @@
                                             </td>
                                             <td class="text-center action mx-2">
                                                 <?php
-                                                $datenow = strtotime(date("Y-m-d"));
-                                                $timenow = strtotime(date("H:i:s"));
-                                                $datedb = strtotime($a['start_date']);
-                                                $timedb = strtotime($a['end_time']);
-                                                // var_dump($timedb);
-                                                // die;
-                                                if ($datenow >= $datedb && $timenow >= $timedb) {
+
+                                                $combine_now = date("Y-m-d");
+                                                $combine_time_now = date("H:i:s");
+                                                $cmd = date('Y-m-d H:i:s', strtotime("$combine_now $combine_time_now"));
+
+                                                $combine_db = date($a['start_date']);
+                                                $combine_db_now = date($a['end_time']);
+                                                $cmb = date('Y-m-d H:i:s', strtotime("$combine_db $combine_db_now"));
+
+                                                $datedb = strtotime($cmd);
+                                                $timedb = strtotime($cmb);
+
+                                                if ($datedb > $timedb) {
                                                     status_meeting_expired($a);
                                                 } else {
                                                     if ($a['type_id'] == '1') {
@@ -96,6 +102,7 @@
                                                         status_meeting_offline($a);
                                                     }
                                                 }
+
                                                 ?>
                                                 <!-- <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a> -->
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
@@ -145,10 +152,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <span id="success_message"></span>
             <form method="POST" id="addMeeting">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
+                    <span id="success_message"></span>
                     <?= enable_add_new(); ?>
                 </div>
             </form>
@@ -205,7 +212,7 @@ foreach ($meeting as $a) :
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
                             <button type="submit" class="btn btn-primary">Ubah Rapat</button>
                         </div>
                     </div>
@@ -281,7 +288,7 @@ foreach ($meeting as $a) :
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
                 </div>
             </div>
         </div>
@@ -331,8 +338,7 @@ foreach ($meeting as $a) :
                     <div class="modal-footer">
                         <div class="actions">
                             <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
-                            <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
                         </div>
                     </div>
                 </form>
@@ -387,7 +393,7 @@ foreach ($meeting as $a) :
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
                     <button type="submit" class="btn btn-success">Unggah Berkas Notulen!</button>
                 </div>
                 </form>
@@ -442,7 +448,7 @@ foreach ($meeting as $a) :
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
                     <button type="submit" class="btn btn-success">Unggah Berkas Absensi!</button>
                 </div>
                 </form>
@@ -467,7 +473,7 @@ foreach ($meeting as $a) :
             </div>
             <div class="modal-footer">
                 <div class="actions">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
                 </div>
             </div>
         </div>
@@ -490,7 +496,7 @@ foreach ($meeting as $a) :
             </div>
             <div class="modal-footer">
                 <div class="actions">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
                 </div>
             </div>
         </div>
@@ -514,7 +520,7 @@ foreach ($meeting as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
                         <button type="submit" class="btn btn-danger">Confirm!</button>
                     </div>
                 </form>
@@ -539,7 +545,7 @@ foreach ($meeting as $a) :
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id" value="<?= $id; ?>">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Tutup</button>
             </div>
         </div>
     </div>
@@ -561,7 +567,7 @@ foreach ($meeting as $a) :
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id" value="<?= $id; ?>">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
             </div>
         </div>
     </div>
