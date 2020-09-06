@@ -84,8 +84,7 @@ class Meeting_model extends CI_Model
             'end_time' => $this->input->post('end_time', true),
             'request_status' => $request_status
         );
-        // var_dump($data);
-        // die;
+
         $result = $this->db->insert($this->meeting, $data);
         return $result;
     }
