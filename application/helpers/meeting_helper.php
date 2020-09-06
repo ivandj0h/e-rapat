@@ -341,51 +341,51 @@ function enable_add_new()
         <label for="other_online_id" class="col-sm-2 col-form-label">ID Rapat lain</label>
         <div class="col-sm-10">
             <input type="text" id="onlineId" name="other_online_id" class="border" placeholder="ID Rapat" autocomplete="off" disabled>
-            <br />
+            <!-- <br /> -->
             <input type="checkbox" class="dissable" id="yourBox" />
-            <small class="text-danger"> Aktifkan CkeckBox ini dan Isikan kolom tersebut dengan ID Rapat yang lain jika anda tidak menggunakan ZOOM Meeting</small>
+            <small class="text-danger"> Aktifkan CkeckBox Jika tidak menggunakan ZOOM Meeting</small>
         </div>
     </div>
     <div class="form-group row">
         <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
         <div class="col-sm-10">
             <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
-            <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
+            <span id="agenda_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label for="members_name" class="col-sm-2 col-form-label">Pimpinan Rapat</label>
         <div class="col-sm-10">
             <input data-role="tagsinput" type="text" name="participants_name" class="form-control form-control-user" id="participants_name" value="<?= set_value('participants_name'); ?>" placeholder="Tambah Pimpinan Rapat">
-            <?= form_error('participants_name', '<small class="text-danger">', '</small>'); ?>
+            <span id="participants_name_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label for="speakers_name" class="col-sm-2 col-form-label">Narasumber</label>
         <div class="col-sm-10">
-            <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakersName" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
-            <?= form_error('speakers_name', '<small class="text-danger">', '</small>'); ?>
+            <input data-role="tagsinput" type="text" name="speakers_name" class="form-control form-control-user" id="speakers_name" value="<?= set_value('speakers_name'); ?>" placeholder="Tambah Narasumber">
+            <span id="speakers_name_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label for="start_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
         <div class="col-sm-10">
             <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Rapat" autocomplete="off">
-            <?= form_error('Tanggal Rapat', '<small class="text-danger">', '</small>'); ?>
+            <span id="start_date_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
         <div class="col-sm-10">
             <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
-            <?= form_error('Jam Awal Rapat', '<small class="text-danger">', '</small>'); ?>
+            <span id="start_time_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
         <div class="col-sm-10">
             <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
-            <?= form_error('Jam Akhir Rapat', '<small class="text-danger">', '</small>'); ?>
+            <span id="end_time_error" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
@@ -395,12 +395,13 @@ function enable_add_new()
                 <input type="file" class="custom-file-input" id="files" name="file">
                 <label class="custom-file-label" for="image">Choose file</label>
             </div>
+            <span id="files_error" class="text-danger"></span>
         </div>
     </div>
     <div class="modal-footer">
         <div class="actions">
-            <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
-            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Buat Rapat</button>
+            <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+            <button type="submit" name="btnSave" class="btn btn-success" id="btnSave"><i class="fas fa-file"></i> Buat Rapat</button>
         </div>
     </div>
     <!-- End Form Add Meeting -->
