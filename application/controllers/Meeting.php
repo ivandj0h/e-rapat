@@ -155,6 +155,7 @@ class Meeting extends CI_Controller
                 <strong>Maaf!</strong> Anda belum mengunggah Undangan Rapat!</div>');
                 redirect('meeting', 'refresh');
             } else {
+
                 $files_name_upload = $_FILES['file']['name'];
                 if ($files_name_upload) {
                     $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
@@ -190,12 +191,12 @@ class Meeting extends CI_Controller
         $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'required');
 
         if ($this->form_validation->run()) {
+            $data = $this->Meeting_model->store_meeting();
             $array = array(
                 'success' => '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Mohon Menunggu!</strong>... <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button> <div id="countdown"></div></div>',
             );
-            $data = $this->Meeting_model->store_meeting();
         } else {
             $array = array(
                 'error'   => true,
@@ -244,6 +245,41 @@ class Meeting extends CI_Controller
         $this->Meeting_model->update_meeting($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
         redirect('meeting');
+    }
+
+    public function uploadundangan()
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting();
+
+        $config = array(
+            'upload_path' => "uploads/",
+            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+            'encrypt_name' => false,
+            'overwrite' => TRUE,
+            'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+        );
+
+        $id = $this->input->post('id');
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('undangan')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $error);
+            $this->load->view('meeting/userindex', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $undangan = $this->upload->data('file_name');
+            $this->db->set('files_upload', $undangan);
+
+            $this->db->where('id', $id);
+            $this->db->update('meeting');
+            $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> File Undangan Rapat berhasil di unggah!</div>');
+            redirect('meeting');
+        }
     }
 
     public function uploadnotulen()

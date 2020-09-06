@@ -229,6 +229,7 @@
                    $.ajax({
                        url: "<?php echo base_url(); ?>" + "meeting/store_meeting",
                        method: "POST",
+                       fileElementId: 'files',
                        data: dataJson,
                        dataType: "JSON",
                        async: true,

@@ -70,9 +70,9 @@
                                                     if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
                                                         status_all_upload($a);
                                                     } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        status_undangan_upload($a);
+                                                        notulen_upload($a);
                                                     } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        status_notulen_upload($a);
+                                                        absensi_upload($a);
                                                     } else {
                                                         status_no_upload($a);
                                                     }
@@ -152,7 +152,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" id="addMeeting">
+            <form method="POST" id="addMeeting" enctype="multipart/form-data">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <span id="success_message"></span>
@@ -174,6 +174,9 @@ foreach ($meeting as $a) :
     <div class="modal fade" id="meetingEdit<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
+                <div class="modal-header mb-2">
+                    <h6 class="modal-title" id="addMeeting"> Ubah Data Rapat <strong><?= $a['sub_department_name']; ?></strong></h6>
+                </div>
                 <form action="<?= base_url('meeting/editmeeting'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
@@ -192,7 +195,7 @@ foreach ($meeting as $a) :
                         <div class="form-group row">
                             <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Describe Agenda here..."><?= $a['agenda']; ?></textarea>
+                                <textarea class="form-control form-control-user textarea-autosize" name="agenda" id="agenda" placeholder="Describe Agenda here..."><?= $a['agenda']; ?></textarea>
                                 <?= form_error('agenda', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -212,8 +215,8 @@ foreach ($meeting as $a) :
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Ubah Rapat</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-copy"></i> Ubah Data Rapat</button>
                         </div>
                     </div>
                 </form>
@@ -237,7 +240,6 @@ foreach ($meeting as $a) :
                     <h6 class="modal-title" id="addMeeting"> Detail Rapat <strong><?= $a['sub_department_name']; ?></strong></h6>
                 </div>
                 <div class="modal-body">
-
                     <div class="form-group row">
                         <label for="members_name" class="col-sm-2 col-form-label">Tanggal Rapat</label>
                         <div class="col-sm-10">
@@ -339,6 +341,7 @@ foreach ($meeting as $a) :
                         <div class="actions">
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                            <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
                         </div>
                     </div>
                 </form>
@@ -347,6 +350,61 @@ foreach ($meeting as $a) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Change Status -->
+
+<!-- Start of Modal Upload Undangan -->
+<?php
+foreach ($meeting as $a) :
+    $id = $a['id'];
+?>
+    <div class="modal fade" id="uploadUndangan<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadUndangan">Unggah Berkas Undangan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?= form_open_multipart('meeting/uploadundangan'); ?>
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Nama Bagian</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= $a['sub_department_name']; ?></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Agenda Rapat</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <strong><?= word_limiter($a['agenda'], 100); ?></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="upload" class="col-sm-2 col-form-label">Berkas Undangan</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="undangan" name="undangan">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?= $id; ?>">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-up"></i> Unggah Berkas Undangan!</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Undangan Undangan -->
 
 <!-- Start of Modal Upload Notulen -->
 <?php
@@ -393,8 +451,8 @@ foreach ($meeting as $a) :
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
-                    <button type="submit" class="btn btn-success">Unggah Berkas Notulen!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-up"></i> Unggah Berkas Notulen!</button>
                 </div>
                 </form>
             </div>
@@ -448,8 +506,8 @@ foreach ($meeting as $a) :
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
-                    <button type="submit" class="btn btn-success">Unggah Berkas Absensi!</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-up"></i> Unggah Berkas Absensi!</button>
                 </div>
                 </form>
             </div>
@@ -458,7 +516,31 @@ foreach ($meeting as $a) :
 <?php endforeach; ?>
 <!-- End of Modal Upload Absensi -->
 
-<!-- Start of Modal Upload Error -->
+<!-- Start of Modal Upload Error Notulen -->
+<div class="modal fade" id="errorNotulen" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorNotulen">Unggah Berkas Notulen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger text-center text-uppercase">Silahkan Unggah File <strong>UNDANGAN RAPAT</strong> terlebih dahulu.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Upload Error Notulen -->
+
+
+<!-- Start of Modal Upload Error Absensi -->
 <div class="modal fade" id="errorAbsensi" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -469,7 +551,7 @@ foreach ($meeting as $a) :
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-danger text-center text-uppercase">Silahkan Unggah File <strong>NOTULENSI RAPAT</strong> terlebih dahulu.</p>
+                <p class="text-danger text-center text-uppercase">Silahkan Unggah File <strong>NOTULEN RAPAT</strong> terlebih dahulu.</p>
             </div>
             <div class="modal-footer">
                 <div class="actions">
@@ -479,7 +561,7 @@ foreach ($meeting as $a) :
         </div>
     </div>
 </div>
-<!-- End of Modal Upload Error -->
+<!-- End of Modal Upload Error Absensi -->
 
 <!-- Start of Modal Download Error -->
 <div class="modal fade" id="errorDownload" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">

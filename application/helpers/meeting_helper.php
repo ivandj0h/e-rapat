@@ -183,14 +183,21 @@ function status_all_upload($a)
     <a href="<?= base_url('meeting/absensidownload/' . $a['files_upload2']); ?>" class="badge badge-success">Absensi Rapat</a>
 <?php }
 
-function status_undangan_upload($a)
+function undangan_upload($a)
+{ ?>
+    <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
+    <span class="badge badge-danger" data-toggle="modal" data-target="#uploadNotulen<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Notulen Rapat</span> <br>
+    <span class="badge badge-danger" data-toggle="modal" data-target="#errorAbsensi" style="cursor:pointer;margin:2px;"> Undangan Rapat</span>
+<?php }
+
+function notulen_upload($a)
 { ?>
     <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
     <span class="badge badge-danger" data-toggle="modal" data-target="#uploadNotulen<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Notulen Rapat</span> <br>
     <span class="badge badge-danger" data-toggle="modal" data-target="#errorAbsensi" style="cursor:pointer;margin:2px;"> Absensi Rapat</span>
 <?php }
 
-function status_notulen_upload($a)
+function absensi_upload($a)
 { ?>
     <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
     <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>" class="badge badge-success">Notulen Rapat</a> <br>
@@ -199,9 +206,9 @@ function status_notulen_upload($a)
 
 function status_no_upload($a)
 { ?>
-    <a href="#" class="badge badge-danger">Undangan Rapat</a> <br>
-    <a href="#" class="badge badge-danger">Notulen Rapat</a> <br>
-    <a href="#" class="badge badge-danger">Absensi Rapat</a>
+    <span class="badge badge-danger" data-toggle="modal" data-target="#uploadUndangan<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Undangan Rapat</span> <br>
+    <span class="badge badge-danger" data-toggle="modal" data-target="#errorNotulen" style="cursor:pointer;margin:2px;"> Notulen Rapat</span> <br>
+    <span class="badge badge-danger" data-toggle="modal" data-target="#errorAbsensi" style="cursor:pointer;margin:2px;"> Absensi Rapat</span>
 <?php }
 
 // can't change status if meeting already Canceled
@@ -388,16 +395,16 @@ function enable_add_new()
             <span id="end_time_error" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
         <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
         <div class="col-sm-10">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="files" name="file">
-                <label class="custom-file-label" for="image">Choose file</label>
+                <label class="custom-file-label" for="file">Choose file</label>
             </div>
             <span id="files_error" class="text-danger"></span>
         </div>
-    </div>
+    </div> -->
     <div class="modal-footer">
         <div class="actions">
             <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
