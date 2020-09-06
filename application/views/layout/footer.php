@@ -39,9 +39,10 @@
            </div>
 
            <!-- Bootstrap core JavaScript-->
-           <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+           <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+           <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
            <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/tagsinput.js"></script>
            <!-- Core plugin JavaScript-->
            <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -157,7 +158,136 @@
                    });
                });
 
-               //    $('.toast').toast('show');
+
+
+               $('#meetingStatus').on('hidden.bs.modal', function() {
+                   location.reload();
+               })
+
+               $("#yourBox").click(function() {
+                   if ($(this).is(":checked")) {
+                       $("#onlineId").removeAttr("disabled");
+                       $("#onlineId").focus();
+                   } else {
+                       $("#onlineId").attr("disabled", "disabled");
+                   }
+               });
+
+               $(".dissable").attr("disabled", "disabled");
+               $("#type_id").on("change", function() {
+                   if ($(this).val() === "2") {
+                       $(".dissable").attr("disabled", "disabled");
+                   } else {
+                       $(".dissable").removeAttr("disabled");
+                   }
+               });
+
+               var maxchars = 1000;
+               $('#texta').on('keyup', function(e) {
+                   var textarea_value = $("#texta").val();
+                   var keyCode = e.which;
+                   $(this).val($(this).val().substring(0, maxchars));
+                   var tlength = $(this).val().length;
+                   remain = maxchars - parseInt(tlength);
+                   $('#remain').text(remain);
+                   if (textarea_value != '' && keyCode != 32 && keyCode != 8) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
+
+               $("#btnSave").click(function(e) {
+                   e.preventDefault();
+
+                   var typeId = $("#type_id").val();
+                   var subTypeId = $("#meeting_subtype").val();
+                   var otherId = $("#onlineId").val();
+                   var participantsName = $("#participants_name").val();
+                   var narasumberRapat = $("#speakers_name").val();
+                   var agenda = $("textarea[name='agenda']").val();
+                   var startDate = $("input[name='start_date']").val();
+                   var startTime = $("input[name='start_time']").val();
+                   var endTime = $("input[name='end_time']").val();
+
+                   var dataJson = {
+                       meeting_subtype: subTypeId,
+                       other_online_id: otherId,
+                       participants_name: participantsName,
+                       speakers_name: narasumberRapat,
+                       agenda: agenda,
+                       start_date: startDate,
+                       start_time: startTime,
+                       end_time: endTime,
+                   };
+
+                   $.ajax({
+                       url: "<?php echo base_url(); ?>" + "meeting/store_meeting",
+                       method: "POST",
+                       data: dataJson,
+                       dataType: "json",
+                       async: true,
+                       cache: false,
+                       //    beforeSend: function() {},
+                       success: function(data) {
+                           if (data.error) {
+                               $('#btnSave').attr('disabled', true);
+                               if (data.agenda_error != '') {
+                                   $('#agenda_error').html(data.agenda_error);
+                               } else {
+                                   $('#agenda_error').html('');
+                               }
+                               if (data.participants_name_error != '') {
+                                   $('#participants_name_error').html(data.participants_name_error);
+                               } else {
+                                   $('#participants_name_error').html('');
+                               }
+                               if (data.speakers_name_error != '') {
+                                   $('#speakers_name_error').html(data.speakers_name_error);
+                               } else {
+                                   $('#speakers_name_error').html('');
+                               }
+                               if (data.start_date_error != '') {
+                                   $('#start_date_error').html(data.start_date_error);
+                               } else {
+                                   $('#start_date_error').html('');
+                               }
+                               if (data.start_time_error != '') {
+                                   $('#start_time_error').html(data.start_time_error);
+                               } else {
+                                   $('#start_time_error').html('');
+                               }
+                               if (data.end_time_error != '') {
+                                   $('#end_time_error').html(data.end_time_error);
+                               } else {
+                                   $('#end_time_error').html('');
+                               }
+                               if ($('input[type=file]').val() == '') {
+                                   $('#files').after(' <span class="rusak text-danger">Upload Undangan tidak boleh kosong</span>');
+                                   $('input[type=file]').change(function() {
+                                       if ($('input[type=file]').val() == '') {
+                                           $('button[type=submit]').attr('disabled', true);
+                                       } else {
+                                           $('button[type=submit]').attr('disabled', false);
+                                       }
+                                   })
+                                   $('button[type=submit]').attr('disabled', true);
+                               }
+                           }
+                           if (data.success) {
+                               $('#success_message').html(data.success);
+                               setTimeout(function() {
+                                   location.reload(true);
+                               }, 2000);
+                               $('#btnSave').attr('disabled', true);
+                           }
+                       }
+                   })
+               });
+               $('#batal, .close').click(function() {
+                   location.reload();
+               })
            </script>
            </body>
 

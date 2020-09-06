@@ -145,8 +145,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!-- <form id="addMeeting" action="<?= base_url('meeting/addmeeting') ?>" enctype="multipart/form-data" method="POST" accept-charset="utf-8"> -->
-            <form id="addMeeting">
+            <span id="success_message"></span>
+            <form method="POST" id="addMeeting">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <?= enable_add_new(); ?>
@@ -567,101 +567,3 @@ foreach ($meeting as $a) :
     </div>
 </div>
 <!-- End of Modal Expired Meeting -->
-
-
-
-<!-- Jquery Area -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-
-        $('#meetingStatus').on('hidden.bs.modal', function() {
-            location.reload();
-        })
-
-        $("#yourBox").click(function() {
-            if ($(this).is(":checked")) {
-                $("#onlineId").removeAttr("disabled");
-                $("#onlineId").focus();
-            } else {
-                $("#onlineId").attr("disabled", "disabled");
-            }
-        });
-
-        $(".dissable").attr("disabled", "disabled");
-        $("#type_id").on("change", function() {
-            if ($(this).val() === "2") {
-                $(".dissable").attr("disabled", "disabled");
-            } else {
-                $(".dissable").removeAttr("disabled");
-            }
-        });
-
-        var maxchars = 1000;
-        $('#texta').on('keyup', function(e) {
-            var textarea_value = $("#texta").val();
-            var keyCode = e.which;
-            $(this).val($(this).val().substring(0, maxchars));
-            var tlength = $(this).val().length;
-            remain = maxchars - parseInt(tlength);
-            $('#remain').text(remain);
-            if (textarea_value != '' && keyCode != 32 && keyCode != 8) {
-                $('button[type=submit]').attr('disabled', false);
-            } else {
-                $('button[type=submit]').attr('disabled', true);
-            }
-        });
-    });
-
-    $("#addMeeting").submit(function(e) {
-        e.preventDefault();
-        agenda = $("textarea[name='agenda']").val();
-        participantsName = $("input[name='participants_name']").val();
-        startDate = $("input[name='start_date']").val();
-        startTime = $("input[name='start_time']").val();
-        endTime = $("input[name='end_time']").val();
-
-        $(".error").remove();
-
-        if (agenda.length < 1) {
-            $('#agenda').after('<span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if (participantsName.length < 1) {
-            $('#participants_name').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if (startDate.length < 1) {
-            $('#start_date').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if (startTime.length < 1) {
-            $('#start_time').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if (endTime.length < 1) {
-            $('#end_time').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if (endTime.length < 1) {
-            $('#end_time').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-        }
-        if ($('input[type=file]').val() == '') {
-            $('#files').after(' <span class="rusak text-danger">Area ini tidak boleh kosong</span>');
-            $('input[type=file]').change(function() {
-                if ($('input[type=file]').val() == '') {
-                    $('button[type=submit]').attr('disabled', true);
-                } else {
-                    $('button[type=submit]').attr('disabled', false);
-                }
-            })
-            $('button[type=submit]').attr('disabled', true);
-
-        } else {
-            alert('wtf');
-        }
-    });
-
-    $('#batal').click(function() {
-        location.reload();
-    })
-
-    $('.close').click(function() {
-        location.reload();
-    })
-</script>
