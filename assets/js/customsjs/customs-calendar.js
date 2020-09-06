@@ -43,7 +43,8 @@ $(document).ready(function () {
 			} else if (cek_status > jamAkhir) {
 				var displayStatus =
 					"<span style='color:red'>Rapat telah berakhir (Expired!)</span>";
-			} else if (event.statuses == "1") {
+			}
+			if (event.statuses == "1") {
 				var displayStatus = "<span style='color:black'>Rapat dibatalkan</span>";
 			}
 
@@ -106,52 +107,6 @@ $(document).ready(function () {
 					html: true,
 					container: "body",
 				});
-			} else if (event.statuses == "1") {
-				element.popover({
-					title:
-						'<div class="popoverTitleCalendar" style="background-color:' +
-						event.backgroundColor +
-						"; color:" +
-						event.textColor +
-						'">Rapat : ' +
-						event.calendar +
-						" (Dibatalkan)</div>",
-					content:
-						'<div class="popoverInfoCalendar">' +
-						"<p>Nama Bagian : <strong>" +
-						event.title +
-						"</strong></p>" +
-						"<p>Rapat : <strong>" +
-						event.media +
-						"</strong></p>" +
-						"<p>Media Rapat : <strong>" +
-						event.submedia +
-						"</strong></p>" +
-						displayMediaId +
-						"<p>Nama Pimpinan Rapat : <strong>" +
-						event.members_name +
-						"</strong></p>" +
-						"<p>Nama Narasumber (Pembicara) : <strong>" +
-						displaySpeakerName +
-						"</strong></p>" +
-						"<p>Waktu Rapat : <strong>" +
-						displayEventDate +
-						"<p>Status Rapat : <strong>" +
-						displayStatus +
-						"</strong></p>" +
-						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
-						event.agenda +
-						"</strong></p></div>" +
-						"</div>",
-					delay: {
-						show: "800",
-						hide: "50",
-					},
-					trigger: "hover",
-					placement: "top",
-					html: true,
-					container: "body",
-				});
 			} else {
 				element.popover({
 					title:
@@ -182,6 +137,54 @@ $(document).ready(function () {
 						"<p>Waktu Rapat : <strong>" +
 						displayEventDate +
 						"</strong></p>" +
+						"<p>Status Rapat : <strong>" +
+						displayStatus +
+						"</strong></p>" +
+						'<div class="popoverDescCalendar">Agenda Rapat : <p class="text-justify"><strong>' +
+						event.agenda +
+						"</strong></p></div>" +
+						"</div>",
+					delay: {
+						show: "800",
+						hide: "50",
+					},
+					trigger: "hover",
+					placement: "top",
+					html: true,
+					container: "body",
+				});
+			}
+
+			if (event.statuses == "1") {
+				element.popover({
+					title:
+						'<div class="popoverTitleCalendar" style="background-color:' +
+						event.backgroundColor +
+						"; color:" +
+						event.textColor +
+						'">Rapat : ' +
+						event.calendar +
+						" (Dibatalkan)</div>",
+					content:
+						'<div class="popoverInfoCalendar">' +
+						"<p>Nama Bagian : <strong>" +
+						event.title +
+						"</strong></p>" +
+						"<p>Rapat : <strong>" +
+						event.media +
+						"</strong></p>" +
+						"<p>Media Rapat : <strong>" +
+						event.submedia +
+						"</strong></p>" +
+						displayMediaId +
+						"<p>Nama Pimpinan Rapat : <strong>" +
+						event.members_name +
+						"</strong></p>" +
+						"<p>Nama Narasumber (Pembicara) : <strong>" +
+						displaySpeakerName +
+						"</strong></p>" +
+						"<p>Waktu Rapat : <strong>" +
+						displayEventDate +
 						"<p>Status Rapat : <strong>" +
 						displayStatus +
 						"</strong></p>" +

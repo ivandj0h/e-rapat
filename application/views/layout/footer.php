@@ -208,6 +208,7 @@
                    var narasumberRapat = $("#speakers_name").val();
                    var agenda = $("textarea[name='agenda']").val();
                    var startDate = $("input[name='start_date']").val();
+                   var endDate = $("input[name='start_date']").val();
                    var startTime = $("input[name='start_time']").val();
                    var endTime = $("input[name='end_time']").val();
 
@@ -218,15 +219,18 @@
                        speakers_name: narasumberRapat,
                        agenda: agenda,
                        start_date: startDate,
+                       end_date: startDate,
                        start_time: startTime,
                        end_time: endTime,
                    };
+
+                   console.log(dataJson);
 
                    $.ajax({
                        url: "<?php echo base_url(); ?>" + "meeting/store_meeting",
                        method: "POST",
                        data: dataJson,
-                       dataType: "json",
+                       dataType: "JSON",
                        async: true,
                        cache: false,
                        //    beforeSend: function() {},
@@ -279,11 +283,22 @@
                                $('#success_message').html(data.success);
                                setTimeout(function() {
                                    location.reload(true);
-                               }, 2000);
+                               }, 5000);
+                               var timeleft = 5;
+                               var downloadTimer = setInterval(function() {
+                                   if (timeleft <= 0) {
+                                       clearInterval(downloadTimer);
+                                       document.getElementById("countdown").innerHTML = "Finished";
+                                   } else {
+                                       document.getElementById("countdown").innerHTML = "Form ini akan tutup dalam " + timeleft + " detik...";
+                                   }
+                                   timeleft -= 1;
+                               }, 1000);
                                $('#btnSave').attr('disabled', true);
                            }
                        }
-                   })
+                   });
+                   return false;
                });
                $('#batal, .close').click(function() {
                    location.reload();

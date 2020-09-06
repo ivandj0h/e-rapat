@@ -48,6 +48,48 @@ class Meeting_model extends CI_Model
         return $this->db->get($this->table)->result_array();
     }
 
+    public function store_meeting()
+    {
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+
+        $a = $this->input->post('speakers_name');
+        $b = $this->input->post('participants_name');
+        $speakers = implode(',', (array) $a);
+        $participants = implode(',', (array) $b);
+
+        $sub_type_id = $this->input->post('meeting_subtype', true);
+        $datenow = strtotime(date('Y-m-d'));
+        $timenow = strtotime(date("H:i:s"));
+        $end_date = strtotime($this->input->post('start_date', true));
+        $end_time = strtotime($this->input->post('end_time', true));
+
+        if ($datenow >= $end_date && $timenow >= $end_time && $sub_type_id != '1') {
+            $request_status = 3;
+        } else {
+            $request_status = 0;
+        }
+
+        $data = array(
+            'user_id' => $data['user']['id'],
+            'sub_type_id' => $sub_type_id,
+            'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
+            'speakers_name' => $speakers,
+            'members_name' => $participants,
+            'unique_code' => uniqid(),
+            'agenda' => htmlspecialchars($this->input->post('agenda', true)),
+            'start_date' => $this->input->post('start_date', true),
+            'end_date' => $this->input->post('start_date', true),
+            'date_requested' =>  date('Y-m-d'),
+            'start_time' => $this->input->post('start_time', true),
+            'end_time' => $this->input->post('end_time', true),
+            'request_status' => $request_status
+        );
+        // var_dump($data);
+        // die;
+        $result = $this->db->insert($this->meeting, $data);
+        return $result;
+    }
+
     public function insert_meeting($data)
     {
         return $this->db->insert($this->meeting, $data);
