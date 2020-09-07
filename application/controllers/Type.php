@@ -117,8 +117,7 @@ class Type extends CI_Controller
     public function deletesubtype()
     {
         $id = $this->input->post('id');
-        var_dump($id);
-        die;
+
         $this->Type_model->delete_sub_type($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> SubMedia Type has been Deleted!</div>');
         redirect('type/subtype');

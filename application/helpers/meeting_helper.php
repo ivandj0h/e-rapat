@@ -176,6 +176,13 @@ function status_all_cancel_upload($a)
     <span class="badge badge-secondary" data-toggle="modal" data-target="#errorDownload" style="cursor:pointer;margin:2px;">Absensi Rapat</span>
 <?php }
 
+function status_all_expired_upload($a)
+{ ?>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#expiredDownload" style="cursor:pointer;margin:2px;">Undangan Rapat</span><br>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#expiredDownload" style="cursor:pointer;margin:2px;">Notulen Rapat</span><br>
+    <span class="badge badge-secondary" data-toggle="modal" data-target="#expiredDownload" style="cursor:pointer;margin:2px;">Absensi Rapat</span>
+<?php }
+
 function status_all_upload($a)
 { ?>
     <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
@@ -323,6 +330,27 @@ function enable_add_new()
 ?>
     <!-- Start Form Add Meeting -->
     <div class="form-group row">
+        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Rapat" autocomplete="off">
+            <span id="start_date_error" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
+            <span id="start_time_error" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
+        <div class="col-sm-10">
+            <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
+            <span id="end_time_error" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="type_id" class="col-sm-2 col-form-label">Tipe Rapat</label>
         <div class="col-sm-5">
             <select name="type_id" id="type_id" class="form-control">
@@ -344,7 +372,34 @@ function enable_add_new()
             </select>
         </div>
     </div>
-    <div class="form-group row" id="other_online_id">
+    <div class="form-group row" id="zoom_id" style='display:none;'>
+        <label for="other_online_id" class="col-sm-2 col-form-label">ZOOM ID</label>
+        <div class="col-sm-10">
+            <ul class="chec-radio">
+                <li class="pz">
+                    <label class="radio-inline">
+                        <input type="radio" checked="" id="pro-chx-residential" name="property_type" class="pro-chx" value="constructed">
+                        <div class="clab">Constructed</div>
+                    </label>
+                </li>
+                <li class="pz">
+                    <label class="radio-inline">
+                        <input type="radio" id="pro-chx-commercial" name="property_type" class="pro-chx" value="unconstructed" checked>
+                        <div class="clab">Un Constructed</div>
+                    </label>
+                </li>
+                <li class="pz">
+                    <label class="radio-inline">
+                        <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
+                        <div class="clab">Open Land</div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="form-group row" id="other_online_id" style='display:none;'>
         <label for="other_online_id" class="col-sm-2 col-form-label">ID Rapat lain</label>
         <div class="col-sm-10">
             <input type="text" id="onlineId" name="other_online_id" class="border" placeholder="ID Rapat" autocomplete="off" disabled>
@@ -374,37 +429,7 @@ function enable_add_new()
             <span id="speakers_name_error" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
-        <div class="col-sm-10">
-            <input type="text" id="start_date" name="start_date" class="border" placeholder="Tanggal Rapat" autocomplete="off">
-            <span id="start_date_error" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="start_time" class="col-sm-2 col-form-label">Jam Awal Rapat</label>
-        <div class="col-sm-10">
-            <input type="text" id="start_time" name="start_time" class="border" placeholder="Jam Awal Rapat" autocomplete="off">
-            <span id="start_time_error" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_time" class="col-sm-2 col-form-label">Jam Akhir Rapat</label>
-        <div class="col-sm-10">
-            <input type="text" id="end_time" name="end_time" class="border" placeholder="Jam Akhir Rapat" autocomplete="off">
-            <span id="end_time_error" class="text-danger"></span>
-        </div>
-    </div>
-    <!-- <div class="form-group row">
-        <label for="end_time" class="col-sm-2 col-form-label">Upload Undangan</label>
-        <div class="col-sm-10">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="files" name="file">
-                <label class="custom-file-label" for="file">Choose file</label>
-            </div>
-            <span id="files_error" class="text-danger"></span>
-        </div>
-    </div> -->
+
     <div class="modal-footer">
         <div class="actions">
             <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
@@ -426,10 +451,16 @@ function disable_add_two($a)
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Anda tidak dapat membuat Rapat baru. Silahkan Unggah File <strong>ABSENSI RAPAT</strong>.</p>
 <?php }
 
-// can't add meeting num two
+// can't download because status already cancel
 function disable_download($a)
 { ?>
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> File tidak bisa di unduh, karena Rapat sudah dibatalkan</p>
+<?php }
+
+// can't download because status already Expired
+function expired_download($a)
+{ ?>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> File tidak bisa di unduh, karena Rapat sudah Expired</p>
 <?php }
 
 // Modal Disabled footer

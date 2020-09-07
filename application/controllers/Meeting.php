@@ -433,4 +433,9 @@ class Meeting extends CI_Controller
     {
         $this->Meeting_model->start_exists($key);
     }
+
+    public function check_zoomid()
+    {
+        echo "test";
+    }
 }
