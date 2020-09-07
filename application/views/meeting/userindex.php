@@ -64,8 +64,21 @@
                                             <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td class="text-center">
                                                 <?php
+                                                $combine_now = date("Y-m-d");
+                                                $combine_time_now = date("H:i:s");
+                                                $cmd = date('Y-m-d H:i:s', strtotime("$combine_now $combine_time_now"));
+
+                                                $combine_db = date($a['start_date']);
+                                                $combine_db_now = date($a['end_time']);
+                                                $cmb = date('Y-m-d H:i:s', strtotime("$combine_db $combine_db_now"));
+
+                                                $datedb = strtotime($cmd);
+                                                $timedb = strtotime($cmb);
+
                                                 if ($a['request_status'] == '1') {
                                                     status_all_cancel_upload($a);
+                                                    // } elseif ($datedb > $timedb) {
+                                                    //     status_all_upload($a);
                                                 } else {
                                                     if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
                                                         status_all_upload($a);
@@ -80,30 +93,7 @@
                                                 ?>
                                             </td>
                                             <td class="text-center action mx-2">
-                                                <?php
-
-                                                $combine_now = date("Y-m-d");
-                                                $combine_time_now = date("H:i:s");
-                                                $cmd = date('Y-m-d H:i:s', strtotime("$combine_now $combine_time_now"));
-
-                                                $combine_db = date($a['start_date']);
-                                                $combine_db_now = date($a['end_time']);
-                                                $cmb = date('Y-m-d H:i:s', strtotime("$combine_db $combine_db_now"));
-
-                                                $datedb = strtotime($cmd);
-                                                $timedb = strtotime($cmb);
-
-                                                if ($datedb > $timedb) {
-                                                    status_meeting_expired($a);
-                                                } else {
-                                                    if ($a['type_id'] == '1') {
-                                                        status_meeting_online($a);
-                                                    } else {
-                                                        status_meeting_offline($a);
-                                                    }
-                                                }
-
-                                                ?>
+                                                <?= status_meeting($a); ?>
                                                 <!-- <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a> -->
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
@@ -585,6 +575,29 @@ foreach ($meeting as $a) :
     </div>
 </div>
 <!-- End of Modal Download Error -->
+
+<!-- Start of Modal Expired Error -->
+<div class="modal fade" id="expiredDownload" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="expiredDownload">Unduh Berkas Rapat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?= expired_download($id); ?>
+            </div>
+            <div class="modal-footer">
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Expired Error -->
 
 <!-- Start of Modal Delete -->
 <?php

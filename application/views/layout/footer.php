@@ -158,11 +158,34 @@
                    });
                });
 
-
-
                $('#meetingStatus').on('hidden.bs.modal', function() {
                    location.reload();
                })
+
+               $('#type_id').on('change', function() {
+                   if (this.value === '1') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").show();
+                   } else {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").hide();
+                   }
+               });
+
+               $('#meeting_subtype').on('change', function() {
+                   if (this.value !== '1') {
+                       $("#other_online_id").show();
+                       $("#zoom_id").hide();
+                   }
+                   if (this.value === '5' || this.value === '6' || this.value === '7' || this.value === '8') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").hide();
+                   }
+                   if (this.value === '1') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").show();
+                   }
+               });
 
                $("#yourBox").click(function() {
                    if ($(this).is(":checked")) {
