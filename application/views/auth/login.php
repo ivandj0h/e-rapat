@@ -12,7 +12,9 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h3 text-primary-900 mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> E-RAPAT</h1>
+                                    <a href="<?= base_url() ?>">
+                                        <h1 class="h3 text-primary-900 mb-4"><i class="fa fa-calendar" aria-hidden="true"></i> E-RAPAT</h1>
+                                    </a>
                                     <h1 class="h4 text-gray-500 mb-4">Control Panel</h1>
                                     <?= $this->session->flashdata('messages'); ?>
                                 </div>

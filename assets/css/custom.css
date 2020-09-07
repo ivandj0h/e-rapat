@@ -161,6 +161,12 @@ textarea.textarea-autosize.form-control-sm {
 	border: 1px solid #eee;
 }
 
+.badge-besar {
+	color: #fff;
+	background-color: #1cc88a;
+	padding: 5px;
+}
+
 .border {
 	border: 1px solid #e3e6f0 !important;
 	padding: 6px 12px !important;
@@ -202,7 +208,7 @@ textarea.textarea-autosize.form-control-sm {
 
 /* Radio Button Custom CSS - Bootsnipp */
 ul.chec-radio {
-	margin: 0;
+	display: contents;
 }
 ul.chec-radio li.pz {
 	display: inline;
@@ -219,19 +225,15 @@ ul.chec-radio li.pz {
 	background: #fafafa;
 	padding: 7px 20px;
 	text-align: center;
-	text-transform: uppercase;
 	border: #e3e6f0 1px solid;
-	/* color: #333; */
 	position: relative;
 	height: 34px;
 	float: left;
 	margin: 0;
-	margin-bottom: 5px;
+	/* margin-bottom: 5px; */
 }
 .chec-radio label.radio-inline input[type="checkbox"]:checked + div:before {
-	content: "\e013";
 	margin-right: 5px;
-	font-family: "Glyphicons Halflings";
 }
 .chec-radio label.radio-inline input[type="radio"] {
 	display: none;
@@ -239,10 +241,4 @@ ul.chec-radio li.pz {
 .chec-radio label.radio-inline input[type="radio"]:checked + div {
 	color: #fff;
 	border: #5c75c7 2px solid;
-	/* font-weight: bold; */
 }
-/* .chec-radio label.radio-inline input[type="radio"]:checked + div:before {
-	content: "\e013";
-	margin-right: 5px;
-	font-family: "Glyphicons Halflings";
-} */

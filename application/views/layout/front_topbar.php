@@ -11,7 +11,7 @@
             if ($sess_id) {
                 echo 'Beralih ke Cpanel ' . $user['name'];
             } else {
-                echo 'Login';
+                echo '<i class="fa fa-lock"></i> Sign In';
             }
             ?>
         </a>
