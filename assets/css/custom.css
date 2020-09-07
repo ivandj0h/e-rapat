@@ -202,7 +202,7 @@ textarea.textarea-autosize.form-control-sm {
 
 /* Radio Button Custom CSS - Bootsnipp */
 ul.chec-radio {
-	margin: 15px;
+	margin: 0;
 }
 ul.chec-radio li.pz {
 	display: inline;
@@ -212,15 +212,16 @@ ul.chec-radio li.pz {
 }
 .chec-radio label.radio-inline input[type="checkbox"]:checked + div {
 	color: #fff;
-	background-color: #000;
+	background-color: rgb(212, 212, 212);
 }
 .chec-radio .radio-inline .clab {
 	cursor: pointer;
-	background: #e7e7e7;
+	background: #fafafa;
 	padding: 7px 20px;
 	text-align: center;
 	text-transform: uppercase;
-	color: #333;
+	border: #e3e6f0 1px solid;
+	/* color: #333; */
 	position: relative;
 	height: 34px;
 	float: left;
@@ -237,10 +238,11 @@ ul.chec-radio li.pz {
 }
 .chec-radio label.radio-inline input[type="radio"]:checked + div {
 	color: #fff;
-	background-color: #000;
+	border: #5c75c7 2px solid;
+	/* font-weight: bold; */
 }
-.chec-radio label.radio-inline input[type="radio"]:checked + div:before {
+/* .chec-radio label.radio-inline input[type="radio"]:checked + div:before {
 	content: "\e013";
 	margin-right: 5px;
 	font-family: "Glyphicons Halflings";
-}
+} */
