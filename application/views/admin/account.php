@@ -90,8 +90,8 @@
                                             </td>
                                             <td class="text-center">
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#resetAccountPass<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Reset Password</span>
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteAccount<?= $a['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
 
@@ -163,8 +163,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data Akun</button>
                 </div>
             </form>
         </div>
@@ -194,7 +194,6 @@ foreach ($account as $a) :
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <img src="<?= base_url('assets/img/profile/') . $a['image']; ?>" class="img-thumbnail">
-
                             </div>
                             <div class="col-sm-9">
                                 <div class="form-group row">
@@ -270,8 +269,8 @@ foreach ($account as $a) :
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data Akun</button>
                     </div>
                 </form>
             </div>
@@ -295,8 +294,8 @@ foreach ($account as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus Data!</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Zoom ID</button>
                     </div>
                 </form>
             </div>
@@ -320,8 +319,8 @@ foreach ($account as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success">Reset Password!</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Reset Password!</button>
                     </div>
                 </form>
             </div>

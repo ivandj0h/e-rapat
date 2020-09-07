@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2020 at 12:07 PM
+-- Generation Time: Sep 07, 2020 at 02:48 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -191,7 +191,7 @@ CREATE TABLE `meeting_users` (
 INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `sub_department_id`, `date_created`, `date_updated`) VALUES
 (14, '717 771 7448', 'administrator', 'admin@erapat.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
 (15, '234 234 2344', 'Admin Keuangan', 'keuangan@erapat.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
-(18, '456 456 4566', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$d6JBLsipnrSfEnzrU3btPubP8miTi6yJCYNZPFZS/j6hM9pzMTpvS', 2, 1, 5, 1597213397, 1599418506),
+(18, '456 456 4566', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$5Kud5rfLqdf.7vApjirzNuWjVLKqFqpZt6hGDH/d/5vtjoCcssqRy', 2, 1, 5, 1597213397, 1599475976),
 (19, '123 123 1233', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
 (20, '123 123 123', 'Kaban Litbang Perhubungan', 'kaban@erapat.com', 'default-avatar.jpg', '$2y$10$w5k9sGFC7SMC8whAPIp/dOknnlHLA.nOP1IypYw6JNVu2aDz0oEse', 4, 1, 14, 1599060092, 1599061311),
 (21, '321 321 321', 'Sesban Litbang Perhubungan', 'sesban@erapat.com', 'default-avatar.jpg', '$2y$10$7iKaePzZkNyVg37xciRbUOzFSQ58N92P8L95KwtgXGkzV8u8yBTge', 5, 1, 15, 1599060131, 1599061333),
@@ -207,16 +207,9 @@ CREATE TABLE `meeting_zoom` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `zoom_id` varchar(150) NOT NULL,
+  `status` int(11) NOT NULL,
   `is_active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meeting_zoom`
---
-
-INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `is_active`) VALUES
-(1, 14, '717 771 7448', 1),
-(2, 22, '098 093 098', 1);
 
 -- --------------------------------------------------------
 
@@ -447,6 +440,7 @@ CREATE TABLE `view_zoom_meeting` (
 ,`name` varchar(128)
 ,`sub_department_name` varchar(225)
 ,`zoom_id` varchar(150)
+,`status` int(11)
 ,`is_active` int(11)
 );
 
@@ -493,7 +487,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -622,7 +616,7 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `meeting_zoom`
 --
 ALTER TABLE `meeting_zoom`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`

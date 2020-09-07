@@ -291,10 +291,9 @@
                                } else {
                                    $('#end_time_error').html('');
                                }
-                               if ($('input[type=file]').val() == '') {
-                                   $('#files').after(' <span class="rusak text-danger">Upload Undangan tidak boleh kosong</span>');
-                                   $('input[type=file]').change(function() {
-                                       if ($('input[type=file]').val() == '') {
+                               if ($('input[name=participants_name]').val() == '') {
+                                   $('input[name=participants_name]').change(function() {
+                                       if ($('input[name=participants_name]').val() == '') {
                                            $('button[type=submit]').attr('disabled', true);
                                        } else {
                                            $('button[type=submit]').attr('disabled', false);

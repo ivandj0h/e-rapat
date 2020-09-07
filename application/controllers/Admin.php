@@ -295,7 +295,7 @@ class Admin extends CI_Controller
     // Sub Department Section
     public function subdepartment()
     {
-        $data['title']   = 'Master Data Bidang';
+        $data['title']   = 'Master Data Bagian';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['dept'] = $this->Department_model->get_all_department();
         $data['subdepartment'] = $this->Department_model->getSubDepartment();
