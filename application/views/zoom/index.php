@@ -178,7 +178,7 @@ foreach ($zoom as $zm) :
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-trash-alt"></i> Ubah Zoom ID</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Zoom ID</button>
                     </div>
                 </form>
             </div>
@@ -203,7 +203,7 @@ foreach ($zoom as $zm) :
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
                         <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-file"></i> Hapus Zoom ID</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Zoom ID</button>
                     </div>
                 </form>
             </div>

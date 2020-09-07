@@ -77,8 +77,6 @@
 
                                                 if ($a['request_status'] == '1') {
                                                     status_all_cancel_upload($a);
-                                                    // } elseif ($datedb > $timedb) {
-                                                    //     status_all_upload($a);
                                                 } else {
                                                     if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
                                                         status_all_upload($a);
@@ -94,7 +92,6 @@
                                             </td>
                                             <td class="text-center action mx-2">
                                                 <?= status_meeting($a); ?>
-                                                <!-- <a class="badge badge-success" href="<?= base_url('meeting/detailsmeeting/' . $a['unique_code']); ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search "></i> Detail Rapat</a> -->
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
                                             </td>
