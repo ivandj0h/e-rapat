@@ -379,31 +379,31 @@ function enable_add_new()
                 <li class="pz">
                     <label class="radio-inline">
                         <input type="radio" checked="" id="pro-chx-residential" name="property_type" class="pro-chx" value="constructed">
-                        <div class="clab text-success">1234 1234 1234 Tersedia!</div>
+                        <div class="clab text-success">1234 1234 1234 - Tersedia!</div>
                     </label>
                 </li>
                 <li class="pz">
                     <label class="radio-inline">
                         <input type="radio" id="pro-chx-commercial" name="property_type" class="pro-chx" value="unconstructed" disabled>
-                        <div class="clab text-danger">2345 2345 2345 Terpakai!</div>
+                        <div class="clab text-danger">2345 2345 2345 - Terpakai!</div>
                     </label>
                 </li>
                 <li class="pz">
                     <label class="radio-inline">
                         <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 Tersedia!</div>
+                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
                     </label>
                 </li>
                 <li class="pz">
                     <label class="radio-inline">
                         <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 Tersedia!</div>
+                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
                     </label>
                 </li>
                 <li class="pz">
                     <label class="radio-inline">
                         <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 Tersedia!</div>
+                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
                     </label>
                 </li>
             </ul>

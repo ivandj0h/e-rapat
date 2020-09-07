@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
+                        Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, <br />Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
                     </div>
                     <div class="row no-gutters">
                         <div class="col-md-4">
