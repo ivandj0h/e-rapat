@@ -11,6 +11,7 @@ class Meeting extends CI_Controller
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
+        $this->load->model('Zoom_model');
     }
 
     public function index()
@@ -19,6 +20,8 @@ class Meeting extends CI_Controller
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
 
+        // var_dump($data['zoom']);
+        // die;
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
@@ -40,141 +43,6 @@ class Meeting extends CI_Controller
         }
     }
 
-    public function addmeeting()
-    {
-        $data['title'] = 'Master Data Rapat';
-        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
-        $data['alltype'] = $this->Type_model->get_all_type();
-        $data['types'] = $this->Type_model->getSubType();
-
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('participants_name', 'Pimpinan Rapat', 'required|trim|xss_clean');
-        $this->form_validation->set_rules('start_time', 'Jam Awal Rapat', 'required|is_unique[meeting.start_date]');
-        $this->form_validation->set_rules('end_time', 'Jam Akhir Rapat', 'required|is_unique[meeting.end_time]');
-
-        if ($this->form_validation->run() == false) {
-            if ($data['user']['role_id'] == '1') {
-                $this->load->view('layout/header', $data);
-                $this->load->view('layout/sidebar', $data);
-                $this->load->view('layout/topbar', $data);
-                $this->load->view('meeting/index', $data);
-                $this->load->view('layout/footer');
-            } else {
-                $this->load->view('layout/header', $data);
-                $this->load->view('layout/sidebar', $data);
-                $this->load->view('layout/topbar', $data);
-                $this->load->view('meeting/userindex', $data);
-                $this->load->view('layout/footer');
-            }
-        } else {
-
-            $a = $this->input->post('speakers_name');
-            $b = $this->input->post('participants_name');
-            $speakers = implode(',', (array) $a);
-            $participants = implode(',', (array) $b);
-
-            $sub_type_id = $this->input->post('meeting_subtype', true);
-            $datenow = strtotime(date('Y-m-d'));
-            $timenow = strtotime(date("H:i:s"));
-            $end_date = strtotime($this->input->post('start_date', true));
-            $end_time = strtotime($this->input->post('end_time', true));
-
-            if ($datenow >= $end_date && $timenow >= $end_time) {
-                $request_status = 3;
-                if ($sub_type_id != '1') {
-                    $data = [
-                        'user_id' => $data['user']['id'],
-                        'sub_type_id' => $sub_type_id,
-                        'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
-                        'speakers_name' => $speakers,
-                        'members_name' => $participants,
-                        'unique_code' => uniqid(),
-                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                        'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('start_date', true),
-                        'date_requested' =>  date('Y-m-d'),
-                        'start_time' => $this->input->post('start_time', true),
-                        'end_time' => $this->input->post('end_time', true),
-                        'request_status' => $request_status
-                    ];
-                } else {
-                    $data = [
-                        'user_id' => $data['user']['id'],
-                        'sub_type_id' => $sub_type_id,
-                        'speakers_name' => $speakers,
-                        'members_name' => $participants,
-                        'unique_code' => uniqid(),
-                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                        'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('start_date', true),
-                        'date_requested' =>  date('Y-m-d'),
-                        'start_time' => $this->input->post('start_time', true),
-                        'end_time' => $this->input->post('end_time', true),
-                        'request_status' => $request_status
-                    ];
-                }
-            } else {
-                $request_status = 0;
-                if ($sub_type_id != '1') {
-                    $data = [
-                        'user_id' => $data['user']['id'],
-                        'sub_type_id' => $sub_type_id,
-                        'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
-                        'speakers_name' => $speakers,
-                        'members_name' => $participants,
-                        'unique_code' => uniqid(),
-                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                        'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('start_date', true),
-                        'date_requested' =>  date('Y-m-d'),
-                        'start_time' => $this->input->post('start_time', true),
-                        'end_time' => $this->input->post('end_time', true),
-                        'request_status' => $request_status
-                    ];
-                } else {
-                    $data = [
-                        'user_id' => $data['user']['id'],
-                        'sub_type_id' => $sub_type_id,
-                        'speakers_name' => $speakers,
-                        'members_name' => $participants,
-                        'unique_code' => uniqid(),
-                        'agenda' => htmlspecialchars($this->input->post('agenda', true)),
-                        'start_date' => $this->input->post('start_date', true),
-                        'end_date' => $this->input->post('start_date', true),
-                        'date_requested' =>  date('Y-m-d'),
-                        'start_time' => $this->input->post('start_time', true),
-                        'end_time' => $this->input->post('end_time', true),
-                        'request_status' => $request_status
-                    ];
-                }
-            }
-            if (empty($_FILES['file']['name'])) {
-                $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Maaf!</strong> Anda belum mengunggah Undangan Rapat!</div>');
-                redirect('meeting', 'refresh');
-            } else {
-
-                $files_name_upload = $_FILES['file']['name'];
-                if ($files_name_upload) {
-                    $config['allowed_types'] = 'gif|jpg|jpeg|png|bmp|pdf';
-                    $config['max_size'] = '1024';
-                    $config['upload_path'] = 'uploads/';
-
-                    $this->load->library('upload', $config);
-
-                    if ($this->upload->do_upload('file')) {
-                        $new_files_name = $this->upload->data('file_name');
-                        $this->db->set('files_upload', $new_files_name);
-                    } else {
-                        echo $this->upload->display_errors();
-                    }
-                }
-            }
-        }
-    }
-
     public function store_meeting()
     {
         $data['title'] = 'Master Data Rapat';
@@ -182,6 +50,7 @@ class Meeting extends CI_Controller
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
         $data['alltype'] = $this->Type_model->get_all_type();
         $data['types'] = $this->Type_model->getSubType();
+        $data['zoom'] = $this->Zoom_model->getzoom();
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agenda', 'Agenda', 'required|trim|xss_clean');

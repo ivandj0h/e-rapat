@@ -72,6 +72,7 @@ class Meeting_model extends CI_Model
         $data = array(
             'user_id' => $data['user']['id'],
             'sub_type_id' => $sub_type_id,
+            'zoomid' => $this->input->post('zoomid', true),
             'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
             'speakers_name' => $speakers,
             'members_name' => $participants,
@@ -85,6 +86,9 @@ class Meeting_model extends CI_Model
             'request_status' => $request_status
         );
 
+        $this->db->set('status', '1');
+        $this->db->where('zoom_id', $data['zoomid']);
+        $this->db->update('meeting_zoom');
         $result = $this->db->insert($this->meeting, $data);
         return $result;
     }

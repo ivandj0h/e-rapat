@@ -70,6 +70,13 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
+                                                <?php
+                                                if ($zm['status'] == 1) { ?>
+                                                    <span class="badge badge-success" data-toggle="modal" data-target="#resetZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Sedang Online</span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger" data-toggle="modal" data-target="#resetZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Sedang Offline</span>
+                                                <?php } ?>
+
                                                 <span class="badge badge-dark" data-toggle="modal" data-target="#editZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
                                                 <span class="badge badge-danger" data-toggle="modal" data-target="#deleteZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
                                             </td>
@@ -211,3 +218,28 @@ foreach ($zoom as $zm) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Delete -->
+
+<!-- Start of Modal Reset Online/Offline Status ZoomID -->
+<?php
+foreach ($zoom as $zm) :
+    $id = $zm['id'];
+?>
+    <div class="modal fade" id="resetZoom<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="<?= base_url('zoom/resetzoom'); ?>" method="POST">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
+                    <div class="modal-body">
+                        <p>Yakin ingin mereset ZoomID <strong><?= $zm['zoom_id']; ?> ?</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" value="<?= $id; ?>">
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Reset Sekarang!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End of Modal Reset Online/Offline Status ZoomID -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2020 at 02:48 PM
+-- Generation Time: Sep 08, 2020 at 02:47 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -31,6 +31,7 @@ CREATE TABLE `meeting` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `other_online_id` varchar(150) NOT NULL,
+  `zoomid` varchar(100) NOT NULL,
   `sub_type_id` int(11) NOT NULL,
   `speakers_name` varchar(225) NOT NULL,
   `members_name` varchar(225) NOT NULL,
@@ -47,6 +48,13 @@ CREATE TABLE `meeting` (
   `request_status` int(11) NOT NULL,
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoomid`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
+(1, 15, '', '2222222222', 1, '', 'ivandi', '', '', '', '5f57770947bb6', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,', '2020-09-08', '2020-09-08', '2020-09-08', '19:00:00', '20:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -190,12 +198,12 @@ CREATE TABLE `meeting_users` (
 
 INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `sub_department_id`, `date_created`, `date_updated`) VALUES
 (14, '717 771 7448', 'administrator', 'admin@erapat.com', '3.jpg', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
-(15, '234 234 2344', 'Admin Keuangan', 'keuangan@erapat.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
-(18, '456 456 4566', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$5Kud5rfLqdf.7vApjirzNuWjVLKqFqpZt6hGDH/d/5vtjoCcssqRy', 2, 1, 5, 1597213397, 1599475976),
-(19, '123 123 1233', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
+(15, '1234567890', 'Admin Keuangan', 'keuangan@erapat.com', 'baray.jpg', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
+(18, '0987654321', 'Admin Humas', 'humas@erapat.com', 'default-avatar.jpg', '$2y$10$5Kud5rfLqdf.7vApjirzNuWjVLKqFqpZt6hGDH/d/5vtjoCcssqRy', 2, 1, 5, 1597213397, 1599549994),
+(19, '1111111111', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
 (20, '123 123 123', 'Kaban Litbang Perhubungan', 'kaban@erapat.com', 'default-avatar.jpg', '$2y$10$w5k9sGFC7SMC8whAPIp/dOknnlHLA.nOP1IypYw6JNVu2aDz0oEse', 4, 1, 14, 1599060092, 1599061311),
 (21, '321 321 321', 'Sesban Litbang Perhubungan', 'sesban@erapat.com', 'default-avatar.jpg', '$2y$10$7iKaePzZkNyVg37xciRbUOzFSQ58N92P8L95KwtgXGkzV8u8yBTge', 5, 1, 15, 1599060131, 1599061333),
-(22, '098 093 098', 'Admin LSDP', 'lsdp@erapat.com', 'default-avatar.jpg', '$2y$10$hNKFHzPaAMTJXuwscLTBEutZtQHxD1CHqJDgOY1Z7u2EJ/ARXPjpy', 2, 1, 9, 1599471171, 0);
+(22, '2222222222', 'Admin LSDP', 'lsdp@erapat.com', 'default-avatar.jpg', '$2y$10$hNKFHzPaAMTJXuwscLTBEutZtQHxD1CHqJDgOY1Z7u2EJ/ARXPjpy', 2, 1, 9, 1599471171, 0);
 
 -- --------------------------------------------------------
 
@@ -210,6 +218,16 @@ CREATE TABLE `meeting_zoom` (
   `status` int(11) NOT NULL,
   `is_active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting_zoom`
+--
+
+INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `status`, `is_active`) VALUES
+(1, 15, '1234567890', 0, 1),
+(2, 18, '0987654321', 0, 1),
+(3, 19, '1111111111', 0, 1),
+(4, 22, '2222222222', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -251,7 +269,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (68, 3, 2),
 (69, 4, 2),
 (70, 5, 2),
-(71, 1, 35);
+(71, 1, 35),
+(72, 2, 35);
 
 -- --------------------------------------------------------
 
@@ -425,7 +444,7 @@ CREATE TABLE `view_user_meeting` (
 ,`end_date` date
 ,`date_requested` date
 ,`remark_status` text
-,`zoomid` varchar(64)
+,`zoomid` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -478,7 +497,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`files_upload1` AS `files_upload1`,`meeting`.`files_upload2` AS `files_upload2`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting`.`other_online_id` AS `other_online_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`view_user_department`.`zoomid` AS `zoomid` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`files_upload1` AS `files_upload1`,`meeting`.`files_upload2` AS `files_upload2`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting`.`other_online_id` AS `other_online_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`meeting`.`zoomid` AS `zoomid` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -574,7 +593,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -616,13 +635,13 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `meeting_zoom`
 --
 ALTER TABLE `meeting_zoom`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
