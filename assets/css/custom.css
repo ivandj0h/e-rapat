@@ -146,6 +146,20 @@ textarea.textarea-autosize.form-control-sm {
 	background: #671f79;
 }
 
+.modal-lg {
+	max-width: 80% !important;
+}
+
+.modal-dialog,
+.modal-content {
+	height: 80% !important;
+}
+
+.modal-body {
+	max-height: calc(100% - 120px);
+	overflow-y: scroll !important;
+}
+
 .form-heigt {
 	height: 1500px !important;
 }
@@ -222,16 +236,39 @@ ul.chec-radio li.pz {
 }
 .chec-radio .radio-inline .clab {
 	cursor: pointer;
-	background: #fafafa;
+	background: #ffffff;
 	padding: 4px 20px;
 	text-align: center;
-	border: #e3e6f0 1px solid;
+	border: #c5ffc9 1px solid;
 	position: relative;
 	height: 34px;
 	float: left;
 	margin: 0;
-	/* margin-bottom: 5px; */
 }
+.chec-radio .radio-inline .avail {
+	cursor: pointer;
+	background: #ffffff;
+	padding: 4px 20px;
+	text-align: center;
+	border: #bbc8ff 1px solid;
+	position: relative;
+	height: 34px;
+	float: left;
+	margin: 0;
+}
+
+.chec-radio .radio-inline .notavail {
+	cursor: pointer;
+	background: #ffffff;
+	padding: 4px 20px;
+	text-align: center;
+	border: #ffc5c5 1px solid;
+	position: relative;
+	height: 34px;
+	float: left;
+	margin: 0;
+}
+
 .chec-radio label.radio-inline input[type="checkbox"]:checked + div:before {
 	margin-right: 5px;
 }
