@@ -150,15 +150,15 @@ textarea.textarea-autosize.form-control-sm {
 	max-width: 80% !important;
 }
 
-.modal-dialog,
-.modal-content {
-	height: 80% !important;
-}
+/* .modal-dialog, */
+/* .modal-content {
+	height: 100% !important;
+} */
 
-.modal-body {
-	max-height: calc(100% - 120px);
-	overflow-y: scroll !important;
-}
+/* .modal-body { */
+/* max-height: calc(100% - 120px); */
+/* overflow-y: scroll !important; */
+/* } */
 
 .form-heigt {
 	height: 1500px !important;

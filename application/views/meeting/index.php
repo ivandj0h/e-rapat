@@ -94,6 +94,7 @@
                                                 <?= status_meeting($a); ?>
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -297,7 +298,6 @@ foreach ($meeting as $a) :
 <?php endforeach; ?>
 <!-- End of Modal Detail -->
 
-
 <!-- Start of Modal Change Status -->
 <?php
 foreach ($meeting as $a) :
@@ -339,7 +339,7 @@ foreach ($meeting as $a) :
                         <div class="actions">
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
-                            <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
+                            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Ubah Status</button>
                         </div>
                     </div>
                 </form>
@@ -624,17 +624,25 @@ foreach ($meeting as $a) :
     $meeting_subtype = $a['meeting_subtype'];
 ?>
     <div class="modal fade" id="meetingDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <form action="<?= base_url('meeting/delete'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $meeting_subtype; ?> ?</b></p>
+                        <p class="text-danger">Yakin ingin menghapus Agenda Rapat :
+                            <br />
+                            <strong><?= $a['agenda']; ?></strong>
+                            <br />
+                            <small>Tanggal <?= date("d-m-Y", strtotime($a['start_date'])); ?></small>
+                        </p>
+                        <br />
+                        <input id="deleteMeeting" type="checkbox">
+                        <label for="deleteMeeting" class="text-danger"> Ya, Saya Yakin</label>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                        <button type="submit" class="btn btn-danger" disabled><i class="fas fa-trash-alt"></i> Hapus Rapat!</button>
                     </div>
                 </form>
             </div>

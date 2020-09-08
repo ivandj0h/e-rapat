@@ -17,6 +17,14 @@ class Zoom_model extends CI_Model
         return $this->db->get($this->view_zoom_meeting)->result_array();
     }
 
+    public function check_status_zoom_today()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('date_format(end_date,"%Y-%m-%d")', 'CURDATE()', FALSE);
+        return $this->db->get()->result_array();
+    }
+
     public function insert_zoom($data)
     {
         return $this->db->insert($this->meeting_zoom, $data);

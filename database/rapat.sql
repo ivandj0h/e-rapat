@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 09:29 PM
+-- Generation Time: Sep 08, 2020 at 11:14 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -208,6 +208,7 @@ CREATE TABLE `meeting_zoom` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `zoom_id` varchar(150) NOT NULL,
+  `date_activated` date DEFAULT NULL,
   `status` int(11) NOT NULL,
   `is_active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -216,14 +217,14 @@ CREATE TABLE `meeting_zoom` (
 -- Dumping data for table `meeting_zoom`
 --
 
-INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `status`, `is_active`) VALUES
-(1, 15, '1234567890', 0, 1),
-(2, 18, '0987654321', 0, 1),
-(3, 19, '1111111111', 0, 1),
-(4, 22, '2222222222', 0, 1),
-(5, 14, '717 771 7448', 0, 1),
-(6, 20, '123 123 123', 0, 1),
-(7, 21, '321 321 321', 0, 1);
+INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `date_activated`, `status`, `is_active`) VALUES
+(1, 15, '1234567890', '0000-00-00', 0, 1),
+(2, 18, '0987654321', NULL, 0, 1),
+(3, 19, '1111111111', NULL, 0, 1),
+(4, 22, '2222222222', NULL, 0, 1),
+(5, 14, '717 771 7448', '2020-09-09', 0, 1),
+(6, 20, '123 123 123', NULL, 0, 1),
+(7, 21, '321 321 321', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -459,6 +460,7 @@ CREATE TABLE `view_zoom_meeting` (
 ,`name` varchar(128)
 ,`sub_department_name` varchar(225)
 ,`zoom_id` varchar(150)
+,`date_activated` date
 ,`status` int(11)
 ,`is_active` int(11)
 );
@@ -506,7 +508,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) ;
 
 --
 -- Indexes for dumped tables

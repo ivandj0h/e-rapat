@@ -97,7 +97,7 @@ function get_available_zoomid()
     } else { ?>
         <li class="pz">
             <label class="radio-inline">
-                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>">
+                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" checked>
                 <div class="avail text-primary">
                     <?= $d['zoom_id']; ?>
                     - (Zoom ID Default)
