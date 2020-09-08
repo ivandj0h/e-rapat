@@ -194,7 +194,23 @@
                    }
                });
 
+               $("#confirmStatus").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
                $("#changeZoom").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
+               $("#deleteMeeting").click(function() {
                    if ($(this).is(":checked")) {
                        $('button[type=submit]').attr('disabled', false);
                    } else {
@@ -299,6 +315,7 @@
                                } else {
                                    $('#end_time_error').html('');
                                }
+
                                if ($('input[name=participants_name]').val() == '') {
                                    $('input[name=participants_name]').change(function() {
                                        if ($('input[name=participants_name]').val() == '') {

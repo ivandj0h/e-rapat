@@ -112,7 +112,7 @@ class Meeting extends CI_Controller
         );
 
         $this->Meeting_model->update_meeting($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Menu has been Updated!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Rapat berhasil diubah!</div>');
         redirect('meeting');
     }
 
@@ -282,7 +282,7 @@ class Meeting extends CI_Controller
         }
 
         $this->Meeting_model->update_meeting_status($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Anda berhasil merubah Status!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Status berhasil dirubah!</div>');
         redirect('meeting');
     }
 
@@ -291,7 +291,7 @@ class Meeting extends CI_Controller
         $id = $this->input->post('id');
 
         $this->Meeting_model->delete_meeting($id);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congradulation!</strong> Data Meeting has been Deleted!</div>');
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Data Rapat berhasil dihapus!</div>');
         redirect('meeting');
     }
 

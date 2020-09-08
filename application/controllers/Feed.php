@@ -11,7 +11,7 @@ class Feed extends CI_Controller
         $this->load->helper(array('string', 'text'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
-        $this->load->model('History_model');
+        $this->load->model('Type_model');
         $this->load->model('Zoom_model');
     }
 
@@ -42,6 +42,22 @@ class Feed extends CI_Controller
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
         $this->load->view('feed/pembaharuan', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function penjelajahan()
+    {
+        $data['title'] = 'Pembaharuan';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting_updates'] = $this->Meeting_model->get_all_meeting_today();
+        $data['zoom'] = $this->Zoom_model->getzoom();
+        $data['subtype'] = $this->Type_model->get_offline_room();
+
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('feed/penjelajahan', $data);
         $this->load->view('layout/footer');
     }
 }

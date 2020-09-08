@@ -16,7 +16,7 @@
                         <a class="nav-link active" href="<?= base_url('feed/pembaharuan'); ?>">Pembaharuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('history/searchdept'); ?>">Jelajah</a>
+                        <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
                     </li>
                 </ul>
             </div>
@@ -119,9 +119,12 @@
                                 <tr>
                                     <td class="text-center"><strong><?= $a['zoom_id']; ?></strong></td>
                                     <td class="text-left"><?= $a['sub_department_name']; ?></td>
-                                    <td class="text-left">
+                                    <td class="text-center">
                                         <?php
-                                        if ($a['status'] == '1') { ?>
+                                        $current = strtotime(date("Y-m-d"));
+                                        $date    = strtotime($a['date_activated']);
+
+                                        if ($a['status'] == '1' && $date == $current) { ?>
                                             <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>

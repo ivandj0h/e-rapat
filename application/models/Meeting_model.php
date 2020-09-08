@@ -26,8 +26,6 @@ class Meeting_model extends CI_Model
 
     public function get_all_meeting_today()
     {
-        // $today = CURDATE();
-        // $condition = "end_date = " . $today;
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where('date_format(end_date,"%Y-%m-%d")', 'CURDATE()', FALSE);
@@ -99,6 +97,7 @@ class Meeting_model extends CI_Model
         );
 
         $this->db->set('status', '1');
+        $this->db->set('date_activated', $data['end_date']);
         $this->db->where('zoom_id', $data['zoomid']);
         $this->db->update('meeting_zoom');
         $result = $this->db->insert($this->meeting, $data);
