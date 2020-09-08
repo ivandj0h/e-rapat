@@ -74,6 +74,70 @@ function show_add_meeting()
     enable_add_new();
 }
 
+// Function Get Radio Button check Availabel Zoom ID
+function get_available_zoomid()
+{
+    $ci = get_instance();
+
+    $zoomid = $ci->db->get_where('view_zoom_meeting', ['user_id !=' => $ci->session->userdata('id')])->result_array();
+    $d = $ci->db->get_where('view_zoom_meeting', ['user_id' => $ci->session->userdata('id')])->row_array();
+
+    if ($d['status'] == '1') {
+?>
+        <li class="pz">
+            <label class="radio-inline">
+                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" disabled>
+                <div class="clab text-danger">
+                    <?= $d['zoom_id']; ?>
+                    - (Zoom ID Default)
+                </div>
+            </label>
+        </li>
+    <?php
+    } else { ?>
+        <li class="pz">
+            <label class="radio-inline">
+                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>">
+                <div class="clab text-primary">
+                    <?= $d['zoom_id']; ?>
+                    - (Zoom ID Default)
+                </div>
+            </label>
+        </li>
+        <?php
+    }
+
+    foreach ($zoomid as $zm) :
+
+        if ($zm['status'] == '1') {
+        ?>
+            <li class="pz">
+                <label class="radio-inline">
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
+                    <div class="clab text-danger">
+                        <?= $zm['zoom_id']; ?>
+                        - (<?= $zm['sub_department_name']; ?>)
+                    </div>
+                </label>
+            </li>
+        <?php
+        } else {
+        ?>
+            <li class="pz">
+                <label class="radio-inline">
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>">
+                    <div class="clab text-success">
+                        <?= $zm['zoom_id']; ?>
+                        - (<?= $zm['sub_department_name']; ?>)
+                    </div>
+                </label>
+            </li>
+    <?php
+        }
+    endforeach;
+}
+
+
 // Show Expired Status
 function status_meeting_expired($a)
 { ?>
@@ -376,36 +440,8 @@ function enable_add_new()
         <label for="other_online_id" class="col-sm-2 col-form-label">ZOOM ID</label>
         <div class="col-sm-10">
             <ul class="chec-radio">
-                <li class="pz">
-                    <label class="radio-inline">
-                        <input type="radio" checked="" id="pro-chx-residential" name="property_type" class="pro-chx" value="constructed">
-                        <div class="clab text-success">1234 1234 1234 - Tersedia!</div>
-                    </label>
-                </li>
-                <li class="pz">
-                    <label class="radio-inline">
-                        <input type="radio" id="pro-chx-commercial" name="property_type" class="pro-chx" value="unconstructed" disabled>
-                        <div class="clab text-danger">2345 2345 2345 - Terpakai!</div>
-                    </label>
-                </li>
-                <li class="pz">
-                    <label class="radio-inline">
-                        <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
-                    </label>
-                </li>
-                <li class="pz">
-                    <label class="radio-inline">
-                        <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
-                    </label>
-                </li>
-                <li class="pz">
-                    <label class="radio-inline">
-                        <input type="radio" id="pro-chx-open" name="property_type" class="pro-chx" value="open_land">
-                        <div class="clab text-success">3456 3456 3456 - Tersedia!</div>
-                    </label>
-                </li>
+                <!-- Radio Button Here -->
+                <?php get_available_zoomid(); ?>
             </ul>
         </div>
     </div>
@@ -423,7 +459,7 @@ function enable_add_new()
     <div class="form-group row">
         <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
         <div class="col-sm-10">
-            <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda di sini..."><?= set_value('agenda'); ?></textarea>
+            <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda Rapatnya disini..."><?= set_value('agenda'); ?></textarea>
             <span id="agenda_error" class="text-danger"></span>
         </div>
     </div>

@@ -15,7 +15,6 @@ class Zoom extends CI_Controller
     {
         $data['title'] = 'Master Data Zoom';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-
         $data['zoom'] = $this->Zoom_model->getzoom();
         $data['users'] = $this->Account_model->get_all_users();
 
@@ -37,11 +36,11 @@ class Zoom extends CI_Controller
                 'is_active' => intval($this->input->post('is_active', true)),
             ];
 
-            // var_dump(['zoomid' => $data['zoom_id'], 'user_id' => $data['user_id']]);
-            // die;
-
             $this->Zoom_model->insert_zoom($data);
-            $this->Zoom_model->change_zoomid(['zoomid' => $data['zoom_id'], 'id' => $data['user_id']]);
+            $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
+            $this->db->set('zoomid', $data['zoom_id']);
+            $this->db->where('id', $data['user_id']);
+            $this->db->update('meeting_users');
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Zoom ID baru telah ditambahkan!</div>');
             redirect('zoom');
         }
@@ -71,6 +70,21 @@ class Zoom extends CI_Controller
 
         $this->Zoom_model->delete_zoom($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Zoom ID baru telah dihapus!</div>');
+        redirect('zoom');
+    }
+
+
+    public function resetzoom()
+    {
+        $id = $this->input->post('id');
+        $status = "0";
+        $data = [
+            'status' => $status
+        ];
+
+        $this->Zoom_model->reset_zoom($id, $data);
+        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Selamat!</strong> Status Zoom ID telah dirubah & Tersedia!</strong>.</div>');
         redirect('zoom');
     }
 }

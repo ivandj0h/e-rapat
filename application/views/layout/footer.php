@@ -226,6 +226,7 @@
 
                    var typeId = $("#type_id").val();
                    var subTypeId = $("#meeting_subtype").val();
+                   var zoomId = $("input[name='zoomid']:checked").val();
                    var otherId = $("#onlineId").val();
                    var participantsName = $("#participants_name").val();
                    var narasumberRapat = $("#speakers_name").val();
@@ -237,6 +238,7 @@
 
                    var dataJson = {
                        meeting_subtype: subTypeId,
+                       zoomid: zoomId,
                        other_online_id: otherId,
                        participants_name: participantsName,
                        speakers_name: narasumberRapat,

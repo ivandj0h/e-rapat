@@ -34,4 +34,10 @@ class Zoom_model extends CI_Model
     {
         return $this->db->where('id', $id)->delete($this->meeting_zoom);
     }
+
+    public function reset_zoom($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update($this->meeting_zoom, $data);
+    }
 }
