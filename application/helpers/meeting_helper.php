@@ -87,7 +87,7 @@ function get_available_zoomid()
         <li class="pz">
             <label class="radio-inline">
                 <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" disabled>
-                <div class="clab text-danger">
+                <div class="notavail text-danger">
                     <?= $d['zoom_id']; ?>
                     - (Zoom ID Default)
                 </div>
@@ -98,7 +98,7 @@ function get_available_zoomid()
         <li class="pz">
             <label class="radio-inline">
                 <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>">
-                <div class="clab text-primary">
+                <div class="avail text-primary">
                     <?= $d['zoom_id']; ?>
                     - (Zoom ID Default)
                 </div>
@@ -114,7 +114,7 @@ function get_available_zoomid()
             <li class="pz">
                 <label class="radio-inline">
                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
-                    <div class="clab text-danger">
+                    <div class="notavail text-danger">
                         <?= $zm['zoom_id']; ?>
                         - (<?= $zm['sub_department_name']; ?>)
                     </div>
@@ -136,6 +136,8 @@ function get_available_zoomid()
         }
     endforeach;
 }
+
+
 
 
 // Show Expired Status

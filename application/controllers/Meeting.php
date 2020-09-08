@@ -201,6 +201,9 @@ class Meeting extends CI_Controller
         );
 
         $id = $this->input->post('id');
+        $zoomid = $this->input->post('zoomid');
+        $checked = $this->input->post('changeZoom');
+
 
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('absensi')) {
@@ -212,6 +215,13 @@ class Meeting extends CI_Controller
             $this->load->view('layout/footer');
         } else {
             $absensi = $this->upload->data('file_name');
+
+            if ((int) $checked == 1) {
+                $this->db->set('status', 0);
+                $this->db->where('zoom_id', $zoomid);
+                $this->db->update('meeting_zoom');
+            }
+
             $this->db->set('files_upload2', $absensi);
 
             $this->db->where('id', $id);

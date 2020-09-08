@@ -24,6 +24,16 @@ class Meeting_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function get_all_meeting_today()
+    {
+        // $today = CURDATE();
+        // $condition = "end_date = " . $today;
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('date_format(end_date,"%Y-%m-%d")', 'CURDATE()', FALSE);
+        return $this->db->get()->result_array();
+    }
+
     public function get_all_meeting_by_role($role)
     {
         $condition = "role_id = " . $role;
@@ -63,6 +73,8 @@ class Meeting_model extends CI_Model
         $end_date = strtotime($this->input->post('start_date', true));
         $end_time = strtotime($this->input->post('end_time', true));
 
+        $zoomid = ($this->input->post('zoomid', true) ? $this->input->post('zoomid', true) : '0');
+
         if ($datenow >= $end_date && $timenow >= $end_time && $sub_type_id != '1') {
             $request_status = 3;
         } else {
@@ -72,7 +84,7 @@ class Meeting_model extends CI_Model
         $data = array(
             'user_id' => $data['user']['id'],
             'sub_type_id' => $sub_type_id,
-            'zoomid' => $this->input->post('zoomid', true),
+            'zoomid' => $zoomid,
             'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
             'speakers_name' => $speakers,
             'members_name' => $participants,

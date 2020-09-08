@@ -78,9 +78,7 @@ class Zoom extends CI_Controller
     {
         $id = $this->input->post('id');
         $status = "0";
-        $data = [
-            'status' => $status
-        ];
+        $data = array('status' => $status);
 
         $this->Zoom_model->reset_zoom($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">

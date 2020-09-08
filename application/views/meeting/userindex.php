@@ -246,14 +246,25 @@ foreach ($meeting as $a) :
                         </div>
                     </div>
                     <?php
-                    if ($a['type_id'] == 1) { ?>
-                        <div class="form-group row">
-                            <label for="members_name" class="col-sm-2 col-form-label">ID Rapat</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['meeting_subtype']; ?> ID : <?= $a['zoomid']; ?>" disabled>
+                    if ($a['type_id'] == 1) {
+                        if ($a['sub_type_id'] != 1) { ?>
+                            <div class="form-group row">
+                                <label for="members_name" class="col-sm-2 col-form-label">ID Rapat</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['other_online_id']; ?> ( <?= $a['meeting_subtype']; ?> ID )" disabled>
+                                </div>
                             </div>
-                        </div>
-                    <?php }
+                        <?php
+                        } else { ?>
+                            <div class="form-group row">
+                                <label for="members_name" class="col-sm-2 col-form-label">ID Rapat</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-user" id="participants_name" value="<?= $a['zoomid']; ?> ( <?= $a['meeting_subtype']; ?> ID )" disabled>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    }
                     ?>
                     <div class="form-group row">
                         <label for="agenda" class="col-sm-2 col-form-label">Agenda</label>
@@ -490,11 +501,21 @@ foreach ($meeting as $a) :
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="checkbox" class="col-sm-2 col-form-label">Akhiri Rapat</label>
+                        <div class="col-sm-10">
+                            <div class="custom-file">
+                                <input id="changeZoom" type="checkbox" name="changeZoom" value="1">
+                                <label for="changeZoom" class="text-danger">Centang box ini untuk mengakhiri Rapat (Pemakai Google Zoom)</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
+                    <input type="hidden" name="zoomid" value="<?= $a['zoomid']; ?>">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Batal</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-up"></i> Unggah Berkas Absensi!</button>
+                    <button type="submit" class="btn btn-primary" disabled><i class="fas fa-arrow-alt-circle-up"></i> Unggah Berkas Absensi!</button>
                 </div>
                 </form>
             </div>

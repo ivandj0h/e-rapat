@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 02:47 PM
+-- Generation Time: Sep 08, 2020 at 09:29 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -48,13 +48,6 @@ CREATE TABLE `meeting` (
   `request_status` int(11) NOT NULL,
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meeting`
---
-
-INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoomid`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
-(1, 15, '', '2222222222', 1, '', 'ivandi', '', '', '', '5f57770947bb6', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,', '2020-09-08', '2020-09-08', '2020-09-08', '19:00:00', '20:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -227,7 +220,10 @@ INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `status`, `is_active`) V
 (1, 15, '1234567890', 0, 1),
 (2, 18, '0987654321', 0, 1),
 (3, 19, '1111111111', 0, 1),
-(4, 22, '2222222222', 1, 1);
+(4, 22, '2222222222', 0, 1),
+(5, 14, '717 771 7448', 0, 1),
+(6, 20, '123 123 123', 0, 1),
+(7, 21, '321 321 321', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +266,9 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (69, 4, 2),
 (70, 5, 2),
 (71, 1, 35),
-(72, 2, 35);
+(72, 2, 35),
+(73, 1, 36),
+(74, 2, 36);
 
 -- --------------------------------------------------------
 
@@ -296,7 +294,8 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (32, 'History'),
 (33, 'Media'),
 (34, 'Role'),
-(35, 'Zoom');
+(35, 'Zoom'),
+(36, 'Feed');
 
 -- --------------------------------------------------------
 
@@ -355,7 +354,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (29, 33, 'Master Data Media', 'type', 'fas fa-fw fa-phone-volume', 1),
 (30, 33, 'Master Data SubMedia', 'type/subtype', 'fas fa-fw fa-phone', 1),
 (31, 34, 'Master Data Akses', 'role', 'fas fa-fw fa-user-circle', 1),
-(32, 35, 'Master Data Zoom', 'zoom', 'fas fa-fw fa-video', 1);
+(32, 35, 'Master Data Zoom', 'zoom', 'fas fa-fw fa-video', 1),
+(33, 36, 'Pembaharuan', 'feed/pembaharuan', 'fas fa-fw fa-sync-alt', 1);
 
 -- --------------------------------------------------------
 
@@ -593,7 +593,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -635,19 +635,19 @@ ALTER TABLE `meeting_users`
 -- AUTO_INCREMENT for table `meeting_zoom`
 --
 ALTER TABLE `meeting_zoom`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -659,7 +659,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
