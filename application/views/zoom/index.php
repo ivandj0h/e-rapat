@@ -47,7 +47,7 @@
                                     <tr>
                                         <th class="text-center w-20">No</th>
                                         <th class="text-center w-20">Nama Zoom ID</th>
-                                        <th class="text-center w-20">Nama Bagian</th>
+                                        <th class="text-center w-20">Nama Pemilik Zoom ID</th>
                                         <th class="text-center w-20">Nama User</th>
                                         <th class="text-center w-20">Status</th>
                                         <th class="text-center w-20">Aksi</th>

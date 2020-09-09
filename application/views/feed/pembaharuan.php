@@ -15,9 +15,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="<?= base_url('feed/pembaharuan'); ?>">Pembaharuan</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -59,8 +59,8 @@
                                     <?php foreach ($meeting_updates as $a) : ?>
                                         <tr>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                            <td class="text-center"><?= $a['start_time']; ?></td>
-                                            <td class="text-center"><?= $a['end_time']; ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td class="text-left"><?= $a['sub_department_name']; ?></td>
                                             <td class="text-left">
                                                 <?php
@@ -109,16 +109,59 @@
                     <table class="table table-condensed" id="meeting" cellspacing="0" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-center w-20">ZoomID</th>
+                                <th class="text-center w-40">ZoomID</th>
                                 <th class="text-center w-20">Nama Pemilik Zoom</th>
-                                <th class="text-center w-20">Status</th>
+                                <th class="text-center w-20">Zoom ID dipakai Oleh</th>
+                                <th class="text-center w-20">Sejak Pukul</th>
+                                <th class="text-center w-20">Berakhir Pukul</th>
+                                <th class="text-center w-20">Status Zoom ID</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($zoom as $a) : ?>
                                 <tr>
-                                    <td class="text-center"><strong><?= $a['zoom_id']; ?></strong></td>
-                                    <td class="text-left"><?= $a['sub_department_name']; ?></td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($a['status'] == 0) { ?>
+                                            <span class="text-success"><?= $a['zoom_id']; ?></span>
+                                        <?php } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
+                                            <span class="text-secondary"><strong><?= $a['zoom_id']; ?></strong></span>
+                                        <?php } else { ?>
+                                            <span class="text-danger"><strong><?= $a['zoom_id']; ?></strong></span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-left">
+                                        <?php
+                                        if ($a['status'] == 0) { ?>
+                                            <span class="text-success"><?= $a['sub_department_name']; ?></span>
+                                        <?php } else { ?>
+                                            <span class="text-danger"><strong><?= $a['sub_department_name']; ?></strong></span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($a['status'] == 0) { ?>
+                                            -
+                                        <?php } else { ?>
+                                            <span class="text-danger"><strong><?= $a['pemakai_zoom']; ?></strong></span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($a['status'] == 0) { ?>
+                                            -
+                                        <?php } else { ?>
+                                            <span class="text-danger"><strong><?= date("H:i", strtotime($a['start_time'])); ?></strong></span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($a['status'] == 0) { ?>
+                                            -
+                                        <?php } else { ?>
+                                            <span class="text-danger"><strong><?= date("H:i", strtotime($a['end_time'])); ?></strong></span>
+                                        <?php } ?>
+                                    </td>
                                     <td class="text-center">
                                         <?php
                                         $current = strtotime(date("Y-m-d"));
@@ -126,6 +169,8 @@
 
                                         if ($a['status'] == '1' && $date == $current) { ?>
                                             <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
+                                        <?php } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
+                                            <button type="button" class="btn btn-secondary" disabled><i class="fas fa-microphone-alt"></i> Terbatas</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>
                                         <?php }

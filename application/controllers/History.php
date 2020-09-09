@@ -72,7 +72,7 @@ class History extends CI_Controller
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
         $data['dept'] = $this->Department_model->get_all_department();
 
-        $this->form_validation->set_rules('department_id', 'Departmen Name', 'required');
+        $this->form_validation->set_rules('department_id', 'Nama Esalon 2', 'required');
 
         $where = array(
             'department_id' => $this->input->post('department_id')
