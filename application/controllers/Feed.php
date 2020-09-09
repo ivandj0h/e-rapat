@@ -13,6 +13,7 @@ class Feed extends CI_Controller
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
         $this->load->model('Zoom_model');
+        $this->load->model('History_model');
     }
 
 
@@ -50,14 +51,27 @@ class Feed extends CI_Controller
         $data['title'] = 'Pembaharuan';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting_updates'] = $this->Meeting_model->get_all_meeting_today();
-        $data['zoom'] = $this->Zoom_model->getzoom();
         $data['subtype'] = $this->Type_model->get_offline_room();
 
+        $this->form_validation->set_rules('sub_type_id', 'Departmen Name', 'required');
+        // $where = array('sub_type_id' => $this->input->post('sub_type_id'));
 
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
-        $this->load->view('feed/penjelajahan', $data);
-        $this->load->view('layout/footer');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('feed/penjelajahan', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($this->input->post('sub_type_id'));
+
+
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('feed/penjelajahan', $data);
+            $this->load->view('layout/footer');
+        }
     }
 }

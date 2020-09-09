@@ -96,10 +96,16 @@ class Meeting_model extends CI_Model
             'request_status' => $request_status
         );
 
-        $this->db->set('status', '1');
-        $this->db->set('date_activated', $data['end_date']);
-        $this->db->where('zoom_id', $data['zoomid']);
-        $this->db->update('meeting_zoom');
+        if ($data['sub_type_id'] == 1) {
+            $this->db->set('status', '1');
+            $this->db->set('pemakai_id', $this->session->userdata('id'));
+            $this->db->set('date_activated', $data['end_date']);
+            $this->db->set('start_time', $data['start_time']);
+            $this->db->set('end_time', $data['end_time']);
+            $this->db->where('zoom_id', $data['zoomid']);
+            $this->db->update('meeting_zoom');
+        }
+
         $result = $this->db->insert($this->meeting, $data);
         return $result;
     }

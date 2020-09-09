@@ -28,11 +28,11 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <?= form_open('history/searchdept'); ?>
+                        <?= form_open('feed/penjelajahan'); ?>
 
                         <div class="form-group row">
                             <div class="col-sm-5">
-                                <select name="department_id" id="department_id" class="form-control">
+                                <select name="sub_type_id" id="sub_type_id" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <?php $i = 1; ?>
                                     <?php foreach ($subtype as $st) : ?>
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cek Ruangan Rapat</button>
-                            <?= form_error('department_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
+                            <?= form_error('sub_type_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
                         </div>
                         <?= form_close(); ?>
                     </div>
@@ -62,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($meeting_admin as $a) : ?>
+                                    <?php foreach ($offline_updates as $a) : ?>
                                         <tr>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td class="text-center"><?= $a['start_time']; ?></td>
@@ -109,7 +109,7 @@
 
 <!-- Start of Modal Detail -->
 <?php
-foreach ($meeting_admin as $a) :
+foreach ($offline_updates as $a) :
     $id = $a['id'];
     $meeting_subtype = $a['meeting_subtype'];
     $request_status = $a['request_status'];
