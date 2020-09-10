@@ -36,12 +36,6 @@
                                 </span>
                                 <span class="text">Cek Google Zoom ID Hari ini</span>
                             </a>
-                            <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#findZoomIdHour">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-fw fa-search"></i>
-                                </span>
-                                <span class="text">Cek Google Zoom ID PerJam</span>
-                            </a>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini</h6>
                         </div>
                         <?= form_close(); ?>
@@ -194,7 +188,9 @@
         </div>
     </div>
 </div>
+
 <!-- End of Modal Find ZoomID Today -->
+
 
 <!-- Start of Modal Find ZoomID PerHour -->
 
@@ -292,4 +288,5 @@
         </div>
     </div>
 </div>
+
 <!-- End of Modal Find ZoomID PerHour -->
