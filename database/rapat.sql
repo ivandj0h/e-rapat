@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 11:14 PM
+-- Generation Time: Sep 10, 2020 at 05:06 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -82,8 +82,22 @@ INSERT INTO `meeting_department` (`id`, `department_name`) VALUES
 
 CREATE TABLE `meeting_place` (
   `id` int(11) NOT NULL,
-  `place_name` int(11) NOT NULL
+  `place_name` varchar(225) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `sub_type_id` int(11) NOT NULL,
+  `date_activated` date DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `meeting_place`
+--
+
+INSERT INTO `meeting_place` (`id`, `place_name`, `user_id`, `sub_type_id`, `date_activated`, `status`) VALUES
+(1, 'Ruangan Rapat Garuda', NULL, 5, NULL, 0),
+(2, 'Ruangan Rapat LRT', NULL, 6, NULL, 0),
+(3, 'Ruangan Rapat Rajawali', NULL, 7, NULL, 0),
+(4, 'Ruangan Rapat Perpustakaan', NULL, 8, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -207,8 +221,11 @@ INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password
 CREATE TABLE `meeting_zoom` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `pemakai_id` int(11) DEFAULT NULL,
   `zoom_id` varchar(150) NOT NULL,
   `date_activated` date DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
   `status` int(11) NOT NULL,
   `is_active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -217,14 +234,14 @@ CREATE TABLE `meeting_zoom` (
 -- Dumping data for table `meeting_zoom`
 --
 
-INSERT INTO `meeting_zoom` (`id`, `user_id`, `zoom_id`, `date_activated`, `status`, `is_active`) VALUES
-(1, 15, '1234567890', '0000-00-00', 0, 1),
-(2, 18, '0987654321', NULL, 0, 1),
-(3, 19, '1111111111', NULL, 0, 1),
-(4, 22, '2222222222', NULL, 0, 1),
-(5, 14, '717 771 7448', '2020-09-09', 0, 1),
-(6, 20, '123 123 123', NULL, 0, 1),
-(7, 21, '321 321 321', NULL, 0, 1);
+INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `zoom_id`, `date_activated`, `start_time`, `end_time`, `status`, `is_active`) VALUES
+(1, 15, 15, '1234567890', '2020-09-09', '12:00:00', '13:00:00', 0, 1),
+(2, 18, 15, '0987654321', '2020-09-09', '08:00:00', '09:00:00', 0, 1),
+(3, 19, 15, '1111111111', '2020-09-09', '11:00:00', '12:00:00', 0, 1),
+(4, 22, 15, '2222222222', '2020-09-09', '14:00:00', '15:00:00', 0, 1),
+(5, 14, 14, '717 771 7448', '2020-09-09', NULL, NULL, 0, 1),
+(6, 20, 20, '123 123 123', NULL, NULL, NULL, 0, 1),
+(7, 21, 21, '321 321 321', NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -458,11 +475,15 @@ CREATE TABLE `view_zoom_meeting` (
 `id` int(11)
 ,`user_id` int(11)
 ,`name` varchar(128)
-,`sub_department_name` varchar(225)
+,`pemakai_zoom` varchar(225)
 ,`zoom_id` varchar(150)
 ,`date_activated` date
 ,`status` int(11)
 ,`is_active` int(11)
+,`pemakai_id` int(11)
+,`sub_department_name` varchar(225)
+,`start_time` time
+,`end_time` time
 );
 
 -- --------------------------------------------------------
@@ -508,7 +529,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_users`.`name` AS `name`,`meeting_sub_department`.`sub_department_name` AS `pemakai_zoom`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active`,`meeting_zoom`.`pemakai_id` AS `pemakai_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time` from (((`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) join `meeting_sub_department` on(`meeting_users`.`sub_department_id` = `meeting_sub_department`.`id`)) join `view_user_department` on(`meeting_zoom`.`pemakai_id` = `view_user_department`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -607,7 +628,7 @@ ALTER TABLE `meeting_department`
 -- AUTO_INCREMENT for table `meeting_place`
 --
 ALTER TABLE `meeting_place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `meeting_sub_department`

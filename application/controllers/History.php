@@ -41,7 +41,7 @@ class History extends CI_Controller
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
                 $this->load->view('layout/topbar', $data);
-                $this->load->view('history/index', $data);
+                $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }
         } else {
@@ -58,7 +58,7 @@ class History extends CI_Controller
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
                 $this->load->view('layout/topbar', $data);
-                $this->load->view('history/index', $data);
+                $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }
         }
