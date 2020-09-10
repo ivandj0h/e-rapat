@@ -45,10 +45,10 @@
                                 <?php foreach ($meeting_user as $a) : ?>
                                     <tr>
                                         <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                        <td class="text-center"><?= $a['start_time']; ?></td>
-                                        <td class="text-center"><?= $a['end_time']; ?></td>
+                                        <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
+                                        <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                         <td class="text-left"><?= $a['sub_department_name']; ?></td>
-                                        <td class="text-left">
+                                        <td class="text-center">
                                             <?php
                                             if ($a['type_id'] == '1') { ?>
                                                 <span class="badge badge-success"><strong> Online</strong></span>
