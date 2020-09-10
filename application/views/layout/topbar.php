@@ -5,7 +5,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 fixed-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 fixed-top  shadow-sm">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -16,7 +16,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>" target="_blank">
-                            <span class="btn btn-secondary">Lihat Kalendar</span>
+                            <span class="btn btn-outline-danger"><i class="fas fa-fw fa-search"></i> Lihat Kalendar</span>
                         </a>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->

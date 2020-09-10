@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col">
-                <div class="card mb-3">
+                <div class="card shadow-none mb-3">
                     <div class="card-header">
                         Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, <br />Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
                     </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card ml-4">
+                <div class="card shadow-none ml-4">
                     <div class="card-header">
                         Hello <strong><?= $user['name']; ?></strong>, Anda dapat merubah Password anda disini.
                     </div>

@@ -26,7 +26,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-backdrop="static" data-target="#addMeeting" data-keyboard="false">
                             <span class="icon text-white-50">

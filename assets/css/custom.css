@@ -38,7 +38,7 @@
 }
 
 .breadcrumb {
-	border-bottom: 1px solid #eeeeee;
+	/* border-bottom: 1px solid #eeeeee; */
 	background-color: #ffffff;
 	margin-top: 85px;
 }
@@ -94,6 +94,10 @@ table.dataTable tbody td {
 
 th {
 	white-space: nowrap !important;
+}
+
+.noborder {
+	border: none !important;
 }
 
 .action {
