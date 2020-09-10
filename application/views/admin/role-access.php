@@ -16,7 +16,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <div class="float-left"><a href="<?= base_url('admin/role'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-chevron-left"></i> Kembali</a></div>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel untuk Pengaturan Hak Akses [ <?= $role['role']; ?> ]</h6>

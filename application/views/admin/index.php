@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow-sm mb-4">
                         <div class="card-header py-3">
                             <?= form_open('admin/searchdepartment'); ?>
 

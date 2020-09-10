@@ -26,7 +26,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-backdrop="static" data-target="#addMeeting" data-keyboard="false">
                             <span class="icon text-white-50">
@@ -46,6 +46,7 @@
                                         <th class="text-center w-20">Akhir</th>
                                         <th class="text-center w-20">Nama Bidang</th>
                                         <th class="text-center w-20">Media</th>
+                                        <th class="text-center w-20">ID Media</th>
                                         <th class="text-center w-20">Pimpinan</th>
                                         <th class="text-center w-20">Agenda</th>
                                         <th class="text-center w-20">File Upload</th>
@@ -60,6 +61,13 @@
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td class="text-center"><?= $a['sub_department_name']; ?></td>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?>
+                                            <td class="text-left">
+                                                <?php if ($a['sub_type_id'] == 1) {
+                                                    echo $a['zoomid'];
+                                                } else {
+                                                    echo $a['other_online_id'];
+                                                } ?>
+                                            </td>
                                             <td class="text-center"><?= $a['members_name']; ?></td>
                                             <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td class="text-center">
@@ -339,7 +347,7 @@ foreach ($meeting as $a) :
                         <div class="actions">
                             <input type="hidden" name="id" value="<?= $id; ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
-                            <button type="submit" class="btn btn-success" disabled><i class="fas fa-file"></i> Ubah Status</button>
+                            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Ubah Status</button>
                         </div>
                     </div>
                 </form>

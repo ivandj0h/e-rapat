@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-sm-3 col-md-6">
                         <!-- Start of DataTales -->
-                        <div class="card shadow mb-4">
+                        <div class="card shadow-none mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary float-right">Todays Meeting</h6>
                             </div>

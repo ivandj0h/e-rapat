@@ -1,9 +1,9 @@
-## E-RAPAT
+## E-RAPAT (ver.0.0.1)
 
 ### About
 
 E-RAPAT is application for meeting administration in research & dev center, ministry of transportation republic of indonesia.
-now this application is still `Beta Version`, we still on progress develop, but if you want to contribute, please let me know.
+now this application is still `Alpha Version`, we still on progress develop, but if you want to contribute, please let me know.
 
 ### Getting Started
 
@@ -21,7 +21,5 @@ or click the green button on top right of this list of repo's file.
 
 Here is the screenshoot of the application.
 
-![Calendar Month](captured/calendar_1.jpg "This is the Screenshoot")
-![Calendar Week](captured/calendar_2.jpg "This is the Screenshoot")
-![Login](captured/login.jpg "This is the Screenshoot")
-![Meeting](captured/meeting.jpg "This is the Screenshoot")
+![Calendar Month](captured/calendar_1.png "This is the Screenshoot")
+![Calendar Week](captured/calendar_2.png "This is the Screenshoot")

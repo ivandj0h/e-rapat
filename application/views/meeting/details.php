@@ -16,7 +16,7 @@ foreach ($meeting as $a) :
             <!-- Start Content Table -->
             <div class="row form-heigt">
                 <div class="col-md-10">
-                    <div class="card shadow mb-4">
+                    <div class="card shadow-none mb-4">
                         <div class="card-header py-3">
                             <div class="float-left"><a href="<?= base_url('meeting'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-chevron-left"></i> Previous</a></div>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Details Meeting</h6>

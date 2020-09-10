@@ -281,6 +281,16 @@ class Meeting extends CI_Controller
             );
         }
 
+        if ($data['sub_type_id'] == 1) {
+            $this->db->set('status', '1');
+            $this->db->set('pemakai_id', $this->session->userdata('id'));
+            $this->db->set('date_activated', $data['end_date']);
+            $this->db->set('start_time', $data['start_time']);
+            $this->db->set('end_time', $data['end_time']);
+            $this->db->where('zoom_id', $data['zoomid']);
+            $this->db->update('meeting_zoom');
+        }
+
         $this->Meeting_model->update_meeting_status($id, $data);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Status berhasil dirubah!</div>');
         redirect('meeting');
