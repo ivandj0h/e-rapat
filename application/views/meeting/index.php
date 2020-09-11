@@ -54,7 +54,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($meeting as $a) : ?>
+                                    <?php foreach ($meeting_admin as $a) : ?>
                                         <tr>
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
@@ -102,6 +102,7 @@
                                                 <?= status_meeting($a); ?>
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

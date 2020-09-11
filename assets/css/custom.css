@@ -16,12 +16,12 @@
 	overflow-x: hidden;
 }
 
-.topbar-breadcrumb {
+/* .topbar-breadcrumb {
 	width: 0;
 	height: calc(3.375rem - 2rem);
 	margin: auto 1rem;
 	width: 67rem;
-}
+} */
 
 #wrapper #content-wrapper {
 	background-color: #ffffff !important;
@@ -40,7 +40,7 @@
 .breadcrumb {
 	/* border-bottom: 1px solid #eeeeee; */
 	background-color: #ffffff;
-	margin-top: 85px;
+	margin-top: 70px;
 }
 .bootstrap-tagsinput {
 	line-height: 29px !important;

@@ -13,9 +13,14 @@ class Zoom_model extends CI_Model
         return $this->db->get($this->meeting_users)->result_array();
     }
 
-    public function getzoom()
+    public function getzoom_users()
     {
         return $this->db->get($this->view_zoom_users)->result_array();
+    }
+
+    public function getzoom()
+    {
+        return $this->db->get($this->view_zoom_meeting)->result_array();
     }
 
     public function check_status_zoom_today()

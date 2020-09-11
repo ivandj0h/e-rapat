@@ -19,9 +19,8 @@ class Meeting extends CI_Controller
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
+        $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
 
-        // var_dump($data['zoom']);
-        // die;
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
