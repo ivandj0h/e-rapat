@@ -12,7 +12,7 @@
         <!-- Page Heading -->
         <?= $this->session->flashdata('messages'); ?>
 
-        <div class="row">
+        <div class="row row-height-sm">
             <div class="col">
                 <div class="card shadow-none mb-3">
                     <div class="card-header">
