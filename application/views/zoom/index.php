@@ -48,7 +48,6 @@
                                         <th class="text-center w-20">No</th>
                                         <th class="text-center w-20">Nama Zoom ID</th>
                                         <th class="text-center w-20">Nama Pemilik Zoom ID</th>
-                                        <th class="text-center w-20">Nama User</th>
                                         <th class="text-center w-20">Status</th>
                                         <th class="text-center w-20">Aksi</th>
                                     </tr>
@@ -59,8 +58,7 @@
                                         <tr>
                                             <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-center"><span class="text-primary"><strong><?= $zm['zoom_id']; ?></strong></span></td>
-                                            <td><?= $zm['sub_department_name']; ?></td>
-                                            <td><?= $zm['name']; ?></td>
+                                            <td><?= $zm['pemilik_zoom']; ?></td>
                                             <td class="text-center">
                                                 <?php
                                                 if ($zm['is_active'] == 1) { ?>
@@ -158,7 +156,7 @@ foreach ($zoom as $zm) :
                     </button>
                 </div>
                 <form action="<?= base_url('zoom/updatezoom'); ?>" method="POST">
-                    <input type="hidden" name="id" value="<?= $zm['id']; ?>">
+                    <input type="hidden" name="id" value="<?= $zm['zoom_id']; ?>">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
@@ -166,7 +164,7 @@ foreach ($zoom as $zm) :
                         </div>
                         <div class="form-group">
                             <select class="custom-select mr-sm-2" select name="user_id" id="user_id">
-                                <option value="<?= $zm['user_id']; ?>"><?= $zm['name']; ?></option>
+                                <option value="<?= $zm['user_id']; ?>"><?= $zm['pemilik_zoom']; ?></option>
                                 <option disabled>--</option>
                                 <?php foreach ($users as $usr) : ?>
                                     <option value="<?= $usr['id']; ?>"><?= $usr['name']; ?></option>

@@ -98,7 +98,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title" id="findZoomId">Daftar Zoom ID yang terpakai hari ini</h5>
+                <h5 class="modal-title" id="findZoomId">Daftar Zoom ID yang terpakai Saat ini</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,62 +112,43 @@
                                 <th class="text-center w-40">ZoomID</th>
                                 <th class="text-center w-20">Nama Pemilik Zoom</th>
                                 <th class="text-center w-20">Zoom ID dipakai Oleh</th>
-                                <th class="text-center w-20">Sejak Pukul</th>
+                                <th class="text-center w-20">Mulai Pukul</th>
                                 <th class="text-center w-20">Berakhir Pukul</th>
                                 <th class="text-center w-20">Status Zoom ID</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($zoom as $a) : ?>
+                            <?php foreach ($zoom as $a) :
+
+                                $currenttime = date("H:i:s");
+                                $starttime = date($a['start_time']);
+                                $endtime = date($a['end_time']);
+
+                                $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+
+                            ?>
                                 <tr>
                                     <td class="text-center">
-                                        <?php
-                                        if ($a['status'] == 0) { ?>
-                                            <span class="text-success"><?= $a['zoom_id']; ?></span>
-                                        <?php } else { ?>
-                                            <span class="text-danger"><strong><?= $a['zoom_id']; ?></strong></span>
-                                        <?php } ?>
+                                        <strong><?= $a['zoom_id']; ?></strong>
                                     </td>
-                                    <td class="text-left">
-                                        <?php
-                                        if ($a['status'] == 0) { ?>
-                                            <span class="text-success"><?= $a['sub_department_name']; ?></span>
-                                        <?php } else { ?>
-                                            <span class="text-danger"><strong><?= $a['sub_department_name']; ?></strong></span>
-                                        <?php } ?>
+                                    <td class="text-center">
+                                        <span><?= $a['pemilik_zoom']; ?></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong><?= $a['pemakai_zoom']; ?></strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <?= date("H:i", strtotime($a['start_time'])); ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?= date("H:i", strtotime($a['end_time'])); ?>
                                     </td>
                                     <td class="text-center">
                                         <?php
-                                        if ($a['status'] == 0) { ?>
-                                            -
-                                        <?php } else { ?>
-                                            <span class="text-danger"><strong><?= $a['pemakai_zoom']; ?></strong></span>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php
-                                        if ($a['status'] == 0) { ?>
-                                            -
-                                        <?php } else { ?>
-                                            <span class="text-danger"><strong><?= date("H:i", strtotime($a['start_time'])); ?></strong></span>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php
-                                        if ($a['status'] == 0) { ?>
-                                            -
-                                        <?php } else { ?>
-                                            <span class="text-danger"><strong><?= date("H:i", strtotime($a['end_time'])); ?></strong></span>
-                                        <?php } ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?php
-                                        $current = strtotime(date("Y-m-d"));
-                                        $date    = strtotime($a['date_activated']);
-
-                                        if ($a['status'] == '1' && $date == $current) { ?>
+                                        if (($currenttime >= $starttime) && ($currenttime <= $endtime)) { ?>
                                             <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
-                                        <?php } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
+                                        <?php
+                                        } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
                                             <button type="button" class="btn btn-secondary" disabled><i class="fas fa-microphone-alt"></i> Terbatas</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>

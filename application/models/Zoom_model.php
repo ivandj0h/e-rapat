@@ -6,6 +6,7 @@ class Zoom_model extends CI_Model
     protected $meeting_users = 'meeting_users';
     protected $meeting_zoom = 'meeting_zoom';
     protected $view_zoom_meeting = 'view_zoom_meeting';
+    protected $view_zoom_users = 'view_zoom_users';
 
     public function get_all_user_accounts()
     {
@@ -14,7 +15,7 @@ class Zoom_model extends CI_Model
 
     public function getzoom()
     {
-        return $this->db->get($this->view_zoom_meeting)->result_array();
+        return $this->db->get($this->view_zoom_users)->result_array();
     }
 
     public function check_status_zoom_today()

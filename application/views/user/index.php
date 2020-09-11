@@ -39,7 +39,7 @@
                                         <span class="badge badge-danger">Not Active</span>
                                     <?php } ?>
                                 </p>
-                                <p class="card-text"><small class="text-muted">Zoom ID : <strong><?= $user['zoomid']; ?></strong></p>
+                                <p class="card-text"><span class="text-danger">Zoom ID : <strong><?= $user['zoomid']; ?></strong></p>
                                 <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Ubah Data Profil</a>
                             </div>
                         </div>
