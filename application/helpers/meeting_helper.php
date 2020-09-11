@@ -79,8 +79,8 @@ function get_available_zoomid()
 {
     $ci = get_instance();
 
-    $zoomid = $ci->db->get_where('view_zoom_meeting', ['user_id !=' => $ci->session->userdata('id')])->result_array();
-    $d = $ci->db->get_where('view_zoom_meeting', ['user_id' => $ci->session->userdata('id')])->row_array();
+    $zoomid = $ci->db->get_where('view_zoom_users', ['user_id !=' => $ci->session->userdata('id')])->result_array();
+    $d = $ci->db->get_where('view_zoom_users', ['user_id' => $ci->session->userdata('id')])->row_array();
 
     if ($d['status'] == '1') {
 ?>
@@ -109,14 +109,26 @@ function get_available_zoomid()
 
     foreach ($zoomid as $zm) :
 
-        if ($zm['status'] == '1') {
+        if ($zm['user_id'] == '20' || $zm['user_id'] == '21' || $zm['user_id'] == '14') {
         ?>
             <li class="pz">
                 <label class="radio-inline">
                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
-                    <div class="notavail text-danger">
+                    <div class="notavail text-secondary">
                         <?= $zm['zoom_id']; ?>
-                        - (<?= $zm['sub_department_name']; ?>)
+                        - (<?= $zm['pemilik_zoom']; ?>)
+                    </div>
+                </label>
+            </li>
+        <?php
+        } else if ($zm['status'] == '1') {
+        ?>
+            <li class="pz">
+                <label class="radio-inline">
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
+                    <div class="notavail text-muted">
+                        <?= $zm['zoom_id']; ?>
+                        - (<?= $zm['pemilik_zoom']; ?>)
                     </div>
                 </label>
             </li>
@@ -128,7 +140,7 @@ function get_available_zoomid()
                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>">
                     <div class="clab text-success">
                         <?= $zm['zoom_id']; ?>
-                        - (<?= $zm['sub_department_name']; ?>)
+                        - (<?= $zm['pemilik_zoom']; ?>)
                     </div>
                 </label>
             </li>

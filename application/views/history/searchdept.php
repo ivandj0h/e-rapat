@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-12 mb-3">
                 <!-- Nav pills -->
-                <ul class="nav nav-pills">
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('history'); ?>">Berdasarkan Rentang Tanggal</a>
                     </li>

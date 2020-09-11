@@ -7,7 +7,7 @@
                     <div class="card shadow-none" style="margin-top: 100px;">
                         <div class="card-header">
                             <div class="text-center">
-                                <h1 class="h3 text-primary-900 mb-3"><i class="fa fa-calendar" aria-hidden="true"></i> E-RAPAT</h1>
+                                <h1 class="text-primary-900 mb-3"><i class="fas fa-calendar-alt"></i></h1>
                                 <h1 class="h5 text-gray-500 mb-4">Control Panel</h1>
                                 <?= $this->session->flashdata('messages'); ?>
                             </div>
