@@ -9,7 +9,7 @@
         <!-- End of Breadcumb -->
 
         <!-- Start Content Table -->
-        <div class="row form-heigt">
+        <div class="row">
             <div class="col-lg-12">
 
                 <!-- Check for error using form validation -->

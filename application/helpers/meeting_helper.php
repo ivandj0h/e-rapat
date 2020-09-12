@@ -333,11 +333,13 @@ function form_change_status_online($a)
         </div>
     </div>
     <?php
-    $datenow = date("Y-m-d");
-    $timenow = date("H:i:s");
-    $datedb = $a['start_date'];
-    $timedb = $a['end_time'];
-    if ($datenow > $datedb && $timenow > $timedb) {
+
+    $currenttime = date("H:i:s");
+    $starttime = date($a['start_time']);
+    $endtime = date($a['end_time']);
+
+    $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+    if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
         expired_form_editable_date($a);
     } else {
         form_editable_date($a);

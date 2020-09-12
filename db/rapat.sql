@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2020 at 12:01 PM
+-- Generation Time: Sep 12, 2020 at 05:24 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -574,7 +574,8 @@ CREATE TABLE `meeting` (
 
 INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoomid`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
 (1, 20, '', '123 123 123', 1, '', 'kabadan', '', '', '', '5f5b4237ca238', 'You can get the client token by opening the console. The onMessage function is used because we don\'t need to send notification if the user is on your web page.', '2020-09-11', '2020-09-11', '2020-09-11', '16:00:00', '17:00:00', 0, ''),
-(2, 15, '', '1234567890', 1, '', 'asdddd', '', '', '', '5f5b48ca86a4c', 'You can get the client token by opening the console. The onMessage function is used because we don\'t need to send notification if the user is on your web page.', '2020-09-11', '2020-09-11', '2020-09-11', '20:00:00', '21:00:00', 0, '');
+(2, 15, '', '1234567890', 1, '', 'asdddd', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'ABSENSI_RAPAT.pdf', '5f5b48ca86a4c', 'You can get the client token by opening the console. The onMessage function is used because we don\'t need to send notification if the user is on your web page.', '2020-09-11', '2020-09-11', '2020-09-11', '20:00:00', '21:00:00', 0, ''),
+(3, 18, '', '0987654321', 1, '', 'Pimpinan Humas', '', '', '', '5f5cc3d9ca0fd', 'Selanjutnya pada file application/views/dashboard/content.php kita menambahkan dua buah widget yang akan menampilkan data hasil query kita pada controller tadi.', '2020-09-12', '2020-09-12', '2020-09-12', '19:00:00', '22:00:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -762,13 +763,13 @@ CREATE TABLE `meeting_zoom` (
 --
 
 INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `zoom_id`, `date_activated`, `start_time`, `end_time`, `status`, `is_active`) VALUES
-(1, 15, 15, '1234567890', '2020-09-11', '20:00:00', '21:00:00', 1, 1),
-(2, 18, 18, '0987654321', '2020-09-11', '14:00:00', '18:00:00', 0, 1),
+(1, 15, 15, '1234567890', '2020-09-11', '20:00:00', '21:00:00', 0, 1),
+(2, 18, 18, '0987654321', '2020-09-12', '21:00:00', '22:00:00', 0, 1),
 (3, 19, 19, '1111111111', '2020-09-11', '19:00:00', '20:00:00', 0, 1),
 (4, 22, 15, '2222222222', '2020-09-09', '14:00:00', '15:00:00', 0, 1),
 (5, 14, 14, '717 771 7448', '2020-09-09', NULL, NULL, 0, 1),
 (6, 20, 20, '123 123 123', '2020-09-11', '16:00:00', '17:00:00', 1, 1),
-(7, 21, 21, '321 321 321', NULL, NULL, NULL, 0, 1);
+(7, 21, 21, '321 321 321', NULL, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1058,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `status`, `email`, `username`, `password`, `auth_key`, `access_token`, `logged_in_ip`, `logged_in_at`, `created_ip`, `created_at`, `updated_at`, `banned_at`, `banned_reason`, `preferences`) VALUES
-(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-11 02:47:47', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
+(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-12 08:20:56', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
 (2, 2, 1, 'user@erapat.com', 'user', '$2y$13$ON/2lLk5YAq5DM2f2mww3.q2QdOM3rJpzL32COoUc7JoEhxP.IydC', NULL, NULL, '::1', '2020-09-10 11:10:05', NULL, '2020-09-10 11:09:47', '2020-09-10 13:54:07', NULL, NULL, NULL),
 (3, 3, 1, 'dave@erapat.com', 'dave', '$2y$13$vJZvD1UCh4yehfVCt4ANB.CpHnoQ0/tIcRXU1m3J0Zk3YozuiTqvu', NULL, NULL, '::1', '2020-09-10 11:16:38', NULL, '2020-09-10 11:16:29', '2020-09-10 13:54:17', NULL, NULL, NULL);
 
@@ -1724,7 +1725,7 @@ ALTER TABLE `mail_queue`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
