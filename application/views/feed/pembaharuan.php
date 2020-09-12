@@ -145,11 +145,14 @@
                                     </td>
                                     <td class="text-center">
                                         <?php
-                                        if (($currenttime >= $starttime) && ($currenttime <= $endtime)) { ?>
+                                        if (($currenttime >= $starttime) && ($currenttime <= $endtime) && ($a['status'] == 1)) { ?>
                                             <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
                                         <?php
                                         } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
                                             <button type="button" class="btn btn-secondary" disabled><i class="fas fa-microphone-alt"></i> Terbatas</button>
+                                        <?php
+                                        } else if ($a['status'] == 0) { ?>
+                                            <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>
                                         <?php }

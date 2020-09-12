@@ -12,7 +12,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <a class="mr-3 d-none d-lg-inline small my-auto text-decoration-none" href="<?= base_url('/beranda'); ?>" target="_blank">

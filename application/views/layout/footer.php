@@ -158,11 +158,7 @@
                        });
                    });
                });
-               tinymce.init({
-                   selector: 'textarea',
-                   menubar: '',
-                   theme: 'modern'
-               });
+
                $('#meetingStatus').on('hidden.bs.modal', function() {
                    location.reload();
                })
@@ -249,6 +245,41 @@
                    }
                });
 
+               tinymce.init({
+                   selector: '#default',
+                   height: 400,
+                   forced_root_block: "",
+                   force_br_newlines: true,
+                   force_p_newlines: false,
+                   theme: 'modern',
+                   plugins: [
+                       'autolink lists link image charmap print preview hr anchor pagebreak',
+                       'searchreplace wordcount visualblocks visualchars code fullscreen',
+                       'insertdatetime media nonbreaking save table contextmenu directionality',
+                       'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+                   ],
+                   toolbar1: 'undo redo | insert | styleselect table | bold italic | hr alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media ',
+                   toolbar2: 'print preview | forecolor backcolor emoticons | fontselect | fontsizeselect | codesample code fullscreen',
+                   templates: [{
+                           title: 'Test template 1',
+                           content: ''
+                       },
+                       {
+                           title: 'Test template 2',
+                           content: ''
+                       }
+                   ],
+                   content_css: [
+                       '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                       '//www.tinymce.com/css/codepen.min.css'
+                   ],
+                   setup: function(ed) {
+                       ed.on('change', function(e) {
+                           console.log('the content ' + ed.getContent());
+                           $("textarea").text(ed.getContent());
+                       });
+                   }
+               });
 
                $("#btnSave").click(function(e) {
                    e.preventDefault();
@@ -260,6 +291,7 @@
                    var participantsName = $("#participants_name").val();
                    var narasumberRapat = $("#speakers_name").val();
                    var agenda = $("textarea[name='agenda']").val();
+                   //    var agenda = $('textarea#agenda').val();
                    var startDate = $("input[name='start_date']").val();
                    var endDate = $("input[name='start_date']").val();
                    var startTime = $("input[name='start_time']").val();
