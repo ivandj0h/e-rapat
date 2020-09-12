@@ -40,7 +40,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Search Meeting</button>
+                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
                             <?= form_error('department_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
                         </div>
 

@@ -149,9 +149,6 @@ function get_available_zoomid()
     endforeach;
 }
 
-
-
-
 // Show Expired Status
 function status_meeting_expired($a)
 { ?>
@@ -355,7 +352,6 @@ function form_change_status_online($a)
     </div>
 <?php }
 
-
 // can change status Offline Meeting if meeting not expired
 function form_change_status_offline($a)
 { ?>
@@ -461,8 +457,6 @@ function enable_add_new()
             </ul>
         </div>
     </div>
-
-
     <div class="form-group row" id="other_online_id" style='display:none;'>
         <label for="other_online_id" class="col-sm-2 col-form-label">ID Rapat lain</label>
         <div class="col-sm-10">
@@ -475,7 +469,7 @@ function enable_add_new()
     <div class="form-group row">
         <label for="agenda" class="col-sm-2 col-form-label">Agenda Rapat</label>
         <div class="col-sm-10">
-            <textarea class="form-control form-control-user" name="agenda" id="agenda" placeholder="Tuliskan Agenda Rapatnya disini..."><?= set_value('agenda'); ?></textarea>
+            <textarea class="form-control form-control-user" name="agenda" id="default" placeholder="Tuliskan Agenda Rapatnya disini..."><?= set_value('agenda'); ?></textarea>
             <span id="agenda_error" class="text-danger"></span>
         </div>
     </div>
