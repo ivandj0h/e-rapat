@@ -67,6 +67,9 @@
            <!-- Chart Scripts -->
            <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
 
+           <!-- Tinymce Scripts -->
+           <script src="<?= base_url('assets/'); ?>vendor/tinymce/tinymce.min.js"></script>
+
            <!-- Customs scripts -->
            <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
            <script>
@@ -155,7 +158,11 @@
                        });
                    });
                });
-
+               tinymce.init({
+                   selector: 'textarea',
+                   menubar: '',
+                   theme: 'modern'
+               });
                $('#meetingStatus').on('hidden.bs.modal', function() {
                    location.reload();
                })
