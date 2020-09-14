@@ -46,6 +46,21 @@ class Feed extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function cekzoom()
+    {
+        $data['title'] = 'Pembaharuan';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting_updates'] = $this->Meeting_model->get_all_meeting_today();
+        $data['zoom'] = $this->Zoom_model->getzoom();
+
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('feed/cekavailzoom', $data);
+        $this->load->view('layout/footer');
+    }
+
     public function penjelajahan()
     {
         $data['title'] = 'Pembaharuan';
