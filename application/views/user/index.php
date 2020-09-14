@@ -70,11 +70,12 @@
                     </div>
                 </div>
             </div>
+
+            <?= get_alert_empty_upload(); ?>
+
         </div>
     </div>
-
     <!-- End Page Contents -->
-
 </div>
 <!-- /.container-fluid -->
 

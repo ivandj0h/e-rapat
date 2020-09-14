@@ -7,8 +7,10 @@ class Zoom extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->helper(array('alert'));
         $this->load->model('Account_model');
         $this->load->model('Zoom_model');
+        $this->load->model('Meeting_model');
     }
 
     public function index()
@@ -17,6 +19,7 @@ class Zoom extends CI_Controller
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['zoom'] = $this->Zoom_model->getzoom();
         $data['users'] = $this->Account_model->get_all_users();
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('zoom_id', 'Zoom ID', 'required|trim|xss_clean');

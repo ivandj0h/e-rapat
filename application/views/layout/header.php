@@ -34,6 +34,7 @@
     <!-- Custom styles -->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>css/customs-popup.css" rel="stylesheet">
 
 
 </head>

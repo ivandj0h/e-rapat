@@ -490,6 +490,7 @@ function enable_add_new()
 
     <div class="modal-footer">
         <div class="actions">
+            <span id="success_message"></span>
             <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
             <button type="submit" name="btnSave" class="btn btn-success" id="btnSave"><i class="fas fa-file"></i> Buat Rapat</button>
         </div>

@@ -16,8 +16,8 @@
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <input type="text" id="start_date" name="from_date" class="border" placeholder="From" autocomplete="off">
-                            <input type="text" id="end_date" name="to_date" class="border" placeholder="To" autocomplete="off">
+                            <input type="text" id="start_date" name="from_date" class="border" placeholder="Tanggal Awal" autocomplete="off">
+                            <input type="text" id="end_date" name="to_date" class="border" placeholder="Tanggal Akhir" autocomplete="off">
                             <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
                             <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>
@@ -79,6 +79,8 @@
 
 </div>
 <!-- End of Main Content -->
+
+<?= get_alert_empty_upload(); ?>
 
 <!-- Start of Modal Detail -->
 <?php
