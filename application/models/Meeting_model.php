@@ -121,6 +121,16 @@ class Meeting_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
+
+        if ($data['sub_type_id'] == 1) {
+            $this->db->set('status', '1');
+            $this->db->set('pemakai_id', $this->session->userdata('id'));
+            $this->db->set('date_activated', $data['end_date']);
+            $this->db->set('start_time', $data['start_time']);
+            $this->db->set('end_time', $data['end_time']);
+            $this->db->where('zoom_id', $data['zoomid']);
+            $this->db->update('meeting_zoom');
+        }
     }
 
     public function upload_notulen($id)

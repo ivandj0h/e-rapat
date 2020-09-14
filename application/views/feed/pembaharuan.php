@@ -15,6 +15,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="<?= base_url('feed/pembaharuan'); ?>">Pembaharuan</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('feed/cekzoom'); ?>">Cek Ketersediaan Akun Zoom</a>
+                    </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
                     </li> -->
@@ -30,12 +33,12 @@
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#findZoomId">
+                            <!-- <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#findZoomId">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-fw fa-search"></i>
                                 </span>
                                 <span class="text">Cek Google Zoom ID Hari ini</span>
-                            </a>
+                            </a> -->
                             <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini</h6>
                         </div>
                         <?= form_close(); ?>
