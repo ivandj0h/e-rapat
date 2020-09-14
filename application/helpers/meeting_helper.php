@@ -206,6 +206,13 @@ function expired_form_editable_date($a)
             <input type="time" class="border" value="<?= $a['end_time']; ?>" disabled> <small class="text-danger"> Rapat sudah Expired! </small>
         </div>
     </div>
+    <div class="form-group row">
+        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
+        <div class="col-sm-10">
+            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..." disabled><?= $a['remark_status']; ?></textarea>
+            <small class="text-danger"> Rapat sudah Expired! </small>
+        </div>
+    </div>
 <?php }
 
 // if meeting not expired
@@ -235,6 +242,14 @@ function form_editable_date($a)
         <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
         <div class="col-sm-10">
             <input type="time" id="end_time" name="end_time" class="tt" value="<?= $a['end_time']; ?>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
+        <div class="col-sm-10">
+            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..."><?= $a['remark_status']; ?></textarea>
+            Batas Maksimum <span id="remain">1000</span> Karakter
+            <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
         </div>
     </div>
 <?php }
@@ -342,14 +357,7 @@ function form_change_status_online($a)
         form_editable_date($a);
     }
     ?>
-    <div class="form-group row">
-        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
-        <div class="col-sm-10">
-            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..."><?= $a['remark_status']; ?></textarea>
-            Batas Maksimum <span id="remain">1000</span> Karakter
-            <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
-        </div>
-    </div>
+
 <?php }
 
 // can change status Offline Meeting if meeting not expired
@@ -387,14 +395,6 @@ function form_change_status_offline($a)
         form_editable_date($a);
     }
     ?>
-    <div class="form-group row">
-        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
-        <div class="col-sm-10">
-            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..."><?= $a['remark_status']; ?></textarea>
-            Batas Maksimum <span id="remain">1000</span> Karakter
-            <?= form_error('remark_status', '<small class="text-danger">', '</small>'); ?>
-        </div>
-    </div>
 <?php }
 
 // Add new Meeting
