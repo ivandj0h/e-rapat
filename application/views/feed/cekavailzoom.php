@@ -45,7 +45,7 @@
                                         <th class="text-center w-20">Zoom ID dipakai Oleh</th>
                                         <th class="text-center w-20">Mulai Pukul</th>
                                         <th class="text-center w-20">Berakhir Pukul</th>
-                                        <th class="text-center w-20">Status Zoom ID</th>
+                                        <th class="text-center w-20">Status Saat ini</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,9 +83,9 @@
                                                     <button type="button" class="btn btn-secondary" disabled><i class="fas fa-microphone-alt"></i> Terbatas</button>
                                                 <?php
                                                 } else if ($a['status'] == 0) { ?>
-                                                    <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>
+                                                    <span class="text-success"><i class="fas fa-check"></i> Tersedia</span>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-success" disabled><i class="fas fa-microphone-alt"></i> Tersedia</button>
+                                                    <span class="text-success"><i class="fas fa-check"></i> Tersedia</span>
                                                 <?php }
                                                 ?>
                                             </td>
