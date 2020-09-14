@@ -32,12 +32,14 @@
                 <!-- DataTales Example -->
                 <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addZoom">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-file"></i>
-                            </span>
-                            <span class="text">Tambah Zoom ID</span>
-                        </a>
+                        <?php if ($this->session->userdata('role_id') == '1') { ?>
+                            <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addZoom">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-file"></i>
+                                </span>
+                                <span class="text">Tambah Zoom ID</span>
+                            </a>
+                        <?php } ?>
                         <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Master Zoom</h6>
                     </div>
                     <div class="card-body">
@@ -74,9 +76,10 @@
                                                 <?php } else { ?>
                                                     <span class="badge badge-danger" data-toggle="modal" data-target="#resetZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Sedang Offline</span>
                                                 <?php } ?>
-
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
+                                                <?php if ($this->session->userdata('role_id') == '1') { ?>
+                                                    <span class="badge badge-dark" data-toggle="modal" data-target="#editZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
+                                                    <span class="badge badge-danger" data-toggle="modal" data-target="#deleteZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

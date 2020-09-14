@@ -8,7 +8,7 @@ class Form extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text'));
+        $this->load->helper(array('string', 'text', 'alert'));
         $this->load->model('Account_model');
     }
 

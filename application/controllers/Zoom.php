@@ -17,7 +17,7 @@ class Zoom extends CI_Controller
     {
         $data['title'] = 'Master Data Zoom';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['zoom'] = $this->Zoom_model->getzoom();
+        $data['zoom'] = $this->Zoom_model->getzoom_where_active();
         $data['users'] = $this->Account_model->get_all_users();
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
 
