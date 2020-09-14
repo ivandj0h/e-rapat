@@ -17,18 +17,18 @@
                                 <form class="user" method="POST" action="<?= base_url('auth'); ?>">
                                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                                     <div class="form-group">
-                                        <input type="text" name="email" class="form-control form-control-user" id="email" value="<?= set_value('email'); ?>" placeholder="Email Address" autocomplete="off" autofocus>
+                                        <input type="text" name="email" class="form-control form-control-user" id="email" value="<?= set_value('email'); ?>" placeholder="Masukan Alamat Email" autocomplete="off" autofocus>
                                         <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
+                                        <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Masukan Password">
                                         <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         <i class="fas fa-fw fa-lock"></i> Sign In
                                     </button>
                                 </form>
-                                <hr class="sidebar-divider">
+                                <hr class="sidebar-divider mb-4">
                                 <div class="copyright text-center text-secondary my-auto">
                                     <!-- <a class="small" href="<?= base_url('auth/forgotpassword') ?>">Forgot Password?</a> -->
                                     <span>Copyright &copy; e-rapat <?= date('Y'); ?></span>

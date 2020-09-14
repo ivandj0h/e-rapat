@@ -149,9 +149,11 @@
             <form method="POST" id="addMeeting" enctype="multipart/form-data">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
-                    <span id="success_message"></span>
                     <?= enable_add_new(); ?>
+
                 </div>
+
+
             </form>
         </div>
     </div>
@@ -691,3 +693,15 @@ foreach ($meeting as $a) :
     </div>
 </div>
 <!-- End of Modal Expired Meeting -->
+
+<script script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+</script>
+<script>
+    $("#changeZoom").click(function() {
+        if ($(this).is(":checked")) {
+            $('button[type=submit]').attr('disabled', false);
+        } else {
+            $('button[type=submit]').attr('disabled', true);
+        }
+    });
+</script>

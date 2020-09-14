@@ -30,8 +30,8 @@
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <input type="text" id="s_date" name="from_date" class="border" placeholder="From">
-                            <input type="text" id="e_date" name="to_date" class="border" placeholder="To">
+                            <input type="text" id="s_date" name="from_date" class="border" placeholder="Tanggal Awal">
+                            <input type="text" id="e_date" name="to_date" class="border" placeholder="Tanggal Akhir">
                             <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
                             <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>

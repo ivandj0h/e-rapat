@@ -61,9 +61,7 @@ class Meeting extends CI_Controller
         if ($this->form_validation->run()) {
             $data = $this->Meeting_model->store_meeting();
             $array = array(
-                'success' => '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Mohon Menunggu!</strong>... <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button> <div id="countdown"></div></div>',
+                'success' => '<div class="popup-wrapper" id="popup"><div class="popup-container"><h2>Mohon Menunggu</h2><p>System Sedang membuat Rapat untuk anda<br/></div></div><div id="countdown"></div></img>',
             );
         } else {
             $array = array(

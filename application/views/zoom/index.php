@@ -97,6 +97,8 @@
 </div>
 <!-- End of Main Content -->
 
+<?= get_alert_empty_upload(); ?>
+
 <!-- Start of Modal Add -->
 <div class="modal fade" id="addZoom" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="addZoom" aria-hidden="true">
     <div class="modal-dialog modal-md">

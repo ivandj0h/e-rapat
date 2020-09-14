@@ -8,19 +8,19 @@ $(document).ready(function () {
 	// Alerts system handler
 	$(".alert-success")
 		.fadeTo(2000, 500)
-		.slideUp(500, function () {
-			$(".alert-success").slideUp(500);
+		.slideUp(2000, function () {
+			$(".alert-success").slideUp(2000);
 		});
 
 	$(".alert-warning")
 		.fadeTo(3000, 500)
-		.slideUp(500, function () {
-			$(".alert-warning").slideUp(500);
+		.slideUp(2000, function () {
+			$(".alert-warning").slideUp(2000);
 		});
 
 	$(".alert-danger")
 		.fadeTo(2000, 500)
-		.slideUp(500, function () {
-			$(".alert-danger").slideUp(500);
+		.slideUp(2000, function () {
+			$(".alert-danger").slideUp(2000);
 		});
 });

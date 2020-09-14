@@ -205,13 +205,7 @@
                    }
                });
 
-               $("#changeZoom").click(function() {
-                   if ($(this).is(":checked")) {
-                       $('button[type=submit]').attr('disabled', false);
-                   } else {
-                       $('button[type=submit]').attr('disabled', true);
-                   }
-               });
+
 
                $("#deleteMeeting").click(function() {
                    if ($(this).is(":checked")) {
@@ -370,7 +364,7 @@
                                $('#success_message').html(data.success);
                                setTimeout(function() {
                                    location.reload(true);
-                               }, 3000);
+                               }, 5000);
                                var timeleft = 5;
                                var downloadTimer = setInterval(function() {
                                    if (timeleft <= 0) {
@@ -380,7 +374,7 @@
                                        document.getElementById("countdown").innerHTML = "Form ini akan tutup dalam " + timeleft + " detik...";
                                    }
                                    timeleft -= 1;
-                               }, 1000);
+                               }, 2000);
                                $('#btnSave').attr('disabled', true);
                            }
                        }

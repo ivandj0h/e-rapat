@@ -7,14 +7,20 @@ class User extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->helper(array('alert'));
         $this->load->library('form_validation');
         $this->load->model('Account_model');
+        $this->load->model('Meeting_model');
     }
 
     public function index()
     {
         $data['title'] = 'Profil Pengguna';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
+
+        // var_dump($data['meeting']);
+        // die;
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
