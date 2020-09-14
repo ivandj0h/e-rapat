@@ -11,7 +11,6 @@
                     if (empty($a['files_upload']) || empty($a['files_upload2'] || empty($a['files_upload2']))) { ?>
                         <div class="popup-wrapper" id="popup">
                             <div class="popup-container">
-
                                 <!-- Konten popup, silahkan ganti sesuai kebutughan -->
                                 <form action="meeting" method="post" class="popup-form">
                                     <h2>Perhatian!!</h2>
@@ -34,5 +33,21 @@
                     }
                 endforeach;
             }
+            // <!-- End of Modal Alert if empty upload file -->
             ?>
-            <!-- End of Modal Alert if empty upload file -->
+            <!-- Start of Modal Restricted Area -->
+            <?php
+            function restricted_area()
+            { ?>
+                <div class="popup-wrapper" id="popup">
+                    <div class="popup-container">
+                        <!-- Konten popup, silahkan ganti sesuai kebutughan -->
+                        <h2>Access Denied!!</h2>
+                        <p><strong class="text-danger">Maaf, Anda tidak memilike akses ke Menu ini.</strong>
+                            <a class="popup-close" href="<?= base_url('meeting'); ?>">X</a>
+                    </div>
+                </div>
+            <?php
+            }
+
+            ?>

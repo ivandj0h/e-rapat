@@ -18,6 +18,11 @@ class Zoom_model extends CI_Model
         return $this->db->get($this->view_zoom_users)->result_array();
     }
 
+    public function getzoom_where_active()
+    {
+        return $this->db->get_where($this->view_zoom_users, array('is_active' => 1))->result_array();
+    }
+
     public function getzoom()
     {
         return $this->db->get($this->view_zoom_meeting)->result_array();
