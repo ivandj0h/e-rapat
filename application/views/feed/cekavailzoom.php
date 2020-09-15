@@ -45,14 +45,16 @@
                                         <th class="text-center w-20">Zoom ID dipakai Oleh</th>
                                         <th class="text-center w-20">Mulai Pukul</th>
                                         <th class="text-center w-20">Berakhir Pukul</th>
-                                        <th class="text-center w-20">Status Saat ini</th>
+                                        <th class="text-center w-20">Durasi</th>
+                                        <th class="text-center w-20">Status Rapat</th>
+                                        <th class="text-center w-20">Status Zoom</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($zoom as $a) : ?>
                                         <tr>
                                             <td class="text-center">
-                                                <strong><?= $a['zoom_id']; ?></strong>
+                                                <strong><?= $a['zoomid']; ?></strong>
                                             </td>
                                             <td class="text-center">
                                                 <span><?= $a['pemilik_zoom']; ?></span>
@@ -68,12 +70,36 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php
+                                                $time1 = strtotime($a['start_time']);
+                                                $time2 = strtotime($a['end_time']);
+                                                $difference = round(abs($time2 - $time1) / 3600, 2);
+                                                echo $difference . ' Jam';
+                                                ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php
                                                 $currenttime = date("H:i:s");
                                                 $starttime = date($a['start_time']);
                                                 $endtime = date($a['end_time']);
 
                                                 $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
-                                                if (($currenttime >= $starttime) && ($currenttime <= $endtime) && ($a['status'] == 1)) {
+                                                if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
+                                                    echo '<span class="text-danger"><i class="fas fa-times"></i> Sedang Berlangsung</span>';
+                                                } else if (($currenttime < $starttime) && ($currenttime < $endtime)) {
+                                                    echo '<span class="text-primary"><i class="fas fa-check"></i> Belum Mulai</span>';
+                                                } else {
+                                                    echo '<span class="text-success"><i class="fas fa-check"></i> Telah Selesai</span>';
+                                                }
+                                                ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php
+                                                $currenttime = date("H:i:s");
+                                                $starttime = date($a['start_time']);
+                                                $endtime = date($a['end_time']);
+
+                                                $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+                                                if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
                                                     if ($a['user_id'] == 20 || $a['user_id'] == 21 || $a['user_id'] == 14) { ?>
                                                         <span class="text-secondary"><i class="fas fa-times"></i> Terbatas</span>
                                                 <?php

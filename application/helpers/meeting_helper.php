@@ -82,11 +82,9 @@ function get_available_zoomid()
     $zoomid = $ci->db->get_where('view_zoom_users', ['user_id !=' => $ci->session->userdata('id')])->result_array();
     $d = $ci->db->get_where('view_zoom_users', ['user_id' => $ci->session->userdata('id')])->row_array();
 
-    $currenttime = date("H:i:s");
-    $starttime = date($d['start_time']);
-    $endtime = date($d['end_time']);
-
-    $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+    $currenttime = strtotime(date("H:i:s"));
+    $starttime = strtotime(date($d['start_time']));
+    $endtime = strtotime(date($d['end_time']));
 
     if (($currenttime >= $starttime) && ($currenttime <= $endtime) && $d['user_id'] == $ci->session->userdata('id') && $d['status'] == 1) { ?>
         <li class="pz">

@@ -1,5 +1,14 @@
 <?php
 
+function isBetween($from, $till, $input)
+{
+    $f = DateTime::createFromFormat('!H:i', $from);
+    $t = DateTime::createFromFormat('!H:i', $till);
+    $i = DateTime::createFromFormat('!H:i', $input);
+    if ($f > $t) $t->modify('+1 day');
+    return ($f <= $i && $i <= $t) || ($f <= $i->modify('+1 day') && $i <= $t);
+}
+
 if (!function_exists('changeDateFormat')) {
 
     function changeDateFormat($format = 'd-m-Y', $originalDate)

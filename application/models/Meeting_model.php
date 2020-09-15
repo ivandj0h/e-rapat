@@ -105,6 +105,7 @@ class Meeting_model extends CI_Model
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
+            $this->db->set('status', 1);
             $this->db->where('id', $zoomid);
             $this->db->update('meeting_zoom');
         }
