@@ -15,14 +15,39 @@ foreach ($meeting as $a) :
 
             <!-- Start Content Table -->
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <div class="card shadow-none mb-4">
                         <div class="card-header py-3">
-                            <div class="float-left"><a href="<?= base_url('meeting'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-chevron-left"></i> Previous</a></div>
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Details Meeting</h6>
+                            <div class="float-left">
+                                <h6 class="m-0 font-weight-bold text-primary float-right">PILIH METODE</h6>
+                            </div>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">LANGKAH PERTAMA</h6>
                         </div>
                         <div class="card-body">
-                            <?= choose_undangan($a); ?>
+                            <p class="text-muted">Silahkan Pilih salah satu metode untuk Pengelolaan Absensi Rapat</p>
+                            <hr>
+                            <ul class="chec-radio">
+                                <!-- Radio Button Here -->
+                                <li class="pz">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="soho">
+                                        <div class="avail text-primary">
+                                            Menggunakan <strong>SOHO FORM</strong>
+                                        </div>
+                                    </label>
+                                </li>
+                                <li class="pz">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="erapat">
+                                        <div class="avail text-primary">
+                                            Menggunakan <strong>E-RAPAT FORM</strong>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                            <br>
+                            <button type="submit" name="btnGo" class="btn btn-primary" id="btnGo"><i class="fas fa-arrow-alt-circle-right"></i> Selanjutnya</button>
+
                         </div>
                     </div>
                 </div>
@@ -43,10 +68,10 @@ foreach ($meeting as $a) :
         jQuery('#btnGo').click(function() {
             var radioValue = jQuery('input:radio:checked').val();
             if (radioValue == 'soho') {
-                window.location.href = '<?= base_url('meeting/fase2/' . $id); ?>';
+                window.location.href = '<?= base_url('meeting/soho/' . $id); ?>';
             }
             if (radioValue == 'erapat') {
-                window.location.href = 'https://facebook.com';
+                window.location.href = '<?= base_url('meeting/erapat/' . $id); ?>';
             }
         })
     })

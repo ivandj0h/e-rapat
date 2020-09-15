@@ -275,8 +275,10 @@ function absensi_upload($a)
 { ?>
     <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>" class="badge badge-success">Undangan Rapat</a> <br>
     <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>" class="badge badge-success">Notulen Rapat</a> <br>
+
+    <a href="<?= base_url('meeting/step1/' . $a['id']); ?>" class="badge badge-danger">Absensi Rapat</a> <br>
     <!-- <span class="badge badge-danger" data-toggle="modal" data-target="#uploadAbsensi<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"> Absensi Rapat</span> -->
-    <a href="<?= base_url('meeting/fase1/' . $a['unique_code']); ?>" class="badge badge-danger">Absensi Rapat</a>
+
 <?php }
 
 function status_no_upload($a)

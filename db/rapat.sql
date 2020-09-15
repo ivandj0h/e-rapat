@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2020 at 09:10 PM
+-- Generation Time: Sep 16, 2020 at 01:50 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -671,8 +671,8 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoom_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`, `meeting_status`) VALUES
-(1, 18, '', 2, 1, '', 'asdasdsad', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'UNDANGAN_RAPAT.pdf', '5f610a80191e2', 'asdasdasd', '2020-09-16', '2020-09-16', '2020-09-16', '02:00:00', '03:00:00', 0, '', 0),
-(2, 14, '', 5, 1, '', 'sadada', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'ABSENSI_RAPAT.pdf', '5f61106e8ef94', 'asdadsad', '2020-09-16', '2020-09-16', '2020-09-16', '02:00:00', '03:00:00', 0, '', 0);
+(1, 15, '', 3, 1, '', 'dave khairul ibrahimovic djoh gah', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'UNDANGAN_RAPAT.pdf', '5f614627e7bcd', 'Excluding merges,&amp;nbsp;&lt;strong class=&quot;text-gray-dark&quot;&gt;3 authors&lt;/strong&gt; have pushed &lt;strong class=&quot;text-gray-dark&quot;&gt;&lt;span class=&quot;text-emphasized&quot;&gt;22&lt;/span&gt; commits&lt;/strong&gt; to master and &lt;strong class=&quot;text-gray-dark&quot;&gt;&lt;span class=&quot;text-emphasized&quot;&gt;27&lt;/span&gt; commits&lt;/strong&gt; to all branches. On master, &lt;strong class=&quot;text-gray-dark&quot;&gt;0 files&lt;/strong&gt; have changed and there have been &lt;a class=&quot;lines-changed muted-link&quot; href=&quot;https://github.com/ivandi1980/e-rapat/compare/master@{1599605598}...master&quot;&gt;&lt;strong class=&quot;text-green&quot;&gt;0&lt;/strong&gt; &lt;strong class=&quot;text-gray-dark&quot;&gt;additions&lt;/strong&gt; and &lt;strong class=&quot;text-red&quot;&gt;0&lt;/strong&gt; &lt;strong class=&quot;text-gray-dark&quot;&gt;deletions&lt;/strong&gt;&lt;/a&gt;.', '2020-09-16', '2020-09-16', '2020-09-16', '07:00:00', '08:00:00', 0, '', 0),
+(2, 18, '', 2, 1, '', 'soeharto', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'ABSENSI_RAPAT.pdf', '5f61476f83b2f', 'indonesia', '2020-09-16', '2020-09-16', '2020-09-16', '06:00:00', '07:00:00', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -861,8 +861,8 @@ CREATE TABLE `meeting_zoom` (
 
 INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `idzoom`, `date_activated`, `start_time`, `end_time`, `is_active`, `status`) VALUES
 (1, 19, 19, '444 444 444 444', '2020-09-16', '00:00:00', '02:00:00', 1, 0),
-(2, 18, 18, '555 555 555 555', '2020-09-16', '02:00:00', '03:00:00', 1, 0),
-(3, 15, 19, '666 666 666 666', '2020-09-16', '00:00:00', '01:00:00', 1, 0),
+(2, 18, 18, '555 555 555 555', '2020-09-16', '06:00:00', '07:00:00', 1, 0),
+(3, 15, 15, '666 666 666 666', '2020-09-16', '07:00:00', '08:00:00', 1, 0),
 (4, 22, 19, '333 333 333 333', '2020-09-16', '03:00:00', '04:00:00', 1, 0),
 (5, 14, 14, '000 000 000 000', '2020-09-16', '02:00:00', '03:00:00', 1, 0),
 (6, 20, NULL, '111 111 111 111', NULL, NULL, NULL, 1, 0),
@@ -1206,7 +1206,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `status`, `email`, `username`, `password`, `auth_key`, `access_token`, `logged_in_ip`, `logged_in_at`, `created_ip`, `created_at`, `updated_at`, `banned_at`, `banned_reason`, `preferences`) VALUES
-(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-14 04:45:20', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
+(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-15 14:55:16', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
 (2, 2, 1, 'user@erapat.com', 'user', '$2y$13$ON/2lLk5YAq5DM2f2mww3.q2QdOM3rJpzL32COoUc7JoEhxP.IydC', NULL, NULL, '::1', '2020-09-14 04:44:59', NULL, '2020-09-10 11:09:47', '2020-09-14 04:47:32', NULL, NULL, NULL),
 (3, 3, 1, 'dave@erapat.com', 'dave', '$2y$13$vJZvD1UCh4yehfVCt4ANB.CpHnoQ0/tIcRXU1m3J0Zk3YozuiTqvu', NULL, NULL, '::1', '2020-09-14 04:42:42', NULL, '2020-09-10 11:16:29', '2020-09-10 13:54:17', NULL, NULL, NULL);
 
