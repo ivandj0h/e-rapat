@@ -9,12 +9,11 @@
         <!-- End of Breadcumb -->
 
         <!-- Start Content Table -->
-        <div class="row form-heigt">
+        <div class="row">
             <div class="col-lg-12">
 
                 <!-- Check for error using form validation -->
                 <?php if (validation_errors()) : ?>
-
                     <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
                         <h4 class="alert-heading">Error!</h4>
                         <hr>
@@ -56,7 +55,7 @@
                                 <tbody>
                                     <?php foreach ($meeting_admin as $a) : ?>
                                         <tr>
-                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
+                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['end_date'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td class="text-center"><?= $a['sub_department_name']; ?></td>
@@ -102,7 +101,6 @@
                                                 <?= status_meeting($a); ?>
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                                 <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#meetingDel<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-trash"></i> Delete</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -143,7 +141,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addMeeting">Buat Rapat Baru</h5>
+                <h5 class="modal-title" id="addMeeting">Buat Rapat Baru - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -151,9 +149,11 @@
             <form method="POST" id="addMeeting" enctype="multipart/form-data">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
-                    <span id="success_message"></span>
                     <?= enable_add_new(); ?>
+
                 </div>
+
+
             </form>
         </div>
     </div>
@@ -171,7 +171,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header mb-2">
-                    <h6 class="modal-title" id="addMeeting"> Ubah Data Rapat <strong><?= $a['sub_department_name']; ?></strong></h6>
+                    <h5 class="modal-title" id="addMeeting"> Ubah Data Rapat <strong><?= $a['sub_department_name']; ?></strong></h5>
                 </div>
                 <form action="<?= base_url('meeting/editmeeting'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
@@ -233,7 +233,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header mb-2">
-                    <h6 class="modal-title" id="addMeeting"> Detail Rapat <strong><?= $a['sub_department_name']; ?></strong></h6>
+                    <h5 class="modal-title" id="addMeeting"> Detail Rapat <strong><?= $a['sub_department_name']; ?></strong></h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
@@ -319,7 +319,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addMeeting">Status Rapat</h5>
+                    <h5 class="modal-title" id="addMeeting">Status Rapat - (<?= $this->session->userdata('name'); ?>) </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -344,13 +344,6 @@ foreach ($meeting as $a) :
                         }
                         ?>
                     </div>
-                    <div class="modal-footer">
-                        <div class="actions">
-                            <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
-                            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Ubah Status</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
@@ -367,7 +360,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="uploadUndangan">Unggah Berkas Undangan</h5>
+                    <h5 class="modal-title" id="uploadUndangan">Unggah Berkas Undangan - (<?= $this->session->userdata('name'); ?>) </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -422,7 +415,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="uploadNotulen">Unggah Berkas Notulen</h5>
+                    <h5 class="modal-title" id="uploadNotulen">Unggah Berkas Notulen - (<?= $this->session->userdata('name'); ?>) </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -477,7 +470,7 @@ foreach ($meeting as $a) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="uploadAbsensi">Unggah Berkas Absensi</h5>
+                    <h5 class="modal-title" id="uploadAbsensi">Unggah Berkas Absensi - (<?= $this->session->userdata('name'); ?>) </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -538,7 +531,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="errorNotulen">Unggah Berkas Notulen</h5>
+                <h5 class="modal-title" id="errorNotulen">Unggah Berkas Notulen - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -562,7 +555,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="errorAbsensi">Unggah Berkas Absensi</h5>
+                <h5 class="modal-title" id="errorAbsensi">Unggah Berkas Absensi - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -585,7 +578,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="errorDownload">Unduh Berkas Rapat</h5>
+                <h5 class="modal-title" id="errorDownload">Unduh Berkas Rapat - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -608,7 +601,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="expiredDownload">Unduh Berkas Rapat</h5>
+                <h5 class="modal-title" id="expiredDownload">Unduh Berkas Rapat - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -638,7 +631,7 @@ foreach ($meeting as $a) :
                 <form action="<?= base_url('meeting/delete'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Are you sure want to delete <b><?= $meeting_subtype; ?> ?</b></p>
+                        <p>Yakin ingin menghapus <b><?= $meeting_subtype; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
@@ -657,7 +650,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="noMeeting">Buat Rapat Baru</h5>
+                <h5 class="modal-title" id="noMeeting">Buat Rapat Baru - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -666,7 +659,6 @@ foreach ($meeting as $a) :
                 <p class="text-danger">Maaf Anda tidak dapat membuat meeting</p>
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="id" value="<?= $id; ?>">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal">Tutup</button>
             </div>
         </div>
@@ -679,7 +671,7 @@ foreach ($meeting as $a) :
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="expiredMeeting">Rapat Kadaluarsa</h5>
+                <h5 class="modal-title" id="expiredMeeting">Rapat Kadaluarsa - (<?= $this->session->userdata('name'); ?>) </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -688,10 +680,21 @@ foreach ($meeting as $a) :
                 <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="id" value="<?= $id; ?>">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
             </div>
         </div>
     </div>
 </div>
 <!-- End of Modal Expired Meeting -->
+
+<script script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+</script>
+<script>
+    $("#changeZoom").click(function() {
+        if ($(this).is(":checked")) {
+            $('button[type=submit]').attr('disabled', false);
+        } else {
+            $('button[type=submit]').attr('disabled', true);
+        }
+    });
+</script>

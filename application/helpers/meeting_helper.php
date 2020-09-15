@@ -79,11 +79,12 @@ function get_available_zoomid()
 {
     $ci = get_instance();
 
-    $zoomid = $ci->db->get_where('view_zoom_users', ['user_id !=' => $ci->session->userdata('id')])->result_array();
-    $d = $ci->db->get_where('view_zoom_users', ['user_id' => $ci->session->userdata('id')])->row_array();
+    $zoomid = $ci->db->get_where('view_zoom_users', ['is_active' => 1, 'user_id !=' => $ci->session->userdata('id')])->result_array();
+    $d = $ci->db->get_where('view_zoom_users', ['is_active' => 1, 'user_id' => $ci->session->userdata('id')])->row_array();
 
-    if ($d['status'] == '1') {
-?>
+    // $d['status'] ??= 'default value';
+
+    if ($d['status'] == '1') { ?>
         <li class="pz">
             <label class="radio-inline">
                 <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" disabled>
@@ -106,7 +107,6 @@ function get_available_zoomid()
         </li>
         <?php
     }
-
     foreach ($zoomid as $zm) :
 
         if ($zm['user_id'] == '20' || $zm['user_id'] == '21' || $zm['user_id'] == '14') {
@@ -182,51 +182,14 @@ function status_meeting_online($a)
 // if meeting already expired
 function expired_form_editable_date($a)
 { ?>
-    <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
-        <div class="col-sm-10">
-            <input type="date" class="border" value="<?= $a['start_date']; ?>" disabled> <small class="text-danger"> Rapat sudah Expired! </small>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
-        <div class="col-sm-10">
-            <input type="date" class="border" value="<?= $a['end_date']; ?>" disabled> <small class="text-danger"> Rapat sudah Expired! </small>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="start_time_edit" class="col-sm-2 col-form-label">Jam Awal</label>
-        <div class="col-sm-10">
-            <input type="time" class="border" value="<?= $a['start_time']; ?>" disabled> <small class="text-danger"> Rapat sudah Expired! </small>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_time_edit" class="col-sm-2 col-form-label">Jam Akhir</label>
-        <div class="col-sm-10">
-            <input type="time" class="border" value="<?= $a['end_time']; ?>" disabled> <small class="text-danger"> Rapat sudah Expired! </small>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="remark_status" class="col-sm-2 col-form-label">Keterangan Status</label>
-        <div class="col-sm-10">
-            <textarea class="form-control form-control-user" name="remark_status" id="texta" placeholder="Tuliskan mengapa Anda membatalkan Rapat atau melakukan perubahan Jadwal Rapat..." disabled><?= $a['remark_status']; ?></textarea>
-            <small class="text-danger"> Rapat sudah Expired! </small>
-        </div>
-    </div>
+    <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah Expired, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
 <?php }
 
 // if meeting not expired
 function form_editable_date($a)
 { ?>
     <div class="form-group row">
-        <label for="start_date" class="col-sm-2 col-form-label">Tanggal Awal</label>
-        <div class="col-sm-10">
-            <input type="date" id="start_date" name="start_date" class="tt" class="border" value="<?= $a['start_date']; ?>">
-            <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Akhir</label>
+        <label for="end_date" class="col-sm-2 col-form-label">Tanggal Rapat</label>
         <div class="col-sm-10">
             <input type="date" id="end_date" name="end_date" class="tt" value="<?= $a['end_date']; ?>">
             <?= form_error('Meeting Date', '<small class="text-danger">', '</small>'); ?>
@@ -318,6 +281,12 @@ function form_cancel_status($a)
 function form_expired_status($a)
 { ?>
     <p class="text-danger text-center text-uppercase"><strong>Maaf, </strong> Data Rapat ini Sudah kadaluarsa dan tidak bisa dirubah, Silahkan menghubungi Administrator e-rapat untuk informasi selanjutnya.</p>
+
+    <div class="modal-footer">
+        <div class="actions">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+        </div>
+    </div>
 <?php }
 
 // can change status Online Meeting if meeting not expired
@@ -327,7 +296,6 @@ function form_change_status_online($a)
         <label for="place_id" class="col-sm-2 col-form-label">Status Rapat</label>
         <div class="col-sm-5">
             <select name="request_status" id="request_status" class="form-control ">
-
                 <?php
                 if ($a['request_status'] == 0) { ?>
                     <option value="<?= $a['request_status']; ?>">Booked</option>
@@ -353,12 +321,26 @@ function form_change_status_online($a)
     $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
     if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
         expired_form_editable_date($a);
-    } else {
-        form_editable_date($a);
-    }
     ?>
-
-<?php }
+        <div class="modal-footer">
+            <div class="actions">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+            </div>
+        </div>
+    <?php } else {
+        form_editable_date($a);
+    ?>
+        <div class="modal-footer">
+            <div class="actions">
+                <input type="hidden" name="id" value="<?= $a['id']; ?>">
+                <input type="hidden" name="zoomid" value="<?= $a['zoomid']; ?>">
+                <input type="hidden" name="sub_type_id" value="<?= $a['sub_type_id']; ?>">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Ubah Status</button>
+            </div>
+        </div>
+    <?php     }
+}
 
 // can change status Offline Meeting if meeting not expired
 function form_change_status_offline($a)

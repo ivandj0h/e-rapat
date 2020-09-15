@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2020 at 08:30 AM
+-- Generation Time: Sep 15, 2020 at 02:09 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -42,8 +42,39 @@ CREATE TABLE `addon` (
 --
 
 INSERT INTO `addon` (`id`, `class`, `name`, `description`, `version`, `status`, `installed`) VALUES
-('google_analytics', 'app\\modules\\addons\\modules\\google_analytics\\Module', 'Google Analytics', NULL, '1.0', 0, 0),
-('webhooks', 'app\\modules\\addons\\modules\\webhooks\\Module', 'Webhooks', NULL, '1.2', 0, 0);
+('google_analytics', 'app\\modules\\addons\\modules\\google_analytics\\Module', 'Google Analytics', NULL, '1.0', 1, 1),
+('webhooks', 'app\\modules\\addons\\modules\\webhooks\\Module', 'Webhooks', NULL, '1.2', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addon_google_analytics`
+--
+
+CREATE TABLE `addon_google_analytics` (
+  `id` int(11) NOT NULL,
+  `form_id` int(11) NOT NULL,
+  `tracking_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tracking_domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `anonymize_ip` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addon_webhooks`
+--
+
+CREATE TABLE `addon_webhooks` (
+  `id` int(11) NOT NULL,
+  `form_id` int(11) NOT NULL,
+  `url` varchar(2083) COLLATE utf8_unicode_ci NOT NULL,
+  `handshake_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `json` tinyint(1) NOT NULL DEFAULT 0,
+  `alias` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -164,6 +195,37 @@ CREATE TABLE `event` (
   `domain_sessionid` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`app_id`, `platform`, `etl_tstamp`, `collector_tstamp`, `dvce_tstamp`, `event`, `event_id`, `txn_id`, `name_tracker`, `v_tracker`, `v_collector`, `v_etl`, `user_id`, `user_ipaddress`, `user_fingerprint`, `domain_userid`, `domain_sessionidx`, `network_userid`, `geo_country`, `geo_region`, `geo_city`, `geo_zipcode`, `geo_latitude`, `geo_longitude`, `geo_region_name`, `page_url`, `page_title`, `page_referrer`, `page_urlscheme`, `page_urlhost`, `page_urlport`, `page_urlpath`, `page_urlquery`, `page_urlfragment`, `refr_urlscheme`, `refr_urlhost`, `refr_urlport`, `refr_urlpath`, `refr_urlquery`, `refr_urlfragment`, `refr_medium`, `refr_source`, `refr_term`, `mkt_medium`, `mkt_source`, `mkt_term`, `mkt_content`, `mkt_campaign`, `contexts`, `se_category`, `se_action`, `se_label`, `se_property`, `se_value`, `unstruct_event`, `tr_orderid`, `tr_affiliation`, `tr_total`, `tr_tax`, `tr_shipping`, `tr_city`, `tr_state`, `tr_country`, `ti_orderid`, `ti_sku`, `ti_name`, `ti_category`, `ti_price`, `ti_quantity`, `pp_xoffset_min`, `pp_xoffset_max`, `pp_yoffset_min`, `pp_yoffset_max`, `useragent`, `br_name`, `br_family`, `br_version`, `br_type`, `br_renderengine`, `br_lang`, `br_features_pdf`, `br_features_flash`, `br_features_java`, `br_features_director`, `br_features_quicktime`, `br_features_realplayer`, `br_features_windowsmedia`, `br_features_gears`, `br_features_silverlight`, `br_cookies`, `br_colordepth`, `br_viewwidth`, `br_viewheight`, `os_name`, `os_family`, `os_manufacturer`, `os_timezone`, `dvce_type`, `dvce_ismobile`, `dvce_screenwidth`, `dvce_screenheight`, `doc_charset`, `doc_width`, `doc_height`, `geo_timezone`, `mkt_clickid`, `mkt_network`, `etl_tags`, `dvce_sent_tstamp`, `domain_sessionid`) VALUES
+('18', 'web', NULL, 1600082607, 1600082607083, 'pv', '060b5290-34ff-44d2-89e9-e139ab5db98c', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 204, NULL, NULL, NULL, NULL, 1600082607086, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600082651, 1600082651746, 'pv', '5e159e1b-442f-4b3b-bdf7-dfe1e69d694f', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 214, NULL, NULL, NULL, NULL, 1600082651749, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600082689, 1600082689018, 'pv', '6b38061c-2c06-4a57-a6bb-348898dae797', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 220, NULL, NULL, NULL, NULL, 1600082689022, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600082809, 1600082809023, 'pv', 'be3bec6a-8910-461b-8c14-6fc3ed562ecd', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 483, NULL, NULL, NULL, NULL, 1600082809027, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600082823, 1600082823004, 'pv', '613c70b4-92e3-4d64-b168-58b509704fc1', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 483, NULL, NULL, NULL, NULL, 1600082823010, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083016, 1600083016624, 'pv', 'c09438c7-38c6-42ed-8f49-0f58a7e438c9', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 1051, NULL, NULL, NULL, NULL, 1600083016628, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083107, 1600083107378, 'pv', '6ebebec3-481b-47a8-a78e-9c353207b52b', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 188, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 1051, NULL, NULL, NULL, NULL, 1600083107382, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083227, 1600083227014, 'pv', 'cb66c686-863e-428c-a5f8-a6c00009270e', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1348, NULL, NULL, NULL, NULL, 1600083227018, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083249, 1600083248889, 'pv', '23bbc968-e4b5-4301-9728-e0137d043085', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&t=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&t=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 530, 1051, NULL, NULL, NULL, NULL, 1600083248891, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083256, 1600083256720, 'pv', '695b3a60-ffc1-4610-956c-8963dfbb1872', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1468, NULL, NULL, NULL, NULL, 1600083256723, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083272, 1600083272322, 'pv', 'fbe42ab5-c845-48ea-8474-74957540818e', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0&js=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0&js=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1468, NULL, NULL, NULL, NULL, 1600083272326, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083275, 1600083275851, 'se', '38b2a27e-6e0e-45c2-8f66-d336d8b17220', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0&js=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0&js=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1467, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1468, NULL, NULL, NULL, NULL, 1600083275855, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083403, 1600083403612, 'pv', 'e8b1990a-ee0e-419b-b0e1-d38e2d2bd5bd', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1176, NULL, NULL, NULL, NULL, 1600083403616, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083411, 1600083411320, 'pv', '3b7080e9-99a5-4f67-aac8-16f600b14515', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 1231, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1231, NULL, NULL, NULL, NULL, 1600083411326, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083469, 1600083468950, 'pv', '6c7c1c50-c10a-4a1b-9282-31c11b65b8de', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1506, NULL, NULL, NULL, NULL, 1600083468955, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083477, 1600083477561, 'pv', '3ef834b4-d3c1-4dc2-ade1-65e31c6dbff6', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1531, NULL, NULL, NULL, NULL, 1600083477565, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083560, 1600083560611, 'pv', '52f85561-2996-4dee-a413-65a90f46330d', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1356, NULL, NULL, NULL, NULL, 1600083560615, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083564, 1600083564302, 'se', 'aa9937e0-8667-40f5-af82-3eaac90d627d', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 1356, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1356, NULL, NULL, NULL, NULL, 1600083564306, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083572, 1600083572598, 'pv', '521e8293-3172-4218-a84e-27ce2a59a223', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1368, NULL, NULL, NULL, NULL, 1600083572602, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083609, 1600083609063, 'pv', 'e70dbdce-4137-472b-b92e-21c2f7bd6f23', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1225, NULL, NULL, NULL, NULL, 1600083609067, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083619, 1600083619275, 'pv', 'a3242655-810e-4f81-98f1-3c3d187b6161', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0&js=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0&js=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1276, NULL, NULL, NULL, NULL, 1600083619279, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083623, 1600083623007, 'se', '8ce382d1-3c0f-4ea7-8fff-7fc209d6d7d0', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0&js=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0&js=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1276, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1276, NULL, NULL, NULL, NULL, 1600083623010, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600083646, 1600083645913, 'pv', '6896ac2f-76e1-45a3-880a-fad9da6f9c27', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1276, NULL, NULL, NULL, NULL, 1600083645920, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600084134, 1600084134371, 'pv', '0a1fc744-af7e-4f41-a315-b233f9bef9f2', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/forms/presensi-rapat-penyusunan-data-statistik-semestar-1-badan-litbang-perhubungan-senin-14-september-2020', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/forms/presensi-rapat-penyusunan-data-statistik-semestar-1-badan-litbang-perhubungan-senin-14-september-2020', NULL, NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1225, NULL, NULL, NULL, NULL, 1600084134375, 'dbaf1293-94fd-4302-aae5-72eb36cf13f6'),
+('18', 'web', NULL, 1600087093, 1600087092970, 'se', '4c2b7e86-815d-4298-a501-77aa63c4ea32', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'bf73b968-80a4-4056-a697-cba60142ce43', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/forms/presensi-rapat-penyusunan-data-statistik-semestar-1-badan-litbang-perhubungan-senin-14-september-2020', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/forms/presensi-rapat-penyusunan-data-statistik-semestar-1-badan-litbang-perhubungan-senin-14-september-2020', NULL, NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 515, 1225, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 515, 1225, NULL, NULL, NULL, NULL, 1600087092974, 'bd84efc4-50bf-4a33-b22b-cd18efbcde26');
+
 -- --------------------------------------------------------
 
 --
@@ -206,6 +268,13 @@ CREATE TABLE `form` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `form`
+--
+
+INSERT INTO `form` (`id`, `name`, `slug`, `status`, `use_password`, `password`, `authorized_urls`, `urls`, `schedule`, `schedule_start_date`, `schedule_end_date`, `total_limit`, `total_limit_number`, `total_limit_period`, `ip_limit`, `ip_limit_number`, `ip_limit_period`, `submission_number`, `submission_number_prefix`, `submission_number_suffix`, `submission_number_width`, `save`, `resume`, `autocomplete`, `novalidate`, `analytics`, `honeypot`, `recaptcha`, `language`, `message`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(18, 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'presensi-rapat-penyusunan-data-statistik-semestar-1-badan-litbang-perhubungan-senin-14-september-2020', 1, 0, '12345', 0, '', 0, NULL, NULL, 0, NULL, '', 0, NULL, '', 1, '', '', NULL, 1, 1, 1, 0, 1, 1, 0, 'id-ID', 'Terima kasih telah melakukan Absen', 1, 1, 1600082597, 1600083600);
 
 -- --------------------------------------------------------
 
@@ -252,6 +321,13 @@ CREATE TABLE `form_confirmation` (
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `form_confirmation`
+--
+
+INSERT INTO `form_confirmation` (`id`, `form_id`, `type`, `message`, `url`, `send_email`, `mail_to`, `mail_from`, `mail_subject`, `mail_message`, `mail_from_name`, `mail_receipt_copy`, `created_at`, `updated_at`) VALUES
+(18, 18, 0, '', '', 0, '', '', '', '', '', 0, 1600082598, 1600083600);
+
 -- --------------------------------------------------------
 
 --
@@ -268,6 +344,13 @@ CREATE TABLE `form_data` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `form_data`
+--
+
+INSERT INTO `form_data` (`id`, `form_id`, `builder`, `fields`, `html`, `height`, `created_at`, `updated_at`) VALUES
+(18, 18, '{\"settings\":{\"name\":\"Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020\",\"canvas\":\"#canvas\",\"disabledFieldset\":false,\"layoutSelected\":\"form-horizontal\",\"layouts\":[{\"id\":\"\",\"name\":\"Vertical\"},{\"id\":\"form-horizontal\",\"name\":\"Horizontal\"},{\"id\":\"form-inline\",\"name\":\"Inline\"}],\"formSteps\":{\"title\":\"formSteps.title\",\"fields\":{\"id\":{\"label\":\"formSteps.id\",\"type\":\"input\",\"value\":\"formSteps\",\"name\":\"id\"},\"steps\":{\"label\":\"formSteps.steps\",\"type\":\"textarea-split\",\"value\":[],\"name\":\"steps\"},\"progressBar\":{\"label\":\"formSteps.progressBar\",\"type\":\"checkbox\",\"value\":false,\"name\":\"progressBar\"},\"noTitles\":{\"label\":\"formSteps.noTitles\",\"type\":\"checkbox\",\"value\":false,\"name\":\"noTitles\"},\"noStages\":{\"label\":\"formSteps.noStages\",\"type\":\"checkbox\",\"value\":false,\"name\":\"noStages\"},\"noSteps\":{\"label\":\"formSteps.noSteps\",\"type\":\"checkbox\",\"value\":false,\"name\":\"noSteps\"}}}},\"initForm\":[{\"name\":\"heading\",\"title\":\"heading.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"heading_0\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"input\",\"value\":\"Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020\",\"name\":\"text\"},\"type\":{\"label\":\"component.type\",\"type\":\"select\",\"value\":[{\"value\":\"h1\",\"selected\":false,\"label\":\"H1\"},{\"value\":\"h2\",\"selected\":false,\"label\":\"H2\"},{\"value\":\"h3\",\"selected\":true,\"label\":\"H3\"},{\"value\":\"h4\",\"selected\":false,\"label\":\"H4\"},{\"value\":\"h5\",\"selected\":false,\"label\":\"H5\"},{\"value\":\"h6\",\"selected\":false,\"label\":\"H6\"}],\"name\":\"type\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"legend\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"spacer\",\"title\":\"spacer.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"spacer_715442\",\"name\":\"id\"},\"height\":{\"label\":\"component.height\",\"type\":\"number\",\"value\":\"10\",\"name\":\"height\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"paragraph\",\"title\":\"paragraph.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"paragraph_0\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"textarea\",\"value\":\"Hari\\/Tanggal : Senin, 14 September 2020\",\"name\":\"text\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"paragraph\",\"title\":\"paragraph.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"paragraph_904377\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"textarea\",\"value\":\"Waktu : Pukul 16:00 WIB\",\"name\":\"text\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"paragraph\",\"title\":\"paragraph.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"paragraph_693456\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"textarea\",\"value\":\"Media : Video Confrence Zoom\",\"name\":\"text\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"paragraph\",\"title\":\"paragraph.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"paragraph_367672\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"textarea\",\"value\":\"Agenda : Penyusunan Data Statistik Semestar 1\",\"name\":\"text\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"spacer\",\"title\":\"spacer.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"spacer_742220\",\"name\":\"id\"},\"height\":{\"label\":\"component.height\",\"type\":\"number\",\"value\":\"50\",\"name\":\"height\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"text\",\"title\":\"text.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"text_442458\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.inputType\",\"type\":\"select\",\"value\":[{\"value\":\"text\",\"selected\":true,\"label\":\"Text\"},{\"value\":\"tel\",\"selected\":false,\"label\":\"Tel\"},{\"value\":\"url\",\"selected\":false,\"label\":\"URL\"},{\"value\":\"color\",\"selected\":false,\"label\":\"Color\"},{\"value\":\"password\",\"selected\":false,\"label\":\"Password\"}],\"name\":\"inputType\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"Nama Lengkap\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"text\",\"title\":\"text.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"text_51160\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.inputType\",\"type\":\"select\",\"value\":[{\"value\":\"text\",\"selected\":true,\"label\":\"Text\"},{\"value\":\"tel\",\"selected\":false,\"label\":\"Tel\"},{\"value\":\"url\",\"selected\":false,\"label\":\"URL\"},{\"value\":\"color\",\"selected\":false,\"label\":\"Color\"},{\"value\":\"password\",\"selected\":false,\"label\":\"Password\"}],\"name\":\"inputType\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"NIP\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"text\",\"title\":\"text.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"text_671020\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.inputType\",\"type\":\"select\",\"value\":[{\"value\":\"text\",\"selected\":true,\"label\":\"Text\"},{\"value\":\"tel\",\"selected\":false,\"label\":\"Tel\"},{\"value\":\"url\",\"selected\":false,\"label\":\"URL\"},{\"value\":\"color\",\"selected\":false,\"label\":\"Color\"},{\"value\":\"password\",\"selected\":false,\"label\":\"Password\"}],\"name\":\"inputType\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"Unit Kerja\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"text\",\"title\":\"text.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"text_932833\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.inputType\",\"type\":\"select\",\"value\":[{\"value\":\"text\",\"selected\":true,\"label\":\"Text\"},{\"value\":\"tel\",\"selected\":false,\"label\":\"Tel\"},{\"value\":\"url\",\"selected\":false,\"label\":\"URL\"},{\"value\":\"color\",\"selected\":false,\"label\":\"Color\"},{\"value\":\"password\",\"selected\":false,\"label\":\"Password\"}],\"name\":\"inputType\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"Jabatan\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"text\",\"title\":\"text.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"text_814491\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.inputType\",\"type\":\"select\",\"value\":[{\"value\":\"text\",\"selected\":true,\"label\":\"Text\"},{\"value\":\"tel\",\"selected\":false,\"label\":\"Tel\"},{\"value\":\"url\",\"selected\":false,\"label\":\"URL\"},{\"value\":\"color\",\"selected\":false,\"label\":\"Color\"},{\"value\":\"password\",\"selected\":false,\"label\":\"Password\"}],\"name\":\"inputType\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"No. HP\\/Telp\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"email\",\"title\":\"email.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"email_754924\",\"name\":\"id\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"Alamat Email\",\"name\":\"label\"},\"placeholder\":{\"label\":\"component.placeholder\",\"type\":\"input\",\"value\":\"\",\"name\":\"placeholder\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"predefinedValue\":{\"label\":\"component.predefinedValue\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"predefinedValue\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"pattern\":{\"label\":\"component.pattern\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"pattern\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"form-control\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"alias\":{\"label\":\"component.alias\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"alias\"},\"checkdns\":{\"label\":\"component.checkDNS\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"checkdns\"},\"multiple\":{\"label\":\"component.multiple\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"multiple\"},\"unique\":{\"label\":\"component.unique\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"unique\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"signature\",\"title\":\"signature.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"signature_163216\",\"name\":\"id\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"Signature\",\"name\":\"label\"},\"required\":{\"label\":\"component.required\",\"type\":\"checkbox\",\"value\":true,\"name\":\"required\"},\"clear\":{\"label\":\"component.clear\",\"type\":\"checkbox\",\"value\":true,\"name\":\"clear\"},\"undo\":{\"label\":\"component.undo\",\"type\":\"checkbox\",\"value\":false,\"name\":\"undo\"},\"helpText\":{\"label\":\"component.helpText\",\"type\":\"textarea\",\"value\":\"\",\"advanced\":true,\"name\":\"helpText\"},\"width\":{\"label\":\"component.width\",\"type\":\"input\",\"value\":\"400\",\"advanced\":true,\"name\":\"width\"},\"height\":{\"label\":\"component.height\",\"type\":\"input\",\"value\":\"200\",\"advanced\":true,\"name\":\"height\"},\"color\":{\"label\":\"component.color\",\"type\":\"input\",\"value\":\"black\",\"advanced\":true,\"name\":\"color\"},\"clearText\":{\"label\":\"component.clearText\",\"type\":\"input\",\"value\":\"Clear\",\"advanced\":true,\"name\":\"clearText\"},\"undoText\":{\"label\":\"component.undoText\",\"type\":\"input\",\"value\":\"Undo\",\"advanced\":true,\"name\":\"undoText\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false},{\"name\":\"button\",\"title\":\"button.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"button_876357\",\"name\":\"id\"},\"inputType\":{\"label\":\"component.type\",\"type\":\"select\",\"value\":[{\"value\":\"submit\",\"selected\":true,\"label\":\"Submit\"},{\"value\":\"reset\",\"selected\":false,\"label\":\"Reset\"},{\"value\":\"image\",\"selected\":false,\"label\":\"Image\"},{\"value\":\"button\",\"selected\":false,\"label\":\"Button\"}],\"name\":\"inputType\"},\"buttonText\":{\"label\":\"component.buttonText\",\"type\":\"input\",\"value\":\"Submit\",\"name\":\"buttonText\"},\"label\":{\"label\":\"component.label\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"label\"},\"src\":{\"label\":\"component.src\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"src\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"btn btn-success\",\"advanced\":true,\"name\":\"cssClass\"},\"labelClass\":{\"label\":\"component.labelClass\",\"type\":\"input\",\"value\":\"control-label\",\"advanced\":true,\"name\":\"labelClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"},\"readOnly\":{\"label\":\"component.readOnly\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"readOnly\"},\"disabled\":{\"label\":\"component.disabled\",\"type\":\"checkbox\",\"value\":false,\"advanced\":true,\"name\":\"disabled\"}},\"fresh\":false},{\"name\":\"paragraph\",\"title\":\"paragraph.title\",\"fields\":{\"id\":{\"label\":\"component.id\",\"type\":\"input\",\"value\":\"paragraph_286208\",\"name\":\"id\"},\"text\":{\"label\":\"component.text\",\"type\":\"textarea\",\"value\":\"Mohon untuk diisi dengan benar\",\"name\":\"text\"},\"cssClass\":{\"label\":\"component.cssClass\",\"type\":\"input\",\"value\":\"\",\"advanced\":true,\"name\":\"cssClass\"},\"containerClass\":{\"label\":\"component.containerClass\",\"type\":\"input\",\"value\":\"col-xs-12\",\"advanced\":true,\"name\":\"containerClass\"}},\"fresh\":false}],\"height\":959}', '[{\"tagName\":\"input\",\"type\":\"text\",\"name\":\"text_442458\",\"id\":\"text_442458\",\"label\":\"Nama Lengkap\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":40,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"text\",\"name\":\"text_51160\",\"id\":\"text_51160\",\"label\":\"NIP\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":46,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"text\",\"name\":\"text_671020\",\"id\":\"text_671020\",\"label\":\"Unit Kerja\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":52,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"text\",\"name\":\"text_932833\",\"id\":\"text_932833\",\"label\":\"Jabatan\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":58,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"text\",\"name\":\"text_814491\",\"id\":\"text_814491\",\"label\":\"No. HP/Telp\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":64,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"email\",\"name\":\"email_754924\",\"id\":\"email_754924\",\"label\":\"Alamat Email\",\"value\":\"\",\"class\":\"form-control\",\"lineNumber\":70,\"required\":true,\"alias\":\"\"},{\"tagName\":\"input\",\"type\":\"hidden\",\"name\":\"hidden_signature_163216\",\"id\":\"hidden_signature_163216\",\"value\":\"\",\"lineNumber\":84,\"required\":true,\"data-label\":\"Signature\"},{\"tagName\":\"button\",\"type\":\"submit\",\"name\":\"button_876357\",\"id\":\"button_876357\",\"class\":\"btn btn-success\",\"lineNumber\":88,\"value\":\"Submit\"}]', '&lt;form id=&quot;form-app&quot; class=&quot;form-horizontal&quot;&gt;\r\n&lt;fieldset class=&quot;row&quot;&gt;\r\n\r\n&lt;!-- Heading --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;h3 class=&quot;legend&quot;&gt;Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020&lt;/h3&gt;\n&lt;/div&gt;\n\n&lt;!-- Spacer --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;div style=&quot;height: 10px&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n&lt;!-- Paragraph Text --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;p&gt;Hari/Tanggal : Senin, 14 September 2020&lt;/p&gt;\n&lt;/div&gt;\n\n&lt;!-- Paragraph Text --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;p&gt;Waktu : Pukul 16:00 WIB&lt;/p&gt;\n&lt;/div&gt;\n\n&lt;!-- Paragraph Text --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;p&gt;Media : Video Confrence Zoom&lt;/p&gt;\n&lt;/div&gt;\n\n&lt;!-- Paragraph Text --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;p&gt;Agenda : Penyusunan Data Statistik Semestar 1&lt;/p&gt;\n&lt;/div&gt;\n\n&lt;!-- Spacer --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;div style=&quot;height: 50px&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n&lt;!-- Text --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;text_442458&quot;&gt;Nama Lengkap&lt;/label&gt;\n    &lt;input type=&quot;text&quot; id=&quot;text_442458&quot; name=&quot;text_442458&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Text --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;text_51160&quot;&gt;NIP&lt;/label&gt;\n    &lt;input type=&quot;text&quot; id=&quot;text_51160&quot; name=&quot;text_51160&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Text --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;text_671020&quot;&gt;Unit Kerja&lt;/label&gt;\n    &lt;input type=&quot;text&quot; id=&quot;text_671020&quot; name=&quot;text_671020&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Text --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;text_932833&quot;&gt;Jabatan&lt;/label&gt;\n    &lt;input type=&quot;text&quot; id=&quot;text_932833&quot; name=&quot;text_932833&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Text --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;text_814491&quot;&gt;No. HP/Telp&lt;/label&gt;\n    &lt;input type=&quot;text&quot; id=&quot;text_814491&quot; name=&quot;text_814491&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Email --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;email_754924&quot;&gt;Alamat Email&lt;/label&gt;\n    &lt;input type=&quot;email&quot; id=&quot;email_754924&quot; name=&quot;email_754924&quot; value=&quot;&quot; data-alias=&quot;&quot; class=&quot;form-control&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n\n&lt;!-- Signature --&gt;\n&lt;div class=&quot;form-group required-control col-xs-12&quot;&gt;\n    &lt;label class=&quot;control-label&quot; for=&quot;signature_163216&quot;&gt;Signature&lt;/label&gt;\n    &lt;div class=&quot;signature-pad&quot;&gt;\n        &lt;canvas id=&quot;signature_163216&quot; width=&quot;400&quot; height=&quot;200&quot; data-color=&quot;black&quot;&gt;&lt;/canvas&gt;\n    &lt;/div&gt;\n    \n    &lt;div class=&quot;signature-pad-actions&quot;&gt;\n        &lt;button type=&quot;button&quot; id=&quot;clear_signature_163216&quot; name=&quot;clear_signature_163216&quot; class=&quot;btn btn-sm btn-default btn-clear&quot; data-exclude=&quot;true&quot;&gt;Clear&lt;/button&gt;\n        \n    &lt;/div&gt;\n    &lt;input type=&quot;hidden&quot; name=&quot;hidden_signature_163216&quot; id=&quot;hidden_signature_163216&quot; value=&quot;&quot; data-label=&quot;Signature&quot; required=&quot;&quot;&gt;\n&lt;/div&gt;\n &lt;!-- Button --&gt;\n&lt;div class=&quot;form-action col-xs-12&quot;&gt;\n    &lt;button type=&quot;submit&quot; id=&quot;button_876357&quot; name=&quot;button_876357&quot; class=&quot;btn btn-success&quot;&gt;Submit&lt;/button&gt;\n&lt;/div&gt;\n\n&lt;!-- Paragraph Text --&gt;\n&lt;div class=&quot;col-xs-12&quot;&gt;\n    &lt;p&gt;Mohon untuk diisi dengan benar&lt;/p&gt;\n&lt;/div&gt;\n\r\n&lt;/fieldset&gt;\r\n&lt;/form&gt;', 959, 1600082597, 1600083552);
 
 -- --------------------------------------------------------
 
@@ -290,6 +373,13 @@ CREATE TABLE `form_email` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `form_email`
+--
+
+INSERT INTO `form_email` (`id`, `form_id`, `to`, `from`, `cc`, `bcc`, `subject`, `type`, `message`, `plain_text`, `attach`, `created_at`, `updated_at`) VALUES
+(18, 18, '', 'admin@erapat.com', '', '', '', 0, '', 0, 1, 1600082598, 1600083600);
 
 -- --------------------------------------------------------
 
@@ -383,6 +473,13 @@ CREATE TABLE `form_ui` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `form_ui`
+--
+
+INSERT INTO `form_ui` (`id`, `form_id`, `theme_id`, `js_file`, `created_at`, `updated_at`) VALUES
+(18, 18, 3, '', 1600082597, 1600083600);
 
 -- --------------------------------------------------------
 
@@ -568,6 +665,16 @@ CREATE TABLE `meeting` (
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoomid`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
+(1, 14, '', '000 000 000 000', 1, '', 'ivandi', '', '', '', '5f5ff0f76d935', '&lt;strong&gt;Lorem Ipsum&lt;/strong&gt; is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-09-15', '2020-09-15', '2020-09-15', '06:00:00', '07:00:00', 0, ''),
+(2, 22, '', '121 121 121 121', 1, '', 'ivandi', '', '', '', '5f5ff5b69416b', '&lt;p&gt;Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&lt;/p&gt;', '2020-09-15', '2020-09-15', '2020-09-15', '06:00:00', '08:00:00', 2, 'rubah'),
+(3, 22, '', '121 121 121 121', 1, '', 'adadsad', '', '', '', '5f5fffe302d66', 'adsadsadsa', '2020-09-15', '2020-09-15', '2020-09-15', '09:00:00', '10:00:00', 0, ''),
+(4, 18, '', '234 234 234 234', 1, '', 'asdadas', '', '', '', '5f6004cb948b6', 'saddsadsa', '2020-09-15', '2020-09-15', '2020-09-15', '09:00:00', '10:00:00', 0, '');
+
 -- --------------------------------------------------------
 
 --
@@ -723,13 +830,13 @@ CREATE TABLE `meeting_users` (
 --
 
 INSERT INTO `meeting_users` (`id`, `zoomid`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `sub_department_id`, `date_created`, `date_updated`) VALUES
-(14, '717 771 7448', 'administrator', 'admin@erapat.com', '32.png', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1597380771),
-(15, '1234567890', 'Admin Keuangan', 'keuangan@erapat.com', '31.png', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
-(18, '0987654321', 'Admin Humas', 'humas@erapat.com', '3.png', '$2y$10$5Kud5rfLqdf.7vApjirzNuWjVLKqFqpZt6hGDH/d/5vtjoCcssqRy', 2, 1, 5, 1597213397, 1599549994),
-(19, '1111111111', 'Admin Perencanaan', 'perencanaan@erapat.com', 'default-avatar.jpg', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
-(20, '123 123 123', 'Kaban Litbang Perhubungan', 'kaban@erapat.com', 'default-avatar.jpg', '$2y$10$w5k9sGFC7SMC8whAPIp/dOknnlHLA.nOP1IypYw6JNVu2aDz0oEse', 4, 1, 14, 1599060092, 1599061311),
-(21, '321 321 321', 'Sesban Litbang Perhubungan', 'sesban@erapat.com', 'default-avatar.jpg', '$2y$10$7iKaePzZkNyVg37xciRbUOzFSQ58N92P8L95KwtgXGkzV8u8yBTge', 5, 1, 15, 1599060131, 1599061333),
-(22, '2222222222', 'Admin LSDP', 'lsdp@erapat.com', 'default-avatar.jpg', '$2y$10$hNKFHzPaAMTJXuwscLTBEutZtQHxD1CHqJDgOY1Z7u2EJ/ARXPjpy', 2, 1, 9, 1599471171, 0);
+(14, '000 000 000 000', 'administrator', 'admin@erapat.com', '32.png', '$2y$10$pcXovYvhzZDvmXoOXEskcuHtdSvZOUBy6o9FXGRSrFsOAUfbhwdTS', 1, 1, 1, 1595188759, 1600115535),
+(15, '132 132 132 132', 'Admin Keuangan', 'keuangan@erapat.com', '31.png', '$2y$10$icYu3J.bfvdocnSNdxPUheArwlUhq80r1N3T7p.ZzgJO48lB1ne6O', 2, 1, 2, 1595195583, 1597380790),
+(18, '234 234 234 234', 'Admin Humas', 'humas@erapat.com', '3.png', '$2y$10$5Kud5rfLqdf.7vApjirzNuWjVLKqFqpZt6hGDH/d/5vtjoCcssqRy', 2, 1, 5, 1597213397, 1599549994),
+(19, '123 123 123 123', 'Admin Perencanaan', 'perencanaan@erapat.com', '33.png', '$2y$10$X/U5/ZLzBP60TO6aDsqp3eWpXLevpxVvTSKy0nLGrzCa31osP4xoK', 2, 1, 3, 1598467083, 0),
+(20, '111 111 111 111', 'Kaban Litbang Perhubungan', 'kaban@erapat.com', 'default-avatar.jpg', '$2y$10$w5k9sGFC7SMC8whAPIp/dOknnlHLA.nOP1IypYw6JNVu2aDz0oEse', 4, 1, 14, 1599060092, 1599061311),
+(21, '222 222 222 222', 'Sesban Litbang Perhubungan', 'sesban@erapat.com', 'default-avatar.jpg', '$2y$10$7iKaePzZkNyVg37xciRbUOzFSQ58N92P8L95KwtgXGkzV8u8yBTge', 5, 1, 15, 1599060131, 1599061333),
+(22, '121 121 121 121', 'Admin LSDP', 'lsdp@erapat.com', '34.png', '$2y$10$hNKFHzPaAMTJXuwscLTBEutZtQHxD1CHqJDgOY1Z7u2EJ/ARXPjpy', 2, 1, 9, 1599471171, 0);
 
 -- --------------------------------------------------------
 
@@ -754,13 +861,13 @@ CREATE TABLE `meeting_zoom` (
 --
 
 INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `zoom_id`, `date_activated`, `start_time`, `end_time`, `status`, `is_active`) VALUES
-(1, 15, 15, '1234567890', '2020-09-14', '14:00:00', '15:00:00', 0, 1),
-(2, 18, 18, '0987654321', '2020-09-13', '11:00:00', '12:00:00', 0, 1),
-(3, 19, 15, '1111111111', '2020-09-13', '13:00:00', '14:00:00', 0, 1),
-(4, 22, 15, '2222222222', '2020-09-09', '14:00:00', '15:00:00', 0, 1),
-(5, 14, 14, '717 771 7448', '2020-09-13', '02:00:00', '03:00:00', 0, 1),
-(6, 20, 20, '123 123 123', '2020-09-11', '16:00:00', '17:00:00', 1, 1),
-(7, 21, 21, '321 321 321', '2020-09-13', '03:18:13', NULL, 1, 1);
+(1, 19, NULL, '123 123 123 123', NULL, NULL, NULL, 0, 1),
+(2, 18, 18, '234 234 234 234', '2020-09-15', '09:00:00', '10:00:00', 1, 1),
+(3, 15, NULL, '132 132 132 132', NULL, NULL, NULL, 0, 1),
+(4, 22, 22, '121 121 121 121', '2020-09-15', '09:00:00', '10:00:00', 1, 1),
+(5, 14, 14, '000 000 000 000', '2020-09-15', '06:00:00', '07:00:00', 1, 1),
+(6, 20, NULL, '111 111 111 111', NULL, NULL, NULL, 0, 1),
+(7, 21, NULL, '222 222 222 222', NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -799,6 +906,45 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `migration_google_analytics`
+--
+
+CREATE TABLE `migration_google_analytics` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `migration_google_analytics`
+--
+
+INSERT INTO `migration_google_analytics` (`version`, `apply_time`) VALUES
+('m000000_000000_base', 1600082298),
+('m150420_183551_init_addon_google_analytics', 1600082299);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migration_webhooks`
+--
+
+CREATE TABLE `migration_webhooks` (
+  `version` varchar(180) NOT NULL,
+  `apply_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `migration_webhooks`
+--
+
+INSERT INTO `migration_webhooks` (`version`, `apply_time`) VALUES
+('m000000_000000_base', 1600082290),
+('m151231_221235_init_addon_webhooks', 1600082291),
+('m180727_170149_upgrade_1', 1600082291);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `profile`
 --
 
@@ -820,8 +966,8 @@ CREATE TABLE `profile` (
 
 INSERT INTO `profile` (`id`, `user_id`, `created_at`, `updated_at`, `full_name`, `company`, `avatar`, `timezone`, `language`) VALUES
 (1, 1, '2020-09-10 10:05:48', '2020-09-10 14:17:23', 'Administrator', 'puslitbang perhubungan', 'KdVCUjb2Zo-tOkTgRfORvxIiGGpV6KBp.jpg', 'Asia/Jakarta', 'id-ID'),
-(2, 2, '2020-09-10 11:09:47', '2020-09-10 13:54:07', 'ivandi', 'puslitbang perhubungan', NULL, 'Asia/Jakarta', 'en-US'),
-(3, 3, '2020-09-10 11:16:29', '2020-09-10 13:54:18', 'dave', 'puslitbang perhubungan', NULL, 'Asia/Jakarta', 'en-US');
+(2, 2, '2020-09-10 11:09:47', '2020-09-14 04:47:32', 'User', 'puslitbang perhubungan', NULL, 'Asia/Jakarta', 'en-US'),
+(3, 3, '2020-09-10 11:16:29', '2020-09-14 04:43:24', 'dave', 'puslitbang perhubungan', '40VTZGo1BGdZFGOiulWrlYYAkMGlpbYt.jpg', 'Asia/Jakarta', 'en-US');
 
 -- --------------------------------------------------------
 
@@ -1049,9 +1195,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `status`, `email`, `username`, `password`, `auth_key`, `access_token`, `logged_in_ip`, `logged_in_at`, `created_ip`, `created_at`, `updated_at`, `banned_at`, `banned_reason`, `preferences`) VALUES
-(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-13 23:21:08', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
-(2, 2, 1, 'user@erapat.com', 'user', '$2y$13$ON/2lLk5YAq5DM2f2mww3.q2QdOM3rJpzL32COoUc7JoEhxP.IydC', NULL, NULL, '::1', '2020-09-10 11:10:05', NULL, '2020-09-10 11:09:47', '2020-09-10 13:54:07', NULL, NULL, NULL),
-(3, 3, 1, 'dave@erapat.com', 'dave', '$2y$13$vJZvD1UCh4yehfVCt4ANB.CpHnoQ0/tIcRXU1m3J0Zk3YozuiTqvu', NULL, NULL, '::1', '2020-09-10 11:16:38', NULL, '2020-09-10 11:16:29', '2020-09-10 13:54:17', NULL, NULL, NULL);
+(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-14 04:45:20', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
+(2, 2, 1, 'user@erapat.com', 'user', '$2y$13$ON/2lLk5YAq5DM2f2mww3.q2QdOM3rJpzL32COoUc7JoEhxP.IydC', NULL, NULL, '::1', '2020-09-14 04:44:59', NULL, '2020-09-10 11:09:47', '2020-09-14 04:47:32', NULL, NULL, NULL),
+(3, 3, 1, 'dave@erapat.com', 'dave', '$2y$13$vJZvD1UCh4yehfVCt4ANB.CpHnoQ0/tIcRXU1m3J0Zk3YozuiTqvu', NULL, NULL, '::1', '2020-09-14 04:42:42', NULL, '2020-09-10 11:16:29', '2020-09-10 13:54:17', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1097,9 +1243,7 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (73, 1, 36),
 (74, 2, 36),
 (75, 1, 37),
-(76, 2, 37),
-(77, 4, 29),
-(78, 2, 35);
+(77, 4, 29);
 
 -- --------------------------------------------------------
 
@@ -1330,8 +1474,8 @@ CREATE TABLE `view_zoom_meeting` (
 ,`date_activated` date
 ,`start_time` time
 ,`end_time` time
-,`status` int(11)
 ,`is_active` int(11)
+,`status` int(11)
 );
 
 -- --------------------------------------------------------
@@ -1395,7 +1539,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_zoom`.`pemakai_id` AS `pemakai_id`,`view_user_department`.`name` AS `pemilik_zoom`,`view_user_department`.`sub_department_name` AS `nama_bagian`,`view_user_meeting`.`name` AS `pemakai_zoom`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time`,`meeting_zoom`.`status` AS `status`,`meeting_zoom`.`is_active` AS `is_active` from ((`meeting_zoom` join `view_user_department` on(`meeting_zoom`.`user_id` = `view_user_department`.`id`)) join `view_user_meeting` on(`meeting_zoom`.`pemakai_id` = `view_user_meeting`.`user_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_zoom`.`pemakai_id` AS `pemakai_id`,`view_user_department`.`name` AS `pemilik_zoom`,`view_user_department`.`sub_department_name` AS `nama_bagian`,`view_user_meeting`.`name` AS `pemakai_zoom`,`meeting_zoom`.`date_activated` AS `date_activated`,`view_user_meeting`.`start_time` AS `start_time`,`view_user_meeting`.`end_time` AS `end_time`,`meeting_zoom`.`is_active` AS `is_active`,`meeting_zoom`.`status` AS `status` from ((`meeting_zoom` join `view_user_department` on(`meeting_zoom`.`user_id` = `view_user_department`.`id`)) join `view_user_meeting` on(`meeting_zoom`.`pemakai_id` = `view_user_meeting`.`user_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -1415,6 +1559,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `addon`
   ADD UNIQUE KEY `id` (`id`) USING BTREE;
+
+--
+-- Indexes for table `addon_google_analytics`
+--
+ALTER TABLE `addon_google_analytics`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `addon_webhooks`
+--
+ALTER TABLE `addon_webhooks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `form`
@@ -1557,6 +1713,18 @@ ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`) USING BTREE;
 
 --
+-- Indexes for table `migration_google_analytics`
+--
+ALTER TABLE `migration_google_analytics`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Indexes for table `migration_webhooks`
+--
+ALTER TABLE `migration_webhooks`
+  ADD PRIMARY KEY (`version`);
+
+--
 -- Indexes for table `profile`
 --
 ALTER TABLE `profile`
@@ -1654,28 +1822,40 @@ ALTER TABLE `user_token`
 --
 
 --
+-- AUTO_INCREMENT for table `addon_google_analytics`
+--
+ALTER TABLE `addon_google_analytics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `addon_webhooks`
+--
+ALTER TABLE `addon_webhooks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `form_confirmation`
 --
 ALTER TABLE `form_confirmation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `form_data`
 --
 ALTER TABLE `form_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `form_email`
 --
 ALTER TABLE `form_email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `form_rule`
@@ -1687,7 +1867,7 @@ ALTER TABLE `form_rule`
 -- AUTO_INCREMENT for table `form_submission`
 --
 ALTER TABLE `form_submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `form_submission_comment`
@@ -1705,7 +1885,7 @@ ALTER TABLE `form_submission_file`
 -- AUTO_INCREMENT for table `form_ui`
 --
 ALTER TABLE `form_ui`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `mail_queue`
@@ -1717,7 +1897,7 @@ ALTER TABLE `mail_queue`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
