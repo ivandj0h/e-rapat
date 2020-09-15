@@ -88,7 +88,7 @@ function get_available_zoomid()
 
     $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
 
-    if (($currenttime >= $starttime) && ($currenttime <= $endtime)) { ?>
+    if (($currenttime >= $starttime) && ($currenttime <= $endtime) && $d['user_id'] == $ci->session->userdata('id') && $d['status'] == 1) { ?>
         <li class="pz">
             <label class="radio-inline">
                 <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['id']; ?>" disabled>
@@ -125,7 +125,19 @@ function get_available_zoomid()
                 </label>
             </li>
         <?php
-        } else if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
+        } else if (($currenttime >= $starttime) && ($currenttime <= $endtime) && $zm['user_id'] == $ci->session->userdata('id')) {
+        ?>
+            <li class="pz">
+                <label class="radio-inline">
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['id']; ?>" disabled>
+                    <div class="notavail text-danger">
+                        <i class="fas fa-times"></i> <?= $zm['idzoom']; ?>
+                        - (<?= $zm['pemilik_zoom']; ?>)
+                    </div>
+                </label>
+            </li>
+        <?php
+        } else if ($zm['status'] == 1) {
         ?>
             <li class="pz">
                 <label class="radio-inline">

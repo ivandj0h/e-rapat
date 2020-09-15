@@ -60,7 +60,7 @@
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td class="text-left"><?= $a['sub_department_name']; ?></td>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?>
-                                            <td class="text-left">
+                                            <td class="text-center">
                                                 <?php if ($a['sub_type_id'] == 1) {
                                                     echo $a['zoomid'];
                                                 } else {

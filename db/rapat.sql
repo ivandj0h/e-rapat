@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2020 at 01:41 PM
+-- Generation Time: Sep 15, 2020 at 04:04 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -665,6 +665,13 @@ CREATE TABLE `meeting` (
   `remark_status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `meeting`
+--
+
+INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoom_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`) VALUES
+(1, 19, '', 1, 1, '', 'asdasdad', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'ABSENSI_RAPAT.pdf', '5f60b66a71506', 'asdadsad', '2020-09-15', '2020-09-15', '2020-09-15', '20:00:00', '21:00:00', 0, '');
+
 -- --------------------------------------------------------
 
 --
@@ -842,21 +849,34 @@ CREATE TABLE `meeting_zoom` (
   `date_activated` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  `is_active` int(11) NOT NULL
+  `is_active` int(11) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `meeting_zoom`
 --
 
-INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `idzoom`, `date_activated`, `start_time`, `end_time`, `is_active`) VALUES
-(1, 19, 14, '444 444 444 444', '2020-09-15', '08:00:00', '09:00:00', 1),
-(2, 18, 14, '555 555 555 555', '2020-09-15', '09:00:00', '10:00:00', 1),
-(3, 15, 14, '666 666 666 666', '2020-09-15', '18:00:00', '19:00:00', 1),
-(4, 22, 14, '333 333 333 333', '2020-09-15', '17:00:00', '18:00:00', 1),
-(5, 14, 14, '000 000 000 000', '2020-09-15', '10:00:00', '11:00:00', 1),
-(6, 20, NULL, '111 111 111 111', NULL, NULL, NULL, 1),
-(7, 21, NULL, '222 222 222 222', NULL, NULL, NULL, 1);
+INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `idzoom`, `date_activated`, `start_time`, `end_time`, `is_active`, `status`) VALUES
+(1, 19, 19, '444 444 444 444', '2020-09-15', '20:00:00', '21:00:00', 1, 0),
+(2, 18, 14, '555 555 555 555', '2020-09-15', '09:00:00', '10:00:00', 1, 0),
+(3, 15, 14, '666 666 666 666', '2020-09-15', '18:00:00', '19:00:00', 1, 0),
+(4, 22, 14, '333 333 333 333', '2020-09-15', '17:00:00', '18:00:00', 1, 0),
+(5, 14, 14, '000 000 000 000', '2020-09-15', '19:00:00', '21:00:00', 1, 0),
+(6, 20, NULL, '111 111 111 111', NULL, NULL, NULL, 1, 0),
+(7, 21, NULL, '222 222 222 222', NULL, NULL, NULL, 1, 0);
+
+--
+-- Triggers `meeting_zoom`
+--
+DELIMITER $$
+CREATE TRIGGER `upd_check` BEFORE UPDATE ON `meeting_zoom` FOR EACH ROW BEGIN
+IF NEW.start_time = NOW() THEN
+SET NEW.status = 1;
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1444,6 +1464,7 @@ CREATE TABLE `view_user_meeting` (
 ,`date_requested` date
 ,`remark_status` text
 ,`zoom_id` int(11)
+,`zoomid` varchar(150)
 );
 
 -- --------------------------------------------------------
@@ -1454,10 +1475,12 @@ CREATE TABLE `view_user_meeting` (
 --
 CREATE TABLE `view_zoom_meeting` (
 `id` int(11)
+,`user_id` int(11)
 ,`zoom_id` int(11)
 ,`date_activated` date
 ,`start_time` time
 ,`end_time` time
+,`status` int(11)
 );
 
 -- --------------------------------------------------------
@@ -1475,6 +1498,7 @@ CREATE TABLE `view_zoom_users` (
 ,`start_time` time
 ,`end_time` time
 ,`is_active` int(11)
+,`status` int(11)
 );
 
 -- --------------------------------------------------------
@@ -1511,7 +1535,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_user_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`files_upload1` AS `files_upload1`,`meeting`.`files_upload2` AS `files_upload2`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting`.`other_online_id` AS `other_online_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`meeting`.`zoom_id` AS `zoom_id` from (((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_user_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`user_id` AS `user_id`,`view_user_department`.`name` AS `name`,`view_user_department`.`email` AS `email`,`view_user_department`.`role_id` AS `role_id`,`view_user_department`.`sub_department_id` AS `sub_department_id`,`view_user_department`.`sub_department_name` AS `sub_department_name`,`view_user_department`.`department_id` AS `department_id`,`view_user_department`.`department_name` AS `department_name`,`meeting`.`speakers_name` AS `speakers_name`,`meeting`.`members_name` AS `members_name`,`meeting`.`files_upload` AS `files_upload`,`meeting`.`files_upload1` AS `files_upload1`,`meeting`.`files_upload2` AS `files_upload2`,`meeting`.`unique_code` AS `unique_code`,`meeting`.`agenda` AS `agenda`,`meeting`.`start_time` AS `start_time`,`meeting`.`end_time` AS `end_time`,`meeting`.`request_status` AS `request_status`,`meeting`.`sub_type_id` AS `sub_type_id`,`meeting_sub_type`.`type_id` AS `type_id`,`meeting`.`other_online_id` AS `other_online_id`,`meeting_sub_type`.`meeting_subtype` AS `meeting_subtype`,`meeting_type`.`meeting_type` AS `meeting_type`,`meeting`.`start_date` AS `start_date`,`meeting`.`end_date` AS `end_date`,`meeting`.`date_requested` AS `date_requested`,`meeting`.`remark_status` AS `remark_status`,`meeting`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`idzoom` AS `zoomid` from ((((`meeting` join `view_user_department` on(`meeting`.`user_id` = `view_user_department`.`id`)) join `meeting_sub_type` on(`meeting`.`sub_type_id` = `meeting_sub_type`.`id`)) join `meeting_type` on(`meeting_sub_type`.`type_id` = `meeting_type`.`id`)) join `meeting_zoom` on(`meeting`.`zoom_id` = `meeting_zoom`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -1520,7 +1544,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_meeting`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting`.`id` AS `id`,`meeting`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time` from (`meeting_zoom` join `meeting` on(`meeting_zoom`.`id` = `meeting`.`zoom_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_meeting`  AS  select `meeting`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting`.`zoom_id` AS `zoom_id`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time`,`meeting_zoom`.`status` AS `status` from (`meeting_zoom` join `meeting` on(`meeting_zoom`.`id` = `meeting`.`zoom_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -1529,7 +1553,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_zoom_users`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_users`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_zoom`.`idzoom` AS `idzoom`,`meeting_users`.`name` AS `pemilik_zoom`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time`,`meeting_zoom`.`is_active` AS `is_active` from (`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_zoom_users`  AS  select `meeting_zoom`.`id` AS `id`,`meeting_zoom`.`user_id` AS `user_id`,`meeting_zoom`.`idzoom` AS `idzoom`,`meeting_users`.`name` AS `pemilik_zoom`,`meeting_zoom`.`date_activated` AS `date_activated`,`meeting_zoom`.`start_time` AS `start_time`,`meeting_zoom`.`end_time` AS `end_time`,`meeting_zoom`.`is_active` AS `is_active`,`meeting_zoom`.`status` AS `status` from (`meeting_zoom` join `meeting_users` on(`meeting_zoom`.`user_id` = `meeting_users`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -1878,7 +1902,7 @@ ALTER TABLE `mail_queue`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`

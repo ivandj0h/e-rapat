@@ -215,7 +215,7 @@ class Meeting extends CI_Controller
 
             if ((int) $checked == 1) {
                 $this->db->set('status', 0);
-                $this->db->where('zoom_id', $zoomid);
+                $this->db->where('idzoom', $zoomid);
                 $this->db->update('meeting_zoom');
             }
 
@@ -279,12 +279,11 @@ class Meeting extends CI_Controller
         }
 
         if ($this->input->post('sub_type_id', true) == 1) {
-            // $this->db->set('status', 0);
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
-            $this->db->where('zoom_id', $this->input->post('zoomid', true));
+            $this->db->where('idzoom', $this->input->post('zoomid', true));
             $this->db->update('meeting_zoom');
         }
 
