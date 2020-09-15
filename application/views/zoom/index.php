@@ -59,7 +59,7 @@
                                     <?php foreach ($zoom as $zm) : ?>
                                         <tr>
                                             <td class="text-center"><?= $i++; ?></td>
-                                            <td class="text-center"><span class="text-primary"><strong><?= $zm['zoom_id']; ?></strong></span></td>
+                                            <td class="text-center"><span class="text-primary"><strong><?= $zm['idzoom']; ?></strong></span></td>
                                             <td><?= $zm['pemilik_zoom']; ?></td>
                                             <td class="text-center">
                                                 <?php
@@ -70,12 +70,6 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <?php
-                                                if ($zm['status'] == 1) { ?>
-                                                    <span class="badge badge-success" data-toggle="modal" data-target="#resetZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Sedang Online</span>
-                                                <?php } else { ?>
-                                                    <span class="badge badge-danger" data-toggle="modal" data-target="#resetZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-eraser"></i> Sedang Offline</span>
-                                                <?php } ?>
                                                 <?php if ($this->session->userdata('role_id') == '1') { ?>
                                                     <span class="badge badge-dark" data-toggle="modal" data-target="#editZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
                                                     <span class="badge badge-danger" data-toggle="modal" data-target="#deleteZoom<?= $zm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
@@ -116,7 +110,7 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="zoom_id" name="zoom_id" placeholder="Masukan Zoom ID...">
+                        <input type="text" class="form-control" id="zoom_id" name="idzoom" placeholder="Masukan Zoom ID...">
                     </div>
                     <div class="form-group">
                         <select name="user_id" id="user_id" class="form-control">
@@ -165,7 +159,7 @@ foreach ($zoom as $zm) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="zoom_id" name="zoom_id" value="<?= $zm['zoom_id']; ?>">
+                            <input type="text" class="form-control" id="zoom_id" name="zoom_id" value="<?= $zm['idzoom']; ?>">
                         </div>
                         <div class="form-group">
                             <select class="custom-select mr-sm-2" select name="user_id" id="user_id">

@@ -34,7 +34,6 @@ class Zoom_model extends CI_Model
         $curr_date = $date->format('Y-m-d ');
 
         $this->db->select('*');
-        // $this->db->select('user_id, user_telephone, user_email, CONCAT(user_firstname, '.', user_surname) AS name', FALSE);
         $this->db->from($this->view_zoom_meeting);
         $this->db->where('DATE(date_activated)', $curr_date);
         return $this->db->get()->result_array();
