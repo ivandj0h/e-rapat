@@ -323,4 +323,48 @@ class Meeting extends CI_Controller
     {
         echo "test";
     }
+
+    public function step1()
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
+        // $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/undangan_step_1', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function soho($id)
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting_undangan($id);
+
+        // var_dump($data['meeting']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/undangan_soho', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function erapat($id)
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting_undangan($id);
+
+        // var_dump($data['meeting']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/undangan_erapat', $data);
+        $this->load->view('layout/footer');
+    }
 }

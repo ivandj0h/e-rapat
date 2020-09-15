@@ -384,6 +384,13 @@
                $('#batal, .close').click(function() {
                    location.reload();
                });
+               $("#changeZoom").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
            </script>
            </body>
 
