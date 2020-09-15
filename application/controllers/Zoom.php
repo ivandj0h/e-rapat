@@ -40,7 +40,7 @@ class Zoom extends CI_Controller
             ];
 
             $this->Zoom_model->insert_zoom($data);
-            $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
+            // $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
             $this->db->set('zoomid', $data['zoom_id']);
             $this->db->where('id', $data['user_id']);
             $this->db->update('meeting_users');
@@ -59,6 +59,7 @@ class Zoom extends CI_Controller
             );
 
             $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
+
             $this->db->set('zoomid', $data['zoom_id']);
             $this->db->where('id', $data['user_id']);
             $this->db->update('meeting_users');

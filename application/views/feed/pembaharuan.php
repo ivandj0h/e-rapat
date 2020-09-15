@@ -39,7 +39,7 @@
                                 </span>
                                 <span class="text">Cek Google Zoom ID Hari ini</span>
                             </a> -->
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong>
                         </div>
                         <?= form_close(); ?>
                     </div>

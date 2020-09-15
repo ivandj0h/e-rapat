@@ -261,7 +261,7 @@ class Meeting extends CI_Controller
         if ($datenow >= $end_date && $timenow >= $end_time) {
             $data = array(
                 'request_status' => $request_status,
-                'start_date' => $this->input->post('start_date', true),
+                'start_date' => $this->input->post('end_date', true),
                 'end_date' => $this->input->post('end_date', true),
                 'start_time' => $this->input->post('start_time', true),
                 'end_time' => $this->input->post('end_time', true),
@@ -270,7 +270,7 @@ class Meeting extends CI_Controller
         } else {
             $data = array(
                 'request_status' => $this->input->post('request_status'),
-                'start_date' => $this->input->post('start_date', true),
+                'start_date' => $this->input->post('end_date', true),
                 'end_date' => $this->input->post('end_date', true),
                 'start_time' => $this->input->post('start_time', true),
                 'end_time' => $this->input->post('end_time', true),
@@ -278,13 +278,13 @@ class Meeting extends CI_Controller
             );
         }
 
-        if ($data['sub_type_id'] == 1) {
-            $this->db->set('status', '1');
+        if ($this->input->post('sub_type_id', true) == 1) {
+            // $this->db->set('status', 0);
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
-            $this->db->where('zoom_id', $data['zoomid']);
+            $this->db->where('zoom_id', $this->input->post('zoomid', true));
             $this->db->update('meeting_zoom');
         }
 

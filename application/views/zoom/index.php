@@ -161,7 +161,7 @@ foreach ($zoom as $zm) :
                     </button>
                 </div>
                 <form action="<?= base_url('zoom/updatezoom'); ?>" method="POST">
-                    <input type="hidden" name="id" value="<?= $zm['zoom_id']; ?>">
+                    <input type="hidden" name="id" value="<?= $zm['id']; ?>">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">

@@ -32,7 +32,7 @@
                 <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <div class="col">
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Zoom Hari ini</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Zoom Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong></h6>
                         </div>
                     </div>
                     <div class="card-body">
@@ -49,15 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($zoom as $a) :
-
-                                        $currenttime = date("H:i:s");
-                                        $starttime = date($a['start_time']);
-                                        $endtime = date($a['end_time']);
-
-                                        $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
-
-                                    ?>
+                                    <?php foreach ($zoom as $a) : ?>
                                         <tr>
                                             <td class="text-center">
                                                 <strong><?= $a['zoom_id']; ?></strong>
@@ -76,17 +68,21 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php
-                                                if (($currenttime >= $starttime) && ($currenttime <= $endtime) && ($a['status'] == 1)) { ?>
-                                                    <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
+                                                $currenttime = date("H:i:s");
+                                                $starttime = date($a['start_time']);
+                                                $endtime = date($a['end_time']);
+
+                                                $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+                                                if (($currenttime >= $starttime) && ($currenttime <= $endtime) && ($a['status'] == 1)) {
+                                                    if ($a['user_id'] == 20 || $a['user_id'] == 21 || $a['user_id'] == 14) { ?>
+                                                        <span class="text-secondary"><i class="fas fa-times"></i> Terbatas</span>
                                                 <?php
-                                                } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>
-                                                    <button type="button" class="btn btn-secondary" disabled><i class="fas fa-microphone-alt"></i> Terbatas</button>
-                                                <?php
-                                                } else if ($a['status'] == 0) { ?>
-                                                    <span class="text-success"><i class="fas fa-check"></i> Tersedia</span>
-                                                <?php } else { ?>
-                                                    <span class="text-success"><i class="fas fa-check"></i> Tersedia</span>
-                                                <?php }
+                                                    } else {
+                                                        echo '<span class="text-danger"><i class="fas fa-times"></i> Dipakai</span>';
+                                                    }
+                                                } else {
+                                                    echo '<span class="text-success"><i class="fas fa-check"></i> Tersedia</span>';
+                                                }
                                                 ?>
                                             </td>
                                         </tr>

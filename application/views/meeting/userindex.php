@@ -58,7 +58,7 @@
                                             <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
-                                            <td class="text-center"><?= $a['sub_department_name']; ?></td>
+                                            <td class="text-left"><?= $a['sub_department_name']; ?></td>
                                             <td class="text-left"><?= $a['meeting_subtype']; ?>
                                             <td class="text-left">
                                                 <?php if ($a['sub_type_id'] == 1) {
@@ -343,13 +343,6 @@ foreach ($meeting as $a) :
                             form_expired_status($a);
                         }
                         ?>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="actions">
-                            <input type="hidden" name="id" value="<?= $id; ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="batal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Tutup</button>
-                            <button type="submit" class="btn btn-success"><i class="fas fa-file"></i> Ubah Status</button>
-                        </div>
                     </div>
                 </form>
             </div>

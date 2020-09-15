@@ -77,8 +77,10 @@ class Meeting_model extends CI_Model
 
         if ($datenow >= $end_date && $timenow >= $end_time && $sub_type_id != '1') {
             $request_status = 3;
+            $zoom_status = 0;
         } else {
             $request_status = 0;
+            $zoom_status = 1;
         }
 
         $data = array(
@@ -99,7 +101,7 @@ class Meeting_model extends CI_Model
         );
 
         if ($data['sub_type_id'] == 1) {
-            $this->db->set('status', '1');
+            $this->db->set('status', $zoom_status);
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);

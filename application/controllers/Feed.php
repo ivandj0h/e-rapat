@@ -51,7 +51,7 @@ class Feed extends CI_Controller
         $data['title'] = 'Pembaharuan';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting_updates'] = $this->Meeting_model->get_all_meeting_today();
-        $data['zoom'] = $this->Zoom_model->getzoom();
+        $data['zoom'] = $this->Zoom_model->check_status_zoom_today();
 
 
         $this->load->view('layout/header', $data);
