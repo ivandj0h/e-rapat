@@ -13,10 +13,10 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?= base_url('feed/pembaharuan'); ?>">Pembaharuan</a>
+                        <a class="nav-link active" href="<?= base_url('feed/pembaharuan'); ?>"><i class="fas fa-sync-alt"></i> Pembaharuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('feed/cekzoom'); ?>">Cek Ketersediaan Akun Zoom</a>
+                        <a class="nav-link" href="<?= base_url('feed/cekzoom'); ?>"><i class="fas fa-video"></i> Cek Ketersediaan Zoom</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
@@ -148,7 +148,7 @@
                                     </td>
                                     <td class="text-center">
                                         <?php
-                                        if (($currenttime >= $starttime) && ($currenttime <= $endtime) && ($a['status'] == 1)) { ?>
+                                        if (($currenttime >= $starttime) && ($currenttime <= $endtime)) { ?>
                                             <button type="button" class="btn btn-danger" disabled><i class="fas fa-microphone-alt-slash"></i> Dipakai</button>
                                         <?php
                                         } else if ($a['user_id'] == 20 || $a['user_id'] == 21) { ?>

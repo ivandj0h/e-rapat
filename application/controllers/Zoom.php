@@ -34,14 +34,13 @@ class Zoom extends CI_Controller
         } else {
 
             $data = [
-                'zoom_id'   => htmlspecialchars($this->input->post('zoom_id', true)),
+                'idzoom'   => htmlspecialchars($this->input->post('idzoom', true)),
                 'user_id'   => intval($this->input->post('user_id', true)),
                 'is_active' => intval($this->input->post('is_active', true)),
             ];
 
             $this->Zoom_model->insert_zoom($data);
-            // $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
-            $this->db->set('zoomid', $data['zoom_id']);
+            $this->db->set('zoomid', $data['idzoom']);
             $this->db->where('id', $data['user_id']);
             $this->db->update('meeting_users');
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Zoom ID baru telah ditambahkan!</div>');
@@ -53,14 +52,14 @@ class Zoom extends CI_Controller
     {
         if ($this->input->post('id')) {
             $data = array(
-                'zoom_id'   => htmlspecialchars($this->input->post('zoom_id', true)),
+                'idzoom'   => htmlspecialchars($this->input->post('idzoom', true)),
                 'user_id'   => intval($this->input->post('user_id', true)),
                 'is_active' => intval($this->input->post('is_active', true)),
             );
 
             $this->Zoom_model->update_zoom($data, $this->input->post('id', true));
 
-            $this->db->set('zoomid', $data['zoom_id']);
+            $this->db->set('zoomid', $data['idzoom']);
             $this->db->where('id', $data['user_id']);
             $this->db->update('meeting_users');
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Zoom ID baru telah diubah!</div>');
@@ -74,19 +73,6 @@ class Zoom extends CI_Controller
 
         $this->Zoom_model->delete_zoom($id);
         $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> Zoom ID baru telah dihapus!</div>');
-        redirect('zoom');
-    }
-
-
-    public function resetzoom()
-    {
-        $id = $this->input->post('id');
-        $status = "0";
-        $data = array('status' => $status);
-
-        $this->Zoom_model->reset_zoom($id, $data);
-        $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Selamat!</strong> Status Zoom ID telah dirubah & Tersedia!</strong>.</div>');
         redirect('zoom');
     }
 }

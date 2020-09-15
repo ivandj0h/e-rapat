@@ -79,17 +79,21 @@ function get_available_zoomid()
 {
     $ci = get_instance();
 
-    $zoomid = $ci->db->get_where('view_zoom_users', ['is_active' => 1, 'user_id !=' => $ci->session->userdata('id')])->result_array();
-    $d = $ci->db->get_where('view_zoom_users', ['is_active' => 1, 'user_id' => $ci->session->userdata('id')])->row_array();
+    $zoomid = $ci->db->get_where('view_zoom_users', ['user_id !=' => $ci->session->userdata('id')])->result_array();
+    $d = $ci->db->get_where('view_zoom_users', ['user_id' => $ci->session->userdata('id')])->row_array();
 
-    // $d['status'] ??= 'default value';
+    $currenttime = date("H:i:s");
+    $starttime = date($d['start_time']);
+    $endtime = date($d['end_time']);
 
-    if ($d['status'] == '1') { ?>
+    $endtime = $endtime <= $starttime ? $endtime + 2400 : $endtime;
+
+    if (($currenttime >= $starttime) && ($currenttime <= $endtime)) { ?>
         <li class="pz">
             <label class="radio-inline">
-                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" disabled>
+                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['id']; ?>" disabled>
                 <div class="notavail text-danger">
-                    <?= $d['zoom_id']; ?>
+                    <i class="fas fa-times"></i> <?= $d['idzoom']; ?>
                     - (Zoom ID Default)
                 </div>
             </label>
@@ -98,9 +102,9 @@ function get_available_zoomid()
     } else { ?>
         <li class="pz">
             <label class="radio-inline">
-                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['zoom_id']; ?>" checked>
+                <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $d['id']; ?>" checked>
                 <div class="avail text-primary">
-                    <?= $d['zoom_id']; ?>
+                    <i class="fas fa-check"></i> <?= $d['idzoom']; ?>
                     - (Zoom ID Default)
                 </div>
             </label>
@@ -113,21 +117,21 @@ function get_available_zoomid()
         ?>
             <li class="pz">
                 <label class="radio-inline">
-                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
-                    <div class="notavail text-secondary">
-                        <?= $zm['zoom_id']; ?>
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['id']; ?>" disabled>
+                    <div class="notavail text-danger">
+                        <i class="fas fa-times"></i> <?= $zm['idzoom']; ?>
                         - (<?= $zm['pemilik_zoom']; ?>)
                     </div>
                 </label>
             </li>
         <?php
-        } else if ($zm['status'] == '1') {
+        } else if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
         ?>
             <li class="pz">
                 <label class="radio-inline">
-                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>" disabled>
-                    <div class="notavail text-muted">
-                        <?= $zm['zoom_id']; ?>
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['id']; ?>" disabled>
+                    <div class="notavail text-danger">
+                        <i class="fas fa-times"></i> <?= $zm['idzoom']; ?>
                         - (<?= $zm['pemilik_zoom']; ?>)
                     </div>
                 </label>
@@ -137,9 +141,9 @@ function get_available_zoomid()
         ?>
             <li class="pz">
                 <label class="radio-inline">
-                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['zoom_id']; ?>">
+                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="<?= $zm['id']; ?>">
                     <div class="clab text-success">
-                        <?= $zm['zoom_id']; ?>
+                        <i class="fas fa-check"></i> <?= $zm['idzoom']; ?>
                         - (<?= $zm['pemilik_zoom']; ?>)
                     </div>
                 </label>

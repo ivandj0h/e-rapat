@@ -100,13 +100,14 @@ class Meeting_model extends CI_Model
             'request_status' => $request_status
         );
 
+        var_dump($data);
+        die;
         if ($data['sub_type_id'] == 1) {
-            $this->db->set('status', $zoom_status);
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
-            $this->db->where('zoom_id', $data['zoomid']);
+            $this->db->where('id', $data['zoomid']);
             $this->db->update('meeting_zoom');
         }
 
@@ -144,6 +145,9 @@ class Meeting_model extends CI_Model
     public function delete_meeting($id)
     {
         return $this->db->where('id', $id)->delete($this->meeting);
+        $this->db->query("SET @num := 0;");
+        $this->db->query("UPDATE $this->meeting SET id = @num := (@num+1);");
+        $this->db->query("ALTER TABLE $this->meeting AUTO_INCREMENT = 1;");
     }
 
     public function update_meeting_status($id, $data)
