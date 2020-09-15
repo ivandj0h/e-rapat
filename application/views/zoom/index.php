@@ -159,7 +159,7 @@ foreach ($zoom as $zm) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="zoom_id" name="zoom_id" value="<?= $zm['idzoom']; ?>">
+                            <input type="text" class="form-control" id="zoom_id" name="idzoom" value="<?= $zm['idzoom']; ?>">
                         </div>
                         <div class="form-group">
                             <select class="custom-select mr-sm-2" select name="user_id" id="user_id">
@@ -202,7 +202,7 @@ foreach ($zoom as $zm) :
                 <form action="<?= base_url('zoom/deletezoom/' . $id); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Apakah anda yakin ingin menghapus Zoom ID <b><?= $zm['zoom_id']; ?> ?</b></p>
+                        <p>Apakah anda yakin ingin menghapus Zoom ID <b><?= $zm['idzoom']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">

@@ -77,16 +77,14 @@ class Meeting_model extends CI_Model
 
         if ($datenow >= $end_date && $timenow >= $end_time && $sub_type_id != '1') {
             $request_status = 3;
-            $zoom_status = 0;
         } else {
             $request_status = 0;
-            $zoom_status = 1;
         }
 
         $data = array(
             'user_id' => $data['user']['id'],
             'sub_type_id' => $sub_type_id,
-            'zoomid' => $zoomid,
+            'zoom_id' => $zoomid,
             'other_online_id' => htmlspecialchars($this->input->post('other_online_id', true)),
             'speakers_name' => $speakers,
             'members_name' => $participants,
@@ -100,14 +98,14 @@ class Meeting_model extends CI_Model
             'request_status' => $request_status
         );
 
-        var_dump($data);
-        die;
+        // var_dump($data);
+        // die;
         if ($data['sub_type_id'] == 1) {
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
-            $this->db->where('id', $data['zoomid']);
+            $this->db->where('id', $zoomid);
             $this->db->update('meeting_zoom');
         }
 
@@ -122,16 +120,16 @@ class Meeting_model extends CI_Model
 
     public function update_meeting($id, $data)
     {
+        $zoomid = ($this->input->post('zoomid', true) ? $this->input->post('zoomid', true) : '0');
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
 
         if ($data['sub_type_id'] == 1) {
-            $this->db->set('status', '1');
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
             $this->db->set('start_time', $data['start_time']);
             $this->db->set('end_time', $data['end_time']);
-            $this->db->where('zoom_id', $data['zoomid']);
+            // $this->db->where('id', $zoomid);
             $this->db->update('meeting_zoom');
         }
     }
