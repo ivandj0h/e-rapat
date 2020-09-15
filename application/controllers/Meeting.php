@@ -220,7 +220,7 @@ class Meeting extends CI_Controller
             }
 
             $this->db->set('files_upload2', $absensi);
-
+            $this->db->set('meeting_status', 0);
             $this->db->where('id', $id);
             $this->db->update('meeting');
             $this->session->set_flashdata('messages', '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Selamat!</strong> File Absensi Rapat berhasil di unggah!</div>');

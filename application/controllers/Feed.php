@@ -8,7 +8,7 @@ class Feed extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text'));
+        $this->load->helper(array('string', 'text', 'tanggal'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
