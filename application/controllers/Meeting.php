@@ -7,7 +7,7 @@ class Meeting extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text', 'tanggal'));
+        $this->load->helper(array('string', 'text', 'tanggal', 'alert'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
@@ -319,9 +319,34 @@ class Meeting extends CI_Controller
         $this->Meeting_model->start_exists($key);
     }
 
-    public function check_zoomid()
+    public function fase1($unique_code)
     {
-        echo "test";
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting($unique_code);
+
+        // var_dump($data['meeting']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/undangan_step_1', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function fase2($id)
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting_undangan($id);
+
+        // var_dump($data['meeting']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/undangan_step_2', $data);
+        $this->load->view('layout/footer');
     }
 
     public function step1()

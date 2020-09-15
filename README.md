@@ -2,7 +2,7 @@
 
 ### About
 
-E-RAPAT version 1 (Old Legacy)is the Legacy application for meeting administration in research & dev center, Ministry of Transportation of the Republic of Indonesia.
+E-RAPAT version 1 (Old Legacy) is the Legacy Application for Meeting Administration in Research & Development Center, Ministry of Transportation of the Republic of Indonesia.
 Now this application is `Release candidate`, Nowdays we still on progress develop, but if you want to contribute, please let me know.
 
 ### Getting Started
@@ -23,9 +23,9 @@ you maybe can faced many branch on this repo because every change or updates hap
 
 The following is the development version of `e-rapat application`
 
-~~Alpha Version 0.0.0~~ - June 2020
-~~Beta Version 1.0.0~~ - July 2020 - August 2020
-**Release candidate 2.0.0** - September 2020
+* ~~Alpha Version 0.0.0~~ - June 2020
+* ~~Beta Version 1.0.0~~ - July 2020 - August 2020
+* **Release candidate 2.0.0** - September 2020
 
 ### The Screenshoot
 
