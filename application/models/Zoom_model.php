@@ -20,7 +20,7 @@ class Zoom_model extends CI_Model
 
     public function getzoom_where_active()
     {
-        return $this->db->get_where($this->view_zoom_users, array('is_active' => 1))->result_array();
+        return $this->db->get_where($this->view_zoom_users, array('type_id' => 1, 'is_active' => 1))->result_array();
     }
 
     public function getzoom()
@@ -32,10 +32,11 @@ class Zoom_model extends CI_Model
     {
         $date = new DateTime("now");
         $curr_date = $date->format('Y-m-d ');
-
+        $typeId = 1;
         $this->db->select('*');
         $this->db->from($this->view_zoom_meeting);
         $this->db->where('DATE(date_activated)', $curr_date);
+        $this->db->where('type_id', $typeId);
         return $this->db->get()->result_array();
     }
 

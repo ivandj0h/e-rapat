@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('/user'); ?>">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt" style="font-size: 1rem;"></i>
                 </div>
                 <div class="sidebar-brand-text mx-1">E-RAPAT <small>Cpanel</small></div>
             </a>
