@@ -324,12 +324,16 @@ class Meeting extends CI_Controller
         echo "test";
     }
 
-    public function step1()
+    public function step1($id)
     {
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
         $data['meeting'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
         // $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
+        $data['rapat'] = $this->Meeting_model->get_one_meeting_undangan($id);
+
+        // var_dump($data['rapat']);
+        // die;
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
@@ -342,7 +346,7 @@ class Meeting extends CI_Controller
     {
         $data['title'] = 'Master Data Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting'] = $this->Meeting_model->get_one_meeting_undangan($id);
+        $data['rapat'] = $this->Meeting_model->get_one_meeting_undangan($id);
 
         // var_dump($data['meeting']);
         // die;

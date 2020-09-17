@@ -61,7 +61,12 @@ class Meeting_model extends CI_Model
     public function get_one_meeting_undangan($id)
     {
         $this->db->where('id', $id);
-        return $this->db->get($this->table)->result_array();
+        // return $this->db->get($this->table)->row();
+        $last = $this->db->order_by('id', "desc")
+            ->limit(1)
+            ->get($this->table)
+            ->row();
+        return $last;
     }
 
     public function store_meeting()
