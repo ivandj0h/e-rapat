@@ -8,7 +8,6 @@
         <!-- Start Breadcumb -->
         <div class="breadcrumb"></div>
         <!-- End of Breadcumb -->
-
         <!-- Start Content Table -->
         <div class="row">
             <div class="col-md-12">

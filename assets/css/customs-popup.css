@@ -58,14 +58,14 @@ a.popup-link:hover {
 	right: 0;
 	bottom: 0;
 	margin: 0;
-	-webkit-animation: autopopup 1s;
-	-moz-animation: autopopup 1s;
-	animation: autopopup 1s;
+	-webkit-animation: autopopup 0s;
+	-moz-animation: autopopup 0s;
+	animation: autopopup 0s;
 }
 #popup:target {
-	-webkit-transition: all 1s;
-	-moz-transition: all 1s;
-	transition: all 1s;
+	-webkit-transition: all 0s;
+	-moz-transition: all 0s;
+	transition: all 0s;
 	opacity: 0;
 	visibility: hidden;
 }
