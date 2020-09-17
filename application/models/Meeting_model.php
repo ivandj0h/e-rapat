@@ -46,7 +46,8 @@ class Meeting_model extends CI_Model
         $this->db->select("*");
         $this->db->from($this->table);
         $this->db->where('email', $sesi);
-        $this->db->order_by('files_upload2', '', false);
+        $this->db->order_by('files_upload2', '', 'DESC');
+        $this->db->order_by('end_date', 'DESC');
         $this->db->order_by('request_status', '0', false);
 
         return $this->db->get()->result_array();
@@ -61,7 +62,6 @@ class Meeting_model extends CI_Model
     public function get_one_meeting_undangan($id)
     {
         $this->db->where('id', $id);
-        // return $this->db->get($this->table)->row();
         $last = $this->db->order_by('id', "desc")
             ->limit(1)
             ->get($this->table)

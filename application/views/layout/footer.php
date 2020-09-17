@@ -205,8 +205,6 @@
                    }
                });
 
-
-
                $("#deleteMeeting").click(function() {
                    if ($(this).is(":checked")) {
                        $('button[type=submit]').attr('disabled', false);
@@ -303,8 +301,6 @@
                        start_time: startTime,
                        end_time: endTime,
                    };
-
-                   console.log(dataJson);
 
                    $.ajax({
                        url: "<?php echo base_url(); ?>" + "meeting/store_meeting",

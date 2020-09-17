@@ -55,7 +55,7 @@
                                 <tbody>
                                     <?php foreach ($meeting as $a) : ?>
                                         <tr>
-                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
+                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['end_date'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
                                             <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
                                             <td class="text-left"><?= $a['sub_department_name']; ?></td>
