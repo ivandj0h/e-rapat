@@ -1,3 +1,6 @@
+            <?php
+            defined('BASEPATH') or exit('No direct script access allowed');
+            ?>
             <!-- Start of Modal Alert if empty upload file -->
             <?php
 
