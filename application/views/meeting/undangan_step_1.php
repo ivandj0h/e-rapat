@@ -47,6 +47,7 @@ foreach ($meeting as $a) :
                             </ul>
                             <br>
                             <button type="submit" name="btnGo" class="btn btn-primary" id="btnGo"><i class="fas fa-arrow-alt-circle-right"></i> Selanjutnya</button>
+
                         </div>
                     </div>
                 </div>

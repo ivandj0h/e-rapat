@@ -3,6 +3,7 @@
             ?>
             <!-- Start of Modal Alert if empty upload file -->
             <?php
+
             function get_alert_empty_upload()
             {
                 $ci = get_instance();
@@ -38,6 +39,7 @@
             }
             // <!-- End of Modal Alert if empty upload file -->
             ?>
+
             <!-- Start of Modal Restricted Area -->
             <?php
             function restricted_area()
@@ -53,4 +55,38 @@
             <?php
             }
 
-            ?>
+            function choose_undangan($m)
+            { ?>
+                <div class="popup-wrapper" id="popup">
+                    <div class="popup-container">
+                        <!-- Konten popup, silahkan ganti sesuai kebutughan -->
+                        <h2>Langkah Pertama</h2>
+                        <p>Silahkan Memilih salah satu metode untuk Managemen Absensi</p>
+                        <hr>
+
+                        <ul class="chec-radio">
+                            <!-- Radio Button Here -->
+                            <li class="pz">
+                                <label class="radio-inline">
+                                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="soho">
+                                    <div class="avail text-primary">
+                                        Menggunakan <strong>SOHO FORM</strong>
+                                    </div>
+                                </label>
+                            </li>
+                            <li class="pz">
+                                <label class="radio-inline">
+                                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="erapat">
+                                    <div class="avail text-primary">
+                                        Menggunakan <strong>E-RAPAT FORM</strong>
+                                    </div>
+                                </label>
+                            </li>
+                        </ul>
+                        <br>
+
+                        <button type="submit" name="btnGo" class="btn btn-primary" id="btnGo"><i class="fas fa-arrow-alt-circle-right"></i> Selanjutnya</button>
+                        <a class="popup-close" href="<?= base_url('meeting'); ?>">X</a>
+                    </div>
+                </div>
+            <?php } ?>
