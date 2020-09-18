@@ -9,7 +9,7 @@
         <!-- End of Breadcumb -->
 
         <div class="row">
-            <div class="col-lg-12 mb-5">
+            <div class="col-lg-12 mb-3">
                 <!-- Nav pills -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -28,26 +28,27 @@
         <!-- Start Content Table -->
         <div class="row">
             <div class="col-lg-12">
+                <?= form_open('feed/searchoffline'); ?>
+                <div class="form-group row">
+                    <div class="col-sm-5">
+                        <select name="sub_type_id" id="sub_type_id" class="form-control">
+                            <option value="">-- Pilih --</option>
+                            <?php $i = 1; ?>
+                            <?php foreach ($subtype as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_subtype']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat Offline Hari ini</button>
+                    <?= form_error('sub_type_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
+                </div>
+                <?= form_close(); ?>
                 <!-- DataTales Example -->
-                <div class="card noborder mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
-                        <?= form_open('feed/offlinemeeting'); ?>
-
-                        <div class="form-group row">
-                            <div class="col-sm-5">
-                                <select name="department_id" id="department_id" class="form-control">
-                                    <option value="">-- Pilih --</option>
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($subtype as $p) : ?>
-                                        <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_subtype']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
-                            <?= form_error('department_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
+                        <div class="col">
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong>
                         </div>
-
-                        <?= form_close(); ?>
                     </div>
                     <div class="card-body">
                         <div class="col-lg-12">
@@ -88,7 +89,6 @@
                                                 <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
                                             </td>
                                         </tr>
-
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

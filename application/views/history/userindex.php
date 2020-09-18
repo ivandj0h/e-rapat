@@ -10,70 +10,83 @@
 
         <!-- Start Content Table -->
         <div class="row">
+            <div class="col-lg-12 mb-5">
+                <?= form_open('history'); ?>
+                <div class="col">
+                    <input type="text" id="start_date" name="from_date" class="border" placeholder="Tanggal Awal" autocomplete="off">
+                    <input type="text" id="end_date" name="to_date" class="border" placeholder="Tanggal Akhir" autocomplete="off">
+                    <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
+                    <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
+                </div>
+                <?= form_close(); ?>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Start Content Table -->
+        <div class="row">
             <div class="col-lg-12">
                 <!-- DataTales Example -->
-                <div class="card noborder mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <input type="text" id="start_date" name="from_date" class="border" placeholder="Tanggal Awal" autocomplete="off">
-                            <input type="text" id="end_date" name="to_date" class="border" placeholder="Tanggal Akhir" autocomplete="off">
-                            <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
-                            <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
-                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>
+                            <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong>
                         </div>
                         <?= form_close(); ?>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="col-lg-12">
-                        <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="text-center w-20">Tanggal</th>
-                                    <th class="text-center w-20">Mulai</th>
-                                    <th class="text-center w-20">Akhir</th>
-                                    <th class="text-center w-20">Nama Bidang</th>
-                                    <th class="text-center w-20">Tipe Rapat</th>
-                                    <th class="text-center w-20">Media</th>
-                                    <th class="text-center w-20">Pimpinan</th>
-                                    <th class="text-center w-20">Agenda</th>
-                                    <th class="text-center w-20">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($meeting_user as $a) : ?>
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
+                                <thead>
                                     <tr>
-                                        <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                        <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
-                                        <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
-                                        <td class="text-left"><?= $a['sub_department_name']; ?></td>
-                                        <td class="text-center">
-                                            <?php
-                                            if ($a['type_id'] == '1') { ?>
-                                                <span class="badge badge-success"><strong> Online</strong></span>
-                                            <?php } else { ?>
-                                                <span class="badge badge-danger"><strong> Offline</strong></span>
-                                            <?php }
-                                            ?>
-                                        </td>
-                                        <td class="text-left"><?= $a['meeting_subtype']; ?></td>
-                                        <td class="text-left"><?= $a['members_name']; ?></td>
-                                        <td><?= word_limiter($a['agenda'], 15); ?></td>
-                                        <td class="text-center action mx-2">
-                                            <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
-                                        </td>
+                                        <th class="text-center w-20">Tanggal</th>
+                                        <th class="text-center w-20">Mulai</th>
+                                        <th class="text-center w-20">Akhir</th>
+                                        <th class="text-center w-20">Nama Bidang</th>
+                                        <th class="text-center w-20">Tipe Rapat</th>
+                                        <th class="text-center w-20">Media</th>
+                                        <th class="text-center w-20">Pimpinan</th>
+                                        <th class="text-center w-20">Agenda</th>
+                                        <th class="text-center w-20">Aksi</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($meeting_user as $a) : ?>
+                                        <tr>
+                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
+                                            <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
+                                            <td class="text-left"><?= $a['sub_department_name']; ?></td>
+                                            <td class="text-center">
+                                                <?php
+                                                if ($a['type_id'] == '1') { ?>
+                                                    <span class="badge badge-success"><strong> Online</strong></span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger"><strong> Offline</strong></span>
+                                                <?php }
+                                                ?>
+                                            </td>
+                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
+                                            <td class="text-left"><?= $a['members_name']; ?></td>
+                                            <td><?= word_limiter($a['agenda'], 15); ?></td>
+                                            <td class="text-center action mx-2">
+                                                <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- End of Content Table -->
     </div>
-    <!-- End of Content Table -->
-</div>
 </div>
 <!-- /.container-fluid -->
 

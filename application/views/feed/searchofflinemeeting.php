@@ -13,10 +13,13 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?= base_url('history'); ?>">Berdasarkan Rentang Tanggal</a>
+                        <a class="nav-link" href="<?= base_url('feed/pembaharuan'); ?>"><i class="fas fa-sync-alt"></i> Pembaharuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('history/searchdept'); ?>">Berdasarkan Esalon 2</a>
+                        <a class="nav-link" href="<?= base_url('feed/cekzoom'); ?>"><i class="fas fa-video"></i> Cek Ketersediaan Zoom</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<?= base_url('feed/offlinemeeting'); ?>"><i class="fas fa-thumbtack"></i> Rapat Offline</a>
                     </li>
                 </ul>
             </div>
@@ -25,78 +28,88 @@
         <!-- Start Content Table -->
         <div class="row">
             <div class="col-lg-12">
-                <?= form_open('history'); ?>
-                <div class="col">
-                    <input type="text" id="s_date" name="from_date" class="border" placeholder="Tanggal Awal">
-                    <input type="text" id="e_date" name="to_date" class="border" placeholder="Tanggal Akhir">
-                    <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat</button>
-                    <?= form_error('from_date', '<small class="text-danger">', '</small>'); ?>
-                    <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Riwayat</h6>
+
+                <?= form_open('feed/searchoffline'); ?>
+                <div class="form-group row">
+                    <div class="col-sm-5">
+                        <select name="sub_type_id" id="sub_type_id" class="form-control">
+                            <option value="">-- Pilih --</option>
+                            <?php $i = 1; ?>
+                            <?php foreach ($subtype as $p) : ?>
+                                <option value="<?= $p['id']; ?>"><?= $i++; ?>. <?= $p['meeting_subtype']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success button-sharp"><i class="fas fa-fw fa-search"></i> Cari Data Rapat Offline Hari ini</button>
+                    <?= form_error('sub_type_id', '<small class="text-danger d-inline-flex p-2">', '</small>'); ?>
                 </div>
                 <?= form_close(); ?>
             </div>
             <!-- DataTales Example -->
             <div class="card shadow-none mb-4">
                 <div class="card-header py-3">
-                    <div class="card-body">
-                        <div class="col-lg-12">
-                            <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
-                                <thead>
+                    <div class="col">
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <table class="table table-striped table-condensed" id="meeting" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="text-center w-20">Tanggal</th>
+                                    <th class="text-center w-20">Mulai</th>
+                                    <th class="text-center w-20">Akhir</th>
+                                    <th class="text-center w-20">Nama Bidang</th>
+                                    <th class="text-center w-20">Tipe Rapat</th>
+                                    <th class="text-center w-20">Media</th>
+                                    <th class="text-center w-20">Pimpinan</th>
+                                    <th class="text-center w-20">Agenda</th>
+                                    <th class="text-center w-20">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($offline_updates as $a) : ?>
                                     <tr>
-                                        <th class="text-center w-20">Tanggal</th>
-                                        <th class="text-center w-20">Mulai</th>
-                                        <th class="text-center w-20">Akhir</th>
-                                        <th class="text-center w-20">Nama Bidang</th>
-                                        <th class="text-center w-20">Tipe Rapat</th>
-                                        <th class="text-center w-20">Media</th>
-                                        <th class="text-center w-20">Pimpinan</th>
-                                        <th class="text-center w-20">Agenda</th>
-                                        <th class="text-center w-20">Aksi</th>
+                                        <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
+                                        <td class="text-center"><?= date("H:i", strtotime($a['start_time'])); ?></td>
+                                        <td class="text-center"><?= date("H:i", strtotime($a['end_time'])); ?></td>
+                                        <td class="text-left"><?= $a['sub_department_name']; ?></td>
+                                        <td class="text-left">
+                                            <?php
+                                            if ($a['type_id'] == '1') { ?>
+                                                <span class="badge badge-success"><strong> Online</strong></span>
+                                            <?php } else { ?>
+                                                <span class="badge badge-danger"><strong> Offline</strong></span>
+                                            <?php }
+                                            ?>
+                                        </td>
+                                        <td class="text-left"><?= $a['meeting_subtype']; ?></td>
+                                        <td class="text-left"><?= $a['members_name']; ?></td>
+                                        <td><?= word_limiter($a['agenda'], 15); ?></td>
+                                        <td class="text-center action mx-2">
+                                            <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($meeting_admin as $a) : ?>
-                                        <tr>
-                                            <td class="text-center"><?= date("d-m-Y", strtotime($a['start_date'])); ?></td>
-                                            <td class="text-center"><?= $a['start_time']; ?></td>
-                                            <td class="text-center"><?= $a['end_time']; ?></td>
-                                            <td class="text-left"><?= $a['sub_department_name']; ?></td>
-                                            <td class="text-left">
-                                                <?php
-                                                if ($a['type_id'] == '1') { ?>
-                                                    <span class="badge badge-success"><strong> Online</strong></span>
-                                                <?php } else { ?>
-                                                    <span class="badge badge-danger"><strong> Offline</strong></span>
-                                                <?php }
-                                                ?>
-                                            </td>
-                                            <td class="text-left"><?= $a['meeting_subtype']; ?></td>
-                                            <td class="text-left"><?= $a['members_name']; ?></td>
-                                            <td><?= word_limiter($a['agenda'], 15); ?></td>
-                                            <td class="text-center action mx-2">
-                                                <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
-                                            </td>
-                                        </tr>
-
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End of Content Table -->
     </div>
+    <!-- End of Content Table -->
+    <!-- Content Row -->
+</div>
 </div>
 <!-- /.container-fluid -->
-
 </div>
 <!-- End of Main Content -->
 
 <!-- Start of Modal Detail -->
 <?php
-foreach ($meeting_admin as $a) :
+foreach ($offline_updates as $a) :
     $id = $a['id'];
     $meeting_subtype = $a['meeting_subtype'];
     $request_status = $a['request_status'];

@@ -33,12 +33,6 @@
                     <div class="card-header py-3">
                         <?= form_open('history'); ?>
                         <div class="col">
-                            <!-- <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#findZoomId">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-fw fa-search"></i>
-                                </span>
-                                <span class="text">Cek Google Zoom ID Hari ini</span>
-                            </a> -->
                             <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Rapat Hari ini Tanggal : <strong><?= date("d-m-Y"); ?></strong>
                         </div>
                         <?= form_close(); ?>

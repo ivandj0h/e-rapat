@@ -28,7 +28,7 @@ class Feed extends CI_Controller
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
         $this->load->view('feed/pembaharuan', $data);
-        $this->load->view('layout/footer');
+        // $this->load->view('layout/footer');
     }
 
     public function pembaharuan()
@@ -95,22 +95,40 @@ class Feed extends CI_Controller
         $data['offline_updates'] = $this->History_model->get_offline_meeting_today();
         $data['subtype'] = $this->Type_model->get_offline_room();
 
-        $this->form_validation->set_rules('sub_type_id', 'Ruangan Rapat', 'required');
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('feed/offlinemeeting', $data);
+        $this->load->view('layout/footer');
+    }
+
+
+    public function searchoffline()
+    {
+        $data['title'] = 'Pembaharuan';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['subtype'] = $this->Type_model->get_offline_room();
+        $data['offline_updates'] = $this->History_model->get_offline_meeting_today();
+
+        $this->form_validation->set_rules('sub_type_id', 'Nama Ruangan', 'required');
+
+        $where  = $this->input->post('sub_type_id');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
             $this->load->view('layout/topbar', $data);
-            $this->load->view('feed/offlinemeeting', $data);
+            $this->load->view('feed/searchofflinemeeting', $data);
             $this->load->view('layout/footer');
         } else {
-            $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($this->input->post('sub_type_id'));
-
+            $data['subtype'] = $this->Type_model->get_offline_room();
+            $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($where);
 
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
             $this->load->view('layout/topbar', $data);
-            $this->load->view('feed/offlinemeeting', $data);
+            $this->load->view('feed/searchofflinemeeting', $data);
             $this->load->view('layout/footer');
         }
     }

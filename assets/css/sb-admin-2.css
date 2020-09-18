@@ -4344,7 +4344,8 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
-	border-color: #eaecf4 #eaecf4 #dddfeb;
+	/* border-color: #eaecf4 #eaecf4 #dddfeb; */
+	border: 1px solid transparent;
 }
 
 .nav-tabs .nav-link.disabled {

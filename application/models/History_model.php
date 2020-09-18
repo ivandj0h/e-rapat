@@ -43,7 +43,7 @@ class History_model extends CI_Model
 
     public function get_all_history_meeting_by_offline($where)
     {
-        $condition = "sub_type_id =" . "'" . $where;
+        $condition = "sub_type_id =" . "'" . $where . "'";
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where($condition);
