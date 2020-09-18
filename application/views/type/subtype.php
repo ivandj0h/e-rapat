@@ -30,7 +30,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addSubMediaType">
                             <span class="icon text-white-50">
@@ -68,8 +68,8 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMediaType<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMediaType<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMediaType<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMediaType<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
 
@@ -96,7 +96,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addSubMediaType">Tambah Data SubMedia</h5>
+                <h5 class="modal-title" id="addSubMediaType">Tambah Data SubMedia Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -126,8 +126,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data SubMedia</button>
                 </div>
             </form>
         </div>
@@ -145,7 +145,7 @@ foreach ($subtype as $s) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSubMediaType">Edit SubMedia Type</h5>
+                    <h5 class="modal-title" id="editSubMediaType">Ubah Data SubMedia</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -176,8 +176,8 @@ foreach ($subtype as $s) :
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data SubMedia</button>
                     </div>
                 </form>
             </div>
@@ -195,15 +195,21 @@ foreach ($subtype as $a) :
     <div class="modal fade" id="deleteSubMediaType<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="typeAddLabel">Hapus Data SubMedia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form action="<?= base_url('type/deletesubtype/' . $id); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Apakah anda yakin ingin menghapus SubMedia Type <b><?= $a['meeting_subtype']; ?> ?</b></p>
+                        <p>Apakah anda yakin ingin menghapus SubMedia <b><?= $a['meeting_subtype']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Data SubMedia</button>
                     </div>
                 </form>
             </div>

@@ -1,8 +1,3 @@
-body {
-	font-family: Roboto;
-	padding: 30px;
-}
-
 .chkdanger {
 	display: inline-block;
 	min-width: 10px;
@@ -214,10 +209,15 @@ body {
 .fc-unthemed .fc-popover,
 .fc-unthemed .fc-row,
 .fc-unthemed tbody,
-.fc-unthemed td,
+.fc-unthemed td {
+	border-color: #dadfea;
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+}
 .fc-unthemed th,
 .fc-unthemed thead {
-	border-color: #dadfea;
+	color: black;
 }
 .fc-ltr .fc-h-event .fc-end-resizer,
 .fc-ltr .fc-h-event .fc-end-resizer:before,

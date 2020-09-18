@@ -20,12 +20,11 @@ class Auth extends CI_Controller
     $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
     if ($this->form_validation->run() == false) {
-      $data['title'] = 'E-RAPAT | Login';
+      $data['title'] = 'E-RAPAT';
 
-      $this->load->view('layout/auth_header', $data);
       $this->load->view('layout/front_header', $data);
+      $this->load->view('layout/front_topbar', $data);
       $this->load->view('auth/login');
-      $this->load->view('layout/auth_footer');
     } else {
       $this->_login();
     }
@@ -42,14 +41,14 @@ class Auth extends CI_Controller
           $data = [
             'id' => $user['id'],
             'email' => $user['email'],
+            'name' => $user['name'],
             'role_id' => $user['role_id'],
           ];
           $this->session->set_userdata($data);
           if ($user['role_id'] == 1) {
-
-            redirect('user');
+            redirect('beranda');
           } else {
-            redirect('user');
+            redirect('beranda');
           }
         } else {
           $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">

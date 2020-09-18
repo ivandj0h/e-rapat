@@ -27,7 +27,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#typeAdd">
                             <span class="icon text-white-50">
@@ -54,8 +54,8 @@
                                             <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-left"><?= $t['meeting_type']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#typeEdit<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#typeDel<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#typeEdit<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#typeDel<?= $t['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
 
@@ -82,7 +82,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="typeAddLabel">Tambah Data Media</h5>
+                <h5 class="modal-title" id="typeAddLabel">Tambah Data Media Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -90,13 +90,16 @@
             <form action="<?= base_url('type/addtype'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Tambah Data Media..." autocomplete="off">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="meeting_type" name="meeting_type" placeholder="Tambah Data Media..." autocomplete="off">
+                            <?= form_error('meeting_type', '<small class="text-danger">', '</small>'); ?>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data Media</button>
                 </div>
             </form>
         </div>
@@ -122,7 +125,7 @@ foreach ($type as $a) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                                 <input type="text" name="meeting_type" class="form-control form-control-user" id="meeting_type" value="<?= $a['meeting_type']; ?>" placeholder="Ubah Data Media..." autocomplete="off">
                                 <?= form_error('meeting_type', '<small class="text-danger">', '</small>'); ?>
                             </div>
@@ -130,8 +133,8 @@ foreach ($type as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data Media</button>
                     </div>
                 </form>
             </div>
@@ -148,6 +151,12 @@ foreach ($type as $a) :
     <div class="modal fade" id="typeDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="typeAddLabel">Hapus Data Media</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form action="<?= base_url('type/deletetype'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
@@ -155,8 +164,8 @@ foreach ($type as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Data Media</button>
                     </div>
                 </form>
             </div>

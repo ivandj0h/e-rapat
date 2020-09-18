@@ -27,15 +27,15 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#roleAdd">
                             <span class="icon text-white-50">
                                 <i class="fas fa-file"></i>
                             </span>
-                            <span class="text">Tambah Role Baru</span>
+                            <span class="text">Tambah Data Akses Baru</span>
                         </a>
-                        <h6 class="m-0 font-weight-bold text-primary float-right">Data Role</h6>
+                        <h6 class="m-0 font-weight-bold text-primary float-right">Tabel Data Akses</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -54,8 +54,8 @@
                                             <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-left"><?= $r['role']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#roleEdit<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#roleDel<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#roleEdit<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#roleDel<?= $r['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
 
@@ -82,7 +82,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="roleAddMenuLabel">Tambah Role Baru</h5>
+                <h5 class="modal-title" id="roleAddMenuLabel">Tambah Data Akses Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -95,8 +95,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data Akses</button>
                 </div>
             </form>
         </div>
@@ -113,7 +113,7 @@ foreach ($role as $rl) :
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="menuAdd">Ubah Data Role</h5>
+                    <h5 class="modal-title" id="menuAdd">Ubah Data Akses</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,15 +123,15 @@ foreach ($role as $rl) :
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" name="role" class="form-control form-control-user" id="role" value="<?= $rl['role']; ?>" placeholder="Ubah Data Role..." autocomplete="off">
+                                <input type="text" name="role" class="form-control form-control-user" id="role" value="<?= $rl['role']; ?>" placeholder="Ubah Data Akses..." autocomplete="off">
                                 <?= form_error('role', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Update!</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data Akses</button>
                     </div>
                 </form>
             </div>
@@ -148,6 +148,12 @@ foreach ($role as $a) :
     <div class="modal fade" id="roleDel<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="typeAddLabel">Hapus Data Akses</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form action="<?= base_url('role/deleterole'); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
@@ -155,8 +161,8 @@ foreach ($role as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Data Media</button>
                     </div>
                 </form>
             </div>

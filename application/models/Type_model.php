@@ -45,6 +45,11 @@ class Type_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function get_offline_room()
+    {
+        return $this->db->query("SELECT meeting_sub_type.* FROM meeting_sub_type WHERE meeting_sub_type.type_id = 2")->result_array();
+    }
+
     public function insert_sub_type($data)
     {
         return $this->db->insert($this->table_sub_type, $data);

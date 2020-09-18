@@ -3,14 +3,14 @@
 
 <head>
 
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <title><?= $title; ?></title>
 
     <!-- Favicon -->
@@ -19,8 +19,8 @@
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>/css/bootstrap4.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput-typeahead.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
-
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css"> -->
+    <link href="<?= base_url('assets/'); ?>css/tagsinput.css" rel="stylesheet" type="text/css">
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,6 +34,7 @@
     <!-- Custom styles -->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/custom.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>css/customs-popup.css" rel="stylesheet">
 
 
 </head>

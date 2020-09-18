@@ -21,29 +21,7 @@
                     <div class="form-group">
                         <label for="calendar_start_time">Jam Awal Rapat :</label>
                         <select class="form-control" id="calendar_start_time">
-                            <option value="01:00:00">01:00 AM</option>
-                            <option value="02:00:00">02:00 AM</option>
-                            <option value="03:00:00">03:00 AM</option>
-                            <option value="04:00:00">04:00 AM</option>
-                            <option value="05:00:00">05:00 AM</option>
-                            <option value="06:00:00">06:00 AM</option>
-                            <option value="07:00:00">07:00 AM</option>
-                            <option value="08:00:00">08:00 AM</option>
-                            <option value="09:00:00">09:00 AM</option>
-                            <option value="10:00:00">10:00 AM</option>
-                            <option value="11:00:00">11:00 AM</option>
-                            <option value="12:00:00">12:00 PM</option>
-                            <option value="13:00:00">13:00 PM</option>
-                            <option value="14:00:00">14:00 PM</option>
-                            <option value="15:00:00">15:00 PM</option>
-                            <option value="16:00:00">16:00 PM</option>
-                            <option value="17:00:00">17:00 PM</option>
-                            <option value="18:00:00">18:00 PM</option>
-                            <option value="19:00:00">19:00 PM</option>
-                            <option value="20:00:00">20:00 PM</option>
-                            <option value="21:00:00">21:00 PM</option>
-                            <option value="22:00:00">22:00 PM</option>
-                            <option value="23:00:00">23:00 PM</option>
+                            <?php get_dropdown_time(); ?>
                         </select>
                     </div>
                 </div>
@@ -51,29 +29,7 @@
                     <div class="form-group">
                         <label for="calendar_end_time">Jam Akhir Rapat :</label>
                         <select class="form-control" id="calendar_end_time">
-                            <option value="01:00:00">01:00 AM</option>
-                            <option value="02:00:00">02:00 AM</option>
-                            <option value="03:00:00">03:00 AM</option>
-                            <option value="04:00:00">04:00 AM</option>
-                            <option value="05:00:00">05:00 AM</option>
-                            <option value="06:00:00">06:00 AM</option>
-                            <option value="07:00:00">07:00 AM</option>
-                            <option value="08:00:00">08:00 AM</option>
-                            <option value="09:00:00">09:00 AM</option>
-                            <option value="10:00:00">10:00 AM</option>
-                            <option value="11:00:00">11:00 AM</option>
-                            <option value="12:00:00">12:00 PM</option>
-                            <option value="13:00:00">13:00 PM</option>
-                            <option value="14:00:00">14:00 PM</option>
-                            <option value="15:00:00">15:00 PM</option>
-                            <option value="16:00:00">16:00 PM</option>
-                            <option value="17:00:00">17:00 PM</option>
-                            <option value="18:00:00">18:00 PM</option>
-                            <option value="19:00:00">19:00 PM</option>
-                            <option value="20:00:00">20:00 PM</option>
-                            <option value="21:00:00">21:00 PM</option>
-                            <option value="22:00:00">22:00 PM</option>
-                            <option value="23:00:00">23:00 PM</option>
+                            <?php get_dropdown_time(); ?>
                         </select>
                     </div>
                 </div>
@@ -95,37 +51,22 @@
                 <label for="calendar_view">Berdasarkan Media Meeting</label>
                 <div class="input-group">
                     <select class="filter" id="type_filter" multiple="multiple">
-                        <option value='all'>Semua Bidang</option>
-                        <option value='0' disabled>-- Media Online --</option>
-                        <option value='1'>Google Zoom</option>
-                        <option value='2'>Google Duo</option>
-                        <option value='3'>Microsoft Skype</option>
-                        <option value='4'>Whatsapp</option>
-                        <option value='0' disabled>-- Media Offline --</option>
-                        <option value='5'>Ruangan Rapat Garuda</option>
-                        <option value='6'>Ruangan Rapat LRT</option>
-                        <option value='7'>Ruangan Rapat Rajawali</option>
-                        <option value='8'>Ruangan Rapat Perpustakaan</option>
+                        <option value='all'>Semua Media Meeting</option>
+                        <?php
+                        echo "<option value='0' disabled>-- Media Online --</option>";
+                        get_dropdown_media_online();
+                        echo "<option value='0' disabled>-- Media Offline --</option>";
+                        get_dropdown_media_offline();
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="col-lg-5">
-                <label for="calendar_view">Berdasarkan Bagian Kerja</label>
+                <label for="calendar_view">Berdasarkan Esalon 2</label>
                 <div class="input-group">
                     <select class="filter" id="bagian_filter" multiple="multiple">
-                        <option value='all'>Semua Bagian</option>
-                        <option value='2'>Bagian Keuangan dan Perlengkapan</option>
-                        <option value='3'>Bagian Perencanaan dan Kerja Sama</option>
-                        <option value='4'>Bagian Kepegawaian</option>
-                        <option value='5'>Bagian Data Humas dan Publikasi</option>
-                        <option value='6'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Udara</option>
-                        <option value='7'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Transportasi Puslitbang Udara</option>
-                        <option value='8'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi LSDP</option>
-                        <option value='9'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi LSDP</option>
-                        <option value='10'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Jalan dan Perkertaapian</option>
-                        <option value='11'>Bagian Pengembangan Teknologi dan Penunjang Penelitian Puslitbang Transportasi Jalan dan Perkeretaapian</option>
-                        <option value='12'>Bagian Pelaporan dan Evaluasi Puslitbang Transportasi Antarmoda</option>
-                        <option value='13'>Bagian Pengembangan Teknologi dan Penunjang Transportasi Antar Moda</option>
+                        <option value='all'>Semua Esalon 2</option>
+                        <?= get_dropdown_esalon_2(); ?>
                     </select>
                 </div>
             </div>

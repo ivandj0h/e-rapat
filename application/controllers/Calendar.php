@@ -8,8 +8,9 @@ class Calendar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // was_logged_in();
+        $this->load->helper(array('string', 'text', 'tanggal', 'dropdown'));
         $this->load->model('Account_model');
+        $this->load->model('Meeting_model');
     }
 
     public function index()
@@ -24,7 +25,6 @@ class Calendar extends CI_Controller
 
     public function get_data_calendar()
     {
-        // echo 'Here is the API';
         $hostname = 'localhost';
         $username = 'root';
         $password = '';
@@ -47,13 +47,17 @@ class Calendar extends CI_Controller
                 if ($result[$row]['meeting_type'] == 'Offline') {
                     $color = '#dc3545';
                 }
+                if ($result[$row]['request_status'] == '1') {
+                    $color = '#000000';
+                }
                 $values[] = array(
                     '_id' => $result[$row]['sub_department_id'],
                     'title' => $result[$row]['sub_department_name'],
-                    'bagid' => $result[$row]['sub_department_id'],
+                    'bagid' => $result[$row]['department_id'],
                     'media' => $result[$row]['meeting_type'],
                     'submedia' => $result[$row]['meeting_subtype'],
                     'submediaid' => $result[$row]['sub_type_id'],
+                    'otherid' => $result[$row]['other_online_id'],
                     'calendar' => $result[$row]['meeting_type'],
                     'zoomid' => $result[$row]['zoomid'],
                     'speakers_name' => $result[$row]['speakers_name'],
@@ -62,6 +66,7 @@ class Calendar extends CI_Controller
                     'start' => implode("T", array($result[$row]['start_date'], $result[$row]['start_time'])),
                     'end' => implode("T", array($result[$row]['end_date'], $result[$row]['end_time'])),
                     'type' => $result[$row]['sub_type_id'],
+                    'statuses' => $result[$row]['request_status'],
                     'className' => 'colorAppointment',
                     'username' => $result[$row]['name'],
                     'location' => $result[$row]['meeting_subtype'],

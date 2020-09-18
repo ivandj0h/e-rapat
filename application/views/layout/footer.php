@@ -39,9 +39,9 @@
            </div>
 
            <!-- Bootstrap core JavaScript-->
-           <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
+           <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
            <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+           <script src="<?= base_url('assets/'); ?>js/tagsinput.js"></script>
            <!-- Core plugin JavaScript-->
            <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -66,7 +66,9 @@
 
            <!-- Chart Scripts -->
            <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
-           <!-- <script src="<?= base_url('assets/'); ?>js/customsjs/chart-bar-demo.js"></script> -->
+
+           <!-- Tinymce Scripts -->
+           <script src="<?= base_url('assets/'); ?>vendor/tinymce/tinymce.min.js"></script>
 
            <!-- Customs scripts -->
            <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
@@ -157,7 +159,234 @@
                    });
                });
 
-               //    $('.toast').toast('show');
+               $('#meetingStatus').on('hidden.bs.modal', function() {
+                   location.reload();
+               })
+
+               $('#type_id').on('change', function() {
+                   if (this.value === '1') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").show();
+                   } else {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").hide();
+                   }
+               });
+
+               $('#meeting_subtype').on('change', function() {
+                   if (this.value !== '1') {
+                       $("#other_online_id").show();
+                       $("#zoom_id").hide();
+                   }
+                   if (this.value === '5' || this.value === '6' || this.value === '7' || this.value === '8') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").hide();
+                   }
+                   if (this.value === '1') {
+                       $("#other_online_id").hide();
+                       $("#zoom_id").show();
+                   }
+               });
+
+               $("#yourBox").click(function() {
+                   if ($(this).is(":checked")) {
+                       $("#onlineId").removeAttr("disabled");
+                       $("#onlineId").focus();
+                   } else {
+                       $("#onlineId").attr("disabled", "disabled");
+                   }
+               });
+
+               $("#confirmStatus").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
+               $("#deleteMeeting").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
+               $(".dissable").attr("disabled", "disabled");
+               $("#type_id").on("change", function() {
+                   if ($(this).val() === "2") {
+                       $(".dissable").attr("disabled", "disabled");
+                   } else {
+                       $(".dissable").removeAttr("disabled");
+                   }
+               });
+
+               var maxchars = 1000;
+               $('#texta').on('keyup', function(e) {
+                   var textarea_value = $("#texta").val();
+                   var keyCode = e.which;
+                   $(this).val($(this).val().substring(0, maxchars));
+                   var tlength = $(this).val().length;
+                   remain = maxchars - parseInt(tlength);
+                   $('#remain').text(remain);
+                   if (textarea_value != '' && keyCode != 32 && keyCode != 8) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
+
+               tinymce.init({
+                   selector: '#default',
+                   height: 400,
+                   forced_root_block: "",
+                   force_br_newlines: true,
+                   force_p_newlines: false,
+                   theme: 'modern',
+                   plugins: [
+                       'autolink lists link image charmap print preview hr anchor pagebreak',
+                       'searchreplace wordcount visualblocks visualchars code fullscreen',
+                       'insertdatetime media nonbreaking save table contextmenu directionality',
+                       'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+                   ],
+                   toolbar1: 'undo redo | insert | styleselect table | bold italic | hr alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media ',
+                   toolbar2: 'print preview | forecolor backcolor emoticons | fontselect | fontsizeselect | codesample code fullscreen',
+                   templates: [{
+                           title: 'Test template 1',
+                           content: ''
+                       },
+                       {
+                           title: 'Test template 2',
+                           content: ''
+                       }
+                   ],
+                   content_css: [
+                       '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                       '//www.tinymce.com/css/codepen.min.css'
+                   ],
+                   setup: function(ed) {
+                       ed.on('change', function(e) {
+                           console.log('the content ' + ed.getContent());
+                           $("textarea").text(ed.getContent());
+                       });
+                   }
+               });
+
+               $("#btnSave").click(function(e) {
+                   e.preventDefault();
+
+                   var typeId = $("#type_id").val();
+                   var subTypeId = $("#meeting_subtype").val();
+                   var zoomId = $("input[name='zoomid']:checked").val();
+                   var otherId = $("#onlineId").val();
+                   var participantsName = $("#participants_name").val();
+                   var narasumberRapat = $("#speakers_name").val();
+                   var agenda = $("textarea[name='agenda']").val();
+                   //    var agenda = $('textarea#agenda').val();
+                   var startDate = $("input[name='start_date']").val();
+                   var endDate = $("input[name='start_date']").val();
+                   var startTime = $("input[name='start_time']").val();
+                   var endTime = $("input[name='end_time']").val();
+
+                   var dataJson = {
+                       meeting_subtype: subTypeId,
+                       zoomid: zoomId,
+                       other_online_id: otherId,
+                       participants_name: participantsName,
+                       speakers_name: narasumberRapat,
+                       agenda: agenda,
+                       start_date: startDate,
+                       end_date: startDate,
+                       start_time: startTime,
+                       end_time: endTime,
+                   };
+
+                   $.ajax({
+                       url: "<?php echo base_url(); ?>" + "meeting/store_meeting",
+                       method: "POST",
+                       fileElementId: 'files',
+                       data: dataJson,
+                       dataType: "JSON",
+                       async: true,
+                       cache: false,
+                       //    beforeSend: function() {},
+                       success: function(data) {
+                           if (data.error) {
+                               $('#btnSave').attr('disabled', true);
+                               if (data.agenda_error != '') {
+                                   $('#agenda_error').html(data.agenda_error);
+                               } else {
+                                   $('#agenda_error').html('');
+                               }
+                               if (data.participants_name_error != '') {
+                                   $('#participants_name_error').html(data.participants_name_error);
+                               } else {
+                                   $('#participants_name_error').html('');
+                               }
+                               if (data.speakers_name_error != '') {
+                                   $('#speakers_name_error').html(data.speakers_name_error);
+                               } else {
+                                   $('#speakers_name_error').html('');
+                               }
+                               if (data.start_date_error != '') {
+                                   $('#start_date_error').html(data.start_date_error);
+                               } else {
+                                   $('#start_date_error').html('');
+                               }
+                               if (data.start_time_error != '') {
+                                   $('#start_time_error').html(data.start_time_error);
+                               } else {
+                                   $('#start_time_error').html('');
+                               }
+                               if (data.end_time_error != '') {
+                                   $('#end_time_error').html(data.end_time_error);
+                               } else {
+                                   $('#end_time_error').html('');
+                               }
+
+                               if ($('input[name=participants_name]').val() == '') {
+                                   $('input[name=participants_name]').change(function() {
+                                       if ($('input[name=participants_name]').val() == '') {
+                                           $('button[type=submit]').attr('disabled', true);
+                                       } else {
+                                           $('button[type=submit]').attr('disabled', false);
+                                       }
+                                   })
+                                   $('button[type=submit]').attr('disabled', true);
+                               }
+                           }
+                           if (data.success) {
+                               $('#success_message').html(data.success);
+                               setTimeout(function() {
+                                   location.reload(true);
+                               }, 5000);
+                               var timeleft = 5;
+                               var downloadTimer = setInterval(function() {
+                                   if (timeleft <= 0) {
+                                       clearInterval(downloadTimer);
+                                       document.getElementById("countdown").innerHTML = "Finished";
+                                   } else {
+                                       document.getElementById("countdown").innerHTML = "Form ini akan tutup dalam " + timeleft + " detik...";
+                                   }
+                                   timeleft -= 1;
+                               }, 2000);
+                               $('#btnSave').attr('disabled', true);
+                           }
+                       }
+                   });
+                   return false;
+               });
+               $('#batal, .close').click(function() {
+                   location.reload();
+               });
+               $("#changeZoom").click(function() {
+                   if ($(this).is(":checked")) {
+                       $('button[type=submit]').attr('disabled', false);
+                   } else {
+                       $('button[type=submit]').attr('disabled', true);
+                   }
+               });
            </script>
            </body>
 

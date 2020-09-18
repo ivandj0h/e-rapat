@@ -16,7 +16,7 @@ foreach ($meeting as $a) :
             <!-- Start Content Table -->
             <div class="row form-heigt">
                 <div class="col-md-10">
-                    <div class="card shadow mb-4">
+                    <div class="card shadow-none mb-4">
                         <div class="card-header py-3">
                             <div class="float-left"><a href="<?= base_url('meeting'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-chevron-left"></i> Previous</a></div>
                             <h6 class="m-0 font-weight-bold text-primary float-right">Details Meeting</h6>
@@ -128,10 +128,49 @@ foreach ($meeting as $a) :
                                             <li class="list-group-item">
                                                 <span class="badge badge-danger">File yang di Unggah belum ada!</span>
                                             </li>
-                                        <?php } else { ?>
+                                        <?php } elseif (!empty($a['files_upload1'])) {  ?>
+                                            <li class="list-group-item">
+                                                Undangan Rapat :
+                                                <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Notulen Rapat :
+                                                <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>"><?= $a['files_upload1']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Absensi Rapat :
+                                                <span class="badge badge-danger">Absensi Rapat Belum Ada</span>
+                                            </li>
+                                        <?php } elseif (!empty($a['files_upload2'])) {  ?>
                                             <li class="list-group-item">
                                                 Undangan Rapat :
                                                 <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Notulen Rapat :
+                                                <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>"><?= $a['files_upload1']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Absensi Rapat :
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload2']); ?>"><?= $a['files_upload2']; ?></a>
+                                            </li>
+                                        <?php } elseif (!empty($a['files_upload2'])) {  ?>
+                                            <li class="list-group-item">
+                                                Undangan Rapat :
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Notulen Rapat :
+                                                <a href="<?= base_url('meeting/notulendownload/' . $a['files_upload1']); ?>"><?= $a['files_upload1']; ?></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Absensi Rapat :
+                                                <a href="<?= base_url('meeting/meetingdownload/' . $a['files_upload2']); ?>"><?= $a['files_upload2']; ?></a>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li class="list-group-item">
+                                                Undangan Rapat :
+                                                <a href="<?= base_url('meeting/undangandownload/' . $a['files_upload']); ?>"><?= $a['files_upload']; ?></a>
                                             </li>
                                             <li class="list-group-item">
                                                 Notulen Rapat :

@@ -11,20 +11,21 @@ class History_model extends CI_Model
         return $this->db->get_where($this->table, ['email' => $where])->result_array();
     }
 
-    public function get_all_history_meeting_by_daterange($where, $role)
+    public function get_all_history_meeting_by_daterange($where, $email)
     {
 
-        $condition = "date_issues BETWEEN " . "'" . $where['from_date'] . "'" . " AND " . "'" . $where['to_date'] . "'" . " AND " . "role_id = " . $role;
+        $condition = "start_date BETWEEN " . "'" . $where['from_date'] . "'" . " AND " . "'" . $where['to_date'] . "'";
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where($condition);
+        $this->db->where('email', $email);
         return $this->db->get()->result_array();
     }
 
     public function get_all_history_meeting_by_daterange_admin($where)
     {
 
-        $condition = "date_issues BETWEEN " . "'" . $where['from_date'] . "'" . " AND " . "'" . $where['to_date'] . "'";
+        $condition = "start_date BETWEEN " . "'" . $where['from_date'] . "'" . " AND " . "'" . $where['to_date'] . "'";
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where($condition);
@@ -33,11 +34,28 @@ class History_model extends CI_Model
 
     public function get_all_history_meeting_by_department_admin($where)
     {
-        // $condition = "department_id =" . "'" . $where['department_id'] . "'" . " AND " . "role_id = " . $role;
         $condition = "department_id =" . "'" . $where['department_id'] . "'";
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->where($condition);
         return $this->db->get()->result_array();
+    }
+
+    public function get_all_history_meeting_by_offline($where)
+    {
+        $condition = "sub_type_id =" . "'" . $where . "'";
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where($condition);
+        return $this->db->get()->result_array();
+    }
+
+    public function get_offline_meeting_today()
+    {
+        $type_id = '2';
+        $today = date("Y-m-d");
+        $convertDate = date("Y-m-d", strtotime($today));
+        $options = array('type_id' => $type_id, 'end_date' => $convertDate);
+        return $this->db->get_where('view_user_meeting', $options)->result_array();
     }
 }

@@ -16,12 +16,12 @@
 	overflow-x: hidden;
 }
 
-.topbar-breadcrumb {
+/* .topbar-breadcrumb {
 	width: 0;
 	height: calc(3.375rem - 2rem);
 	margin: auto 1rem;
 	width: 67rem;
-}
+} */
 
 #wrapper #content-wrapper {
 	background-color: #ffffff !important;
@@ -38,9 +38,9 @@
 }
 
 .breadcrumb {
-	border-bottom: 1px solid #eeeeee;
+	/* border-bottom: 1px solid #eeeeee; */
 	background-color: #ffffff;
-	margin-top: 85px;
+	margin-top: 70px;
 }
 .bootstrap-tagsinput {
 	line-height: 29px !important;
@@ -79,7 +79,7 @@
 }
 
 .modal-md {
-	max-width: 60%;
+	max-width: 80%;
 	z-index: 10;
 }
 
@@ -96,12 +96,33 @@ th {
 	white-space: nowrap !important;
 }
 
+.noborder {
+	border: none !important;
+}
+
 .action {
 	display: flex !important;
 	justify-content: space-between !important;
 	flex-wrap: wrap !important;
 	flex-direction: column !important;
 	padding-bottom: 2px;
+}
+
+textarea.textarea-autosize {
+	height: 12.25rem !important;
+	min-height: 2.25rem !important;
+	resize: none !important;
+	overflow-y: hidden !important;
+}
+
+textarea.textarea-autosize.form-control-lg {
+	height: 12.75rem !important;
+	min-height: 3.75rem !important;
+}
+
+textarea.textarea-autosize.form-control-sm {
+	height: 2rem !important;
+	min-height: 2rem !important;
 }
 
 .modal-lg {
@@ -129,12 +150,26 @@ th {
 	background: #671f79;
 }
 
+.modal-lg {
+	max-width: 80% !important;
+}
+
+/* .modal-dialog, */
+/* .modal-content {
+	height: 100% !important;
+} */
+
+/* .modal-body { */
+/* max-height: calc(100% - 120px); */
+/* overflow-y: scroll !important; */
+/* } */
+
 .form-heigt {
 	height: 1500px !important;
 }
 
 .row-height-sm {
-	height: 800px !important;
+	height: 400px !important;
 }
 
 .datepicker td,
@@ -142,6 +177,12 @@ th {
 	width: 1.5em;
 	height: 1.5em;
 	border: 1px solid #eee;
+}
+
+.badge-besar {
+	color: #fff;
+	background-color: #1cc88a;
+	padding: 5px;
 }
 
 .border {
@@ -161,6 +202,10 @@ th {
 	top: 26px !important;
 }
 
+.rusak {
+	margin-left: 5px;
+}
+
 #datepicker {
 	width: 180px;
 	margin: 0 20px 20px 13px;
@@ -177,4 +222,64 @@ th {
 	height: 60px;
 	line-height: 60px;
 	z-index: 10;
+}
+
+/* Radio Button Custom CSS - Bootsnipp */
+ul.chec-radio {
+	display: contents;
+}
+ul.chec-radio li.pz {
+	display: inline;
+}
+.chec-radio label.radio-inline input[type="checkbox"] {
+	display: none;
+}
+.chec-radio label.radio-inline input[type="checkbox"]:checked + div {
+	color: #fff;
+	background-color: rgb(212, 212, 212);
+}
+.chec-radio .radio-inline .clab {
+	cursor: pointer;
+	background: #ffffff;
+	padding: 4px 20px;
+	text-align: center;
+	border: #c5ffc9 1px solid;
+	position: relative;
+	height: 34px;
+	float: left;
+	margin: 0;
+}
+.chec-radio .radio-inline .avail {
+	cursor: pointer;
+	background: #ffffff;
+	padding: 4px 20px;
+	text-align: center;
+	border: #bbc8ff 1px solid;
+	position: relative;
+	height: 34px;
+	float: left;
+	margin: 0;
+}
+
+.chec-radio .radio-inline .notavail {
+	cursor: pointer;
+	background: #ffffff;
+	padding: 4px 20px;
+	text-align: center;
+	border: #ffc5c5 1px solid;
+	position: relative;
+	height: 34px;
+	float: left;
+	margin: 0;
+}
+
+.chec-radio label.radio-inline input[type="checkbox"]:checked + div:before {
+	margin-right: 5px;
+}
+.chec-radio label.radio-inline input[type="radio"] {
+	display: none;
+}
+.chec-radio label.radio-inline input[type="radio"]:checked + div {
+	color: #fff;
+	border: #1e8b10 2px solid;
 }

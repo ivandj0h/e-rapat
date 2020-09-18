@@ -12,11 +12,11 @@
         <!-- Page Heading -->
         <?= $this->session->flashdata('messages'); ?>
 
-        <div class="row">
+        <div class="row row-height-sm">
             <div class="col">
-                <div class="card mb-3">
+                <div class="card shadow-none mb-3">
                     <div class="card-header">
-                        Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
+                        Hello <label id="lblGreetings"></label> <strong><?= $user['name']; ?></strong>, <br />Selamat Datang di Aplikasi e-rapat, berikut ini adalah Profil anda
                     </div>
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -29,7 +29,7 @@
                                 <hr class="sidebar-divider d-none d-md-block">
                                 <p class="card-text">Email : <strong><?= $user['email']; ?></strong></p>
                                 <p class="card-text">Sekretariat : <strong><?= $user['department_name']; ?></strong></p>
-                                <p class="card-text">Bidang : <strong><?= $user['sub_department_name']; ?></strong></p>
+                                <p class="card-text">Bagian : <strong><?= $user['sub_department_name']; ?></strong></p>
                                 <p class="card-text">Hak Akses : <strong><?= $user['role']; ?></strong></p>
                                 <p class="card-text">Status :
                                     <?php
@@ -39,8 +39,7 @@
                                         <span class="badge badge-danger">Not Active</span>
                                     <?php } ?>
                                 </p>
-                                <p class="card-text"><small class="text-muted">Tanggal Daftar : <strong><?= date('d F Y', $user['date_created']); ?></strong> - Waktu : <strong><?= date('h:m', $user['date_updated']); ?></strong></small></p>
-                                <p class="card-text"><small class="text-muted">Akses Terakhir : <strong><?= date('d F Y', $user['date_updated']); ?></strong> - Waktu : <strong><?= date('H:m', $user['date_updated']); ?></strong></small></p>
+                                <p class="card-text"><span class="text-danger">Zoom ID : <strong><?= $user['zoomid']; ?></strong></p>
                                 <a href="<?= base_url('user/edit/'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm p-2 ml-2"><i class="fas fa-edit fa-sm text-white-50"></i> Ubah Data Profil</a>
                             </div>
                         </div>
@@ -48,7 +47,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card ml-4">
+                <div class="card shadow-none ml-4">
                     <div class="card-header">
                         Hello <strong><?= $user['name']; ?></strong>, Anda dapat merubah Password anda disini.
                     </div>
@@ -71,11 +70,12 @@
                     </div>
                 </div>
             </div>
+
+            <?= get_alert_empty_upload(); ?>
+
         </div>
     </div>
-
     <!-- End Page Contents -->
-
 </div>
 <!-- /.container-fluid -->
 

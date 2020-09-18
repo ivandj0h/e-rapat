@@ -30,7 +30,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addSubMenu">
                             <span class="icon text-white-50">
@@ -72,8 +72,8 @@
                                                 <?php } ?>
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#editSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $sm['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
 
@@ -100,7 +100,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addSubMenu">Add New SubMenu</h5>
+                <h5 class="modal-title" id="addSubMenu">Tambah SubMenu Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -109,11 +109,11 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter SubMenu Name...">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Masukan Nama SubMenu...">
                     </div>
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="">-- Select Menu --</option>
+                            <option value="">-- Pilih Menu --</option>
                             <?php foreach ($menu as $m) : ?>
                                 <option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
                             <?php endforeach; ?>
@@ -125,19 +125,19 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="icon" name="icon" placeholder="Enter SubMenu icon...">
                     </div>
-                    Do you want to Activate this menu? <br>
+                    Apakah anda ingin mengaktifkan SubMenu ini? <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active1" value="1" checked>
-                        <label class="form-check-label" for="is_active1">Active</label>
+                        <label class="form-check-label" for="is_active1">Aktif</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="is_active" id="is_active2" value="0">
-                        <label class="form-check-label" for="is_active2">Not Active</label>
+                        <label class="form-check-label" for="is_active2">Tidak Aktif</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data SubMenu</button>
                 </div>
             </form>
         </div>
@@ -155,7 +155,7 @@ foreach ($subMenu as $s) :
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSubMenu">Edit SubMenu</h5>
+                    <h5 class="modal-title" id="editSubMenu">Ubah Data Menu</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -186,14 +186,14 @@ foreach ($subMenu as $s) :
                             <select class="custom-select mr-sm-2" select name="is_active" id="is_active">
                                 <option value="<?= $s['is_active']; ?>"><?= $s['is_active'] ? 'Active' : 'Not Active'; ?></option>
                                 <option disabled>--</option>
-                                <option value="1">Active</option>
-                                <option value="0">Not Active</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data SubMenu</button>
                     </div>
                 </form>
             </div>
@@ -201,7 +201,6 @@ foreach ($subMenu as $s) :
     </div>
 <?php endforeach; ?>
 <!-- End of Modal Edit -->
-
 
 <!-- Start of Modal Delete -->
 <?php
@@ -211,15 +210,21 @@ foreach ($subMenu as $a) :
     <div class="modal fade" id="deleteSubMenu<?= $id; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSubDepartment">Hapus Data SubMenu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form action="<?= base_url('menu/deletesubmenu/' . $id); ?>" method="POST">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
-                        <p>Apakah anda yakin ingin menghapus Sub Menu <b><?= $a['title']; ?> ?</b></p>
+                        <p>Apakah anda yakin ingin menghapus SubMenu <b><?= $a['title']; ?> ?</b></p>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm!</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Data Menu</button>
                     </div>
                 </form>
             </div>

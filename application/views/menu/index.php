@@ -27,7 +27,7 @@
                 <?= $this->session->flashdata('messages'); ?>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow-none mb-4">
                     <div class="card-header py-3">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#menuAdd">
                             <span class="icon text-white-50">
@@ -54,11 +54,10 @@
                                             <td class="text-center"><?= $i++; ?></td>
                                             <td class="text-left"><?= $m['menu']; ?></td>
                                             <td class="text-center">
-                                                <span class="badge badge-dark" data-toggle="modal" data-target="#menuEdit<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Edit</span>
-                                                <span class="badge badge-danger" data-toggle="modal" data-target="#menuDelete<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Delete</span>
+                                                <span class="badge badge-dark" data-toggle="modal" data-target="#menuEdit<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-marker"></i> Ubah Data</span>
+                                                <span class="badge badge-danger" data-toggle="modal" data-target="#menuDelete<?= $m['id']; ?>" style="cursor:pointer"><i class="fas fa-fw fa-trash"></i> Hapus Data</span>
                                             </td>
                                         </tr>
-
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -95,8 +94,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tambah Data Menu</button>
                 </div>
             </form>
         </div>
@@ -123,7 +122,7 @@ foreach ($menu as $a) :
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                                 <input type="text" name="menu" class="form-control form-control-user" id="menu" value="<?= $menu; ?>" placeholder="Masukan Nama Menu..." autocomplete="off">
                                 <?= form_error('menu', '<small class="text-danger">', '</small>'); ?>
                             </div>
@@ -131,8 +130,8 @@ foreach ($menu as $a) :
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" value="<?= $id; ?>">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Ubah Data Menu</button>
                     </div>
                 </form>
             </div>
@@ -146,15 +145,21 @@ foreach ($menu as $a) :
 <div class="modal fade" id="menuDelete<?= $m['id']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="menuDelete" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSubDepartment">Hapus Data Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <form action="<?= base_url('menu/deletemenu'); ?>" method="POST">
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
-                    <p>Are you sure want to delete <b><?= $a['menu']; ?> ?</b></p>
+                    <p>Yakin ingin menghapus Menu <b><?= $a['menu']; ?> ?</b></p>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" value="<?= $id; ?>">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus Data!</button>
+                    <button type="button" class="btn btn-secondary" id="batal" data-dismiss="modal"><i class="fas fa-power-off fa-sm fa-fw mr-2 text-gray-400"></i> Keluar</button>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus Data Menu</button>
                 </div>
             </form>
         </div>

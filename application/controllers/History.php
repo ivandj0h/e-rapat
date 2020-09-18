@@ -8,7 +8,7 @@ class History extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text'));
+        $this->load->helper(array('string', 'text', 'alert'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('History_model');
@@ -19,7 +19,7 @@ class History extends CI_Controller
     {
         $data['title'] = 'Riwayat Rapat';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
-        $data['meeting_user'] = $this->History_model->get_all_history_meeting($this->session->userdata('email'));
+        $data['meeting_user'] = $this->Meeting_model->get_all_meeting_by_sesi($this->session->userdata('email'));
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
 
         $this->form_validation->set_rules('from_date', 'From Date', 'required');
@@ -41,12 +41,12 @@ class History extends CI_Controller
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
                 $this->load->view('layout/topbar', $data);
-                $this->load->view('history/index', $data);
+                $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }
         } else {
             $data['meeting_admin'] = $this->History_model->get_all_history_meeting_by_daterange_admin($where);
-            $data['meeting_user'] = $this->History_model->get_all_history_meeting_by_daterange($where, $this->session->userdata('role_id'));
+            $data['meeting_user'] = $this->History_model->get_all_history_meeting_by_daterange($where, $this->session->userdata('email'));
 
             if ($data['user']['role_id'] == 1) {
                 $this->load->view('layout/header', $data);
@@ -58,7 +58,7 @@ class History extends CI_Controller
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
                 $this->load->view('layout/topbar', $data);
-                $this->load->view('history/index', $data);
+                $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }
         }
@@ -72,7 +72,7 @@ class History extends CI_Controller
         $data['meeting_admin'] = $this->Meeting_model->get_all_meeting();
         $data['dept'] = $this->Department_model->get_all_department();
 
-        $this->form_validation->set_rules('department_id', 'Departmen Name', 'required');
+        $this->form_validation->set_rules('department_id', 'Nama Esalon 2', 'required');
 
         $where = array(
             'department_id' => $this->input->post('department_id')

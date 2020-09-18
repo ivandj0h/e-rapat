@@ -7,8 +7,9 @@ $(document).ready(function () {
 	var table = $("#meeting").DataTable({
 		// scrollY: "500px",
 		paging: true,
-		dom: "Bfrtip",
-		buttons: ["print", "pdfHtml5"],
+		order: [[0, "DESC"]],
+		// dom: "Bfrtip",
+		// buttons: ["print", "pdfHtml5"],
 	});
 
 	$("a.toggle-vis").on("click", function (e) {
