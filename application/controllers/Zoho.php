@@ -44,4 +44,26 @@ class Zoho extends CI_Controller
         $this->load->view('layout/topbar', $data);
         $this->load->view('zoho/manageform', $data);
     }
+
+    public function submissionsform()
+    {
+        $data['title'] = 'Zoho API';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('zoho/submissionsform', $data);
+    }
+
+    public function reportsform()
+    {
+        $data['title'] = 'Zoho API';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('zoho/reportsform', $data);
+    }
 }

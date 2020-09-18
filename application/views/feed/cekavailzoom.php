@@ -17,10 +17,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="<?= base_url('feed/cekzoom'); ?>"><i class="fas fa-video"></i> Cek Ketersediaan Zoom</a>
-                        <!-- </li>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
-                    </li> -->
+                        <a class="nav-link" href="<?= base_url('feed/offlinemeeting'); ?>"><i class="fas fa-thumbtack"></i> Rapat Offline</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -102,12 +102,17 @@
                                                 if (($currenttime >= $starttime) && ($currenttime <= $endtime)) {
                                                     if ($a['user_id'] == 20 || $a['user_id'] == 21 || $a['user_id'] == 14) { ?>
                                                         <span class="text-secondary"><i class="fas fa-times"></i> Terbatas</span>
-                                                <?php
+                                                    <?php
                                                     } else {
                                                         echo '<span class="text-danger"><i class="fas fa-times"></i> Dipakai</span>';
                                                     }
                                                 } else {
-                                                    echo '<span class="text-success"><i class="fas fa-check"></i> Tersedia</span>';
+                                                    if ($a['user_id'] == 20 || $a['user_id'] == 21 || $a['user_id'] == 14) { ?>
+                                                        <span class="text-secondary"><i class="fas fa-times"></i> Terbatas</span>
+                                                <?php
+                                                    } else {
+                                                        echo '<span class="text-success"><i class="fas fa-check"></i> Tersedia</span>';
+                                                    }
                                                 }
                                                 ?>
                                             </td>

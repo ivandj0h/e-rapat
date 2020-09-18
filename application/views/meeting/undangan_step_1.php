@@ -28,7 +28,7 @@
                                 <label class="radio-inline">
                                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="soho">
                                     <div class="avail text-primary">
-                                        Menggunakan <strong>SOHO FORM</strong>
+                                        Unggah File dari <strong>SOHO FORM</strong>
                                     </div>
                                 </label>
                             </li>

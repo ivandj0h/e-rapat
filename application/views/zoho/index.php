@@ -26,7 +26,7 @@
                                 <label class="radio-inline">
                                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="create">
                                     <div class="avail text-primary">
-                                        Buat <strong>SOHO FORM</strong>
+                                        Menggunakan <strong>ZOHO FORM BUILDER</strong>
                                     </div>
                                 </label>
                             </li>
@@ -34,7 +34,23 @@
                                 <label class="radio-inline">
                                     <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="maintenance">
                                     <div class="avail text-primary">
-                                        Kelola <strong>SOHO FORM</strong>
+                                        Pengelolaan <strong>FORM</strong>
+                                    </div>
+                                </label>
+                            </li>
+                            <li class="pz">
+                                <label class="radio-inline">
+                                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="submissions">
+                                    <div class="avail text-primary">
+                                        Lihat Data <strong>FORM SUBMISSIONS</strong>
+                                    </div>
+                                </label>
+                            </li>
+                            <li class="pz">
+                                <label class="radio-inline">
+                                    <input type="radio" id="pro-chx-residential" name="zoomid" class="pro-chx" value="reports">
+                                    <div class="avail text-primary">
+                                        Pengelolaan <strong>REPORTS</strong>
                                     </div>
                                 </label>
                             </li>
@@ -67,6 +83,12 @@
             }
             if (radioValue == 'maintenance') {
                 window.location.href = '<?= base_url('zoho/manageform'); ?>';
+            }
+            if (radioValue == 'submissions') {
+                window.location.href = '<?= base_url('zoho/submissionsform'); ?>';
+            }
+            if (radioValue == 'reports') {
+                window.location.href = '<?= base_url('zoho/reportsform'); ?>';
             }
         })
     })

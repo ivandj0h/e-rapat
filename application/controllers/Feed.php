@@ -8,7 +8,7 @@ class Feed extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text', 'tanggal'));
+        $this->load->helper(array('string', 'text', 'tanggal', 'date'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
@@ -69,8 +69,6 @@ class Feed extends CI_Controller
         $data['subtype'] = $this->Type_model->get_offline_room();
 
         $this->form_validation->set_rules('sub_type_id', 'Departmen Name', 'required');
-        // $where = array('sub_type_id' => $this->input->post('sub_type_id'));
-
 
         if ($this->form_validation->run() == false) {
             $this->load->view('layout/header', $data);
@@ -86,6 +84,33 @@ class Feed extends CI_Controller
             $this->load->view('layout/sidebar', $data);
             $this->load->view('layout/topbar', $data);
             $this->load->view('feed/penjelajahan', $data);
+            $this->load->view('layout/footer');
+        }
+    }
+
+    public function offlinemeeting()
+    {
+        $data['title'] = 'Pembaharuan';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['offline_updates'] = $this->History_model->get_offline_meeting_today();
+        $data['subtype'] = $this->Type_model->get_offline_room();
+
+        $this->form_validation->set_rules('sub_type_id', 'Ruangan Rapat', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('feed/offlinemeeting', $data);
+            $this->load->view('layout/footer');
+        } else {
+            $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($this->input->post('sub_type_id'));
+
+
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('layout/topbar', $data);
+            $this->load->view('feed/offlinemeeting', $data);
             $this->load->view('layout/footer');
         }
     }

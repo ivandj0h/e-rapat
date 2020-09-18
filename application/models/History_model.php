@@ -49,4 +49,13 @@ class History_model extends CI_Model
         $this->db->where($condition);
         return $this->db->get()->result_array();
     }
+
+    public function get_offline_meeting_today()
+    {
+        $type_id = '2';
+        $today = date("Y-m-d");
+        $convertDate = date("Y-m-d", strtotime($today));
+        $options = array('type_id' => $type_id, 'end_date' => $convertDate);
+        return $this->db->get_where('view_user_meeting', $options)->result_array();
+    }
 }

@@ -18,9 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('feed/cekzoom'); ?>"><i class="fas fa-video"></i> Cek Ketersediaan Zoom</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('feed/penjelajahan'); ?>">Penjelajahan</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('feed/offlinemeeting'); ?>"><i class="fas fa-thumbtack"></i> Rapat Offline</a>
+                    </li>
                 </ul>
             </div>
         </div>
