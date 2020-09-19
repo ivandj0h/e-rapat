@@ -145,105 +145,153 @@
                                 <!--//section-block-->
                                 <div id="sass" class="section-block">
                                     <div class="code-block">
-                                        <h6>SCSS Code Example</h6>
-                                        <pre><code class="language-css">@mixin transform($property) {
-  -webkit-transform: $property;
-      -ms-transform: $property;
-          transform: $property;
-}
-
-.box { @include transform(rotate(30deg)); }</code></pre>
+                                        <h3 class="block-title">Tampilan Halaman Master Data Rapat</h3>
+                                        <p class="callout-block callout-white">Blok tampilan dibawah ini adalah tampilan Master Data Rapat pada Admin Cpanel, pada halaman inilah semua administrasi rapat di handle</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/011.png'); ?>" /></div>
                                     </div>
-                                    <!--//code-block-->
+                                    <p class="garis"></p>
+                                    <div class="code-block">
+                                        <h6 class="block-title">Membuat Agenda Rapat Baru</h6>
+                                        <p class="callout-block callout-white">Untuk Membuat Agenda Rapat yang Baru, Silahkan Klik Tombol berwarna Hijau yang terletak di bagian kiri atas tabel Rapat</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/012.png'); ?>" /></div>
+                                    </div>
+                                    <p class="garis"></p>
+                                    <div class="code-block">
+                                        <p class="callout-block callout-white">Maka kemudian akan muncul PopUp Form untuk di isi dengan kelengkapan data-data agenda rapat yang akan dilaksanakan.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/013.png'); ?>" /></div>
+                                    </div>
+                                    <p class="garis"></p>
+                                    <div class="code-block">
+                                        <p class="callout-block callout-white">Setelah berhasil melakukan input data rapat, maka akan muncul tabel seperti dibawah ini.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/014.png'); ?>" /></div>
+                                    </div>
+                                    <p class="garis"></p>
+                                    <div class="code-block">
+                                        <p class="callout-block callout-white">Klik tombol ini jika anda ingin kembali ke halaman Kalender.<i> (terletak di pojok kanan atas pada menu toolbar)</i></p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/015.png'); ?>" /></div>
+                                    </div>
                                 </div>
                                 <!--//section-block-->
                                 <div id="less" class="section-block">
                                     <div class="code-block">
-                                        <h6>LESS Code Example</h6>
-                                        <pre><code class="language-css">@base: #f04615;
-@width: 0.5;
-
-.class {
-  width: percentage(@width); // returns &#x60;50%&#x60;
-  color: saturate(@base, 5%);
-  background-color: spin(lighten(@base, 25%), 8);
-}</code></pre>
+                                        <h3 class="block-title">Tampilan Halaman Upload Undangan Rapat</h3>
+                                        <p class="callout-block callout-white">Secara default tampilan upload file-file pendukung Rapat masih berwana merah. maka anda diharuskan untuk mengunggah file-file tersebut. (fokus ke button yang berwarna merah).</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/016.png'); ?>" /></div>
                                     </div>
-                                    <!--//code-block-->
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Jika anda tidak mengunggah file-file pendukung seperti yang telah di minta maka akan muncul pop up seperti ini</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/017.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Silahkan klik tombol <strong>Undangan Rapat</strong> untuk mengunggah File Undangan</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/018.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Selanjutnya akan tampil PopUp seperti dibawah ini, silahkan <strong>mengunggah File Undangan Rapat</strong> anda.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/019.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Langkah berikutnya adalah dengan <strong>mengunggah File Undangan Rapat</strong> seperti dibawah ini.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/020.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Jika <strong>File Undangan Rapat</strong> yang anda unggah tadi berhasil maka tombol yang tadinya masih berwarna merah akan berwarna Hijau.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/021.png'); ?>" /></div>
+                                    </div>
                                 </div>
                                 <!--//section-block-->
                                 <div id="javascript" class="section-block">
                                     <div class="code-block">
-                                        <h6>JavaScript Code Example</h6>
-                                        <pre><code class="language-javascript">&lt;script&gt; 
-    function myFunction(a, b) { 
-        return a * b; 
-    } 
-    
-    document.getElementById(&quot;demo&quot;).innerHTML = myFunction(4, 3); 
-&lt;/script&gt;</code></pre>
+                                        <h3 class="block-title">Tampilan Halaman Download Undangan Rapat</h3>
+                                        <p class="callout-block callout-white">Setelah berhasil mengunggah File Undangan kemudian anda berniat ingin <strong>Mengunduh</strong> File tersebut, maka yang harus dilakukan adalah dengan mengKlik tombol File undangan yang sudah berwarna hijau.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/023.png'); ?>" /></div>
                                     </div>
-                                    <!--//code-block-->
                                 </div>
                                 <!--//section-block-->
-                                <div id="python" class="section-block">
+                                <div id="notulen" class="section-block">
                                     <div class="code-block">
-                                        <h6>Python Code Example</h6>
-                                        <pre><code class="language-python">&gt;&gt;&gt; x = int(input(&quot;
-Please enter an integer: &quot;)) Please enter an integer: 42 
-&gt;&gt;&gt; if x &lt; 0: 
-... x = 0 
-... print('Negative changed to zero') 
-... elif x == 0: 
-... print('Zero') 
-... elif x == 1: 
-... print('Single') 
-... else: 
-... print('More') 
-... More</code></pre>
+                                        <h3 class="block-title">Tampilan Halaman Upload Notulen Rapat</h3>
+                                        <p class="callout-block callout-white">Sama Halnya dengan Proses Mengunduh File Undangan Rapat, pada proses <strong>Unduhan File Notulen Rapat</strong> ini dapat dilakukan dengan cara yang sama yaitu</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/024.png'); ?>" /></div>
                                     </div>
-                                    <!--//code-block-->
+                                    <div class="code-block">
+                                        <p class="callout-block callout-white">kemudian akan tampil PopUp seperti dibawah ini</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/025.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="callout-block callout-white">Langkah berikutnya adalah dengan <strong>mengunggah File Notulen Rapat</strong> seperti dibawah ini.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/026.png'); ?>" /></div>
+                                    </div>
+                                    <div class="code-block">
+                                        <p class="garis"></p>
+                                        <p class="callout-block callout-white">Jika <strong>File Notulen Rapat</strong> yang anda unggah tadi berhasil maka tombol yang tadinya masih berwarna merah akan berwarna Hijau.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/027.png'); ?>" /></div>
+                                    </div>
                                 </div>
                                 <!--//section-block-->
-                                <div id="php" class="section-block">
+                                <div id="notulenDownload" class="section-block">
                                     <div class="code-block">
-                                        <h6>PHP Code Example</h6>
-                                        <pre><code class="language-php">&lt;?php 
-$txt = &quot;Hello world!&quot;; 
-$x = 5; 
-$y = 10.5; 
+                                        <h3 class="block-title">Tampilan Halaman Download Notulen Rapat</h3>
+                                        <p class="callout-block callout-white">Setelah berhasil mengunggah File Notulen kemudian anda berniat ingin <strong>Mengunduh</strong> File tersebut, maka yang harus dilakukan adalah dengan mengKlik tombol File undangan yang sudah berwarna hijau.</p>
+                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/028.png'); ?>" /></div>
+                                    </div>
+                                </div>
 
-echo $txt; 
-echo &quot;&lt;br&gt;&quot;; 
-echo $x; 
-echo &quot;&lt;br&gt;&quot;; 
-echo $y; 
-?&gt;</code></pre>
+                                <div id="kelolaAbsen" class="section-block">
+                                    <div class="code-block">
+                                        <h3 class="block-title">Tampilan Halaman Pengelolaan Absensi Rapat</h3>
+                                        <p class="callout-block callout-white">Untuk halaman <strong>Pengelolaan Absensi Rapat</strong> agak sedikit berbeda dengan Halaman Unggahan Sebelumnya dikarenakan untuk <strong>Absensi Rapat</strong> ini akan dilakukan dengan 2 cara yaitu :</p>
+                                        <p>
+                                            <!--//section-block-->
+                                            <div id="zohoUpload" class="section-block">
+                                                <div class="code-block">
+                                                    <ul>
+                                                        <li>1. <strong>ZOHO APPS</strong>
+                                                            <br />
+                                                            Cara Pertama adalah <strong>mengunggah</strong> secara langsung File-file <i>(.pdf/excel)</i> Hasil dari <strong>Zoho Apps</strong>
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/029.png'); ?>" /></div>
+                                                            <br />
+                                                            <p class="callout-block callout-green">Silahkan Klik Tombol <strong>Absensi Rapat</strong> diatas maka akan tampil halaman berikut.</p>
+                                                            <br />
+                                                            <p class="garis"></p>
+                                                            <br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/030.png'); ?>" /></div>
+                                                            <br />
+                                                            <p class="callout-block callout-green">Selanjutnya ikuti langkah-langkah seperti pada gambar diatas maka akan muncul Tampilan Form seperti dibawah ini</p>
+                                                            <br />
+                                                            <p class="garis"></p>
+                                                            <br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/031.png'); ?>" /></div>
+                                                            <br />
+                                                            <p class="callout-block callout-green">kemudian Pilih <strong>BROWSE</strong> -> <strong>PILIH FILE ABSEN</strong> -> <strong>OPEN</strong></p>
+                                                            <br />
+                                                            <p class="garis"></p>
+                                                            <br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/032.png'); ?>" /></div>
+                                                            <br />
+                                                            <p class="callout-block callout-green">langkah selanjutnya adalah <strong>JANGAN LUPA</strong> Untuk <strong>CENTANG CHECK BOX</strong> Agar ID Zoom Meeting anda di closed sehingga Status ID Zoom tersebut Menjadi <strong>AVAILABLE</strong></p>
+                                                            <br />
+                                                            <p class="garis"></p>
+                                                            <br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/033.png'); ?>" /></div>
+                                                            <br />
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--//section-block-->
+                                        </p>
                                     </div>
-                                    <!--//code-block-->
                                 </div>
                                 <!--//section-block-->
-                                <div id="handlebars" class="section-block">
-                                    <div class="code-block">
-                                        <h6>Handlebars Code Example</h6>
-                                        <pre><code class="language-handlebars">Handlebars.registerHelper('list', function(items, options) { 
-  var out = &quot;&lt;ul&gt;&quot;; 
-  
-  for(var i=0, l=items.length; i&lt;l; i++) { 
-    out = out + &quot;&lt;li&gt;&quot; + options.fn(items[i]) + &quot;&lt;/li&gt;&quot;; 
-  } 
-  
-  return out + &quot;&lt;/ul&gt;&quot;; 
-});</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                    <div class="code-block">
-                                        <h6>Git Code Example</h6>
-                                        <pre><code class="language-git">$ git add Documentation.txt</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
+                            </section>
+
+
                             </section>
                             <!--//doc-section-->
                             <section id="callouts-section" class="doc-section">
@@ -518,12 +566,13 @@ echo $y;
                                 <nav class="doc-sub-menu nav flex-column">
                                     <a class="nav-link scrollto" href="#html"><i class="fas fa-fw fa-angle-right"></i> Halaman Login</a>
                                     <a class="nav-link scrollto" href="#css"><i class="fas fa-fw fa-angle-right"></i> Halaman Profil</a>
-                                    <a class="nav-link scrollto" href="#sass">Sass</a>
-                                    <a class="nav-link scrollto" href="#less">LESS</a>
-                                    <a class="nav-link scrollto" href="#javascript">JavaScript</a>
-                                    <a class="nav-link scrollto" href="#python">Python</a>
-                                    <a class="nav-link scrollto" href="#php">PHP</a>
-                                    <a class="nav-link scrollto" href="#handlebars">Handlebars</a>
+                                    <a class="nav-link scrollto" href="#sass"><i class="fas fa-fw fa-angle-right"></i> Halaman Master Data Rapat</a>
+                                    <a class="nav-link scrollto" href="#less"><i class="fas fa-fw fa-angle-right"></i> Halaman Upload Undangan Rapat</a>
+                                    <a class="nav-link scrollto" href="#javascript"><i class="fas fa-fw fa-angle-right"></i> Halaman Download Undangan Rapat</a>
+                                    <a class="nav-link scrollto" href="#notulen"><i class="fas fa-fw fa-angle-right"></i> Halaman Upload Notulen Rapat</a>
+                                    <a class="nav-link scrollto" href="#notulenDownload"><i class="fas fa-fw fa-angle-right"></i> Halaman Download Notulen Rapat</a>
+                                    <a class="nav-link scrollto" href="#kelolaAbsen"><i class="fas fa-fw fa-angle-right"></i> Halaman Pengelolaan Absensi Rapat</a>
+                                    <a class="nav-link scrollto" href="#zohoUpload"><i class="fas fa-fw fa-angle-right"></i> Halaman Upload File Zoho</a>
                                 </nav>
                                 <!--//nav-->
                                 <a class="nav-link scrollto" href="#callouts-section">Callouts</a>
