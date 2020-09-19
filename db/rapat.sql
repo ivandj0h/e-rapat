@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2020 at 10:52 AM
+-- Generation Time: Sep 19, 2020 at 12:46 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -240,7 +240,11 @@ INSERT INTO `event` (`app_id`, `platform`, `etl_tstamp`, `collector_tstamp`, `dv
 ('18', 'web', NULL, 1600288874, 1600288874628, 'se', 'f70c306c-f71c-4ffd-849a-300c6331c2e2', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'b9132888-f063-4dfe-8049-988ca022eec2', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1467, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1468, NULL, NULL, NULL, NULL, 1600288874632, '0169f36b-a6b3-451b-89c9-cb40c080ade8'),
 ('18', 'web', NULL, 1600288907, 1600288907296, 'se', '62e2d37e-eeaa-43b5-8ff4-5d871101c5ca', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'b9132888-f063-4dfe-8049-988ca022eec2', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'submit', '15', 'time', 32670, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1467, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1468, NULL, NULL, NULL, NULL, 1600288907301, '0169f36b-a6b3-451b-89c9-cb40c080ade8'),
 ('18', 'web', NULL, 1600331970, 1600331970514, 'pv', 'ee547aca-e967-4bbb-b3ce-ab8ca37b4574', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'b9132888-f063-4dfe-8049-988ca022eec2', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600331970519, 'e5986047-2989-458e-bc4b-7c5a9577e5af'),
-('18', 'web', NULL, 1600331976, 1600331976490, 'se', '4c1ad541-c88e-4ca5-b62c-f431fd1be79e', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'b9132888-f063-4dfe-8049-988ca022eec2', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1463, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600331976493, 'e5986047-2989-458e-bc4b-7c5a9577e5af');
+('18', 'web', NULL, 1600331976, 1600331976490, 'se', '4c1ad541-c88e-4ca5-b62c-f431fd1be79e', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'b9132888-f063-4dfe-8049-988ca022eec2', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1463, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600331976493, 'e5986047-2989-458e-bc4b-7c5a9577e5af'),
+('18', 'web', NULL, 1600369658, 1600369658431, 'pv', '2c70fbdf-6d98-4678-86ff-4ae4134706bd', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', 'fc2f5a32-d6dc-41e4-b46d-eb1ef2c91ba9', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1463, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600369658435, '2aaeefbe-1a17-43ae-9ecf-123c7ce0ed4e');
+INSERT INTO `event` (`app_id`, `platform`, `etl_tstamp`, `collector_tstamp`, `dvce_tstamp`, `event`, `event_id`, `txn_id`, `name_tracker`, `v_tracker`, `v_collector`, `v_etl`, `user_id`, `user_ipaddress`, `user_fingerprint`, `domain_userid`, `domain_sessionidx`, `network_userid`, `geo_country`, `geo_region`, `geo_city`, `geo_zipcode`, `geo_latitude`, `geo_longitude`, `geo_region_name`, `page_url`, `page_title`, `page_referrer`, `page_urlscheme`, `page_urlhost`, `page_urlport`, `page_urlpath`, `page_urlquery`, `page_urlfragment`, `refr_urlscheme`, `refr_urlhost`, `refr_urlport`, `refr_urlpath`, `refr_urlquery`, `refr_urlfragment`, `refr_medium`, `refr_source`, `refr_term`, `mkt_medium`, `mkt_source`, `mkt_term`, `mkt_content`, `mkt_campaign`, `contexts`, `se_category`, `se_action`, `se_label`, `se_property`, `se_value`, `unstruct_event`, `tr_orderid`, `tr_affiliation`, `tr_total`, `tr_tax`, `tr_shipping`, `tr_city`, `tr_state`, `tr_country`, `ti_orderid`, `ti_sku`, `ti_name`, `ti_category`, `ti_price`, `ti_quantity`, `pp_xoffset_min`, `pp_xoffset_max`, `pp_yoffset_min`, `pp_yoffset_max`, `useragent`, `br_name`, `br_family`, `br_version`, `br_type`, `br_renderengine`, `br_lang`, `br_features_pdf`, `br_features_flash`, `br_features_java`, `br_features_director`, `br_features_quicktime`, `br_features_realplayer`, `br_features_windowsmedia`, `br_features_gears`, `br_features_silverlight`, `br_cookies`, `br_colordepth`, `br_viewwidth`, `br_viewheight`, `os_name`, `os_family`, `os_manufacturer`, `os_timezone`, `dvce_type`, `dvce_ismobile`, `dvce_screenwidth`, `dvce_screenheight`, `doc_charset`, `doc_width`, `doc_height`, `geo_timezone`, `mkt_clickid`, `mkt_network`, `etl_tags`, `dvce_sent_tstamp`, `domain_sessionid`) VALUES
+('18', 'web', NULL, 1600382379, 1600382379298, 'pv', '59cb68ca-ad94-427f-9580-9c93c249d1cd', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', '50b9d9ba-c63a-4405-a609-5c33c88c5a88', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', 'Presensi Rapat Penyusunan Data Statistik Semestar 1 Badan Litbang Perhubungan Senin 14 September 2020', 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 150, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600382379303, '51efada6-c462-4f96-9ed6-a98ea52f4b33'),
+('18', 'web', NULL, 1600382385, 1600382385304, 'se', '902b8254-a940-4481-aae1-45ead1b9cec9', NULL, 't18', 'js-2.6.1', '1.0', NULL, NULL, '81.2.69.160', '2727505273', '50b9d9ba-c63a-4405-a609-5c33c88c5a88', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'http://localhost/app/app/form?id=18&b=0', NULL, 'http://localhost/app/form/share?id=18', 'http', 'localhost', NULL, '/app/app/form', 'id=18&b=0', NULL, 'http', 'localhost', NULL, '/app/form/share', 'id=18', NULL, 'internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form', 'fill', 'start', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36', 'Chrome', 'Chrome', '85.0', 'browser', 'Blink', 'en-US', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, '24', 1170, 1463, 'Windows', 'Windows', '', 'Asia/Jakarta', 'desktop', 0, 1366, 768, 'UTF-8', 1170, 1463, NULL, NULL, NULL, NULL, 1600382385307, '51efada6-c462-4f96-9ed6-a98ea52f4b33');
 
 -- --------------------------------------------------------
 
@@ -694,7 +698,8 @@ CREATE TABLE `meeting` (
 --
 
 INSERT INTO `meeting` (`id`, `user_id`, `other_online_id`, `zoom_id`, `sub_type_id`, `speakers_name`, `members_name`, `files_upload`, `files_upload1`, `files_upload2`, `unique_code`, `agenda`, `date_requested`, `start_date`, `end_date`, `start_time`, `end_time`, `request_status`, `remark_status`, `meeting_status`) VALUES
-(1, 15, '', 3, 8, '', 'Ivandi Djoh Gah', '', '', '', '5f63211280cef', 'ini adalah contoh rapat yang dilaksanakan secara offline', '2020-09-17', '2020-09-17', '2020-09-17', '16:00:00', '17:00:00', 0, '', 0);
+(1, 15, '', 3, 1, '', 'Pimpinan Keuangan', '', '', '', '5f6492170ec79', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-09-18', '2020-09-18', '2020-09-18', '18:00:00', '19:00:00', 0, '', 0),
+(2, 15, '', 3, 5, 'Narasumber 1,Narasumber 2', 'Pimpinan Keuangan', 'UNDANGAN_RAPAT.pdf', 'NOTULENSI_RAPAT.pdf', 'ABSENSI_RAPAT.pdf', '5f64929084e25', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-09-18', '2020-09-19', '2020-09-19', '18:00:00', '19:00:00', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -883,12 +888,12 @@ CREATE TABLE `meeting_zoom` (
 
 INSERT INTO `meeting_zoom` (`id`, `user_id`, `pemakai_id`, `idzoom`, `date_activated`, `start_time`, `end_time`, `is_active`, `status`) VALUES
 (1, 19, 18, '444 444 444 444', '2020-09-17', '13:00:00', '14:00:00', 1, 0),
-(2, 18, 18, '555 555 555 555', '2020-09-16', '06:00:00', '07:00:00', 1, 0),
-(3, 15, 15, '666 666 666 666', '2020-09-17', '16:00:00', '17:00:00', 1, 0),
+(2, 18, 18, '555 555 555 555', '2020-09-18', '07:00:00', '08:00:00', 1, 0),
+(3, 15, 15, '666 666 666 666', '2020-09-18', '18:00:00', '19:00:00', 1, 0),
 (4, 22, 19, '333 333 333 333', '2020-09-16', '03:00:00', '04:00:00', 1, 0),
-(5, 14, 14, '000 000 000 000', '2020-09-16', '02:00:00', '03:00:00', 1, 0),
-(6, 20, NULL, '111 111 111 111', NULL, NULL, NULL, 1, 0),
-(7, 21, NULL, '222 222 222 222', NULL, NULL, NULL, 1, 0);
+(5, 14, 14, '000 000 000 000', '2020-09-18', '09:00:00', '10:00:00', 1, 0),
+(6, 20, 20, '111 111 111 111', '2020-09-18', '05:00:00', '06:00:00', 1, 0),
+(7, 21, 21, '222 222 222 222', '2020-09-18', '06:00:00', '07:00:00', 1, 0);
 
 --
 -- Triggers `meeting_zoom`
@@ -1228,7 +1233,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `status`, `email`, `username`, `password`, `auth_key`, `access_token`, `logged_in_ip`, `logged_in_at`, `created_ip`, `created_at`, `updated_at`, `banned_at`, `banned_reason`, `preferences`) VALUES
-(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-17 01:35:32', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
+(1, 1, 1, 'admin@erapat.com', 'admin', '$2y$13$hMNGKD7ImJLtU9O1oTewRu5qStpYEKGsMBI/dgmK6.UsP2uwjYDkW', 'pUSNgmzBP4YLg9eIjoDJ_MuOcMIlV8qx', 'taNrGcvfGQeCWfVrxhxepNyzQiPN_kKL', '::1', '2020-09-17 20:44:26', '::1', '2020-09-10 10:05:48', '2020-09-10 13:56:16', NULL, NULL, '{\"GridView\":{\"submissions\":{\"settings\":{\"2\":\"\",\"9\":\"{\\\"sort_attribute\\\":\\\"-created_at\\\",\\\"resizeColumns\\\":false,\\\"showColumns\\\":true,\\\"minimumCountColumns\\\":2,\\\"columns\\\":{\\\"text_680998\\\":false,\\\"number_63801\\\":false,\\\"date_748302\\\":true,\\\"hidden_signature_803792\\\":true}}\"}},\"pagination\":{\"pageSize\":\"500\"}},\"App\":{\"User\":{\"SessionTimeout\":{\"value\":\"86400000\"}}}}'),
 (2, 2, 1, 'user@erapat.com', 'user', '$2y$13$ON/2lLk5YAq5DM2f2mww3.q2QdOM3rJpzL32COoUc7JoEhxP.IydC', NULL, NULL, '::1', '2020-09-14 04:44:59', NULL, '2020-09-10 11:09:47', '2020-09-14 04:47:32', NULL, NULL, NULL),
 (3, 3, 1, 'dave@erapat.com', 'dave', '$2y$13$vJZvD1UCh4yehfVCt4ANB.CpHnoQ0/tIcRXU1m3J0Zk3YozuiTqvu', NULL, NULL, '::1', '2020-09-14 04:42:42', NULL, '2020-09-10 11:16:29', '2020-09-10 13:54:17', NULL, NULL, NULL);
 
@@ -1272,12 +1277,16 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (68, 3, 2),
 (69, 4, 2),
 (70, 5, 2),
-(71, 1, 35),
 (73, 1, 36),
 (74, 2, 36),
 (75, 1, 37),
 (77, 4, 29),
-(79, 2, 37);
+(79, 2, 37),
+(80, 2, 38),
+(81, 1, 38),
+(82, 4, 36),
+(83, 5, 36),
+(84, 5, 29);
 
 -- --------------------------------------------------------
 
@@ -1321,7 +1330,8 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (34, 'Role'),
 (35, 'Zoom'),
 (36, 'Feed'),
-(37, 'Form');
+(37, 'Form'),
+(38, 'Zoho');
 
 -- --------------------------------------------------------
 
@@ -1383,7 +1393,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (32, 35, 'Master Data Zoom', 'zoom', 'fas fa-fw fa-video', 1),
 (33, 36, 'Pembaharuan', 'feed/pembaharuan', 'fas fa-fw fa-sync-alt', 1),
 (34, 37, 'Master Data Form', 'form', 'fas fa-fw fa-file-powerpoint', 1),
-(35, 37, 'Kelolah User Form', 'form/user', 'far fa-fw fa-user-circle', 1);
+(35, 37, 'Kelolah User Form', 'form/user', 'far fa-fw fa-user-circle', 1),
+(36, 38, 'Zoho API', 'zoho', 'fas fa-fw fa-link', 1);
 
 -- --------------------------------------------------------
 
@@ -1931,7 +1942,7 @@ ALTER TABLE `mail_queue`
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `meeting_department`
@@ -2021,7 +2032,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `user_auth`
@@ -2033,7 +2044,7 @@ ALTER TABLE `user_auth`
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -2045,7 +2056,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `user_token`

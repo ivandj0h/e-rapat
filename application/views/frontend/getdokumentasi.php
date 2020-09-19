@@ -247,11 +247,66 @@
                                         <h3 class="block-title">Tampilan Halaman Pengelolaan Absensi Rapat</h3>
                                         <p class="callout-block callout-white">Untuk halaman <strong>Pengelolaan Absensi Rapat</strong> agak sedikit berbeda dengan Halaman Unggahan Sebelumnya dikarenakan untuk <strong>Absensi Rapat</strong> ini akan dilakukan dengan 2 cara yaitu :</p>
                                         <p>
+                                            <div id="zohoForm" class="section-block">
+                                                <ul>
+                                                    <li>
+                                                        <strong>1. Membuat Absensi Rapat Menggunakan <span class="text-danger">ZOHO FORM BUILDER API</span></strong>
+                                                        <br />
+                                                        Jika anda lebih familiar dalam membuat <strong><span class="text-danger">FORM ABSENSI RAPAT</span></strong> Menggunakan aplikasi <strong><span class="text-danger">ZOHO FORM</span></strong>, berikut ini adalah panduan penggunaannya.
+
+                                                        <br /><br />
+                                                        <strong>- Langkah Pertama :</strong> <br />
+
+                                                        Silahkan Pilih Menu <strong><span class="text-danger">ZOHO API</span></strong> yang terdapat pada aplikasi <strong><span class="text-danger">E-RAPAT</span></strong> berikut ini.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/035.png'); ?>" /></div>
+                                                        <br />
+                                                        <strong>- Langkah Kedua :</strong> <br />
+
+                                                        Pastikan anda telah memiliki Akun pada aplikasi <strong><span class="text-danger">ZOHO FORM</span></strong> jika <strong><span class="text-danger">IYA</span></strong> <br />
+                                                        <strong><span class="text-danger"> SILAHKAN LOGIN MENGGUNAKAN USERNAME &amp; PASSWORD ANDA</span></strong>.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/036.png'); ?>" /></div>
+                                                        <br />
+                                                        <strong>- Langkah Ketiga :</strong> <br />
+
+                                                        <strong><span class="text-danger">MASUKAN KODE VERIFIKASI (JIKA ADA/DIMINTA)</span></strong>.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/037.png'); ?>" /></div>
+                                                        <br />
+                                                        <strong>- Langkah Keempat :</strong> <br />
+
+                                                        <strong><span class="text-danger">MASUKAN JUGA OTP (JIKA ADA/DIMINTA)</span></strong>.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/038.png'); ?>" /></div>
+                                                        <br />
+                                                        <strong>- Langkah Kelima :</strong> <br />
+
+                                                        <strong><span class="text-danger">KLIK TRUST</span></strong>.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/039.png'); ?>" /></div>
+                                                        <br />
+                                                        <strong>- Langkah Keenam :</strong> <br />
+
+                                                        <strong><span class="text-danger">Silahkan Tunggu Beberapa saat ...</span></strong>.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/040.png'); ?>" /></div>
+                                                        <br />
+                                                        Jika <strong><span class="text-primary">BERHASIL</span></strong> maka akan muncul halaman Berikut ini.
+                                                        <div><img class="img-responsive" src="<?= base_url('assets/img/docs/041.png'); ?>" /></div>
+                                                        <br /><br />
+                                                        <div id="zohoFormmng" class="section-block">
+                                                            <h3 class="block-title">Tampilan Halaman Pengelolaan Zoho Form</h3>
+                                                            Untuk mengelola <strong>Zoho Form Absensi</strong> Menggunakan Aplikasi <strong>e-rapat</strong>, maka ikutilah langkah - langkah dibawah ini.
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/042.png'); ?>" /></div>
+                                                            <br /><br />
+                                                            Gambar dibawah ini adalah <strong>Tabel Form Absensi</strong> yang telah dibuat Menggunakan <strong>Zoho Form</strong>
+                                                            <br /><br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/043.png'); ?>" /></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
                                             <!--//section-block-->
                                             <div id="zohoUpload" class="section-block">
                                                 <div class="code-block">
                                                     <ul>
-                                                        <li>1. <strong>ZOHO APPS</strong>
+                                                        <li>1. <strong>ZOHO FORM BUILDER</strong>
                                                             <br />
                                                             Cara Pertama adalah <strong>mengunggah</strong> secara langsung File-file <i>(.pdf/excel)</i> Hasil dari <strong>Zoho Apps</strong>
                                                             <div><img class="img-responsive" src="<?= base_url('assets/img/docs/029.png'); ?>" /></div>
@@ -279,6 +334,12 @@
                                                             <p class="garis"></p>
                                                             <br />
                                                             <div><img class="img-responsive" src="<?= base_url('assets/img/docs/033.png'); ?>" /></div>
+                                                            <br />
+                                                            <p class="callout-block callout-green">Jika berhasil makan akan muncul tampilan seperti dibawah ini</p>
+                                                            <br />
+                                                            <p class="garis"></p>
+                                                            <br />
+                                                            <div><img class="img-responsive" src="<?= base_url('assets/img/docs/034.png'); ?>" /></div>
                                                             <br />
                                                         </li>
                                                     </ul>
@@ -572,6 +633,8 @@
                                     <a class="nav-link scrollto" href="#notulen"><i class="fas fa-fw fa-angle-right"></i> Halaman Upload Notulen Rapat</a>
                                     <a class="nav-link scrollto" href="#notulenDownload"><i class="fas fa-fw fa-angle-right"></i> Halaman Download Notulen Rapat</a>
                                     <a class="nav-link scrollto" href="#kelolaAbsen"><i class="fas fa-fw fa-angle-right"></i> Halaman Pengelolaan Absensi Rapat</a>
+                                    <a class="nav-link scrollto" href="#zohoForm"><i class="fas fa-fw fa-angle-right"></i> Halaman Zoho Form Builder</a>
+                                    <a class="nav-link scrollto" href="#zohoFormmng"><i class="fas fa-fw fa-angle-right"></i> Halaman Pengelolaan Zoho Form</a>
                                     <a class="nav-link scrollto" href="#zohoUpload"><i class="fas fa-fw fa-angle-right"></i> Halaman Upload File Zoho</a>
                                 </nav>
                                 <!--//nav-->
