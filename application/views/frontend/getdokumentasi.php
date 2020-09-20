@@ -418,7 +418,7 @@
                                         </div>
                                         <br />
                                         <strong>- Langkah Kedua :</strong> <br />
-                                        Kkemudian akan tampil sesuai dengan gambar dibawah ini<br />
+                                        Kemudian akan tampil sesuai dengan gambar dibawah ini<br />
                                         <div>
                                             <img class="img-responsive" src="<?= base_url('assets/img/docs/063.png'); ?>" />
                                         </div>
@@ -429,7 +429,7 @@
                             <section id="callouts-section" class="doc-section">
                                 <h2 class="section-title">Fitur Tambahan</h2>
                                 <div id="other" class="section-block">
-                                    <h3 class="section-title">Tampilan Pembaharuan Rapat</h3>
+                                    <h3 class="block-title">Tampilan Pembaharuan Rapat</h3>
                                     <div><img class="img-responsive" src="<?= base_url('assets/img/docs/064.png'); ?>" /></div>
                                 </div>
                                 <br />
@@ -450,6 +450,148 @@
                                 </div>
                                 <br />
                                 <p class="garis"></p>
+                                <div id="profil" class="section-block">
+                                    <h3 class="block-title">Edit Profil</h3>
+                                    Untuk mengganti<strong>Foto Profil</strong> pada aplikasi <strong>e-rapat</strong> maka hal tersebut bisa dilakukan dengan cara sebagai berikut :
+                                    <br />
+                                    <strong>- Langkah Pertama :</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/067.png'); ?>" />
+                                    </div>
+                                    <br />
+                                    <strong>- Langkah Kedua :</strong> <br />
+                                    Kemudian akan tampil sesuai dengan gambar dibawah ini<br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/068.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <p class="garis"></p>
+                                <div id="password" class="section-block">
+                                    <h3 class="block-title">Ganti Password</h3>
+                                    Untuk mengganti<strong>Password</strong> pada aplikasi <strong>e-rapat</strong> maka hal tersebut bisa dilakukan dengan cara sebagai berikut :
+                                    <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/069.png'); ?>" />
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="admin-section" class="doc-section">
+                                <h2 class="section-title">Fitur Administrator</h2>
+                                <div id="masterAkun" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Tampilan Master Data Akun</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Master Data Akun</strong>
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/070.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Menambah Data User</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/071.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Ubah Data User</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/072.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div id="hakAkses" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Pengaturan Hak Akses</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Pengaturan Hak Akses</strong>
+                                    <br />
+                                    <strong>- Memberikan hak Akses</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/073.png'); ?>" />
+                                    </div>
+                                    <br />
+                                    <strong>- Pilih Menu yang akan diberikan Hak Aksesnya</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/074.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <p class="garis"></p>
+                                <div id="masterSekretariat" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Tampilan Master Data Sekretariat</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Master Data Sekretariat</strong>
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/075.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Menambah Data Sekretariat</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/076.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Ubah Data Sekretariat</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/077.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <p class="garis"></p>
+                                <div id="masterBagian" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Tampilan Master Data Bagian</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Master Data Bagian</strong>
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/078.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Menambah Data Bagian</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/079.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Ubah Data Bagian</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/080.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <p class="garis"></p>
+                                <div id="masterMedia" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Tampilan Master Data Media</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Master Data Media</strong>
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/081.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Menambah Data Media</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/082.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Ubah Data Media</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/083.png'); ?>" />
+                                    </div>
+                                </div>
+                                <br />
+                                <p class="garis"></p>
+                                <div id="masterSubMedia" class="section-block">
+                                    <br /><br />
+                                    <h3 class="block-title">Tampilan Master Data Sub-Media</h3>
+                                    Gambar dibawah ini adalah Tampilan dari <strong>Master Data Sub-Media</strong>
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/084.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Menambah Data Sub-Media</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/085.png'); ?>" />
+                                    </div>
+                                    <br /><br />
+                                    <strong>- Ubah Data Sub-Media</strong> <br />
+                                    <div>
+                                        <img class="img-responsive" src="<?= base_url('assets/img/docs/086.png'); ?>" />
+                                    </div>
+                                </div>
                             </section>
                         </div>
                         <!--//content-inner-->
@@ -457,7 +599,6 @@
                     <!--//doc-content-->
                     <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
                         <div id="doc-nav" class="doc-nav">
-
                             <nav id="doc-menu" class="nav doc-menu flex-column sticky">
                                 <a class="nav-link scrollto" href="#download-section"><i class="fas fa-fw fa-angle-right"></i> Memulai Aplikasi <strong>e-rapat</strong></a>
                                 <a class="nav-link scrollto" href="#installation-section"><i class="fas fa-fw fa-angle-right"></i> <strong>Tampilan Antarmuka e-rapat</strong></a>
@@ -466,7 +607,6 @@
                                     <a class="nav-link scrollto" href="#step2"><i class="fas fa-fw fa-angle-right"></i> Filter Kalender</a>
                                     <a class="nav-link scrollto" href="#step3"><i class="fas fa-fw fa-angle-right"></i> Preview Kalendar</a>
                                 </nav>
-                                <!--//nav-->
                                 <a class="nav-link scrollto" href="#code-section"><i class="fas fa-fw fa-angle-right"></i> <strong>Tampilan Admin Cpanel</strong></a>
                                 <nav class="doc-sub-menu nav flex-column">
                                     <a class="nav-link scrollto" href="#html"><i class="fas fa-fw fa-angle-right"></i> Tampilan Halaman Login</a>
@@ -496,31 +636,28 @@
                                     <a class="nav-link scrollto" href="#profil"><i class="fas fa-fw fa-angle-right"></i> Ubah Profil</a>
                                     <a class="nav-link scrollto" href="#password"><i class="fas fa-fw fa-angle-right"></i> Ganti Password</a>
                                 </nav>
-                            </nav>
-                            <!--//doc-menu-->
+                                <a class="nav-link scrollto" href="#admin-section"><i class="fas fa-fw fa-angle-right"></i> <strong>Fitur Administrator</strong></a>
+                                <nav class="doc-sub-menu nav flex-column">
+                                    <a class="nav-link scrollto" href="#masterAkun"><i class="fas fa-fw fa-angle-right"></i> Master Data Akun</a>
+                                    <a class="nav-link scrollto" href="#hakAkses"><i class="fas fa-fw fa-angle-right"></i> Pengaturan Hak Akses</a>
+                                    <a class="nav-link scrollto" href="#masterSekretariat"><i class="fas fa-fw fa-angle-right"></i> Master Data Sekretariat</a>
+                                    <a class="nav-link scrollto" href="#masterBagian"><i class="fas fa-fw fa-angle-right"></i> Master Data Bagian</a>
+                                    <a class="nav-link scrollto" href="#masterMedia"><i class="fas fa-fw fa-angle-right"></i> Master Data Media</a>
+                                    <a class="nav-link scrollto" href="#masterSubMedia"><i class="fas fa-fw fa-angle-right"></i> Master Data Sub-Media</a>
+                                </nav>
 
+                            </nav>
                         </div>
                     </div>
-                    <!--//doc-sidebar-->
                 </div>
-                <!--//doc-body-->
             </div>
-            <!--//container-->
         </div>
-        <!--//doc-wrapper-->
-
     </div>
-    <!--//page-wrapper-->
-
     <footer id="footer" class="footer text-center">
         <div class="container">
             <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/ivandi1980" target="_blank">Ivandi Djoh Gah</a> &copy; 2020. Allright reserved</small>
         </div>
-        <!--//container-->
     </footer>
-    <!--//footer-->
-
-
     <!-- Main Javascript -->
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/jquery-3.4.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
