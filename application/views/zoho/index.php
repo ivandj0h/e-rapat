@@ -80,6 +80,7 @@
             var radioValue = jQuery('input:radio:checked').val();
             if (radioValue == 'create') {
                 window.location.href = '<?= base_url('zoho/createform'); ?>';
+
             }
             if (radioValue == 'maintenance') {
                 window.location.href = '<?= base_url('zoho/manageform'); ?>';

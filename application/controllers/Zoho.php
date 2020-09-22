@@ -7,6 +7,7 @@ class Zoho extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->helper(array('alert'));
         $this->load->model('Account_model');
         $this->load->model('Role_model');
     }

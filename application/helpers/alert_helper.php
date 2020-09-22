@@ -35,6 +35,8 @@
             }
             // <!-- End of Modal Alert if empty upload file -->
             ?>
+
+
             <!-- Start of Modal Restricted Area -->
             <?php
             function restricted_area()
@@ -50,4 +52,14 @@
             <?php
             }
 
-            ?>
+
+            function alert_zoho()
+            { ?>
+                <div class="popup-wrapper" id="popup">
+                    <div class="popup-container">
+                        <!-- <iframe src="accounts.zoho.com/signin?servicename=ZohoForms&signupurl=https://www.zoho.com/forms/signup.html" style="position: fixed; padding-top:75px; left:0;bottom:0; right: 0; width: 100%; height: 100%; border: none; margin:0; overflow-x: hidden; z-index:1;"> -->
+                        <iframe src="https://www.zoho.com/creator/signup.html">box for ifr_Cities_List</iframe>
+                    </div>
+                </div>
+            <?php
+            }
