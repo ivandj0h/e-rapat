@@ -92,13 +92,17 @@
                                                     status_all_cancel_upload($a);
                                                 } else {
                                                     if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
-                                                        status_all_upload($a);
+                                                        // status_all_upload($a);
+                                                        uploadpages($a['unique_code']);
                                                     } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        notulen_upload($a);
+                                                        uploadpages($a['unique_code']);
+                                                        // notulen_upload($a);
                                                     } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        absensi_upload($a);
+                                                        uploadpages($a['unique_code']);
+                                                        // absensi_upload($a);
                                                     } else {
-                                                        status_no_upload($a);
+                                                        uploadpages($a['unique_code']);
+                                                        // status_no_upload($a);
                                                     }
                                                 }
                                                 ?>

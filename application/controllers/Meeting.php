@@ -7,7 +7,7 @@ class Meeting extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->helper(array('string', 'text', 'tanggal'));
+        $this->load->helper(array('string', 'text', 'tanggal', 'uploadpages'));
         $this->load->model('Account_model');
         $this->load->model('Meeting_model');
         $this->load->model('Type_model');
@@ -91,6 +91,24 @@ class Meeting extends CI_Controller
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/details', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function uploadpages($unique)
+    {
+        $data['title'] = 'Master Data Rapat';
+        $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
+        $data['meeting'] = $this->Meeting_model->get_one_meeting($unique);
+
+        foreach ($data['meeting'] as $pecah) {
+            $data['speakers'] = explode(",", $pecah['speakers_name']);
+            $data['members'] = explode(",", $pecah['members_name']);
+        }
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/topbar', $data);
+        $this->load->view('meeting/uploadpages', $data);
         $this->load->view('layout/footer');
     }
 
