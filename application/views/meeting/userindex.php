@@ -46,8 +46,6 @@
                                         <th class="text-center w-20">Nama Bidang</th>
                                         <th class="text-center w-20">Media</th>
                                         <th class="text-center w-20">ID Media</th>
-                                        <th class="text-center w-20">Pimpinan</th>
-                                        <th class="text-center w-20">Agenda</th>
                                         <th class="text-center w-20">File Upload</th>
                                         <th class="text-center w-20">Aksi</th>
                                     </tr>
@@ -73,8 +71,6 @@
                                                 }
                                                 ?>
                                             </td>
-                                            <td class="text-center"><?= $a['members_name']; ?></td>
-                                            <td class="text-justify"><?= word_limiter($a['agenda'], 5); ?></td>
                                             <td class="text-center">
                                                 <?php
                                                 $combine_now = date("Y-m-d");
