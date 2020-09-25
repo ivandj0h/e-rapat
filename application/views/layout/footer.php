@@ -14,11 +14,6 @@
            </div>
            <!-- End of Page Wrapper -->
 
-           <!-- Scroll to Top Button-->
-           <a class="scroll-to-top rounded" href="#page-top">
-               <i class="fas fa-angle-up"></i>
-           </a>
-
            <!-- Logout Modal-->
            <div class="modal fade" id="logoutModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
@@ -39,39 +34,36 @@
            </div>
 
            <!-- Bootstrap core JavaScript-->
-           <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-           <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/tagsinput.js"></script>
+           <script src="<?= base_url('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/tagsinput.js'); ?>"></script>
            <!-- Core plugin JavaScript-->
-           <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+           <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
 
            <!-- Custom scripts for all pages-->
-           <script src="<?= base_url('assets/'); ?>js/sb-admin-2.js"></script>
+           <script src="<?= base_url('assets/js/sb-admin-2.js'); ?>"></script>
 
            <!-- Page level plugins -->
-           <script src="<?= base_url('assets/'); ?>vendor/datatables/jquery.dataTables.js"></script>
-           <script src="<?= base_url('assets/'); ?>vendor/datatables/dataTables.buttons.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/pdfmake.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/vfs_fonts.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/buttons.html5.min.js"></script>
-           <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+           <script src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js'); ?>"></script>
+           <script src="<?= base_url('assets/vendor/datatables/dataTables.buttons.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/pdfmake.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/vfs_fonts.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/buttons.html5.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/vendor/datatables/buttons-1.6.2.print.min.js'); ?>"></script>
 
            <!-- DateTime -->
-           <script src="<?= base_url('assets/'); ?>vendor/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/moment.min.js"></script>
+           <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/moment.min.js'); ?>"></script>
 
            <!-- Page level custom scripts -->
-           <script src="<?= base_url('assets/'); ?>js/datatables/datatables-demo.js"></script>
-           <script src="<?= base_url('assets/'); ?>js/datetime/datetime-demo.js"></script>
-
-           <!-- Chart Scripts -->
-           <script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.min.js"></script>
+           <script src="<?= base_url('assets/js/datatables/datatables-demo.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/datetime/datetime-demo.js'); ?>"></script>
 
            <!-- Tinymce Scripts -->
-           <script src="<?= base_url('assets/'); ?>vendor/tinymce/tinymce.min.js"></script>
+           <script src="<?= base_url('assets/vendor/tinymce/tinymce.min.js'); ?>"></script>
 
            <!-- Customs scripts -->
-           <script src="<?= base_url('assets/'); ?>js/customsjs/customsjs-demo.js"></script>
+           <script src="<?= base_url('assets/js/customsjs/customsjs-demo.js'); ?>"></script>
            <script>
                // change menu access for checkbox
                var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
