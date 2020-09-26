@@ -29,7 +29,7 @@
             <!-- Menu Looping -->
             <?php foreach ($menu as $m) : ?>
                 <div class="sidebar-heading text-white">
-                    <!-- ROLE <?= $m['menu']; ?> -->
+                     <!-- $m['menu'];  -->
                 </div>
 
 

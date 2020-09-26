@@ -49,11 +49,10 @@
            <script src="<?= base_url('assets/js/pdfmake.min.js'); ?>"></script>
            <script src="<?= base_url('assets/js/vfs_fonts.js'); ?>"></script>
            <script src="<?= base_url('assets/js/buttons.html5.min.js'); ?>"></script>
-           <script src="<?= base_url('assets/vendor/datatables/buttons-1.6.2.print.min.js'); ?>"></script>
 
            <!-- DateTime -->
            <script src="<?= base_url('assets/vendor/datetimepicker/jquery.datetimepicker.full.min.js'); ?>"></script>
-           <script src="<?= base_url('assets/js/moment.min.js'); ?>"></script>
+           <script src="<?= base_url('assets/js/moment-2.10.6.js'); ?>"></script>
 
            <!-- Page level custom scripts -->
            <script src="<?= base_url('assets/js/datatables/datatables-demo.js'); ?>"></script>
