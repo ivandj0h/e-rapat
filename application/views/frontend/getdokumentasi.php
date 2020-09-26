@@ -39,10 +39,10 @@
                 </div>
                 <!--//branding-->
 
-                <ol class="breadcrumb">
+<!--                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Home</a></li>
                     <li class="breadcrumb-item active">Memulai Aplikasi E-RAPAT</li>
-                </ol>
+                </ol> -->
             </div>
             <!--//container-->
         </header>
