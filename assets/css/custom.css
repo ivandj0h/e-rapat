@@ -23,6 +23,15 @@
 	width: 67rem;
 } */
 
+.fixed-top {
+    position: fixed !important;
+    top: 0 !important;;
+    right: 0 !important;;
+    left: 0 !important;;
+    z-index: 1030 !important;;
+    background-color: #fff !important;
+}
+
 #wrapper #content-wrapper {
 	background-color: #ffffff !important;
 	position: relative !important;

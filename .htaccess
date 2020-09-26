@@ -2,4 +2,4 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
-Header append X-Frame-Options: "SAMEORIGIN"
+Header set X-Frame-Options: "ALLOW-FROM http://localhost:8080/" 
