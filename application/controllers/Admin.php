@@ -28,9 +28,9 @@ class Admin extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('admin/index', $data);
-        $this->load->view('layout/footer');
+        // $this->load->view('layout/footer');
     }
 
     public function role()

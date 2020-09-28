@@ -26,7 +26,7 @@ class Feed extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('feed/pembaharuan', $data);
         // $this->load->view('layout/footer');
     }
@@ -41,9 +41,9 @@ class Feed extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('feed/pembaharuan', $data);
-        $this->load->view('layout/footer');
+        // $this->load->view('layout/footer');
     }
 
     public function cekzoom()
@@ -56,9 +56,9 @@ class Feed extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('feed/cekavailzoom', $data);
-        $this->load->view('layout/footer');
+        // $this->load->view('layout/footer');
     }
 
     public function penjelajahan()
@@ -73,18 +73,18 @@ class Feed extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('feed/penjelajahan', $data);
-            $this->load->view('layout/footer');
+            // $this->load->view('layout/footer');
         } else {
             $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($this->input->post('sub_type_id'));
 
 
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('feed/penjelajahan', $data);
-            $this->load->view('layout/footer');
+            // $this->load->view('layout/footer');
         }
     }
 
@@ -98,9 +98,9 @@ class Feed extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('feed/offlinemeeting', $data);
-        $this->load->view('layout/footer');
+        // $this->load->view('layout/footer');
     }
 
 
@@ -118,18 +118,18 @@ class Feed extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('feed/searchofflinemeeting', $data);
-            $this->load->view('layout/footer');
+            // $this->load->view('layout/footer');
         } else {
             $data['subtype'] = $this->Type_model->get_offline_room();
             $data['offline_updates'] = $this->History_model->get_all_history_meeting_by_offline($where);
 
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('feed/searchofflinemeeting', $data);
-            $this->load->view('layout/footer');
+            // $this->load->view('layout/footer');
         }
     }
 }

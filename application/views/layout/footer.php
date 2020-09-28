@@ -1,11 +1,11 @@
            <!-- Footer -->
-           <footer class="footer bg-white">
+           <!-- <footer class="footer bg-white">
                <div class="container my-auto">
                    <div class="copyright text-center my-auto">
                        <span>Copyright &copy; e-rapat <?= date('Y'); ?></span>
                    </div>
                </div>
-           </footer>
+           </footer> -->
            <!-- End of Footer -->
 
            </div>

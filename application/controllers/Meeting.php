@@ -24,19 +24,19 @@ class Meeting extends CI_Controller
         if ($data['user']['role_id'] == '1') {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('meeting/index', $data);
             $this->load->view('layout/footer');
         } elseif ($data['user']['role_id'] == '4' && $data['user']['role_id'] == '5') {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('meeting/superuser', $data);
             $this->load->view('layout/footer');
         } else {
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $data);
+            // $this->load->view('layout/topbar', $data);
             $this->load->view('meeting/userindex', $data);
             $this->load->view('layout/footer');
         }
@@ -89,7 +89,7 @@ class Meeting extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/details', $data);
         $this->load->view('layout/footer');
     }
@@ -107,7 +107,7 @@ class Meeting extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/uploadpages', $data);
         $this->load->view('layout/footer');
     }
@@ -152,7 +152,7 @@ class Meeting extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $error);
+            // $this->load->view('layout/topbar', $error);
             $this->load->view('meeting/userindex', $data);
             $this->load->view('layout/footer');
         } else {
@@ -187,7 +187,7 @@ class Meeting extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $error);
+            // $this->load->view('layout/topbar', $error);
             $this->load->view('meeting/userindex', $data);
             $this->load->view('layout/footer');
         } else {
@@ -225,7 +225,7 @@ class Meeting extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
             $this->load->view('layout/header', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/topbar', $error);
+            // $this->load->view('layout/topbar', $error);
             $this->load->view('meeting/userindex', $data);
             $this->load->view('layout/footer');
         } else {
@@ -355,7 +355,7 @@ class Meeting extends CI_Controller
 
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/undangan_step_1', $data);
         $this->load->view('layout/footer');
     }
@@ -370,7 +370,7 @@ class Meeting extends CI_Controller
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/undangan_soho', $data);
         $this->load->view('layout/footer');
     }
@@ -385,7 +385,7 @@ class Meeting extends CI_Controller
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/topbar', $data);
+        // $this->load->view('layout/topbar', $data);
         $this->load->view('meeting/undangan_erapat', $data);
         $this->load->view('layout/footer');
     }
