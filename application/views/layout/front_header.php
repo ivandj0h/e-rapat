@@ -21,5 +21,6 @@
     <!-- Custom fonts for this template-->
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
     <link href="<?= base_url('assets/'); ?>css/front-customs.css" rel="stylesheet">
-
+<!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/vendor/docs/css/styles.css') ?>">
 </head>

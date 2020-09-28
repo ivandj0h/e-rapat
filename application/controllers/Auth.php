@@ -23,7 +23,7 @@ class Auth extends CI_Controller
       $data['title'] = 'E-RAPAT';
 
       $this->load->view('layout/front_header', $data);
-      $this->load->view('layout/front_topbar', $data);
+      // $this->load->view('layout/front_topbar', $data);
       $this->load->view('auth/login');
     } else {
       $this->_login();

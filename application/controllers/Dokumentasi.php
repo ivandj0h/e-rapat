@@ -19,7 +19,7 @@ class Dokumentasi extends CI_Controller
 		$data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
 		$this->load->view('layout/front_header', $data);
-		$this->load->view('layout/front_topbar', $data);
+		// $this->load->view('layout/front_topbar', $data);
 		$this->load->view('frontend/dokumentasi', $data);
 		$this->load->view('layout/front_footer', $data);
 	}
