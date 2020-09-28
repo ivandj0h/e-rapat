@@ -26,8 +26,34 @@
 
 <body class="body-green">
     <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <!-- <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="">
+                            <span aria-hidden="true" class="fas fa-calendar-alt"></span>
+                            <span class="text-highlight">Dokumentasi </span> <span class="text-bold">E-RAPAT</span>
+                        </a>
+                    </h1>
+                </div> -->
+                <!--//branding-->
+
+<!--                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Home</a></li>
+                    <li class="breadcrumb-item active">Memulai Aplikasi E-RAPAT</li>
+                </ol> -->
+            </div>
+            <!--//container-->
+        </header>
+        <!--//header-->
         <div class="doc-wrapper">
             <div class="container">
+                <!-- <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Quick Start</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: September 18th, 2020</div>
+                </div> -->
+                <!--//doc-header-->
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
@@ -627,11 +653,11 @@
             </div>
         </div>
     </div>
-    <!-- <footer id="footer" class="footer text-center">
+    <footer id="footer" class="footer text-center">
         <div class="container">
             <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/ivandi1980" target="_blank">Ivandi Djoh Gah</a> &copy; 2020. Allright reserved</small>
         </div>
-    </footer> -->
+    </footer>
     <!-- Main Javascript -->
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/jquery-3.4.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
