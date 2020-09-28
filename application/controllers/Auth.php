@@ -22,7 +22,7 @@ class Auth extends CI_Controller
     if ($this->form_validation->run() == false) {
       $data['title'] = 'E-RAPAT';
 
-      $this->load->view('layout/front_header', $data);
+      // $this->load->view('layout/front_header', $data);
       // $this->load->view('layout/front_topbar', $data);
       $this->load->view('auth/login');
     } else {
@@ -46,9 +46,9 @@ class Auth extends CI_Controller
           ];
           $this->session->set_userdata($data);
           if ($user['role_id'] == 1) {
-            redirect('beranda');
+            redirect('user');
           } else {
-            redirect('beranda');
+            redirect('user');
           }
         } else {
           $this->session->set_flashdata('messages', '<div class="alert alert-danger alert-dismissible fade show" role="alert">

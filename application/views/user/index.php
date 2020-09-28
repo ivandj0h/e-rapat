@@ -5,9 +5,6 @@
 
     <div class="contents">
 
-        <!-- Start Breadcumb -->
-        <div class="breadcrumb"></div>
-        <!-- End of Breadcumb -->
 
         <!-- Page Heading -->
         <?= $this->session->flashdata('messages'); ?>

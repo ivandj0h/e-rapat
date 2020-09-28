@@ -4,10 +4,6 @@
     <!-- Page Heading -->
     <div class="contents">
 
-        <!-- Start Breadcumb -->
-        <div class="breadcrumb"></div>
-        <!-- End of Breadcumb -->
-
         <!-- Start Content Table -->
         <div class="row">
             <div class="col-lg-12">
