@@ -11,7 +11,7 @@ If you want to play around with this application, just clone it by typing :
 `git clone https://github.com/ivandi1980/e-rapat.git`
 or click the green button on top right of this list of repo's file.
 
-## This Code still be updates daily, cause it still maintenance
+# This Code is not maintenance anymore!!
 
 ### Changelog
 
