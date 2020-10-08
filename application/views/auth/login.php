@@ -4,7 +4,7 @@
         <div class="col-lg-6">
             <div class="row">
                 <div class="col">
-                    <div class="card shadow-none" style="margin-top: 100px;">
+                    <div class="card shadow-none" style="margin-top: 180px;">
                         <div class="card-header">
                             <div class="text-center">
                                 <h1 class="text-primary-900 mb-3"><i class="fas fa-calendar-alt"></i></h1>

@@ -11,7 +11,7 @@
         <!-- Start Content Table -->
         <div class="row">
             <div class="col-lg-12 mb-5">
-                <?= form_open('history'); ?>
+                <?= form_open('riwayat'); ?>
                 <div class="col">
                     <input type="text" id="start_date" name="from_date" class="border" placeholder="Tanggal Awal" autocomplete="off">
                     <input type="text" id="end_date" name="to_date" class="border" placeholder="Tanggal Akhir" autocomplete="off">
@@ -21,10 +21,6 @@
                 <?= form_close(); ?>
             </div>
         </div>
-
-
-
-
 
         <!-- Start Content Table -->
         <div class="row">
