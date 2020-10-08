@@ -34,13 +34,13 @@ class History extends CI_Controller
             if ($data['user']['role_id'] == 1) {
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
-                // $this->load->view('layout/topbar', $data);
+                $this->load->view('layout/topbar', $data);
                 $this->load->view('history/admin', $data);
                 $this->load->view('layout/footer');
             } else {
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
-                // $this->load->view('layout/topbar', $data);
+                $this->load->view('layout/topbar', $data);
                 $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }
@@ -51,13 +51,13 @@ class History extends CI_Controller
             if ($data['user']['role_id'] == 1) {
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
-                // $this->load->view('layout/topbar', $data);
+                $this->load->view('layout/topbar', $data);
                 $this->load->view('history/admin', $data);
                 $this->load->view('layout/footer');
             } else {
                 $this->load->view('layout/header', $data);
                 $this->load->view('layout/sidebar', $data);
-                // $this->load->view('layout/topbar', $data);
+                $this->load->view('layout/topbar', $data);
                 $this->load->view('history/userindex', $data);
                 $this->load->view('layout/footer');
             }

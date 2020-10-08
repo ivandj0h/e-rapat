@@ -84,25 +84,25 @@
                                                     status_all_cancel_upload($a);
                                                 } else {
                                                     if (!empty($a['files_upload']) && !empty($a['files_upload1']) && !empty($a['files_upload2'])) {
-                                                        // status_all_upload($a);
-                                                        uploadpages($a['unique_code']);
+                                                        status_all_upload($a);
+                                                        // uploadpages($a['unique_code']);
                                                     } elseif (!empty($a['files_upload']) && empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        uploadpages($a['unique_code']);
-                                                        // notulen_upload($a);
+                                                        // uploadpages($a['unique_code']);
+                                                        notulen_upload($a);
                                                     } elseif (!empty($a['files_upload']) && !empty($a['files_upload1']) && empty($a['files_upload2'])) {
-                                                        uploadpages($a['unique_code']);
-                                                        // absensi_upload($a);
+                                                        // uploadpages($a['unique_code']);
+                                                        absensi_upload($a);
                                                     } else {
-                                                        uploadpages($a['unique_code']);
-                                                        // status_no_upload($a);
+                                                        // uploadpages($a['unique_code']);
+                                                        status_no_upload($a);
                                                     }
                                                 }
                                                 ?>
                                             </td>
                                             <td class="text-center action mx-2">
                                                 <?= status_meeting($a); ?>
-                                                <!-- <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span> -->
-                                                <!-- <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span> -->
+                                                <span class="badge badge-success" data-toggle="modal" data-target="#meetingDetail<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-search"></i> Detail Rapat</span>
+                                                <span class="badge badge-primary" data-toggle="modal" data-target="#meetingEdit<?= $a['id']; ?>" style="cursor:pointer;margin:2px;"><i class="fas fa-fw fa-marker"></i> Ubah Rapat</span>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -152,10 +152,7 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <?= enable_add_new(); ?>
-
                 </div>
-
-
             </form>
         </div>
     </div>

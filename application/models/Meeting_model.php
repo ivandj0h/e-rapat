@@ -109,8 +109,8 @@ class Meeting_model extends CI_Model
             'request_status' => $request_status
         );
 
-        // var_dump($data);
-        // die;
+        var_dump($data);
+        die;
         if ($data['sub_type_id'] == 1) {
             $this->db->set('pemakai_id', $this->session->userdata('id'));
             $this->db->set('date_activated', $data['end_date']);
