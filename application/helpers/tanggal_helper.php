@@ -73,27 +73,3 @@ function facebook_time_ago($timestamp)
         }
     }
 }
-
-function status_meeting($a)
-{
-    $combine_now = date("Y-m-d");
-    $combine_time_now = date("H:i:s");
-    $cmd = date('Y-m-d H:i:s', strtotime("$combine_now $combine_time_now"));
-
-    $combine_db = date($a['start_date']);
-    $combine_db_now = date($a['end_time']);
-    $cmb = date('Y-m-d H:i:s', strtotime("$combine_db $combine_db_now"));
-
-    $datedb = strtotime($cmd);
-    $timedb = strtotime($cmb);
-
-    if ($datedb > $timedb) {
-        status_meeting_expired($a);
-    } else {
-        if ($a['type_id'] == '1') {
-            status_meeting_online($a);
-        } else {
-            status_meeting_offline($a);
-        }
-    }
-}
