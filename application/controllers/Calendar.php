@@ -7,10 +7,9 @@ class Calendar extends CI_Controller
 
     public function __construct()
     {
+        // header('Access-Control-Allow-Origin: *');
+        // header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         parent::__construct();
-        $this->load->helper(array('string', 'text', 'tanggal', 'dropdown'));
-        $this->load->model('Account_model');
-        $this->load->model('Meeting_model');
     }
 
     public function index()
@@ -18,19 +17,13 @@ class Calendar extends CI_Controller
         $data['title'] = 'E-RAPAT';
         $data['user'] = $this->Account_model->get_admin($this->session->userdata('email'));
 
-        $this->load->view('layout/calendar_header', $data);
         $this->load->view('frontend/getcalendar', $data);
-        $this->load->view('layout/calendar_footer', $data);
     }
 
-    public function get_data_calendar()
+    public function get_data_calendar($hostname = 'localhost', $username = 'root', $password = '', $dbname = 'rapat')
     {
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = '';
-
         try {
-            $dbh = new PDO("mysql:host=$hostname;dbname=rapat", $username, $password);
+            $dbh = new PDO("mysql:host=$hostname;dbname=" . $dbname, $username, $password);
 
             $query = "select * from view_user_meeting";
 

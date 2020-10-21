@@ -574,6 +574,9 @@
                     <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
                         <div id="doc-nav" class="doc-nav">
                             <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+                                <div class="stick" style="margin: auto;width: 60%;padding: 10px;">
+                                    <img class="img-responsive" src="<?= base_url('assets/vendor/docs/images/demo/logo.png'); ?>" />
+                                </div>
                                 <a class="nav-link scrollto" href="#download-section"><i class="fas fa-fw fa-angle-right"></i> Memulai Aplikasi <strong>e-rapat</strong></a>
                                 <a class="nav-link scrollto" href="#installation-section"><i class="fas fa-fw fa-angle-right"></i> <strong>Tampilan Antarmuka e-rapat</strong></a>
                                 <nav class="doc-sub-menu nav flex-column">
@@ -627,12 +630,6 @@
             </div>
         </div>
     </div>
-    <!-- <footer id="footer" class="footer text-center">
-        <div class="container">
-            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/ivandi1980" target="_blank">Ivandi Djoh Gah</a> &copy; 2020. Allright reserved</small>
-        </div>
-    </footer> -->
-    <!-- Main Javascript -->
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/jquery-3.4.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/vendor/docs/plugins/prism/prism.js') ?>"></script>
